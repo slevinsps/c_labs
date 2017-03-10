@@ -1,0 +1,5 @@
+Входные данные:
+100
+Выходние данные:
+Entrance number: 3
+Floor number: 7
