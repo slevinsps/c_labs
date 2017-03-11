@@ -9,8 +9,8 @@ int main(void)
     setbuf(stdout,NULL);
     printf("Enter the large, lower side of the trapezoid, and the angle at the large side: \n");
     scanf("%f %f %f", &a, &b, &u);
-    h = (a-b)*tan((PI/180)*u)/2;  // подсчет высоты
-    s = h*a/2;  // подсчет площади
+    h = (a - b) * tan((PI / 180) * u) / 2;  // подсчет высоты
+    s = h * a / 2;  // подсчет площади
     printf("S = %7.3f\n", s);
     return 0;
 }
