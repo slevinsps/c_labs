@@ -6,16 +6,17 @@
 // Программа подсчитывает площадь трапеции, используя два основания и угол
 int main(void)
 {
-    float a, b;  // большая и меньшая сторона трапеции
-    float u;  // угол при большем основании
+    float big_side, small_side;  // большая и меньшая сторона трапеции
+    float ugol;  // угол при большем основании
     float h, s;  // высота и площадь трапеции
 
     setbuf(stdout,NULL);
     printf("Enter the large, lower side of the trapezoid, and the angle at the"
            " large side: \n");
-    scanf("%f %f %f", &a, &b, &u);
-    h = (a - b) * tan((PI / 180) * u) / 2;  // подсчет высоты
-    s = h * a / 2;  // подсчет площади
+    scanf("%f %f %f", &big_side, &small_side, &ugol);
+    h = (big_side - small_side) * tan((PI / 180) * ugol) / 2;  // подсчет высоты
+    s = h * big_side / 2;  // подсчет площади
+
     printf("S = %7.3f\n", s);
     return 0;
 }

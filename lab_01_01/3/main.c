@@ -11,6 +11,7 @@ int main(void)
     scanf("%f %f %f %f", &v1, &v2, &t1, &t2);
     t = (v2 * t2 + v1 * t1) / (v1 + v2);  // подсчет общей температуры
     v = v1 + v2; // подсчет общего объема
+
     printf("T = %7.3f\n", t);
     printf("V = %7.3f\n", v);
     return 0;
