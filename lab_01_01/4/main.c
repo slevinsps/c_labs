@@ -1,6 +1,9 @@
 #include <stdio.h>
+
 #define AP_IN_ENTR 36 // квартир в подъезде
 #define AP_ON_FLOOR 4 // квартир на этаже
+
+// Программа по номеру квартиры подсчитывает номер подъезда и этажа
 int main(void)
 {
     setbuf(stdout,NULL);
