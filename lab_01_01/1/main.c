@@ -15,7 +15,7 @@ int main(void)
            " large side: \n");
     scanf("%f %f %f", &big_side, &small_side, &ugol);
     h = (big_side - small_side) * tan((PI / 180) * ugol) / 2;  // подсчет высоты
-    s = h * big_side / 2;  // подсчет площади
+    s = h * (big_side + small_side) / 2;  // подсчет площади
 
     printf("S = %7.3f\n", s);
     return 0;
