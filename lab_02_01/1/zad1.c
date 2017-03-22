@@ -40,6 +40,7 @@ int main(void)
         fflush(stdin);
         x = Division(a,b);
         printf("%d / %d = %d; %d %% %d = %d\n",a,b,x,a,b,a-x*b);
+        break;
     }
     return 0;
 }
