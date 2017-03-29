@@ -4,10 +4,10 @@
 // Программа которая вычисляет площадь треугольника по координатам трех точек
 
 // Функция вычисления площади по трем точкам
-int Area(float x1,float x2,float x3,float y1,float y2,float y3)
+float Area(float x1,float x2,float x3,float y1,float y2,float y3)
 {
-    int s;
-    s = abs(((x1-x3)*(y2-y3)-(x2-x3)*(y1-y3))/2);
+    float s;
+    s = fabs(((x1-x3)*(y2-y3)-(x2-x3)*(y1-y3))/2);
     return s;
 }
 

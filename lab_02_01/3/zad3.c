@@ -10,13 +10,15 @@ float Sum(float x,float eps)
     float s2 = x; // Сумма ряда
     float x1 = x; // Очередной x
     int k = 1; // Счетчик
-    while (fabs(x1) > eps)
+    while(1)
     {
         x1 = -x1*x*x/((k+1)*(k+2));
+		if (fabs(x1) < eps)
+			return s2;
         k += 2;
         s2 += x1;
     }
-    return s2;
+    
 }
 
 int main(void)

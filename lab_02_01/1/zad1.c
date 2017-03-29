@@ -40,7 +40,7 @@ int main(void)
         if (b == 0)
         {
             printf("Division by zero...\n");
-            continue;
+            break;
         }
 
         zel_del = Division(a,b);
