@@ -1,3 +1,6 @@
 *.exe
 *.o
 *.creator.user
+*.gcov
+*.gcno
+*.gcda
