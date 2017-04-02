@@ -16,7 +16,7 @@ float Sum(float x,float eps)
 		if (fabs(x1) < eps)
 			return s2;
         k += 2;
-        s2 += x1;
+        s2 += x1
     }
     
 }
