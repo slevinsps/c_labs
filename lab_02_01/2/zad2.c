@@ -19,57 +19,32 @@ int main(void)
     float s; // Площадь треугольника
     int pr; // Счетчик правильно считанных пременных
 
-    // Цикл выполняется пока не будет найдено ошибок ввода
-    while(1)
+    setbuf(stdout,NULL);
+    printf("Enter the coordinates of the first point x,y\n");
+    pr = scanf("%f %f", &x1, &y1);
+    if ( pr != 2)
     {
-        setbuf(stdout,NULL);
-        printf("Enter the coordinates of the first point x,y\n");
-        pr = scanf("%f %f", &x1, &y1);
-        if ( pr != 2)
-        {
-            fflush(stdin); // Очищаем буфер обмена
-            printf("Uncorrected variables...\n");
-            continue;
-        }
-
-        else
-            break;
-
-    }
-    fflush(stdin);
-
-    // Цикл выполняется пока не будет найдено ошибок ввода
-    while(1)
-    {
-        printf("Enter the coordinates of the second point x,y\n");
-        pr = scanf("%f %f", &x2, &y2);
-        if ( pr != 2)
-        {
-            fflush(stdin);
-            printf("Uncorrected variables...\n");
-            continue;
-
-        }
-        else
-            break;
-
+        printf("Uncorrected variables...\n");
+        return 0;
     }
 
-    // Цикл выполняется пока не будет найдено ошибок ввода
-    while(1)
+    setbuf(stdout,NULL);
+    printf("Enter the coordinates of the second point x,y\n");
+    pr = scanf("%f %f", &x2, &y2);
+    if ( pr != 2)
     {
-        printf("Enter the coordinates of the third point x,y\n");
-        pr = scanf("%f %f", &x3, &y3);
-        if ( pr != 2)
-        {
-            fflush(stdin);
-            printf("Uncorrected variables...\n");
-            continue;
+        printf("Uncorrected variables...\n");
+        return 0;
+    }
 
-        }
-        else
-            break;
 
+    setbuf(stdout,NULL);
+    printf("Enter the coordinates of the third point x,y\n");
+    pr = scanf("%f %f", &x3, &y3);
+    if ( pr != 2)
+    {
+        printf("Uncorrected variables...\n");
+        return 0;
     }
 
     s = Area(x1,x2,x3,y1,y2,y3);
