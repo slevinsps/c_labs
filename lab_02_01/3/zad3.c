@@ -68,14 +68,13 @@ int main(void)
         printf("Negative epsilon...\n");
         return NEGATIVE_EPSILON;
     }    
-	
-	
+		
     zn = sum(x,eps);
     zn_toch = sin(x); // Точное значение синуса
     absol_Error = fabs(zn_toch-zn);
     printf("Sum = %7.3lf\n",zn);
     printf("Sum_tochn = %7.3lf\n",zn_toch);
     printf("Absolut error = %lf\n",absol_Error);
-	otnos_Error(zn, absol_Error, zn_toch);
+    otnos_Error(zn, absol_Error, zn_toch);
     return 0;
 }
