@@ -1,4 +1,5 @@
 #include <stdio.h>
+
 #define DIVISION_BY_ZERO 1
 
 // Программа которая вычисляет остаток от
@@ -22,6 +23,7 @@ int main(void)
     int ost_del = 0; // Результат деления с остатком
     int pr; // Счетчик правильно считанных пременных
 	setbuf(stdout,NULL);
+	
     // Цикл выполняется пока не будет найдено ошибок ввода
     do
     {       
@@ -42,6 +44,7 @@ int main(void)
             printf("Division by zero...\n");
             return DIVISION_BY_ZERO;
         }
+		
 	division(a,b,&zel_del,&ost_del);
     printf("%d / %d = %d; %d %% %d = %d\n",a,b,zel_del,a,b,ost_del);
     return 0;
