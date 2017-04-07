@@ -11,15 +11,15 @@
 int otnos_Error(double zn,double absol_Error, double zn_toch)
 {
     if (zn == 0)
-	{
+    {
         printf("Division by zero, it is impossible to calculate the relative error...\n");
-		return DIVISION_BY_ZERO;
-	}
+        return DIVISION_BY_ZERO;
+    }
     else
     {
         double otnos_Error = absol_Error/zn_toch; //  Относительная ошибка
         printf("Otnosit error = %lf\n",otnos_Error);
-		return 0;
+        return 0;
     }
 }
 	
@@ -47,6 +47,7 @@ int main(void)
     double absol_Error; // Абсолютная ошибка
     int pr; // Счетчик правильно считанных пременных
 	setbuf(stdout,NULL);
+	
     // Цикл выполняется пока не будет найдено ошибок ввода
 	do
     {       
@@ -63,10 +64,10 @@ int main(void)
 	
 	// Проверка на отрицательную точность
 	if (eps < 0)
-	{
-		printf("Negative epsilon...\n");
-		return NEGATIVE_EPSILON;
-	}    
+    {
+        printf("Negative epsilon...\n");
+        return NEGATIVE_EPSILON;
+    }    
 	
 	
     zn = sum(x,eps);

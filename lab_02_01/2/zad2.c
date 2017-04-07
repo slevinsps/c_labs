@@ -9,16 +9,16 @@
 // Функция, выводящая площадь треугольника
 int correct_triangle(float s)
 {
-	if (s == 0)
-	{
+    if (s == 0)
+    {
         printf("The points lie on one straight line");
-		return THERE_IS_NO_TRIANGLE;
-	}
+        return THERE_IS_NO_TRIANGLE;
+    }
     else
-	{
+    {
         printf("Area of triangle = %7.3f\n",s);	
-		return 0;
-	}
+        return 0;
+    }
 }
 
 // Функция вычисления площади по трем точкам
