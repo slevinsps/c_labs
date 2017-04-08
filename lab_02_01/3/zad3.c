@@ -35,8 +35,7 @@ double sum(double x,double eps)
         k += 2;
         s2 += x1;
     }
-    return s2;
-    
+    return s2;    
 }
 
 int main(void)
@@ -60,7 +59,7 @@ int main(void)
             continue;
 
         }  
-    }while (pr != 2);
+    } while (pr != 2);
 	
 	// Проверка на отрицательную точность
     if (eps < 0)
