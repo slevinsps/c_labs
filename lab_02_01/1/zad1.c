@@ -41,10 +41,10 @@ int main(void)
 	
     // Проверка деления на 0
     if (b == 0)
-        {
-            printf("Division by zero...\n");
-            return DIVISION_BY_ZERO;
-        }
+    {
+        printf("Division by zero...\n");
+        return DIVISION_BY_ZERO;
+    }
 		
     division(a,b,&zel_del,&ost_del);
     printf("%d / %d = %d; %d %% %d = %d\n",a,b,zel_del,a,b,ost_del);
