@@ -35,7 +35,7 @@ double sum(double x,double eps)
         k += 2;
         s2 += x1;
     }
-	return s2;
+    return s2;
     
 }
 
@@ -46,10 +46,10 @@ int main(void)
     double zn,zn_toch; // Вычисленное и точное значение фунции
     double absol_Error; // Абсолютная ошибка
     int pr; // Счетчик правильно считанных пременных
-	setbuf(stdout,NULL);
+    setbuf(stdout,NULL);
 	
     // Цикл выполняется пока не будет найдено ошибок ввода
-	do
+    do
     {       
         printf("Enter x and epsilon:\n");
         pr = scanf("%lf %lf", &x, &eps);
@@ -63,7 +63,7 @@ int main(void)
     }while (pr != 2);
 	
 	// Проверка на отрицательную точность
-	if (eps < 0)
+    if (eps < 0)
     {
         printf("Negative epsilon...\n");
         return NEGATIVE_EPSILON;

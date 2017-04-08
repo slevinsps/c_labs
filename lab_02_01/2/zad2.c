@@ -63,6 +63,6 @@ int main(void)
     }
 
     s = area(x1,x2,x3,y1,y2,y3);
-	correct_triangle(s);
+    correct_triangle(s);
     return 0;
 }

@@ -7,13 +7,14 @@
 
 // Функция которая высичляет результат целочисленного деления числа a на b
 void division(int a, int b,int *zel_del,int *ost_del)
-{	int a1 = a;
+{	
+    int a1 = a;
     while(a1>=b)
     {
         a1 = a1 - b;
         *zel_del = *zel_del + 1;		
     }
-	*ost_del = a-*zel_del*b;	
+    *ost_del = a-*zel_del*b;	
 }
 
 int main(void)
