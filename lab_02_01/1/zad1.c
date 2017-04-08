@@ -23,7 +23,7 @@ int main(void)
     int zel_del = 0; // Результат целочисленного деления
     int ost_del = 0; // Результат деления с остатком
     int pr; // Счетчик правильно считанных пременных
-	setbuf(stdout,NULL);
+    setbuf(stdout,NULL);
 	
     // Цикл выполняется пока не будет найдено ошибок ввода
     do
@@ -39,14 +39,14 @@ int main(void)
         }  
     }while (pr != 2);
 	
-	// Проверка деления на 0
-	if (b == 0)
+    // Проверка деления на 0
+    if (b == 0)
         {
             printf("Division by zero...\n");
             return DIVISION_BY_ZERO;
         }
 		
-	division(a,b,&zel_del,&ost_del);
+    division(a,b,&zel_del,&ost_del);
     printf("%d / %d = %d; %d %% %d = %d\n",a,b,zel_del,a,b,ost_del);
     return 0;
 
