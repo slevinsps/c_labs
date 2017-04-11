@@ -6,21 +6,6 @@
 
 // Программа которая вычисляет площадь треугольника по координатам трех точек
 
-// Функция, выводящая площадь треугольника
-int correct_triangle(float s)
-{
-    if (s == 0)
-    {
-        printf("The points lie on one straight line");
-        return THERE_IS_NO_TRIANGLE;
-    }
-    else
-    {
-        printf("Area of triangle = %7.3f\n",s);	
-        return 0;
-    }
-}
-
 // Функция вычисления площади по трем точкам
 float area(float x1,float x2,float x3,float y1,float y2,float y3)
 {
@@ -37,7 +22,7 @@ int main(void)
     float s; // Площадь треугольника
     int pr; // Счетчик правильно считанных пременных
     setbuf(stdout,NULL);
-	
+    
     printf("Enter the coordinates of the first point x,y\n");
     pr = scanf("%f %f", &x1, &y1);
     if ( pr != 2)
@@ -63,6 +48,15 @@ int main(void)
     }
 
     s = area(x1,x2,x3,y1,y2,y3);
-    correct_triangle(s);
+    
+    if (s == 0)
+    {
+        printf("The points lie on one straight line");
+        return THERE_IS_NO_TRIANGLE;
+    }
+    else
+    {
+        printf("Area of triangle = %7.3f\n",s);    
+    }
     return 0;
 }

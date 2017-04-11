@@ -7,20 +7,21 @@
 
 // Функция которая высичляет результат целочисленного деления числа a на b
 void division(int a, int b,int *zel_del,int *ost_del)
-{    
+{   
+    *zel_del = 0;
     int a1 = a;
     while(a1>=b)
     {
         a1 = a1 - b;
         *zel_del = *zel_del + 1;        
     }
-    *ost_del = a-*zel_del*b;    
+    *ost_del = a - *zel_del * b;    
 }
     
 int main(void)
 {
     int a, b; // Делимое и делитель
-    int zel_del = 0; // Результат целочисленного деления
+    int zel_del; // Результат целочисленного деления
     int ost_del = 0; // Результат деления с остатком
     int pr; // Счетчик правильно считанных пременных
     setbuf(stdout,NULL);

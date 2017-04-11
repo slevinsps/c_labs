@@ -6,24 +6,8 @@
 
 // Программа которая вычисляет сумму ряда, точное значение ряда,
 // абсолютную и относителную ошибку
-
-// Функция возвращает относительную ошибку
-int otnos_Error(double zn,double absol_Error, double zn_toch)
-{
-    if (zn == 0)
-    {
-        printf("Division by zero, it is impossible to calculate the relative error...\n");
-        return DIVISION_BY_ZERO;
-    }
-    else
-    {
-        double otnos_Error = absol_Error/zn_toch; //  Относительная ошибка
-        printf("Otnosit error = %lf\n",otnos_Error);
-        return 0;
-    }
-}
-	
-// Функция котоая вычисляет сумму ряда	
+    
+// Функция котоая вычисляет сумму ряда    
 double sum(double x,double eps)
 {
     double s2 = x; // Сумма ряда
@@ -46,7 +30,7 @@ int main(void)
     double absol_Error; // Абсолютная ошибка
     int pr; // Счетчик правильно считанных пременных
     setbuf(stdout,NULL);
-	
+    
     // Цикл выполняется пока не будет найдено ошибок ввода
     do
     {       
@@ -60,20 +44,31 @@ int main(void)
 
         }  
     } while (pr != 2);
-	
-	// Проверка на отрицательную точность
+    
+    // Проверка на отрицательную точность
     if (eps < 0)
     {
         printf("Negative epsilon...\n");
         return NEGATIVE_EPSILON;
     }    
-		
+        
     zn = sum(x,eps);
     zn_toch = sin(x); // Точное значение синуса
     absol_Error = fabs(zn_toch-zn);
     printf("Sum = %7.3lf\n",zn);
     printf("Sum_tochn = %7.3lf\n",zn_toch);
     printf("Absolut error = %lf\n",absol_Error);
-    otnos_Error(zn, absol_Error, zn_toch);
+    
+    if (zn == 0)
+    {
+        printf("Division by zero, it is impossible to calculate the relative error...\n");
+        return DIVISION_BY_ZERO;
+    }
+    else
+    {
+        double otnos_Error = absol_Error/zn_toch; //  Относительная ошибка
+        printf("Otnosit error = %lf\n",otnos_Error);
+    }
+
     return 0;
 }
