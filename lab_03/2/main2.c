@@ -76,6 +76,6 @@ int main(int argc, char** argv)
 	k = get_count(f,srednee);
 	fclose(f);
 
-	printf("Number of values of large mean value: %d", k);
+	fprintf(stdout,"Number of values of large mean value: %d", k);
     return 0;
 }
