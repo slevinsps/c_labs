@@ -1,4 +1,4 @@
-#include <stdio.h>
+﻿#include <stdio.h>
 
 #define DIVISION_BY_ZERO 1
 
@@ -9,13 +9,12 @@
 void division(int a, int b,int *zel_del,int *ost_del)
 {   
     *zel_del = 0;
-    int a1 = a;
-    while(a1>=b)
+    while(a>=b)
     {
-        a1 = a1 - b;
+        a = a - b;
         *zel_del = *zel_del + 1;        
     }
-    *ost_del = a - *zel_del * b;    
+    *ost_del = a;    
 }
     
 int main(void)

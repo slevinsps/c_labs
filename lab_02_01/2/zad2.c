@@ -54,9 +54,6 @@ int main(void)
         printf("The points lie on one straight line");
         return THERE_IS_NO_TRIANGLE;
     }
-    else
-    {
-        printf("Area of triangle = %7.3f\n",s);    
-    }
+    printf("Area of triangle = %7.3f\n",s);    
     return 0;
 }
