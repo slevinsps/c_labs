@@ -5,8 +5,7 @@
 #define FEWER_THAN_THREE_VALUES -1
 
 int find_loc_max(FILE *f1,int *k)
-{
-        
+{   
     float a = 0,b = 0,c = 0,x;
     int err = 0;
     *k = 0;
@@ -46,7 +45,8 @@ int find_loc_max(FILE *f1,int *k)
 
 
 int main(int argc, char** argv)
-{   printf("Enter numbers:\n");
+{   
+    printf("Enter numbers:\n");
     setbuf(stdout,NULL);
     int k = 0;
     int err = find_loc_max(stdin,&k);
