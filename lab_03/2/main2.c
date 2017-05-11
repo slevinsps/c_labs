@@ -11,12 +11,10 @@ int get_count(FILE *f, float srednee)
     float x = 0;
     int k = 0;
     while (fscanf(f, "%f", &x) == 1)
-    {
-        
+    {    
         if (x > srednee)
             k++;
-    }
-    
+    }   
     return k;
 }
     
@@ -29,23 +27,23 @@ int get_min_max(FILE *f,float *min, float *max)
     {
         *max = x;
         *min = x;
+        while (fscanf(f, "%f", &x) == 1)
+        {
+            if (x > *max)
+            {
+                *max = x;
+            }
+            if (x < *min)
+            {
+                *min = x;
+            }
+        }
     }
     else
-        err = NO_VALUES_IN_FILE;
-    while (fscanf(f, "%f", &x) == 1)
-    {
-        if (x > *max)
-        {
-            *max = x;
-        }
-        if (x < *min)
-        {
-            *min = x;
-        }
-    }
+        err = NO_VALUES_IN_FILE; 
     return err;
 }
-
+    
 int main(int argc, char** argv)
 {
     FILE *f;

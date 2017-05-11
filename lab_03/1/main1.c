@@ -10,33 +10,21 @@ int find_loc_max(FILE *f1,int *k)
     int err = 0;
     *k = 0;
     
-    if (fscanf(f1,"%f", &x) == 1)
-         a = x;
-     else
-         err = FEWER_THAN_THREE_VALUES;
-       
-    if (fscanf(f1,"%f", &x) == 1)
-         b = x;
-     else
-         err = FEWER_THAN_THREE_VALUES;
-    
-    if (fscanf(f1,"%f", &x) == 1)
-         c = x;
-     else
-         err = FEWER_THAN_THREE_VALUES;
-    
-    if (b>c && b>a)
-        *k = *k + 1;
-    
-    while (fscanf(f1,"%f", &x) == 1)
-    {
-
-        a = b;
-        b = c;
-        c = x;
+    if (fscanf(f1,"%f%f%f", &a, &b, &c) != 3)
+        err = FEWER_THAN_THREE_VALUES;
+    else
+    {    
         if (b>c && b>a)
+            *k = *k + 1;        
+        while (fscanf(f1,"%f", &x) == 1)
         {
-            *k = *k + 1;
+            a = b;
+            b = c;
+            c = x;
+            if (b>c && b>a)
+            {
+                *k = *k + 1;
+            }
         }
     }
     return err;
@@ -46,11 +34,11 @@ int find_loc_max(FILE *f1,int *k)
 
 int main(int argc, char** argv)
 {   
-    printf("Enter numbers:\n");
     setbuf(stdout,NULL);
-    int k = 0;
+    int k;    
+    
+    printf("Enter numbers:\n");   
     int err = find_loc_max(stdin,&k);
-
     if (err == FEWER_THAN_THREE_VALUES)
         fprintf(stderr, "Fewer than three values\n");
     else
