@@ -8,9 +8,11 @@
 #define NO_FILE -1
 #define NOT_ALL_ARGUMENTS -2
 #define NUMBER_ITEMS_EXCEEDED -3
+#define NUMBER_UNCORRECT -4
 
 int sum_proizved(const int* pb,const int* pe)
 {
+	pe = pe - 1;
     int sum = 0;
     const int *left_border = pb;
     const int *right_border = pe;
@@ -26,8 +28,7 @@ int sum_proizved(const int* pb,const int* pe)
             }
             else
             {
-                right_border--;   
-                
+                right_border--;
             }
         }
         else
@@ -40,26 +41,33 @@ int sum_proizved(const int* pb,const int* pe)
 
 int read_array(FILE *f, int **pb, int **pe)
 {
-    int x;
     int k = 0;
-    int warning = OK;
-    if (fscanf(f,"%d",&x) == 1)
+    int err = OK;
+    if (fscanf(f,"%d",*pb) == 1)
     {
-        **pb = x;
-        **pe = x; 
+        *pe = *pb; 
+		//printf("%d\n",**pe);
+		*pe = *pe + 1;
+		
         k++;
-    } 
-    while((fscanf(f,"%d",&x) == 1) && (k <= NUMBER_ITEMS))
-    {
-        *pe = *pe + 1;
-        **pe = x;
-        k++;
-    }
-    if (k > NUMBER_ITEMS)
-    {
-        warning = NUMBER_ITEMS_EXCEEDED;
-    }
-    return warning;        
+		while((fscanf(f,"%d",*pe) == 1) && (k <= NUMBER_ITEMS))
+		{
+			//printf("%d\n",**pe);
+			*pe = *pe + 1;
+			
+			k++;
+		}
+
+		if (k > NUMBER_ITEMS)
+		{
+			err = NUMBER_ITEMS_EXCEEDED;
+		}
+	}
+	else
+	{
+		err = NUMBER_UNCORRECT;
+	}
+    return err;        
 }
 
     
@@ -69,7 +77,6 @@ int main(int argc, char** argv)
     int a[NUMBER_ITEMS];
     int sum;
     int err = OK;
-    int warning;
     int *pb = a;
     int *pe = a;
     
@@ -88,13 +95,20 @@ int main(int argc, char** argv)
             }
             else
             {
-                warning = read_array(f, &pb, &pe);
-                sum = sum_proizved(pb, pe);
-                if (warning == NUMBER_ITEMS_EXCEEDED)
-                {
-                    printf("The number of elements exceeded %d Only %d elements will be taken into account\n",NUMBER_ITEMS,NUMBER_ITEMS);
-                }
-                printf("The sum of products of positive and negative elements = %d",sum);
+                err = read_array(f, &pb, &pe);
+				if (err == NUMBER_UNCORRECT)
+				{
+					printf("First element in array uncorrect or array is empty");	
+				}
+				else
+				{
+					if (err == NUMBER_ITEMS_EXCEEDED)
+					{
+						printf("The number of elements exceeded %d Only %d elements will be taken into account\n",NUMBER_ITEMS,NUMBER_ITEMS);
+					}
+					sum = sum_proizved(pb, pe);
+					printf("The sum of products of positive and negative elements = %d",sum);
+				}
             }
             fclose(f);
         }    
