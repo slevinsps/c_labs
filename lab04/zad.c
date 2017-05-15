@@ -248,6 +248,47 @@ void div_into_three(int *pb,int *pe)
     }
 }
 
+
+void sort(int a[], int n)
+{
+    int maxi = 0;
+	int mini = 0;
+	int k;
+    for (int i = 0; i < n; i++)
+	{
+		if (a[i] > a[maxi])
+		{
+			maxi = i;
+		}
+		if (a[i] < a[mini])
+		{
+			mini = i;
+		}
+	}
+	
+	if (mini > maxi)
+	{
+		k = mini;
+        mini = maxi;
+		maxi = k;
+	}
+	for (int i = mini; i<maxi; i++)
+	{
+		for (int j = i+1; j<=maxi; j++) 
+		{
+			if (a[i]>a[j])
+			{
+				k = a[i];
+				a[i] = a[j];
+				a[j] = k;
+			}
+		}
+		
+	}
+}
+
+
+
 int main()
 {
     setbuf(stdout,NULL);
@@ -323,7 +364,15 @@ int main()
                         printf("%d ",*pb);
                         pb = pb + 1;
                     }
-            }git 
+                case 7:
+                    sort(a,n);
+					printf("Array:\n");
+                    while(pe>=pb)
+                    {
+                        printf("%d ",*pb);
+                        pb = pb + 1;
+                    }
+            }
         }
             
     }
