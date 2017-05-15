@@ -27,7 +27,9 @@ void read_array(int **pb, int **pe, int n)
         **pe = x;
         k++;
     }     
+    //*pe = *pe + 1;
 }
+    
 int menu(int *k)
 {
     int err;
@@ -252,39 +254,39 @@ void div_into_three(int *pb,int *pe)
 void sort(int a[], int n)
 {
     int maxi = 0;
-	int mini = 0;
-	int k;
+    int mini = 0;
+    int k;
     for (int i = 0; i < n; i++)
-	{
-		if (a[i] > a[maxi])
-		{
-			maxi = i;
-		}
-		if (a[i] < a[mini])
-		{
-			mini = i;
-		}
-	}
-	
-	if (mini > maxi)
-	{
-		k = mini;
+    {
+        if (a[i] > a[maxi])
+        {
+            maxi = i;
+        }
+        if (a[i] < a[mini])
+        {
+            mini = i;
+        }
+    }
+    
+    if (mini > maxi)
+    {
+        k = mini;
         mini = maxi;
-		maxi = k;
-	}
-	for (int i = mini; i<maxi; i++)
-	{
-		for (int j = i+1; j<=maxi; j++) 
-		{
-			if (a[i]>a[j])
-			{
-				k = a[i];
-				a[i] = a[j];
-				a[j] = k;
-			}
-		}
-		
-	}
+        maxi = k;
+    }
+    for (int i = mini; i<maxi; i++)
+    {
+        for (int j = i+1; j<=maxi; j++) 
+        {
+            if (a[i]>a[j])
+            {
+                k = a[i];
+                a[i] = a[j];
+                a[j] = k;
+            }
+        }
+        
+    }
 }
 
 
@@ -366,7 +368,7 @@ int main()
                     }
                 case 7:
                     sort(a,n);
-					printf("Array:\n");
+                    printf("Array:\n");
                     while(pe>=pb)
                     {
                         printf("%d ",*pb);
