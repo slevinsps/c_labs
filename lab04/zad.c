@@ -3,33 +3,44 @@
 #include <string.h>
 #include <errno.h>
 
+
 #define NUMBER_ITEMS 10
+
+
+
+#define ARRAY_EMPTY -2
+
+#define NUMBER_ITEMS_EXCEEDED -4
     
 #define OK 0
 #define NO_FILE -1
-#define NOT_ALL_ARGUMENTS -2
+
 #define UNCORRECT_NUMBERS -3
 #define UNCORRECT_CHOICE -4
-
-void read_array(int **pb, int **pe, int n)
+   
+int read_array(int **pb, int **pe, int n)
 {
-    int x;
-    int k = 0;
-    if (scanf("%d",&x) == 1)
-    {
-        **pb = x;
-        **pe = x; 
-        k++;
-    } 
-    while((k < n) && (scanf("%d",&x) == 1))
+    int err = OK;
+    while((*pe-*pb < n) && (scanf("%d",*pe) == 1))
     {
         *pe = *pe + 1;
-        **pe = x;
-        k++;
-    }     
-    //*pe = *pe + 1;
-}
+    }
+
+    if (*pe == *pb)
+    {
+        err = ARRAY_EMPTY;
+    }
     
+    if (*pe-*pb > n)
+    {
+		
+        err = NUMBER_ITEMS_EXCEEDED;
+    }
+    return err;        
+}
+
+
+   
 int menu(int *k)
 {
     int err;
@@ -50,12 +61,12 @@ int menu(int *k)
 
 void sum_and_proizved(int *pb,int *pe,int *sum,int *proizved)
 {
-    int k = 1;
+
     *sum = 0;
     *proizved = 1;
     while(pe>=pb)
     {
-        if (k % 2 == 0)
+        if (*pb % 2 == 0)
         {
             *sum = (*sum)+(*pb);
         }
@@ -63,7 +74,7 @@ void sum_and_proizved(int *pb,int *pe,int *sum,int *proizved)
         {
             *proizved = (*proizved)*(*pb); 
         }
-        k++;
+
         pb = pb + 1;
     }
 }
@@ -103,6 +114,7 @@ void more_arithmetic_mean(int *pb,int *pe,int **bb, int **be,int n)
 
 void delete(int **pb,int **pe)
 {
+	*pe = *pe - 1;
     int *begin = *pb;
     int *ppb;
     while(*pe>=begin)
@@ -127,6 +139,7 @@ void delete(int **pb,int **pe)
 
 void add_sum(int **pb,int **pe,int k)
 {
+	*pe = *pe - 1;
     int *begin = *pb;
     int *ppe;
     int sum = 0;
@@ -172,7 +185,7 @@ void replace(int *pb,int *pe)
     int maxi = 2;
     while(pe>=ppb)
     {
-        if (k % 2 == 0)
+        if (*ppb % 2 == 0)
         {
             if (*ppb > max)
             {
@@ -310,73 +323,86 @@ int main()
         int proizved = 1;
         int number;
         printf("Enter array:\n");
-        read_array(&pb, &pe,n);
-        err = menu(&choice);
-        if (err == OK)
+        err = read_array(&pb, &pe,n);
+		if (err == ARRAY_EMPTY)
         {
-            switch(choice)
-            {
-                case 1:
-                    sum_and_proizved(pb,pe,&sum,&proizved);
-                    printf("Sum = %d; Proivedenie = %d",sum,proizved);
-                    break;
-                case 2:
-                    more_arithmetic_mean(pb,pe,&bb,&be,n);
-                    printf("Array of elements of large mean value\n");
-                    while(be>=bb)
-                    {
-                        printf("%d ",*bb);
-                        bb = bb + 1;
-                    }
-                    break;        
-                case 3:
-                    delete(&pb,&pe);
-                    while(pe>=pb)
-                    {
-                        printf("%d ",*pb);
-                        pb = pb + 1;
-                    }
-                    break;    
-                case 4:
-                    printf("Enter number: ");
-                    if (scanf("%d",&number) == 1)
-                    {
-                        add_sum(&pb,&pe,number);
-                        while(pe>=pb)
-                        {
-                            printf("%d ",*pb);
-                            pb = pb + 1;
-                        }
-                    }
-                    else 
-                        err = UNCORRECT_CHOICE;
-                    break;
-                case 5:
-                    replace(pb,pe);
-                    while(pe>=pb)
-                    {
-                        printf("%d ",*pb);
-                        pb = pb + 1;
-                    }
-                    break;    
-                case 6:
-                    div_into_three(pb,pe);
-                    while(pe>=pb)
-                    {
-                        printf("%d ",*pb);
-                        pb = pb + 1;
-                    }
-                case 7:
-                    sort(a,n);
-                    printf("Array:\n");
-                    while(pe>=pb)
-                    {
-                        printf("%d ",*pb);
-                        pb = pb + 1;
-                    }
-            }
+            printf("Array is empty");    
         }
-            
+		else
+        {
+            if (err == NUMBER_ITEMS_EXCEEDED)
+            {
+                printf("The number of elements exceeded %d\n",n);
+            }
+			else
+			{		
+				err = menu(&choice);
+				if (err == OK)
+				{
+					switch(choice)
+					{
+						case 1:
+							sum_and_proizved(pb,pe-1,&sum,&proizved);
+							printf("Sum = %d; Proivedenie = %d",sum,proizved);
+							break;
+						case 2:
+							more_arithmetic_mean(pb,pe-1,&bb,&be,n);
+							printf("Array of elements of large mean value\n");
+							while(be>=bb)
+							{
+								printf("%d ",*bb);
+								bb = bb + 1;
+							}
+							break;        
+						case 3:
+							delete(&pb,&pe);
+							while(pe>=pb)
+							{
+								printf("%d ",*pb);
+								pb = pb + 1;
+							}
+							break;    
+						case 4:
+							printf("Enter number: ");
+							if (scanf("%d",&number) == 1)
+							{
+								add_sum(&pb,&pe,number);
+								while(pe>=pb)
+								{
+									printf("%d ",*pb);
+									pb = pb + 1;
+								}
+							}
+							else 
+								err = UNCORRECT_CHOICE;
+							break;
+						case 5:
+							replace(pb,pe-1);
+							while(pe>=pb)
+							{
+								printf("%d ",*pb);
+								pb = pb + 1;
+							}
+							break;    
+						case 6:
+							div_into_three(pb,pe-1);
+							while(pe>=pb)
+							{
+								printf("%d ",*pb);
+								pb = pb + 1;
+							}
+						case 7:
+							sort(a,n);
+							printf("Array:\n");
+							while(pe>=pb)
+							{
+								printf("%d ",*pb);
+								pb = pb + 1;
+							}
+					}
+				}
+			}
+        }    
     }
     else
     {
