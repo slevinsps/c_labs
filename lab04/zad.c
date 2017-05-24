@@ -1,9 +1,9 @@
 #include <stdio.h>
-#include <string.h>
-#include <errno.h>
+#include <math.h>
+#include <assert.h>
 
 #define NUMBER_ITEMS 10
-
+    
 #define OK 0
 #define NO_FILE -1
 #define ARRAY_EMPTY -2
@@ -34,7 +34,6 @@ int read_array(int **pb, int **pe)
     return err;        
 }
 
-
 int menu(int *k)
 {
     int err;
@@ -46,7 +45,7 @@ int menu(int *k)
 6 - записи на место максимального элемента, кратного 3, суммы элементов, заканчивающихся на 3\n\
 7 - упорядочивания элементов, расположенных между минимальным и максимальным элементами массива (включая эти элементы)\n");
     printf("\nYour choice: ");
-    if (scanf("%d",k) == 1)
+    if (scanf("%d",k) == 1 && 1 <= *k && *k <= 7)
     {
         err = OK;
     }
@@ -57,11 +56,12 @@ int menu(int *k)
     return err;
 }
 
-int sum_and_proizved(int *pb,int *pe,int *sum,int *proizved)
+int sum_and_proizved(const int *pb,const int *pe,int *sum,int *proizved)
 {
+    assert(pe - pb != -1);
     int err = OK;
-    int counter_even = 0;
-    int counter_odd = 0;
+    int check_even = 0;
+    int check_odd = 0;
     *sum = 0;
     *proizved = 1;
     while(pe>=pb)
@@ -69,37 +69,37 @@ int sum_and_proizved(int *pb,int *pe,int *sum,int *proizved)
         if (*pb % 2 == 0)
         {
             *sum = *sum + *pb;
-            counter_even = 1;
+            check_even = 1;
         }
         else
         {
             *proizved = (*proizved)*(*pb); 
-            counter_odd = 1;
+            check_odd = 1;
         }
         pb = pb + 1;
-    }
-    
-    if (counter_even == 0)
+    }    
+    if (check_even == 0)
         err = NO_EVEN_NUMBER;
-    if (counter_odd == 0)
+    if (check_odd == 0)
         err = NO_ODD_NUMBER;
     return err;
 }
 
-int summ_elements(int *pb,int *pe)
+int summ_elements(const int *pb,const int *pe)
 {
     int sum = 0;
-    int *ppb = pb;
-    while(pe>=ppb)
+    while(pe>=pb)
     {
-        sum = sum + *ppb;
-        ppb = ppb + 1;
+        sum = sum + *pb;
+        pb = pb + 1;
     }
     return sum;    
 }
 
-int more_arithmetic_mean(int *pb,int *pe, int **bb, int **be,int n)
+int more_arithmetic_mean(const int *pb,const int *pe, int **bb, int **be)
 {
+    assert(pe - pb != -1);
+    int n = pe-pb+1; // количество элементов в массиве
     int err = OK;
     int sum = 0;
     int srednee = 0;
@@ -123,8 +123,6 @@ int more_arithmetic_mean(int *pb,int *pe, int **bb, int **be,int n)
     return err; 
 }
 
-
-
 void delete_element(int *number, int **pb, int **pe)
 {
     int *ppb;
@@ -139,6 +137,7 @@ void delete_element(int *number, int **pb, int **pe)
 
 int delete_negative(int **pb,int **pe)
 {
+    assert(*pe - *pb != 0);
     int err = OK;
     int *begin = *pb;
     int n;
@@ -160,13 +159,10 @@ int delete_negative(int **pb,int **pe)
     
     if (*pe-*pb == n)
         err = ALL_POSITIVE;
-
     if (*pe - *pb == -1)
-        err = ALL_NEGATIVE;
-    
+        err = ALL_NEGATIVE;   
     return err;
 }
-
 
 void add_element(int *number, int **pb, int **pe,int element)
 {
@@ -183,6 +179,7 @@ void add_element(int *number, int **pb, int **pe,int element)
 
 int add_sum(int **pb,int **pe,int k)
 {
+    assert(*pe - *pb != 0);
     int err = OK;
     int check_existence = 0;
     int *begin = *pb; 
@@ -209,126 +206,92 @@ int add_sum(int **pb,int **pe,int k)
     return err;
 }
     
-
-void replace_elements(int *pb,int *pe,int e1i,int e2i,int e1,int e2)
+void replace_elements(int *e1,int *e2)
 {
-    int k = 1;
-    while(pe>=pb)
-    {
-        if (k == e1i)
-            *pb = e2;
-        if (k == e2i)
-            *pb = e1;
-        k++;
-        pb = pb + 1;
-    }
+    int temp = *e1;
+    *e1 = *e2;
+    *e2 = temp;
 }
     
 int replace_min_max(int *pb,int *pe)
 {
-
-    int err = OK;
-    int k = 1;
-    int *ppb = pb;
+    assert(pe - pb != -1);
+    int err = OK;   
+    int *min = NULL; 
+    int *max = NULL;
     
-    int min = 2; // среди нечетных => 2 не может быть равно
-    int max = 1; // среди четных => 1 не может быть равно
-    int mini = -1;
-    int maxi = -1;
-    
-    int counter_even = 0;
-    int counter_odd = 0;
-    
-    
-    while(pe>=ppb)
+    while(pe>=pb)
     {
-        if (*ppb % 2 == 0)
+        if (*pb % 2 == 0)
         {
-            if (max == 1) // инициализация первого максимума
+            if (max == NULL) // инициализация первого максимума
             {
-                max = *ppb;
-                maxi = k;
+                max = pb;
             }
             else
             {
-                if (*ppb > max)
+                if (*pb > *max)
                 {
-                    max = *ppb;
-                    maxi = k;
+                    max = pb;
                 }
             }
-            counter_even = 1;
         }
         else
         {
-            if (min == 2) // инициализация первого минимума
+            if (min == NULL) // инициализация первого минимума
             {
-                min = *ppb;
-                mini = k;
+                min = pb;
             }
             else
             {
-                if (*ppb < min)
+                if (*pb < *min)
                 {
-                    min = *ppb;
-                    mini = k;
+                    min = pb;
                 }
             }
-            counter_odd = 1;
         }
-        k++;
-        ppb = ppb + 1;
+        pb = pb + 1;
     }
-    
-    if (counter_even == 0)
+    if (max == NULL)
         err = NO_EVEN_NUMBER;
-    if (counter_odd == 0)
+    if (min == NULL)
         err = NO_ODD_NUMBER;
     if (err == OK)    
-        replace_elements(pb,pe,mini,maxi,min,max);
-    
+        replace_elements(min,max);
     return err;
 }
 
 int div_into_three(int *pb,int *pe)
 {
+    assert(pe - pb != -1);
     int err = OK;
-    int k = 1;
-    int *ppb = pb;
-    int max;
-    int maxi = 0;
-    int check_initialization = 0;
+    int *max = NULL;
     int check_div_three = 0;
     int check_ending_three = 0;
     int sum = 0;
-    while(pe>=ppb)
+    while(pe>=pb)
     {
-        if (*ppb % 3 == 0)
+        if (*pb % 3 == 0)
         {
-            if (check_initialization == 0)
+            if (max == NULL)
             {
-                max = *ppb;
-                maxi = k;
-                check_initialization = 1;
+                max = pb;
                 check_div_three = 1;
             }
             else
             {
-                if (*ppb > max)
+                if (*pb > *max)
                 {
-                    max = *ppb;
-                    maxi = k;
+                    max = pb;
                 }
             }
         }
-        
-        if (*ppb % 10 == 3)
+        if (abs(*pb) % 10 == 3)
         {
+            sum = sum + *pb;
             check_ending_three = 1;
-            sum = sum + *ppb;
         }
-        k++;
-        ppb = ppb + 1;
+        pb = pb + 1;
     }
     if (check_div_three == 0)
         err  = NO_ELEMENT_DIV_3;
@@ -336,22 +299,14 @@ int div_into_three(int *pb,int *pe)
         err = NO_ELEMENT_ENDING_3;
     if (err == OK)
     {
-        k = 1;
-        while(pe>=pb)
-        {
-            if (k == maxi)
-                *pb = sum;
-            k++;
-            pb = pb + 1;
-        }
+        *max = sum;
     }
     return err;
 }
 
-
-
 void bubble_sort(int **pb, int **pe)
 {
+    assert(*pe - *pb != 0);
     int elem;
     int n = *pe - *pb;
     for (int i = 0; i<n; i++)
@@ -368,28 +323,27 @@ void bubble_sort(int **pb, int **pe)
     }
 }
 
-void sort_min_max(int **pb, int **pe)
+void sort_min_max(int *pb, int *pe)
 {
-    int *k;
-    int *ppb = *pb;
-    
-    int *min = *pb; 
-    int *max = *pb;
+    assert(pe - pb != 0);
+    int *k;    
+    int *min = pb; 
+    int *max = pb;
         
-    while(*pe>ppb)
+    while(pe>pb)
     {
-        if (*ppb > *max)
+        if (*pb > *max)
         {
-            max = ppb;
+            max = pb;
 
         }
         
-        if (*ppb < *min)
+        if (*pb < *min)
         {
-            min = ppb;
+            min = pb;
         }
         
-        ppb = ppb + 1;
+        pb = pb + 1;
     }
     if (min > max)
     {
@@ -400,13 +354,11 @@ void sort_min_max(int **pb, int **pe)
     bubble_sort(&min, &max);
 }
     
-
 int main()
 {
     setbuf(stdout,NULL);
     int err = OK;
     int err_in_function = OK;
-    int n;
     int a[2*NUMBER_ITEMS];
     int *pb = a;
     int *pe = a;
@@ -422,150 +374,143 @@ int main()
     {
         printf("The maximum number of elements is %d\nYou can finish typing by typing a letter\nEnter the elements of the array into a column:\n",NUMBER_ITEMS);
         err = read_array(&pb, &pe);
-        n = pe-pb;
         if (err == ARRAY_EMPTY)
         {
             printf("Array is empty");    
         }
         else
-        {
-            if (err == NUMBER_ITEMS_EXCEEDED)
+        {        
+            switch(choice)
             {
-                printf("The number of elements exceeded %d\n",n);
-            }
-            else
-            {        
-                switch(choice)
-                {
-                    case 1:
-                        
-                        err_in_function = sum_and_proizved(pb,pe-1,&sum,&proizved);
-                        if (err_in_function == NO_EVEN_NUMBER)
+                case 1:
+                    
+                    err_in_function = sum_and_proizved(pb,pe-1,&sum,&proizved);
+                    if (err_in_function == NO_EVEN_NUMBER)
+                    {
+                        printf("No even number\n");
+                        printf("The product of odd numbers = %d",proizved);
+                    }
+                    else
+                    {
+                        if (err_in_function == NO_ODD_NUMBER)
                         {
-                            printf("No even number\n");
-                            printf("The product of odd numbers = %d",proizved);
+                            printf("No odd number\n");
+                            printf("The summ of even numbers = %d",sum);
                         }
                         else
+                            printf("The summ of even numbers = %d;\nThe product of odd numbers = %d",sum,proizved);
+                    }
+                    break;
+                    
+                case 2:
+                    err_in_function = more_arithmetic_mean(pb,pe-1,&bb,&be);
+                    if (err_in_function == ARRAY_EMPTY)
+                    {
+                        printf("There are no elements larger than the arithmetic mean");
+                    }
+                    else
+                    {
+                        printf("Array of elements of large mean value:\n");
+                        while(be>=bb)
                         {
-                            if (err_in_function == NO_ODD_NUMBER)
-                            {
-                                printf("No odd number\n");
-                                printf("The summ of even numbers = %d",sum);
-                            }
-                            else
-                                printf("The summ of even numbers = %d;\nThe product of odd numbers = %d",sum,proizved);
+                            printf("%d ",*bb);
+                            bb = bb + 1;
                         }
-                        break;
-                        
-                    case 2:
-                        err_in_function = more_arithmetic_mean(pb,pe-1,&bb,&be,n);
-                        if (err_in_function == ARRAY_EMPTY)
+                    }
+                    break;        
+                case 3:
+                    err_in_function = delete_negative(&pb,&pe);
+                    if (err_in_function == ALL_NEGATIVE)
+                        printf("All elements negative");
+                    else
+                    {
+                        if (err_in_function == ALL_POSITIVE)
+                            printf("All elements positive\n");
+                        while(pe>=pb)
                         {
-                            printf("There are no elements larger than the arithmetic mean");
+                            printf("%d ",*pb);
+                            pb = pb + 1;
                         }
+                    }
+
+                    break;    
+                case 4:
+                    printf("Enter number: ");
+                    if (scanf("%d",&number) == 1)
+                    {
+                        err_in_function = add_sum(&pb,&pe,number);
+                        if (err_in_function == NO_ELEMENT_IN_ARRAY)
+                            printf("There is no element in the array");
                         else
                         {
-                            printf("Array of elements of large mean value:\n");
-                            while(be>=bb)
-                            {
-                                printf("%d ",*bb);
-                                bb = bb + 1;
-                            }
-                        }
-                        break;        
-                    case 3:
-                        err_in_function = delete_negative(&pb,&pe);
-                        if (err_in_function == ALL_NEGATIVE)
-                            printf("All elements negative");
-                        else
-                        {
-                            if (err_in_function == ALL_POSITIVE)
-                                printf("All elements positive\n");
+                            printf("New array:\n");
                             while(pe>=pb)
                             {
                                 printf("%d ",*pb);
                                 pb = pb + 1;
                             }
                         }
-
-                        break;    
-                    case 4:
-                        printf("Enter number: ");
-                        if (scanf("%d",&number) == 1)
+                    }
+                    else 
+                        err = UNCORRECT_CHOICE;
+                    break;
+                    
+                case 5:
+                    err_in_function = replace_min_max(pb,pe-1);
+                    if (err_in_function == NO_EVEN_NUMBER)
+                    {
+                        printf("No even numbers\n");
+                    }
+                    else
+                    {
+                        if (err_in_function == NO_ODD_NUMBER)
                         {
-                            err_in_function = add_sum(&pb,&pe,number);
-                            if (err_in_function == NO_ELEMENT_IN_ARRAY)
-                                printf("There is no element in the array");
-                            else
-                            {
-                                printf("New array:\n");
-                                while(pe>=pb)
-                                {
-                                    printf("%d ",*pb);
-                                    pb = pb + 1;
-                                }
-                            }
-                        }
-                        else 
-                            err = UNCORRECT_CHOICE;
-                        break;
-                        
-                    case 5:
-                        err_in_function = replace_min_max(pb,pe-1);
-                        if (err_in_function == NO_EVEN_NUMBER)
-                        {
-                            printf("No even numbers\n");
+                            printf("No odd numbers\n");
                         }
                         else
                         {
-                            if (err_in_function == NO_ODD_NUMBER)
-                            {
-                                printf("No odd numbers\n");
-                            }
-                            else
-                            {
-                                printf("New array:\n");
-                                while(pe>pb)
-                                {    
-                                    printf("%d ",*pb);
-                                    pb = pb + 1;
-                                }
+                            printf("New array:\n");
+                            while(pe>pb)
+                            {    
+                                printf("%d ",*pb);
+                                pb = pb + 1;
                             }
                         }
-                        break;    
-                    case 6:
-                        err_in_function = div_into_three(pb,pe-1);
-                        if (err_in_function == NO_ELEMENT_DIV_3)
-                            printf("No elements dividing by 3");
+                    }
+                    break;    
+                case 6:
+                    err_in_function = div_into_three(pb,pe-1);
+                    if (err_in_function == NO_ELEMENT_DIV_3)
+                        printf("No elements dividing by 3");
+                    else
+                    {
+                        if (err_in_function == NO_ELEMENT_ENDING_3)
+                            printf("No elements ending by 3");
                         else
                         {
-                            if (err_in_function == NO_ELEMENT_ENDING_3)
-                                printf("No elements ending by 3");
-                            else
+                            printf("New array:\n");
+                            while(pe>pb)
                             {
-                                printf("New array:\n");
-                                while(pe>pb)
-                                {
-                                    printf("%d ",*pb);
-                                    pb = pb + 1;
-                                }
+                                printf("%d ",*pb);
+                                pb = pb + 1;
                             }
                         }
-                        break;
-                    case 7:
-                        sort_min_max(&pb, &pe);
-                        printf("Array:\n");
+                    }
+                    break;
+                case 7:
+                    sort_min_max(pb, pe);
+                    printf("Array:\n");
 
-                        while(pe>pb)
-                        {
-                            printf("%d ",*pb);
-                            pb = pb + 1;
-                        }
-                        break;
-                }
-                
-            }
-        }  
+                    while(pe>pb)
+                    {
+                        printf("%d ",*pb);
+                        pb = pb + 1;
+                    }
+                    break;
+            }   
+        }
     }
+    else    
+        printf("Uncorrect choice\n");
     return err;
 }
