@@ -1,54 +1,10 @@
 #include <stdio.h>
 #include <string.h>
 #include <errno.h>
-
-#define OK 0
-#define INCORRECT_SIZE -1
-#define ARRAY_EMPTY -2
-#define INCORRECT_ELEMENT -3
- 
-int read_array(FILE *f, int *pb, int n)
-{
-	int *pe = pb;
-	int err = OK;
-	while(pe-pb<=n && fscanf(f,"%d",pe) == 1)
-	{
-		pe = pe + 1;
-	}
-	if (pe-pb < n)
-		err = INCORRECT_ELEMENT;
-	if (pe-pb == 0)
-		err = ARRAY_EMPTY;
-	return err;	
-}
-
-void replace(int *pb, int size)
-{
-	int replace_element;
-	int flag = 0;
-	while (flag == 0)
-	{
-		flag = 1;
-		for (int i = 0; i < size-1; i++)
-		{
-			if ((*(pb + i) < 0 && *(pb + i+1) >= 0))
-			{
-				replace_element = *(pb + i);
-				*(pb + i) = *(pb + i + 1);
-				*(pb + i + 1) = replace_element;
-				flag = 0;
-			}
-		}
-	}
-}
-
-void print_array(FILE *f, int *pb, int size)
-{
-	for (int i = 0; i<size;i++)
-	{
-		printf("%d ",*(pb+i));
-	}
-}
+#include "read_array.h"
+#include "replace.h"
+#include "print_array.h"
+#include "defines.h"
 
 int main(int argc, char** argv)
 {
@@ -100,8 +56,8 @@ int main(int argc, char** argv)
 					}
 				}
 			}
-		}
-		
+			fclose(f);		
+		}				
 	}
 	return err;
 }
