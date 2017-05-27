@@ -1,0 +1,2 @@
+1) Входные данные: ./main.exe in_154545.txt     Выходные данные: No such file or directory
+2) Входные данные: ./main.exe    Выходные данные: main.exe <filename>
