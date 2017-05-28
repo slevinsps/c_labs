@@ -9,7 +9,9 @@ ifeq ($(mode), release)
 	CFLAGS += -DNDEBUG -g0
 endif
 
-zad1.exe : zad1.o read_array.o sum_proizved.o
+main.exe : zad1.o read_array.o sum_proizved.o
+	$(CC) $(CFLAGS) $^ -o $@
+tests.exe: tests.o sum_proizved.o
 	$(CC) $(CFLAGS) $^ -o $@
 %.o : %.c *.h
 	$(CC) $(CFLAGS) -c $<
