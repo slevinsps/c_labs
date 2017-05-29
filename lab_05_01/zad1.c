@@ -2,13 +2,22 @@
 #include <string.h>
 #include <errno.h>
 
-#define NUMBER_ITEMS 100
+#define NUMBER_ITEMS 5
     
 #define OK 0
 #define NO_FILE -1
 #define FILE_EMPTY -2
 #define NOT_ALL_ARGUMENTS -3
 #define NUMBER_ITEMS_EXCEEDED -4
+void print_array(const int* pb,const int* pe)
+{
+	while (pe>pb)
+	{
+		printf("%d ",*pb);
+		pb = pb +1;
+	}
+}
+
 
 int sum_proizved(const int* pb,const int* pe)
 {
@@ -41,7 +50,7 @@ int sum_proizved(const int* pb,const int* pe)
 int read_array(FILE *f, int **pb, int **pe)
 {
     int err = OK;
-    while((*pe-*pb <= NUMBER_ITEMS) && (fscanf(f,"%d",*pe) == 1))
+    while((*pe-*pb < NUMBER_ITEMS) && (fscanf(f,"%d",*pe) == 1))
     {
         *pe = *pe + 1;
     }
@@ -84,6 +93,7 @@ int main(int argc, char** argv)
         else
         {
             err = read_array(f, &pb, &pe);
+			print_array(pb,pe);
             if (err == FILE_EMPTY)
             {
                 printf("File is empty");    
