@@ -26,7 +26,7 @@
 #define NO_ELEMENT_IN_ARRAY -10
 #define NO_ELEMENT_DIV_3 -11
 #define NO_ELEMENT_ENDING_3 -12
-
+    
 int read_array(int ** const pb, int **const pe)
 {
     int err = OK;
