@@ -5,6 +5,14 @@
 #define NUMBER_ITEMS 10
 #define NUMBER_OF_FUNCTIONS 7
     
+#define CALL_FUNCTION_1 1
+#define CALL_FUNCTION_2 2
+#define CALL_FUNCTION_3 3
+#define CALL_FUNCTION_4 4
+#define CALL_FUNCTION_5 5
+#define CALL_FUNCTION_6 6
+#define CALL_FUNCTION_7 7
+
 #define OK 0
 #define NO_FILE -1
 #define ARRAY_EMPTY -2
@@ -19,7 +27,7 @@
 #define NO_ELEMENT_DIV_3 -11
 #define NO_ELEMENT_ENDING_3 -12
 
-int read_array(int **pb, int **pe)
+int read_array(int ** const pb, int **const pe)
 {
     int err = OK;
     while((*pe-*pb < NUMBER_ITEMS) && (scanf("%d",*pe) == 1))
@@ -97,7 +105,7 @@ int summ_elements(const int *pb,const int *pe)
     return sum;    
 }
 
-int more_arithmetic_mean(const int *pb,const int *pe, int **bb, int **be)
+int more_arithmetic_mean(const int *pb,const int *pe, int **const bb, int **const be)
 {
     assert(pe - pb != -1);
     int n = pe-pb+1; // количество элементов в массиве
@@ -124,7 +132,7 @@ int more_arithmetic_mean(const int *pb,const int *pe, int **bb, int **be)
     return err; 
 }
 
-void delete_element(int *number, int **pb, int **pe)
+void delete_element(int *number, int **const pb, int **const pe)
 {
     int *ppb = number;
     while(*pe>ppb)
@@ -135,7 +143,7 @@ void delete_element(int *number, int **pb, int **pe)
     *pe = *pe - 1;
 }
 
-int delete_negative(int **pb,int **pe)
+int delete_negative(int **const pb,int **const pe)
 {
     assert(*pe - *pb != 0);
     int err = OK;
@@ -164,7 +172,7 @@ int delete_negative(int **pb,int **pe)
     return err;
 }
 
-void add_element(int *const position, int **pb, int **pe,int element)
+void add_element(int *const position, int **const pb, int **const pe,int element)
 {
     int *ppe;
     *pe = *pe + 1;
@@ -177,7 +185,7 @@ void add_element(int *const position, int **pb, int **pe,int element)
     *(position+1) = element;
 }
 
-int add_sum(int **pb,int **pe,int k)
+int add_sum(int **const pb,int **const pe,int k)
 {
     assert(*pe - *pb != 0);
     int err = OK;
@@ -213,7 +221,7 @@ void replace_elements(int *const e1,int *const e2)
     *e2 = temp;
 }
     
-int replace_min_max(int *pb,int *const pe)
+int replace_min_max(int *pb,int const *const pe)
 {
     assert(pe - pb != -1);
     int err = OK;   
@@ -261,7 +269,7 @@ int replace_min_max(int *pb,int *const pe)
     return err;
 }
 
-int div_into_three(int *pb,int *const pe)
+int div_into_three(int *pb,int const *const pe)
 {
     assert(pe - pb != -1);
     int err = OK;
@@ -323,7 +331,7 @@ void bubble_sort(int *const pb,int *const pe)
     }
 }
 
-void sort_min_max(int *pb, int *const pe)
+void sort_min_max(int *pb, int const *const pe)
 {
     assert(pe - pb != 0);
     int *k;    
@@ -375,14 +383,13 @@ int main()
         err = read_array(&pb, &pe);
         if (err == ARRAY_EMPTY)
         {
-            printf("Array is empty");
-            err = ARRAY_EMPTY;            
+            printf("Array is empty");       
         }
         else
         {        
             switch(choice)
             {
-                case 1:
+                case CALL_FUNCTION_1:
                     
                     err = sum_and_proizved(pb,pe-1,&sum,&proizved);
                     if (err == NO_EVEN_NUMBER)
@@ -400,9 +407,8 @@ int main()
                         else
                             printf("The summ of even numbers = %d;\nThe product of odd numbers = %d",sum,proizved);
                     }
-                    break;
-                    
-                case 2:
+                    break;                  
+                case CALL_FUNCTION_2:
                     err = more_arithmetic_mean(pb,pe-1,&bb,&be);
                     if (err == ARRAY_EMPTY)
                     {
@@ -418,7 +424,7 @@ int main()
                         }
                     }
                     break;        
-                case 3:
+                case CALL_FUNCTION_3:
                     err = delete_negative(&pb,&pe);
                     if (err == ALL_NEGATIVE)
                         printf("All elements negative");
@@ -433,9 +439,8 @@ int main()
                             pb = pb + 1;
                         }
                     }
-
                     break;    
-                case 4:
+                case CALL_FUNCTION_4:
                     printf("Enter number: ");
                     if (scanf("%d",&number) == 1)
                     {
@@ -456,7 +461,7 @@ int main()
                         err = UNCORRECT_CHOICE;
                     break;
                     
-                case 5:
+                case CALL_FUNCTION_5:
                     err = replace_min_max(pb,pe-1);
                     if (err == NO_EVEN_NUMBER)
                     {
@@ -479,7 +484,7 @@ int main()
                         }
                     }
                     break;    
-                case 6:
+                case CALL_FUNCTION_6:
                     err = div_into_three(pb,pe-1);
                     if (err == NO_ELEMENT_DIV_3)
                         printf("No elements dividing by 3");
@@ -498,7 +503,7 @@ int main()
                         }
                     }
                     break;
-                case 7:
+                case CALL_FUNCTION_7:
                     sort_min_max(pb, pe);
                     printf("Array:\n");
 
@@ -518,4 +523,3 @@ int main()
     }
     return err;
 }
-    
