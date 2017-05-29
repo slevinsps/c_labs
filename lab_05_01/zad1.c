@@ -11,13 +11,13 @@
 #define NUMBER_ITEMS_EXCEEDED -4
 void print_array(const int* pb,const int* pe)
 {
-	while (pe>pb)
-	{
-		printf("%d ",*pb);
-		pb = pb +1;
-	}
+    while (pe>pb)
+    {
+        printf("%d ",*pb);
+        pb = pb +1;
+    }
 }
-
+    
 
 int sum_proizved(const int* pb,const int* pe)
 {
@@ -50,7 +50,7 @@ int sum_proizved(const int* pb,const int* pe)
 int read_array(FILE *f, int **pb, int **pe)
 {
     int err = OK;
-    while((*pe-*pb < NUMBER_ITEMS) && (fscanf(f,"%d",*pe) == 1))
+    while((*pe-*pb <= NUMBER_ITEMS) && (fscanf(f,"%d",*pe) == 1))
     {
         *pe = *pe + 1;
     }
@@ -62,6 +62,7 @@ int read_array(FILE *f, int **pb, int **pe)
     
     if (*pe-*pb > NUMBER_ITEMS)
     {
+        *pe = *pe - 1;
         err = NUMBER_ITEMS_EXCEEDED;
     }
     return err;        
@@ -93,7 +94,8 @@ int main(int argc, char** argv)
         else
         {
             err = read_array(f, &pb, &pe);
-			print_array(pb,pe);
+            print_array(pb,pe);
+            printf("\n");
             if (err == FILE_EMPTY)
             {
                 printf("File is empty");    
