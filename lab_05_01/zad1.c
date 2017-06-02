@@ -2,13 +2,14 @@
 #include <string.h>
 #include <errno.h>
 
-#define NUMBER_ITEMS 5
+#define NUMBER_ITEMS 3
     
 #define OK 0
 #define NO_FILE -1
 #define FILE_EMPTY -2
 #define NOT_ALL_ARGUMENTS -3
 #define NUMBER_ITEMS_EXCEEDED -4
+
 void print_array(const int* pb,const int* pe)
 {
     while (pe>pb)
@@ -17,7 +18,6 @@ void print_array(const int* pb,const int* pe)
         pb = pb +1;
     }
 }
-    
 
 int sum_proizved(const int* pb,const int* pe)
 {
