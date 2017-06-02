@@ -18,7 +18,7 @@ void print_array(const int* pb,const int* pe)
         pb = pb +1;
     }
 }
-
+    
 int sum_proizved(const int* pb,const int* pe)
 {
     int sum = 0;
