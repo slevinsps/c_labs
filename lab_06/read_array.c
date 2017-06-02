@@ -22,7 +22,9 @@ int read_array(FILE *f, int **pb, int **pe)
     
     if (*pe-*pb > NUMBER_ITEMS)
     {
+        *pe = *pe - 1;
         err = NUMBER_ITEMS_EXCEEDED;
     }
     return err;        
 }
+    
