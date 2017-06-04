@@ -3,14 +3,7 @@
 #include <stdio.h>
 #include "read_array.h"
 #include "sum_proizved.h"
-
-#define NUMBER_ITEMS 100
-    
-#define OK 0
-#define NO_FILE -1
-#define FILE_EMPTY -2
-#define NOT_ALL_ARGUMENTS -3
-#define NUMBER_ITEMS_EXCEEDED -4
+#include "defines.h"
     
 int main(int argc, char** argv)
 {

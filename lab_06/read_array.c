@@ -1,11 +1,6 @@
 #include <stdio.h>
 #include "read_array.h"
-
-#define NUMBER_ITEMS 100 
-
-#define OK 0
-#define FILE_EMPTY -2
-#define NUMBER_ITEMS_EXCEEDED -4
+#include "defines.h"
 
 int read_array(FILE *f, int **pb, int **pe)
 {
