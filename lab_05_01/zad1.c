@@ -2,7 +2,7 @@
 #include <string.h>
 #include <errno.h>
 
-#define NUMBER_ITEMS 3
+#define NUMBER_ITEMS 5
     
 #define OK 0
 #define NO_FILE -1
