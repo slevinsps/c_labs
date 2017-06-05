@@ -4,7 +4,18 @@
 #include "read_array.h"
 #include "sum_proizved.h"
 #include "defines.h"
-    
+  
+
+void print_array(const int* pb,const int* pe)
+{
+	while (pe>pb)
+	{
+		printf("%d ",*pb);
+		pb = pb +1;
+	}
+	printf("\n");
+}
+  
 int main(int argc, char** argv)
 {
     FILE *f;
@@ -30,6 +41,7 @@ int main(int argc, char** argv)
         else
         {
             err = read_array(f, &pb, &pe);
+			print_array(pb,pe);
             if (err == FILE_EMPTY)
             {
                 printf("File is empty");    
