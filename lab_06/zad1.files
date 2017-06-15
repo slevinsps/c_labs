@@ -1,0 +1,8 @@
+makefile
+read_array.c
+read_array.h
+sum_proizved.c
+sum_proizved.h
+tests.c
+text.txt
+zad1.c
