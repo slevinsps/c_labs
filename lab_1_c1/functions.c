@@ -2,9 +2,9 @@
 #include <assert.h>
 #include <stdio.h>
 
-#define INCORRECT_EPSILON -1
 #define NO_INTERSECTIONS -2
 
+// Первая пользовательская функция
 float func1(float x)
 {
     float y = exp(-x+2);
@@ -25,97 +25,80 @@ float func3(float x)
     return y;
 }
 
-// Первая пользовательская функция
 float eq1(float x)
 {
     float y = func1(x)-func2(x);
     return y;
 }
 
-// Вторая пользовательская функция
 float eq2(float x)
 {
     float y = func2(x)-func3(x);
     return y;
 }
-    
-// Третья пользовательская функция    
+        
 float eq3(float x)
 {
     float y = func3(x)-func1(x);
     return y;
 }
 
-
-
-float PolovDel(float (*func)(float), float a, float b, float eps)
+//Функция, реализирующая метод половинного деления
+float polovin_del(float (*func)(float), float a, float b, float eps)
 {
-    float x1 = 0; 
-    float x2 = (a + b) / 2;  
-
-    while (fabs(x2 - x1) >= eps)
+    float c = (a + b) / 2;  
+    while (fabs(b - a) > eps)
 	{
-        x1 = x2;
       
-        if (func(a) * func(x2) <= 0)
-            b = x2;
+        if (func(a) * func(c) <= 0)
+            b = c;
         else
 		{
-			if (func(x2) * func(b) <= 0)
-				a = x2;
+			a = c;
 		}
-        x2 = (a + b) / 2;
+		c = (a+b)/2;
+
 	}
-    return x1;
+    return (a+b)/2;
 }
 
-
-
 // Функция, находящая пересечения пользовательских функций
-int intersection(float *x1, float *x2, float *x3, float (*eq1)(float), float (*eq2)(float),float (*eq3)(float))
-{
-    float begin = -1;   
-    float end = 1;    
+int intersection(float *x1, float *x2, float *x3, float (*eq1)(float), float (*eq2)(float),float (*eq3)(float),float begin,float end)
+{  
     float dx = 0.01;
     float nach = begin;
 	float kon = nach+dx;
     int bool1 = 0;
     int bool2 = 0;
     int bool3 = 0;
-    while (kon <= end)
+	
+    while (nach <= end)
     {
-   
+		
         if (eq1(nach)*eq1(kon) <= 0)
         {
-            *x1 = PolovDel(eq1,nach,kon,0.00001);
+            *x1 = polovin_del(eq1,nach,kon,0.00001);
             bool1 = 1;
         }
         if (eq2(nach)*eq2(kon) <= 0)
         {
-            *x2 = PolovDel(eq2,nach,kon,0.00001);
+            *x2 = polovin_del(eq2,nach,kon,0.00001);
             bool2 = 1;
         }    
         if (eq3(nach)*eq3(kon) <= 0)
         {
-            *x3 = PolovDel(eq3,nach,kon,0.00001);
+            *x3 = polovin_del(eq3,nach,kon,0.00001);
             bool3 = 1;
         }
 		nach = kon;
         kon = kon + dx;
     }
-	printf("###   %f   %f   %f ###",*x1,*x2,*x3);
     if (bool1 == 0 || bool2 == 0 || bool3 == 0)
     {
         return NO_INTERSECTIONS;
     }
     return 0;
 }
-
-
-
-
-
-
 
 //Функция находящая интеграл по методу трапеций для данного колиества разбиений
 float trapez_method(float a, float b, int n, float (*func)(float))
@@ -155,12 +138,11 @@ float integral(float a, float b, float eps, float (*func)(float))
 }
     
 // Функция, находящая площадь криволинейного треугольника
-float square(float x1, float x2, float x3, float eps, float (*eq1)(float), float (*eq2)(float),float (*eq3)(float))
+float square(float x1, float x2, float x3, float eps, float (*func1)(float), float (*func2)(float),float (*func3)(float))
 {
     float s1 = integral(x1,x3,eps,func1);
     float s2 = integral(x1,x2,eps,func2);
     float s3 = integral(x2,x3,eps,func3);
-	printf("###   %f   %f   %f ###",s1,s2,s3);
     float answer = 0;
     if ((x2 <= x1 && x1 <= x3) || (x3 <= x1 && x1 <= x2))
     {
@@ -169,12 +151,13 @@ float square(float x1, float x2, float x3, float eps, float (*eq1)(float), float
     }
     if ((x1 <= x2 && x2 <= x3) || (x3 <= x2 && x2 <= x1))
     {
-        answer = fabs(s1 + s3 - s2);
+        answer = fabs(s3 + s2 - s1);
         
     }
     if ((x1 <= x3 && x3 <= x2) || (x2 <= x3 && x3 <= x1))
     {
-        answer = fabs(s1 + s2 - s3);
+       
+		answer = fabs(s1 + s3 - s2);
     }
     return answer;
 }

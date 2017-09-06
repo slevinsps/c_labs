@@ -3,13 +3,14 @@
 #include <assert.h>
 #include "functions.h"
 
+#define OK 0
 #define INCORRECT_EPSILON -1
 #define NO_INTERSECTIONS -2
 
 int main(void)
 {
     float x1,x2,x3,eps;
-    int err = 0;
+    int err = OK;
     setbuf(stdout,NULL);
     printf("Enter epsilon:  ");
     scanf("%f",&eps);
@@ -20,7 +21,7 @@ int main(void)
     }
     else
     {
-        err = intersection(&x1,&x2,&x3,eq1,eq2,eq3);
+        err = intersection(&x1,&x2,&x3,eq1,eq2,eq3,0,3);
 		
         if (err == NO_INTERSECTIONS)
         {
@@ -33,6 +34,5 @@ int main(void)
 			
         }
     }
-	//printf("   %f   ",PolovDel(eq2,-1,0,0.00001));
     return err;
 }
