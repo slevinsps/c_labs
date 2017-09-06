@@ -3,7 +3,7 @@
 #include <stdio.h>
 
 #define NO_INTERSECTIONS -2
-
+    
 // Первая пользовательская функция
 float func1(float x)
 {
@@ -48,17 +48,17 @@ float polovin_del(float (*func)(float), float a, float b, float eps)
 {
     float c = (a + b) / 2;  
     while (fabs(b - a) > eps)
-	{
+    {
       
         if (func(a) * func(c) <= 0)
             b = c;
         else
-		{
-			a = c;
-		}
-		c = (a+b)/2;
+        {
+            a = c;
+        }
+        c = (a+b)/2;
 
-	}
+    }
     return (a+b)/2;
 }
 
@@ -67,14 +67,14 @@ int intersection(float *x1, float *x2, float *x3, float (*eq1)(float), float (*e
 {  
     float dx = 0.01;
     float nach = begin;
-	float kon = nach+dx;
+    float kon = nach+dx;
     int bool1 = 0;
     int bool2 = 0;
     int bool3 = 0;
-	
+    
     while (nach <= end)
     {
-		
+        
         if (eq1(nach)*eq1(kon) <= 0)
         {
             *x1 = polovin_del(eq1,nach,kon,0.00001);
@@ -90,7 +90,7 @@ int intersection(float *x1, float *x2, float *x3, float (*eq1)(float), float (*e
             *x3 = polovin_del(eq3,nach,kon,0.00001);
             bool3 = 1;
         }
-		nach = kon;
+        nach = kon;
         kon = kon + dx;
     }
     if (bool1 == 0 || bool2 == 0 || bool3 == 0)
@@ -157,7 +157,7 @@ float square(float x1, float x2, float x3, float eps, float (*func1)(float), flo
     if ((x1 <= x3 && x3 <= x2) || (x2 <= x3 && x3 <= x1))
     {
        
-		answer = fabs(s1 + s3 - s2);
+        answer = fabs(s1 + s3 - s2);
     }
     return answer;
 }

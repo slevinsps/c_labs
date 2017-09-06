@@ -1,6 +1,6 @@
 #ifndef FUNCTIONS
 #define FUNCTIONS
-
+    
 float func1(float x);
 float func2(float x);
 float func3(float x);

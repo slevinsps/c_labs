@@ -2,7 +2,7 @@
 #include <math.h>
 #include <assert.h>
 #include "functions.h"
-
+    
 #define OK 0
 #define INCORRECT_EPSILON -1
 #define NO_INTERSECTIONS -2
@@ -22,7 +22,7 @@ int main(void)
     else
     {
         err = intersection(&x1,&x2,&x3,eq1,eq2,eq3,0,3);
-		
+        
         if (err == NO_INTERSECTIONS)
         {
             printf("There is not triangle");
@@ -30,9 +30,10 @@ int main(void)
         else
         {
             printf("Square triangle = ");
-            printf("%f  ",square(x1,x2,x3,eps,eq1,eq2,eq3));
-			
+            printf("%f  ",square(x1,x2,x3,eps,func1,func2,func3));
+            
         }
     }
     return err;
 }
+    
