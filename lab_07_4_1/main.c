@@ -9,7 +9,7 @@
 #define FILE_EMPTY -2
 #define NOT_ALL_ARGUMENTS -3
 #define NUMBER_ITEMS_EXCEEDED -4
-
+#define ARRAY_EMPTY -5
 
 int count_numbers(FILE *f)
 {
@@ -55,34 +55,40 @@ void print_array(const int* pb,const int* pe)
     printf("\n");
 }
 
-
-void bubble_sort(int *const pb,int *const pe)
+void binary_insert(int *const pb,int *const pe)
 {
-   
-    int elem;
-    int n = pe - pb;
-    for (int i = 0; i<n; i++)
-    {
-        for (int j = i+1; j<=n; j++) 
-        {
-            if (*(pb+i) > *(pb+j))
-            {
-                elem = *(pb+i);
-                *(pb+i) = *(pb+j);
-                *(pb+j) = elem;
-            }
-        }
-    }
+	int n = pe - pb;
+	int l,r,x,m;
+	for (int i = 1; i<n; i++)
+	{
+		l = 0;
+		r = i - 1;
+		x = *(pb+i);
+		while (l<=r)
+		{
+			m = (l+r)/2;
+			if (*(pb+m)>x)
+				r = m - 1;
+			else
+				l = m + 1;
+		}
+		for (int j = i-1; j>=l; j--)
+		{
+			*(pb+j+1) = *(pb+j);
+		} 
+		*(pb+l) = x;
+	}
 }
 
-void sort_min_max(int *pb, int const *const pe, int **ppb, int **ppe)
+int sort_min_max(int *pb, int const *const pe, int **ppb, int **ppe)
 {
     int n;
     int *k;    
     int *min = pb; 
     int *max = pb;
-	int *a2, *begin, *end;
-        
+	int *a2;
+    int err = 0;
+	
     while(pe>pb)
     {
         if (*pb > *max)
@@ -105,6 +111,7 @@ void sort_min_max(int *pb, int const *const pe, int **ppb, int **ppe)
         max = k;
     }
 	n = max-min;
+	
 	a2 = malloc((n)*sizeof(int));
  	*ppb = a2;
 	*ppe = a2;
@@ -112,14 +119,15 @@ void sort_min_max(int *pb, int const *const pe, int **ppb, int **ppe)
 	
  	for(int i=1;i<n;i++)
 	{
-		**ppe = *min;
-		
+		**ppe = *min;	
 		min = min + 1;
 		*ppe = *ppe + 1;
-		
 	}
-    bubble_sort(*ppb, *ppe);
-
+	if (*ppe == *ppb)
+    {
+        err = ARRAY_EMPTY;
+    }
+	return err;
 }
 
 
@@ -157,20 +165,22 @@ int main(int argc, char** argv)
 			pb = a;
 			pe = a;
             err = read_array(f, &pb, &pe);
-			//printf("%p   %p",pb,pe);
-			sort_min_max(pb,pe,&ppb,&ppe);
-			//print_array(pb,pe);
-			print_array(ppb, ppe);
             if (err == FILE_EMPTY)
             {
                 printf("File is empty");    
             }
             else
             {
-                if (err == NUMBER_ITEMS_EXCEEDED)
-                {
-                    printf("The number of elements exceeded %d Only %d elements will be taken into account\n",NUMBER_ITEMS,NUMBER_ITEMS);
-                }
+                err = sort_min_max(pb,pe,&ppb,&ppe);
+				if (err == ARRAY_EMPTY)
+				{
+					printf("Array is empty");    
+				}
+				else
+				{
+					binary_insert(ppb,ppe);
+					print_array(ppb, ppe);
+				}
             }
             fclose(f);
         }      
