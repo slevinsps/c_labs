@@ -44,7 +44,7 @@ float eq3(float x)
 }
 
 //Функция, реализирующая метод половинного деления
-float polovin_del(float (*func)(float), float a, float b, float eps)
+float polovin_del(float (*const func)(float), float a, float b, float eps)
 {
     float c = (a + b) / 2;  
     while (fabs(b - a) > eps)
@@ -63,7 +63,7 @@ float polovin_del(float (*func)(float), float a, float b, float eps)
 }
 
 // Функция, находящая пересечения пользовательских функций
-int intersection(float *x1, float *x2, float *x3, float (*eq1)(float), float (*eq2)(float),float (*eq3)(float),float begin,float end)
+int intersection(float *const x1, float *const x2, float *const x3, float (*const eq1)(float), float (*const eq2)(float),float (*const eq3)(float),float begin,float end)
 {  
     float dx = 0.01;
     float nach = begin;
@@ -101,7 +101,7 @@ int intersection(float *x1, float *x2, float *x3, float (*eq1)(float), float (*e
 }
 
 //Функция находящая интеграл по методу трапеций для данного колиества разбиений
-float trapez_method(float a, float b, int n, float (*func)(float))
+float trapez_method(float a, float b, int n, float (*const func)(float))
 {
     float h = (b-a)/n;
     float s = 0;
@@ -120,7 +120,7 @@ float trapez_method(float a, float b, int n, float (*func)(float))
 }
 
 //Функция находящая интеграл с заданной точностью
-float integral(float a, float b, float eps, float (*func)(float))
+float integral(float a, float b, float eps, float (*const func)(float))
 {
     assert(0 < eps && eps < 1);
     assert(func);
@@ -136,9 +136,9 @@ float integral(float a, float b, float eps, float (*func)(float))
     }
     return s1;
 }
-    
+        
 // Функция, находящая площадь криволинейного треугольника
-float square(float x1, float x2, float x3, float eps, float (*func1)(float), float (*func2)(float),float (*func3)(float))
+float square(float x1, float x2, float x3, float eps, float (*const func1)(float), float (*const func2)(float),float (*const func3)(float))
 {
     float s1 = integral(x1,x3,eps,func1);
     float s2 = integral(x1,x2,eps,func2);
