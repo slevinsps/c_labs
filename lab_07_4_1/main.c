@@ -2,14 +2,17 @@
 #include <errno.h>
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 
 #define NUMBER_ITEMS 5  
 #define OK 0
-#define NO_FILE -1
+#define NO_FILE_1 -1
 #define FILE_EMPTY -2
 #define NOT_ALL_ARGUMENTS -3
 #define NUMBER_ITEMS_EXCEEDED -4
 #define ARRAY_EMPTY -5
+#define INCORRECT_OUTPUT_NAME -6
+#define INCORRECT_FILTER -7
 
 int count_numbers(FILE *f)
 {
@@ -27,70 +30,84 @@ int read_array(FILE *f, int **pb, int **pe)
     int err = OK;
     while(fscanf(f,"%d",*pe) == 1)
     {
-        *pe = *pe + 1;
+        *pe = *pe + 1;	
     }
-	*pe = *pe + 1;
+	
+
     
     if (*pe == *pb)
     {
         err = FILE_EMPTY;
     }
-    
-    if (*pe-*pb > NUMBER_ITEMS)
-    {
-        *pe = *pe - 1;
-        err = NUMBER_ITEMS_EXCEEDED;
-    }
     return err;        
 }
   
 
-void print_array(const int* pb,const int* pe)
+void print_array(const int* pb,const int* pe,FILE *f)
 {
-    while (pe>pb)
+	fprintf(f,"Sorted array:\n");
+    while (pe>=pb)
     {
-        printf("%d ",*pb);
+        fprintf(f,"%d ",*pb);
         pb = pb +1;
     }
-    printf("\n");
+    fprintf(f,"\n");
 }
 
-void binary_insert(int *const pb,int *const pe)
+void swap(void *a, void *b,size_t size)                                                                                                                     
 {
-	int n = pe - pb;
-	int l,r,x,m;
-	for (int i = 1; i<n; i++)
+	size_t __size = (size);                                                      
+	char *__a = (a), *__b = (b);
+	for (int i=1;i<=__size;i++)
+	{
+		*__a = *__b;
+		__a++;
+		__b++;				
+	}
+}
+
+ 
+ 
+void binary_insert(void * first, size_t number, size_t size,int (*compare)(const void*, const void*))
+{
+	int l,r,m;
+	void *tmp;
+	tmp = malloc(size);
+	for (int i = 1; i<number; i++)
 	{
 		l = 0;
 		r = i - 1;
-		x = *(pb+i);
 		while (l<=r)
 		{
 			m = (l+r)/2;
-			if (*(pb+m)>x)
+			if (compare(((char*)first+m*size),((char*)first+i*size)))
 				r = m - 1;
 			else
 				l = m + 1;
 		}
 		for (int j = i-1; j>=l; j--)
 		{
-			*(pb+j+1) = *(pb+j);
+			swap(tmp, ((char*)first + (j+1)*size), size);
+            swap(((char*)first + (j+1)*size), ((char*)first + j*size), size);
+            swap(((char*)first + j*size), tmp, size);
 		} 
-		*(pb+l) = x;
 	}
 }
 
-int sort_min_max(int *pb, int const *const pe, int **ppb, int **ppe)
+
+int intSort(const void *a, const void *b) {
+    return *((int*)a) > *((int*)b);
+}
+ 
+void search_min_max(int *pb, int const *const pe, int **ppb, int *n)
 {
-    int n;
-    int *k;    
+    int *k;  
     int *min = pb; 
     int *max = pb;
-	int *a2;
-    int err = 0;
-	
+	*n = 0;
     while(pe>pb)
     {
+		
         if (*pb > *max)
         {
             max = pb;
@@ -110,20 +127,23 @@ int sort_min_max(int *pb, int const *const pe, int **ppb, int **ppe)
         min = max;
         max = k;
     }
-	n = max-min;
-	
-	a2 = malloc((n)*sizeof(int));
- 	*ppb = a2;
-	*ppe = a2;
-	min = min + 1;
-	
- 	for(int i=1;i<n;i++)
+	*n = max-min-1;
+	*ppb = min + 1;
+}
+
+
+int rewrite_array(int *min,int n,int **new_begin)
+{
+	int err = OK;
+	int *new_end = *new_begin;
+ 	for(int i=1;i<=n;i++)
 	{
-		**ppe = *min;	
+		
+		*new_end = *min;
 		min = min + 1;
-		*ppe = *ppe + 1;
-	}
-	if (*ppe == *ppb)
+		new_end = new_end + 1;
+	}	
+	if (new_end == *new_begin)
     {
         err = ARRAY_EMPTY;
     }
@@ -131,58 +151,102 @@ int sort_min_max(int *pb, int const *const pe, int **ppb, int **ppe)
 }
 
 
+int compare_int(const void* p, const void* q)
+{
+	const int *a = p;
+	const int *b = q;
+	return *a - *b; 
+}
+
+
 int main(int argc, char** argv)
 {
-    FILE *f;
-    int *a;
+    FILE *f1;
+    FILE *f2;
+    int *a, *a2;
 
     int err = OK;
     int *pb;
     int *pe;
     int k;
 	int *ppb;
-	int *ppe;
-	
-    if (argc != 2)
+	int n;
+	int *new_begin;
+	char* pstr;
+
+    if (argc != 4)
     {
-        fprintf(stderr, "main1.exe <file-name>\n");
+        fprintf(stderr, "main1.exe <file_input-name> <file_output-name> <filter>\n");
         err = NOT_ALL_ARGUMENTS;
     }
     else
     {
-        f = fopen(argv[1], "r");
-        if (f == NULL)
+        f1 = fopen(argv[1], "r");
+        if (f1 == NULL)
         {
             fprintf(stderr, "%s\n",strerror(errno));
-            err = NO_FILE;
+            err = NO_FILE_1;
         }
         else
         {
-			k = count_numbers(f);
-			rewind(f);
-			
-			a = malloc(k*sizeof(int));
-			pb = a;
-			pe = a;
-            err = read_array(f, &pb, &pe);
-            if (err == FILE_EMPTY)
-            {
-                printf("File is empty");    
-            }
-            else
-            {
-                err = sort_min_max(pb,pe,&ppb,&ppe);
-				if (err == ARRAY_EMPTY)
+			f2 = fopen(argv[2], "w");
+			if (f2 == NULL)
+			{
+				fprintf(stderr, "%s\n",strerror(errno));
+				err = INCORRECT_OUTPUT_NAME;
+			}
+			else
+			{
+				k = count_numbers(f1);
+				rewind(f1);
+				
+				a = malloc(k*sizeof(int));
+				pb = a;
+				pe = a;
+				err = read_array(f1, &pb, &pe);
+				if (err == FILE_EMPTY)
 				{
-					printf("Array is empty");    
+					fprintf(stderr,"File is empty");    
 				}
 				else
 				{
-					binary_insert(ppb,ppe);
-					print_array(ppb, ppe);
+					pstr = argv[3];
+					if(pstr[0] == 'y' && pstr[1] == 0)
+					{
+						search_min_max(pb,pe,&ppb,&n);
+						a2 = malloc((n)*sizeof(int));
+						new_begin = a2;
+						err = rewrite_array(ppb,n,&new_begin);
+						
+						if (err == ARRAY_EMPTY)
+						{
+							fprintf(stderr,"Array is empty");    
+						}
+						else
+						{
+							binary_insert(new_begin,n,sizeof(int),intSort);
+							print_array(new_begin, new_begin+n-1,f2);
+						}
+						free(a2);
+					}
+					else
+					{
+						if(pstr[0] == 'n' && pstr[1] == 0)
+						{
+							binary_insert(pb,pe-pb,sizeof(int),intSort);
+							print_array(pb, pe-1,f2);
+						}
+						else
+						{
+							fprintf(stderr, "Enter filter value: y/n");
+							err = INCORRECT_FILTER;
+						}
+					}
+					free(a);
 				}
-            }
-            fclose(f);
+				fclose(f2);
+			}
+			fclose(f1);
         }      
     }    
     return err;
