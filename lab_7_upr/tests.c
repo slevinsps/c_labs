@@ -4,44 +4,39 @@
 #include "functions.h"
     
 
-float f1(float x)
+double f1(double x)
 {
-    float y = x*x;
-    return y;
+    return x*x;
 }
 
-float f2(float x)
+double f2(double x)
 {
-    float y = 2*x+3;
-    return y;
+    return 2*x+3;
 }
        
-float f3(float x)
+double f3(double x)
 {
-    float y = 3-x;
-    return y;
+    return 3-x;
 }
 
-float ef1(float x)
+double ef1(double x)
 {
-    float y = f1(x)-f2(x);
-    return y;
+    return f1(x)-f2(x);
 }
 
-float ef2(float x)
+double ef2(double x)
 {
-    float y = f2(x)-f3(x);
-    return y;
+    return f2(x)-f3(x);
 }
         
-float ef3(float x)
+double ef3(double x)
 {
-    float y = f3(x)-f1(x);
-    return y;
+    return f3(x)-f1(x);
 }
+
 void polovin_del_tests(void)
 {
-    float expected, actual;
+    double expected, actual;
     // Tests polovin_del function
     // Test 1
     expected = -1;
@@ -77,7 +72,7 @@ void polovin_del_tests(void)
 
 void trapez_method_tests(void)
 {
-    float expected, actual;
+    double expected, actual;
     // Tests trapez_method function
     // Test 1
     expected = 8;
@@ -104,7 +99,7 @@ void trapez_method_tests(void)
 
 void integral_tests(void)
 {
-    float expected, actual;
+    double expected, actual;
     // Tests integral function
     // Test 1
     expected = 8;
@@ -131,7 +126,7 @@ void integral_tests(void)
 
 void intersection_tests(void)
 {
-    float x1,x2,x3;
+    double x1,x2,x3;
     // Tests intersection function
     // Test 1
     intersection(&x1,&x2,&x3,ef1,ef2,ef3,-3,0);
@@ -150,7 +145,7 @@ void intersection_tests(void)
     
 void square_tests(void)
 {
-    float actual,expected;
+    double actual,expected;
     // Tests intersection function
     // Test 1 
     expected = 3.8229;

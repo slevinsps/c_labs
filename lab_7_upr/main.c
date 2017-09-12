@@ -8,51 +8,45 @@
 #define NO_INTERSECTIONS -2
 
 // Первая пользовательская функция
-float func1(float x)
+double func1(double x)
 {
-    float y = exp(-x+2);
-    return y;
+    return exp(-x+2);
 }
 
 // Вторая пользовательская функция
-float func2(float x)
+double func2(double x)
 {
-    float y = exp(x);
-    return y;
+    return exp(x);
 }
     
 // Третья пользовательская функция    
-float func3(float x)
+double func3(double x)
 {
-    float y = 3*x+2;
-    return y;
+    return 3*x+2;
 }
 
-float eq1(float x)
+double eq1(double x)
 {
-    float y = func1(x)-func2(x);
-    return y;
+    return func1(x)-func2(x);
 }
 
-float eq2(float x)
+double eq2(double x)
 {
-    float y = func2(x)-func3(x);
-    return y;
+    return func2(x)-func3(x);
 }
         
-float eq3(float x)
+double eq3(double x)
 {
-    float y = func3(x)-func1(x);
-    return y;
+    return func3(x)-func1(x);
 }
 
 int main(void)
 {
-    float x1,x2,x3,eps;
+    double x1,x2,x3,eps;
     int err = OK;
     setbuf(stdout,NULL);
     printf("Enter epsilon:  ");
-    scanf("%f",&eps);
+    scanf("%lf",&eps);
     if (eps <= 0 || eps >= 1)
     {
         printf("Inorrect epsilon");
