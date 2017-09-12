@@ -13,7 +13,7 @@ int count_numbers(FILE *f)
     
     return k;
 }
-
+    
 int read_array(FILE *f, int **pb, int **pe)
 {
     int err = OK;
