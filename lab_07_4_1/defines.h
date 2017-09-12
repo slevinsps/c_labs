@@ -10,6 +10,7 @@
 #define ARRAY_EMPTY -5
 #define INCORRECT_OUTPUT_NAME -6
 #define INCORRECT_FILTER -7
+#define MEMORY_ERROR -8
 
 #endif // DEFINES
 
