@@ -13,6 +13,8 @@ main.exe : main.o functions.o
 	$(CC) $(CFLAGS) $^ -o $@
 tests.exe : tests.o functions.o
 	$(CC) $(CFLAGS) $^ -o $@
+test_speed.exe : test_speed.o functions.o
+	$(CC) $(CFLAGS) $^ -o $@
 
 %.o : %.c *.h
 	$(CC) $(CFLAGS) -c $<
