@@ -3,46 +3,7 @@
 #include <stdio.h>
 
 #define NO_INTERSECTIONS -2
-    
-// Первая пользовательская функция
-float func1(float x)
-{
-    float y = exp(-x+2);
-    return y;
-}
-
-// Вторая пользовательская функция
-float func2(float x)
-{
-    float y = exp(x);
-    return y;
-}
-    
-// Третья пользовательская функция    
-float func3(float x)
-{
-    float y = 3*x+2;
-    return y;
-}
-
-float eq1(float x)
-{
-    float y = func1(x)-func2(x);
-    return y;
-}
-
-float eq2(float x)
-{
-    float y = func2(x)-func3(x);
-    return y;
-}
-        
-float eq3(float x)
-{
-    float y = func3(x)-func1(x);
-    return y;
-}
-
+     
 //Функция, реализирующая метод половинного деления
 float polovin_del(float (*const func)(float), float a, float b, float eps)
 {

@@ -7,6 +7,45 @@
 #define INCORRECT_EPSILON -1
 #define NO_INTERSECTIONS -2
 
+// Первая пользовательская функция
+float func1(float x)
+{
+    float y = exp(-x+2);
+    return y;
+}
+
+// Вторая пользовательская функция
+float func2(float x)
+{
+    float y = exp(x);
+    return y;
+}
+    
+// Третья пользовательская функция    
+float func3(float x)
+{
+    float y = 3*x+2;
+    return y;
+}
+
+float eq1(float x)
+{
+    float y = func1(x)-func2(x);
+    return y;
+}
+
+float eq2(float x)
+{
+    float y = func2(x)-func3(x);
+    return y;
+}
+        
+float eq3(float x)
+{
+    float y = func3(x)-func1(x);
+    return y;
+}
+
 int main(void)
 {
     float x1,x2,x3,eps;
