@@ -26,37 +26,25 @@ double polovin_del(function1 func, double a, double b, double eps)
 }
 
 // Функция, находящая пересечения пользовательских функций
-int intersection(double *const x1, double *const x2, double *const x3, function1 eq1, function1 eq2,function1 eq3,double begin,double end)
+int intersection(double *const x, function1 eq, double begin,double end)
 {  
     double dx = 0.01; // шаг
     double nach = begin;
     double kon = nach+dx;
-    int intersection1 = 0;  // переменная, показывающая, нахождение пересечения 1
-    int intersection2 = 0;  // переменная, показывающая, нахождение пересечения 2
-    int intersection3 = 0;  // переменная, показывающая, нахождение пересечения 3
+    int intersection = 0;  // переменная, показывающая, нахождение пересечения 1
     
     while (nach <= end)
     {
         
-        if (eq1(nach)*eq1(kon) <= 0)
+        if (eq(nach)*eq(kon) <= 0)
         {
-            *x1 = polovin_del(eq1,nach,kon,0.00001);
-            intersection1 = 1;
-        }
-        if (eq2(nach)*eq2(kon) <= 0)
-        {
-            *x2 = polovin_del(eq2,nach,kon,0.00001);
-            intersection2 = 1;
-        }    
-        if (eq3(nach)*eq3(kon) <= 0)
-        {
-            *x3 = polovin_del(eq3,nach,kon,0.00001);
-            intersection3 = 1;
+            *x = polovin_del(eq,nach,kon,0.00001);
+            intersection = 1;
         }
         nach = kon;
         kon = kon + dx;
     }
-    if (intersection1 == 0 || intersection2 == 0 || intersection3 == 0)
+    if (intersection == 0)
     {
         return NO_INTERSECTIONS;
     }

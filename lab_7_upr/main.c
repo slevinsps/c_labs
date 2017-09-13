@@ -7,7 +7,7 @@
 #define INCORRECT_EPSILON -1
 #define NO_INTERSECTIONS -2
 
-// Первая пользовательская функция
+/* // Первая пользовательская функция
 double func1(double x)
 {
     return exp(-x+2);
@@ -38,7 +38,44 @@ double eq2(double x)
 double eq3(double x)
 {
     return func3(x)-func1(x);
+} */
+
+double func1(double x)
+{
+    return -x*x-2*x+3;
 }
+
+// Вторая пользовательская функция
+double func2(double x)
+{
+    return -x*x+4;
+}
+    
+// Третья пользовательская функция    
+double func3(double x)
+{
+    return 1;
+}
+
+double eq1(double x)
+{
+    return func1(x)-func2(x);
+}
+
+double eq2(double x)
+{
+    return func2(x)-func3(x);
+}
+        
+double eq3(double x)
+{
+    return func3(x)-func1(x);
+} 
+
+
+
+
+
 
 int main(void)
 {
@@ -54,7 +91,10 @@ int main(void)
     }
     else
     {
-        err = intersection(&x1,&x2,&x3,eq1,eq2,eq3,0,3);
+        err = intersection(&x1,eq1,-1,0);
+        err = intersection(&x2,eq2,-2,-1);
+        err = intersection(&x3,eq3,0,1);
+		
         
         if (err == NO_INTERSECTIONS)
         {
