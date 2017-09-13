@@ -69,7 +69,7 @@ int main(int argc, char** argv)
                 {
                     pb = a;
                     pe = a;
-                    err = read_array(f1, &pb, &pe);
+                    err = read_array(f1, &pb, &pe,k);
                     if (err == FILE_EMPTY)
                     {
                         fprintf(stderr,"File is empty");    
@@ -93,8 +93,8 @@ int main(int argc, char** argv)
                                 else
                                 {
                                     tb = tick();
-                                    qsort(new_begin,n,sizeof(int),compare_int);
-                                    //binary_insert(new_begin,n,sizeof(int),compare_int);
+                                    //qsort(new_begin,n,sizeof(int),compare_int);
+                                    binary_insert(new_begin,n,sizeof(int),compare_int);
                                     te = tick();
                                     printf("test 'time': %I64d\n", (te - tb) / n);
                                     

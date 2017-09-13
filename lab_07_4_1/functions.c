@@ -14,12 +14,12 @@ int count_numbers(FILE *f)
     return k;
 }
     
-int read_array(FILE *f, int **pb, int **pe)
+int read_array(FILE *f, int **pb, int **pe, int k)
 {
     int err = OK;
-    while(fscanf(f,"%d",*pe) == 1)
+    while((fscanf(f,"%d",*pe) == 1) && (*pe-*pb < k))
     {
-        *pe = *pe + 1;    
+        *pe = *pe + 1;  
     }
     
     if (*pe == *pb)
@@ -32,21 +32,18 @@ int read_array(FILE *f, int **pb, int **pe)
 
 void print_array(const int* pb,const int* pe,FILE *f)
 {
-    fprintf(f,"Sorted array:\n");
     while (pe>=pb)
     {
         fprintf(f,"%d ",*pb);
         pb = pb +1;
     }
-    fprintf(f,"\n");
 }
     
 void swap(void *a, void *b,size_t size)                                                                                                                     
-{
-    size_t size2 = size;                                                      
+{                                                     
     char *a1 = a, *b1 = b;
     char tmp;
-    for (int i=1;i<=size2;i++)
+    for (int i=1;i<=size;i++)
     {
         tmp = *a1;
         *a1 = *b1;
@@ -55,22 +52,27 @@ void swap(void *a, void *b,size_t size)
         b1++;                
     }
 }
-
+void binary_search(void *first,int i, size_t size)
+{
+	char *l,*r,*m;
+	l = (char*)first;
+    r = (char*)first+(i-1)*size;
+    while (l<=r)
+    {
+        m = l+((r-l)/2);
+        if (compare((char*)m,((char*)first+i*size))>0)
+            r = m - 1;
+        else
+            l = m + 1;
+    }
+	return *l;
+}
 void binary_insert(void * first, size_t number, size_t size,int (*compare)(const void*, const void*))
 {
-    int l,r,m;
+    int l;
     for (int i = 1; i<number; i++)
     {
-        l = 0;
-        r = i - 1;
-        while (l<=r)
-        {
-            m = (l+r)/2;
-            if (compare(((char*)first+m*size),((char*)first+i*size))>0)
-                r = m - 1;
-            else
-                l = m + 1;
-        }
+        l = binary_search(first,i,size);
         for (int j = i-1; j>=l; j--)
         {
             swap(((char*)first + (j+1)*size), ((char*)first + j*size), size);
