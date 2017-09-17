@@ -52,35 +52,51 @@ void swap(void *a, void *b,size_t size)
         b1++;                
     }
 }
-void binary_search(void *first,int i, size_t size)
+    
+void* binary_search(void *first,void *right, size_t size,int (*compare)(const void*, const void*))
 {
-	char *l,*r,*m;
-	l = (char*)first;
-    r = (char*)first+(i-1)*size;
+    void *l,*r,*m;
+    l = first;
+    r = right-size;
     while (l<=r)
     {
-        m = l+((r-l)/2);
-        if (compare((char*)m,((char*)first+i*size))>0)
-            r = m - 1;
+        m = l+((r-l)/(2));   
+        while ((m-first)%size !=0)
+        {
+            m--;
+        }
+        if (compare((char*)m,((char*)right))>0)
+        {
+            r = m - size;
+        }
         else
-            l = m + 1;
+        {
+            l = m + size;
+        }   
     }
-	return *l;
+    return l;
 }
+    
 void binary_insert(void * first, size_t number, size_t size,int (*compare)(const void*, const void*))
 {
-    int l;
+    void *l, *right2;
+    void *right = first+size;
     for (int i = 1; i<number; i++)
     {
-        l = binary_search(first,i,size);
-        for (int j = i-1; j>=l; j--)
+        right2 = right-size;
+        l = binary_search(first,right,size,compare);
+        
+        while (l<=right2)
         {
-            swap(((char*)first + (j+1)*size), ((char*)first + j*size), size);
+            
+            swap(((char*)right2 + size), ((char*)right2), size);
+            right2-=size;
         }
+        
+        right+=size;
     }
 }
 
- 
 void search_min_max(int *pb, int const *const pe, int **ppb, int *n)
 {
     int *k;  

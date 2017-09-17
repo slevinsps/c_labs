@@ -200,15 +200,14 @@ void binary_insert_tests(void)
     //Test 2
     float *pb1;
     k = 1;
-    float b[3] = {2.5,-1.23,0};
-    float b1[3] = {-1.23,0,2.5};
+    float b[5] = {2.5,-1.23,0,0,1};
+    float b1[5] = {-1.23,0,0,1,2.5};
     pb1 = b;
-    binary_insert(pb1,3,sizeof(float),compare_float);
-    for (int i = 0;i<3;i++)
+    binary_insert(pb1,5,sizeof(float),compare_float);
+    for (int i = 0;i<5;i++)
     {
         if (fabs(b[i] - b1[i])>0.001)
             k = 0;
-
     }
     if (k == 1)
         printf("Test 2 in binary_insert function is passed\n");
@@ -237,6 +236,7 @@ void binary_insert_tests(void)
     } 
 }
 
+    
 int main(void)
 {
     count_numbers_tests();
