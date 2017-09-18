@@ -32,10 +32,10 @@ int main(int argc, char** argv)
     int *pe;
     int k;
     int *ppb;
-    int n;
+    int *ppe;
     int *new_begin;
+    int *new_end;
     char* pstr;
-    unsigned long long tb, te;
     
     if (argc != 4)
     {
@@ -78,12 +78,12 @@ int main(int argc, char** argv)
                         pstr = argv[3];
                         if(pstr[0] == 'y' && pstr[1] == 0)
                         {
-                            search_min_max(pb,pe,&ppb,&n);
-                            a2 = malloc((n)*sizeof(int));
+                            search_min_max(pb,pe,&ppb,&ppe);
+                            a2 = malloc((ppe-ppb)*sizeof(int));
                             if (a2 != NULL)
                             {
                                 new_begin = a2;
-                                err = rewrite_array(ppb,n,&new_begin);
+                                err = rewrite_array(ppb,ppe,&new_begin,&new_end);
                                 
                                 if (err == ARRAY_EMPTY)
                                 {
@@ -91,16 +91,16 @@ int main(int argc, char** argv)
                                 }
                                 else
                                 {
-                                    tb = tick();
+    
                                     //qsort(new_begin,n,sizeof(int),compare_int);
-                                    binary_insert(new_begin,n,sizeof(int),compare_int);
-                                    te = tick();
-                                    printf("test 'time': %I64d\n", (te - tb) / n);
+                                    binary_insert(new_begin,new_end-new_begin,sizeof(int),compare_int);
+
                                     
-                                    print_array(new_begin, new_begin+n-1,f2);
+                                    
+                                    print_array(new_begin, new_end,f2);
                                 }
                                 free(a2);
-                            }
+                            }    
                             else
                             {
                                 printf("Memory error\n");
@@ -112,7 +112,7 @@ int main(int argc, char** argv)
                             if(pstr[0] == 'n' && pstr[1] == 0)
                             {
                                 binary_insert(pb,pe-pb,sizeof(int),compare_int);
-                                print_array(pb, pe-1,f2);
+                                print_array(pb, pe,f2);
                             }
                             else
                             {

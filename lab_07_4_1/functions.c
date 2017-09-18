@@ -32,7 +32,7 @@ int read_array(FILE *f, int **pb, int **pe, int k)
 
 void print_array(const int* pb,const int* pe,FILE *f)
 {
-    while (pe>=pb)
+    while (pe>pb)
     {
         fprintf(f,"%d ",*pb);
         pb = pb +1;
@@ -97,12 +97,11 @@ void binary_insert(void * first, size_t number, size_t size,int (*compare)(const
     }
 }
 
-void search_min_max(int *pb, int const *const pe, int **ppb, int *n)
+void search_min_max(int *pb, int const *const pe, int **ppb, int **ppe)
 {
     int *k;  
     int *min = pb; 
     int *max = pb;
-    *n = 0;
     while(pe>pb)
     {
         
@@ -125,25 +124,28 @@ void search_min_max(int *pb, int const *const pe, int **ppb, int *n)
         min = max;
         max = k;
     }
-    *n = max-min-1;
     *ppb = min + 1;
+    *ppe = max;
 }
 
 
-int rewrite_array(int *min,int n,int **new_begin)
+int rewrite_array(int *min,int *max,int **new_begin, int **new_end)
 {
     int err = OK;
-    int *new_end = *new_begin;
-     for(int i=1;i<=n;i++)
-    {
-        
-        *new_end = *min;
-        min = min + 1;
-        new_end = new_end + 1;
-    }    
-    if (new_end == *new_begin)
+    *new_end = *new_begin;
+    if (min == max)
     {
         err = ARRAY_EMPTY;
+    }
+    else
+    {
+        while(min < max)
+        {
+            
+            **new_end = *min;
+            min = min + 1;
+            *new_end = *new_end + 1;
+        }     
     }
     return err;
 }
