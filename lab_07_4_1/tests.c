@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <math.h>
 #include "functions.h"
-    
+#include "defines.h"  
     
 void count_numbers_tests(void)
 {
@@ -103,54 +103,53 @@ void swap_tests(void)
 
 void search_min_max_tests(void)
 {
-    int *pb, *pe, *ppb;
-    int n;
-    double expected_ppb,expected_n, actual_ppb,actual_n;
+    int *pb, *pe, *ppb, *ppe;
+    double expected_ppb,expected_ppe, actual_ppb,actual_ppe;
     //Tests search_min_max function
     //Test 1
     int a[9] = {8,2,0,1,5,7,2,-1,3};
     pb = a;
     pe = pb + 9;
-    search_min_max(pb,pe,&ppb,&n);
+    search_min_max(pb,pe,&ppb,&ppe);
     expected_ppb = 2;
-    expected_n = 6;
+    expected_ppe = -1;
     actual_ppb = *ppb;
-    actual_n = n;
-    if (fabs(actual_ppb - expected_ppb) < 0.0001 && fabs(actual_n - expected_n) < 0.0001)
+    actual_ppe = *ppe;
+    if (fabs(actual_ppb - expected_ppb) < 0.0001 && fabs(actual_ppe - expected_ppe) < 0.0001)
         printf("Test 1 in search_min_max function is passed\n");
     else
     {
-        printf("Test 1 in search_min_max function is failed:\n    expected = %f; %f, actual = %f; %f\n",expected_ppb,expected_n,actual_ppb,actual_n);
+        printf("Test 1 in search_min_max function is failed:\n    expected = %f; %f, actual = %f; %f\n",expected_ppb,expected_ppe,actual_ppb,actual_ppe);
     } 
     //Test 2
     int b[9] = {8,2,0,1,5,7,2,5,3};
     pb = b;
     pe = pb + 9;
-    search_min_max(pb,pe,&ppb,&n);
+    search_min_max(pb,pe,&ppb,&ppe);
     expected_ppb = 2;
-    expected_n = 1;
+    expected_ppe = 1;
     actual_ppb = *ppb;
-    actual_n = n;
-    if (fabs(actual_ppb - expected_ppb) < 0.0001 && fabs(actual_n - expected_n) < 0.0001)
+    actual_ppe = *ppe;
+    if (fabs(actual_ppb - expected_ppb) < 0.0001 && fabs(actual_ppe - expected_ppe) < 0.0001)
         printf("Test 2 in search_min_max function is passed\n");
     else
     {
-        printf("Test 2 in search_min_max function is failed:\n    expected = %f; %f, actual = %f; %f\n",expected_ppb,expected_n,actual_ppb,actual_n);
+        printf("Test 2 in search_min_max function is failed:\n    expected = %f; %f, actual = %f; %f\n",expected_ppb,expected_ppe,actual_ppb,actual_ppe);
     } 
     //Test 3
     int c[8] = {1,3,3,4,5,6,7,8};
     pb = c;
     pe = pb + 8;
-    search_min_max(pb,pe,&ppb,&n);
+    search_min_max(pb,pe,&ppb,&ppe);
     expected_ppb = 3;
-    expected_n = 6;
+    expected_ppe = 8;
     actual_ppb = *ppb;
-    actual_n = n;
-    if (fabs(actual_ppb - expected_ppb) < 0.0001 && fabs(actual_n - expected_n) < 0.0001)
+    actual_ppe = *ppe;
+    if (fabs(actual_ppb - expected_ppb) < 0.0001 && fabs(actual_ppe - expected_ppe) < 0.0001)
         printf("Test 3 in search_min_max function is passed\n");
     else
     {
-        printf("Test 3 in search_min_max function is failed:\n    expected = %f; %f, actual = %f; %f\n",expected_ppb,expected_n,actual_ppb,actual_n);
+        printf("Test 3 in search_min_max function is failed:\n    expected = %f; %f, actual = %f; %f\n",expected_ppb,expected_ppe,actual_ppb,actual_ppe);
     } 
 }
 
@@ -236,6 +235,82 @@ void binary_insert_tests(void)
     } 
 }
 
+void read_array_tests(void)
+{
+    FILE *f1,*f2,*f3;
+    f1 = fopen("read_test1.txt","r");
+    f2 = fopen("read_test1.txt","r");
+    f3 = fopen("read_test1.txt","r");
+
+    int a1[5];
+    int a11[5]={2,-4,5,1,0};
+    int a2[2];
+    int a22[1]={1};
+    int a3[1];
+    int counter;
+    int *pb, *pe;
+
+    // Test1
+    pb = a1;
+    pe = a1;
+    read_array(f1, &pb, &pe, 5);
+    counter=0;
+    for (int i=0;i<5;i++)
+    {
+        if (a1[i] != a11[i])
+        {
+            counter = 1;
+        }
+
+    }
+    if (counter == 1)
+    {
+        printf("Test 1 in read_array function is failed\n");
+    }
+    else
+    {
+        printf("Test 1 in read_array function is passed\n");       
+    }
+
+    // Test2
+
+    pb = a2;
+    pe = a2;
+    read_array(f2, &pb, &pe, 1);
+    counter=0;
+    for (int i=0;i<1;i++)
+    {
+        if (a2[i] != a22[i])
+        {
+            counter = 1;
+        }
+
+    }
+    if (counter == 1)
+    {
+        printf("Test 2 in read_array function is failed\n");
+    }
+    else
+    {
+        printf("Test 2 in read_array function is passed\n");       
+    }
+
+    // Test3
+
+    pb = a3;
+    pe = a3;
+    int err = read_array(f3, &pb, &pe, 6);
+    if (err == FILE_EMPTY)
+    {
+        printf("Test 2 in read_array function is passed\n");
+    }
+    else
+    {
+        printf("Test 2 in read_array function is failed\n");
+    }
+
+}
+
     
 int main(void)
 {
@@ -243,5 +318,6 @@ int main(void)
     swap_tests();
     search_min_max_tests();
     binary_insert_tests();
+    read_array_tests();
     return 0;
 }
