@@ -35,7 +35,7 @@ int main(int argc, char** argv)
         fprintf(stderr, "main1.exe <file_input-name> <file_output-name> <filter>\n");
         err = NOT_ALL_ARGUMENTS;
     }
-    else
+    else    
     {
         f1 = fopen(argv[1], "r");
         if (f1 == NULL)

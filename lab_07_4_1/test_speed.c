@@ -4,6 +4,9 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <inttypes.h>
+
+
 #include "functions.h"
 #include "defines.h"
 
@@ -23,169 +26,453 @@ unsigned long long tick(void)
     
 int main(int argc, char** argv)
 {
-    int n;
-	int a[10];
+    
+    int a[10];
     int a1[100];
     int a2[1000];
-    int a3[10000];
-    int a4[100000];
+    //int a3[10000];
+    //int a4[100000]; 
     //int a5[1000000]; 
   
     unsigned long long tb, te;
+    int n;
+    unsigned long long t_mid;
+    //int64_t t_mid;
+
     srand(time(NULL));
-	
-	
-	n = 10;
+    
+    
+    n = 10;
+    int b[n];
+    printf("В случайном порядке:\n");
+    t_mid = 0;
     for(int i = 0;i<n;i++)
     {
         a[i] = rand() % (100)+1;
     }
-    tb = tick();
-    //qsort(a1,n,sizeof(int),compare_int);
-    binary_insert(a,n,sizeof(int),compare_int);
-    te = tick();
-    printf("binary_insert 10: %I64d\n", (te - tb) / n);
-    
-    
-    for(int i = 0;i<n;i++)
+    for(int i = 0;i<100;i++)
     {
-        a[i] = rand() % (100)+1;
+        for(int j = 0;j<n;j++)
+        {
+            b[j] = a[j];
+        }
+        tb = tick();
+        binary_insert(b,n,sizeof(int),compare_int);
+        te = tick();
+        t_mid += (te - tb);
     }
-    tb = tick();
-    qsort(a,n,sizeof(int),compare_int);
-    //binary_insert(a1,n,sizeof(int),compare_int);
-    te = tick();
-    printf("qsort 10: %I64d\n", (te - tb) / n);
+    printf("binary_insert 10: %I64d\n", t_mid / 100);
     
+    t_mid = 0;
+    for(int i = 0;i<100;i++)
+    {
+        for(int j = 0;j<n;j++)
+        {
+            b[j] = a[j];
+        }
+        tb = tick();
+        qsort(b,n,sizeof(int),compare_int);
+        te = tick();
+        t_mid += (te - tb);
+    }
+    printf("qsort 10: %I64d\n", t_mid / 100);
     
     /////////////////
-	
     n = 100;
+    int b1[n];
+
+    t_mid = 0;
     for(int i = 0;i<n;i++)
     {
         a1[i] = rand() % (100)+1;
     }
-    tb = tick();
-    //qsort(a1,n,sizeof(int),compare_int);
-    binary_insert(a1,n,sizeof(int),compare_int);
-    te = tick();
-    printf("binary_insert 100: %I64d\n", (te - tb) / n);
-    
-    
-    for(int i = 0;i<n;i++)
+    for(int i = 0;i<100;i++)
     {
-        a1[i] = rand() % (100)+1;
+        for(int j = 0;j<n;j++)
+        {
+            b1[j] = a1[j];
+        }
+        tb = tick();
+        binary_insert(b1,n,sizeof(int),compare_int);
+        te = tick();
+        t_mid += (te - tb);
     }
-    tb = tick();
-    qsort(a1,n,sizeof(int),compare_int);
-    //binary_insert(a1,n,sizeof(int),compare_int);
-    te = tick();
-    printf("qsort 100: %I64d\n", (te - tb) / n);
+    printf("binary_insert 100: %I64d\n", t_mid / 100);
     
+    t_mid = 0;
+    for(int i = 0;i<100;i++)
+    {
+        for(int j = 0;j<n;j++)
+        {
+            b1[j] = a1[j];
+        }
+        tb = tick();
+        qsort(b1,n,sizeof(int),compare_int);
+        te = tick();
+        t_mid += (te - tb);
+    }
+    printf("qsort 100: %I64d\n", t_mid / 100);
     
     /////////////////
-    
-    
     n = 1000;
-    //srand(time(NULL));
+    int b2[n];
+
+    t_mid = 0;
     for(int i = 0;i<n;i++)
     {
         a2[i] = rand() % (100)+1;
     }
-    tb = tick();
-    //qsort(a1,n,sizeof(int),compare_int);
-    binary_insert(a2,n,sizeof(int),compare_int);
-    te = tick();
-    printf("binary_insert 1000: %I64d\n", (te - tb) / n);
+    for(int i = 0;i<100;i++)
+    {
+        for(int j = 0;j<n;j++)
+        {
+            b2[j] = a2[j];
+        }
+        tb = tick();
+        binary_insert(b2,n,sizeof(int),compare_int);
+        te = tick();
+        t_mid += (te - tb);
+    }
+    printf("binary_insert 1000: %I64d\n", t_mid / 100);
     
-    //srand(time(NULL));
+  
+    t_mid = 0;
+    for(int i = 0;i<100;i++)
+    {
+        for(int j = 0;j<n;j++)
+        {
+            b2[j] = a2[j];
+        }
+        tb = tick();
+        qsort(b2,n,sizeof(int),compare_int);
+        te = tick();
+        t_mid += (te - tb);
+    }
+    printf("qsort 1000: %I64d\n", t_mid / 100);
+        
+    /////////////////
+    printf("\n\nВ порядке возрастания:\n");
+    n = 10;
+    t_mid = 0;
     for(int i = 0;i<n;i++)
     {
-        a2[i] = rand() % (100)+1;
+        a[i] = i;
     }
-    tb = tick();
-    qsort(a2,n,sizeof(int),compare_int);
-    //binary_insert(a1,n,sizeof(int),compare_int);
-    te = tick();
-    printf("qsort 1000: %I64d\n", (te - tb) / n);
+    for(int i = 0;i<100;i++)
+    {
+        for(int j = 0;j<n;j++)
+        {
+            b[j] = a[j];
+        }
+        tb = tick();
+        binary_insert(b,n,sizeof(int),compare_int);
+        te = tick();
+        t_mid += (te - tb);
+    }
+    printf("binary_insert 10: %I64d\n", t_mid / 100);
     
-    //////////////////////
     
+    t_mid = 0;
+    for(int i = 0;i<100;i++)
+    {
+        for(int j = 0;j<n;j++)
+        {
+            b[j] = a[j];
+        }
+        tb = tick();
+        qsort(b,n,sizeof(int),compare_int);
+        te = tick();
+        t_mid += (te - tb);
+    }
+    printf("qsort 10: %I64d\n", t_mid / 100);
     
-    n = 10000;
-    //srand(time(NULL));
+    /////////////////
+    n = 100;
+
+    t_mid = 0;
     for(int i = 0;i<n;i++)
     {
-        a3[i] = rand() % (100)+1;
+        a1[i] = i;
     }
-    tb = tick();
-    //qsort(a1,n,sizeof(int),compare_int);
-    binary_insert(a3,n,sizeof(int),compare_int);
-    te = tick();
-    printf("binary_insert 10000: %I64d\n", (te - tb) / n);
+    for(int i = 0;i<100;i++)
+    {
+        for(int j = 0;j<n;j++)
+        {
+            b1[j] = a1[j];
+        }
+        tb = tick();
+        binary_insert(b1,n,sizeof(int),compare_int);
+        te = tick();
+        t_mid += (te - tb);
+    }
+    printf("binary_insert 100: %I64d\n", t_mid / 100);
     
-    //srand(time(NULL));
+    
+    t_mid = 0;
+    for(int i = 0;i<100;i++)
+    {
+        for(int j = 0;j<n;j++)
+        {
+            b1[j] = a1[j];
+        }
+        tb = tick();
+        qsort(b1,n,sizeof(int),compare_int);
+        te = tick();
+        t_mid += (te - tb);
+    }
+    printf("qsort 100: %I64d\n", t_mid / 100);
+    
+    /////////////////
+    n = 1000;
+
+    t_mid = 0;
     for(int i = 0;i<n;i++)
     {
-        a3[i] = rand() % (100)+1;
+        a2[i] = i;
     }
-    tb = tick();
-    qsort(a3,n,sizeof(int),compare_int);
-    //binary_insert(a1,n,sizeof(int),compare_int);
-    te = tick();
-    printf("qsort 10000: %I64d\n", (te - tb) / n);
+    for(int i = 0;i<100;i++)
+    {
+        for(int j = 0;j<n;j++)
+        {
+            b2[j] = a2[j];
+        }
+        tb = tick();
+        binary_insert(b2,n,sizeof(int),compare_int);
+        te = tick();
+        t_mid += (te - tb);
+    }
+    printf("binary_insert 1000: %I64d\n", t_mid / 100);
     
-    //////////////////////
     
-    n = 100000;
-    //srand(time(NULL));
+    t_mid = 0;
+    for(int i = 0;i<100;i++)
+    {
+        for(int j = 0;j<n;j++)
+        {
+            b2[j] = a2[j];
+        }
+        tb = tick();
+        qsort(b2,n,sizeof(int),compare_int);
+        te = tick();
+        t_mid += (te - tb);
+    }
+    printf("qsort 1000: %I64d\n", t_mid / 100);
+    
+    /////////////////
+    printf("\n\nВ порядке убывания:\n");
+    n = 10;
+    t_mid = 0;
     for(int i = 0;i<n;i++)
     {
-        a4[i] = rand() % (100)+1;
+        a[i] = n-i;
     }
-    tb = tick();
-    qsort(a4,n,sizeof(int),compare_int);
-    //binary_insert(a1,n,sizeof(int),compare_int);
-    te = tick();
-    printf("qsort 100000: %I64d\n", (te - tb) / n);
+    for(int i = 0;i<100;i++)
+    {
+        for(int j = 0;j<n;j++)
+        {
+            b[j] = a[j];
+        }
+        tb = tick();
+        binary_insert(b,n,sizeof(int),compare_int);
+        te = tick();
+        t_mid += (te - tb);
+    }
+    printf("binary_insert 10: %I64d\n", t_mid / 100);
     
     
-    //srand(time(NULL));
+    t_mid = 0;
+    for(int i = 0;i<100;i++)
+    {
+        for(int j = 0;j<n;j++)
+        {
+            b[j] = a[j];
+        }
+        tb = tick();
+        qsort(b,n,sizeof(int),compare_int);
+        te = tick();
+        t_mid += (te - tb);
+    }
+    printf("qsort 10: %I64d\n", t_mid / 100);
+    
+    /////////////////
+    n = 100;
+
+    t_mid = 0;
     for(int i = 0;i<n;i++)
     {
-        a4[i] = rand() % (100)+1;
+        a1[i] = n-i;
     }
-    tb = tick();
-    //qsort(a1,n,sizeof(int),compare_int);
-    binary_insert(a4,n,sizeof(int),compare_int);
-    te = tick();
-    printf("binary_insert 100000: %I64d\n", (te - tb) / n);
+    for(int i = 0;i<100;i++)
+    {
+        for(int j = 0;j<n;j++)
+        {
+            b1[j] = a1[j];
+        }
+        tb = tick();
+        binary_insert(b1,n,sizeof(int),compare_int);
+        te = tick();
+        t_mid += (te - tb);
+    }
+    printf("binary_insert 100: %I64d\n", t_mid / 100);
     
-    /*
     
-    ////////////////////////
+    t_mid = 0;
+    for(int i = 0;i<100;i++)
+    {
+        for(int j = 0;j<n;j++)
+        {
+            b1[j] = a1[j];
+        }
+        tb = tick();
+        qsort(b1,n,sizeof(int),compare_int);
+        te = tick();
+        t_mid += (te - tb);
+    }
+    printf("qsort 100: %I64d\n", t_mid / 100);
     
-    n = 1000000;
-    srand(time(NULL));
+    /////////////////
+    n = 1000;
+
+    t_mid = 0;
     for(int i = 0;i<n;i++)
     {
-        a5[i] = rand() % (100)+1;
+        a2[i] = n-i;
     }
-    tb = tick();
-    //qsort(a1,n,sizeof(int),compare_int);
-    binary_insert(a5,n,sizeof(int),compare_int);
-    te = tick();
-    printf("binary_insert 1000000: %I64d\n", (te - tb) / n);
+    for(int i = 0;i<100;i++)
+    {
+        for(int j = 0;j<n;j++)
+        {
+            b2[j] = a2[j];
+        }
+        tb = tick();
+        binary_insert(b2,n,sizeof(int),compare_int);
+        te = tick();
+        t_mid += (te - tb);
+    }
+    printf("binary_insert 1000: %I64d\n", t_mid / 100);
     
-    srand(time(NULL));
+    
+    t_mid = 0;
+    for(int i = 0;i<100;i++)
+    {
+        for(int j = 0;j<n;j++)
+        {
+            b2[j] = a2[j];
+        }
+        tb = tick();
+        qsort(b2,n,sizeof(int),compare_int);
+        te = tick();
+        t_mid += (te - tb);
+    }
+    printf("qsort 1000: %I64d\n", t_mid / 100);
+    
+    /////////////////
+    printf("\n\nОдинаковые значения:\n");
+    n = 10;
+    t_mid = 0;
     for(int i = 0;i<n;i++)
     {
-        a5[i] = rand() % (100)+1;
+        a[i] = 5;
     }
-    tb = tick();
-    qsort(a5,n,sizeof(int),compare_int);
-    //binary_insert(a1,n,sizeof(int),compare_int);
-    te = tick();
-    printf("qsort 1000000: %I64d\n", (te - tb) / n); */
+    for(int i = 0;i<100;i++)
+    {
+        for(int j = 0;j<n;j++)
+        {
+            b[j] = a[j];
+        }
+        tb = tick();
+        binary_insert(b,n,sizeof(int),compare_int);
+        te = tick();
+        t_mid += (te - tb);
+    }
+    printf("binary_insert 10: %I64d\n", t_mid / 100);
     
+    
+    t_mid = 0;
+    for(int i = 0;i<100;i++)
+    {
+        for(int j = 0;j<n;j++)
+        {
+            b[j] = a[j];
+        }
+        tb = tick();
+        qsort(b,n,sizeof(int),compare_int);
+        te = tick();
+        t_mid += (te - tb);
+    }
+    printf("qsort 10: %I64d\n", t_mid / 100);
+    /////////////////
+    
+    n = 100;
+
+    t_mid = 0;
+    for(int i = 0;i<n;i++)
+    {
+        a1[i] = 5;
+    }
+    for(int i = 0;i<100;i++)
+    {
+        for(int j = 0;j<n;j++)
+        {
+            b1[j] = a1[j];
+        }
+        tb = tick();
+        binary_insert(b1,n,sizeof(int),compare_int);
+        te = tick();
+        t_mid += (te - tb);
+    }
+    printf("binary_insert 100: %I64d\n", t_mid / 100);
+    
+    
+    t_mid = 0;
+    for(int i = 0;i<100;i++)
+    {
+        for(int j = 0;j<n;j++)
+        {
+            b1[j] = a1[j];
+        }
+        tb = tick();
+        qsort(b1,n,sizeof(int),compare_int);
+        te = tick();
+        t_mid += (te - tb);
+    }
+    printf("qsort 100: %I64d\n", t_mid / 100);
+    
+    /////////////////
+    n = 1000;
+
+    t_mid = 0;
+    for(int i = 0;i<n;i++)
+    {
+        a2[i] = 5;
+    }
+    for(int i = 0;i<100;i++)
+    {
+        for(int j = 0;j<n;j++)
+        {
+            b2[j] = a2[j];
+        }
+        tb = tick();
+        binary_insert(b2,n,sizeof(int),compare_int);
+        te = tick();
+        t_mid += (te - tb);
+    }
+    printf("binary_insert 1000: %I64d\n", t_mid / 100);
+    
+    
+    t_mid = 0;
+    for(int i = 0;i<100;i++)
+    {
+        for(int j = 0;j<n;j++)
+        {
+            b2[j] = a2[j];
+        }
+        tb = tick();
+        qsort(b2,n,sizeof(int),compare_int);
+        te = tick();
+        t_mid += (te - tb);
+    }
+    printf("qsort 1000: %I64d\n", t_mid / 100);
+    /////////////////
+
 }
