@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <assert.h>
 #include "defines.h"
 
 int count_numbers(FILE *f)
@@ -55,6 +56,7 @@ void swap(void *a, void *b,size_t size)
     
 void* binary_search(void *first,void *right, size_t size,int (*compare)(const void*, const void*))
 {
+	assert(first<right);
     void *l,*r,*m;
     l = first;
     r = right-size;
@@ -81,8 +83,8 @@ void binary_insert(void * first, size_t number, size_t size,int (*compare)(const
 {
     void *l, *right2;
     void *right = first+size;
-    for (int i = 1; i<number; i++)
-    {
+    while(right < first+number*size)
+	{
         right2 = right-size;
         l = binary_search(first,right,size,compare);
         
@@ -102,7 +104,8 @@ void search_min_max(int *pb, int const *const pe, int **ppb, int **ppe)
     int *k;  
     int *min = pb; 
     int *max = pb;
-    while(pe>pb)
+	assert(pe > pb);
+    while(pe > pb)
     {
         
         if (*pb > *max)

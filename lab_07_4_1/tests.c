@@ -127,7 +127,7 @@ void search_min_max_tests(void)
     pe = pb + 9;
     search_min_max(pb,pe,&ppb,&ppe);
     expected_ppb = 2;
-    expected_ppe = 1;
+    expected_ppe = 0;
     actual_ppb = *ppb;
     actual_ppe = *ppe;
     if (fabs(actual_ppb - expected_ppb) < 0.0001 && fabs(actual_ppe - expected_ppe) < 0.0001)
@@ -137,11 +137,11 @@ void search_min_max_tests(void)
         printf("Test 2 in search_min_max function is failed:\n    expected = %f; %f, actual = %f; %f\n",expected_ppb,expected_ppe,actual_ppb,actual_ppe);
     } 
     //Test 3
-    int c[8] = {1,3,3,4,5,6,7,8};
+    int c[8] = {1,-1,8,4,5,6,7,3};
     pb = c;
     pe = pb + 8;
     search_min_max(pb,pe,&ppb,&ppe);
-    expected_ppb = 3;
+    expected_ppb = 8;
     expected_ppe = 8;
     actual_ppb = *ppb;
     actual_ppe = *ppe;
@@ -159,22 +159,35 @@ int compare_int(const void* p, const void* q)
 {
     const int *a = p;
     const int *b = q;
-    return *a - *b; 
+    if (*a - *b > 0)
+	{
+		return 1; 
+	}
+    return -1;
 }
 
 int compare_float(const void* p, const void* q)
 {
     const float *a = p;
     const float *b = q;
-    return *a - *b; 
+	if (*a - *b > 0)
+	{
+		return 1; 
+	}
+    return -1; 
 }
 
 int compare_double(const void* p, const void* q)
 {
     const double *a = p;
     const double *b = q;
-    return *a - *b; 
+    if (*a - *b > 0)
+	{
+		return 1; 
+	}
+    return -1;
 }
+
 void binary_insert_tests(void)
 {
     int *pb;
@@ -199,11 +212,11 @@ void binary_insert_tests(void)
     //Test 2
     float *pb1;
     k = 1;
-    float b[5] = {2.5,-1.23,0,0,1};
-    float b1[5] = {-1.23,0,0,1,2.5};
+    float b[6] = {2.6,-1.23,0,2.5,0,1};
+    float b1[6] = {-1.23,0,0,1,2.5,2.6};
     pb1 = b;
-    binary_insert(pb1,5,sizeof(float),compare_float);
-    for (int i = 0;i<5;i++)
+    binary_insert(pb1,6,sizeof(float),compare_float);
+    for (int i = 0;i<6;i++)
     {
         if (fabs(b[i] - b1[i])>0.001)
             k = 0;
@@ -233,19 +246,57 @@ void binary_insert_tests(void)
     {
         printf("Test 3 in binary_insert function is failed\n");
     } 
+	
+	//Test 4
+	int *pb3;
+    int d[1] = {8};
+    int d1[1] = {8};
+	k = 1;
+    pb3 = d;
+    binary_insert(pb3,1,sizeof(int),compare_int);
+    for (int i = 0;i<1;i++)
+    {
+        if (d[i] != d1[i])
+            k = 0;
+    }
+    if (k == 1)
+        printf("Test 4 in binary_insert function is passed\n");
+    else
+    {
+        printf("Test 4 in binary_insert function is failed\n");
+    }
+	
+	//Test 5
+	int *pb4;
+    int e[2] = {8,-1};
+    int e1[2] = {-1,8};
+	k = 1;
+    pb4 = e;
+    binary_insert(pb4,2,sizeof(int),compare_int);
+    for (int i = 0;i<2;i++)
+    {
+        if (e[i] != e1[i])
+            k = 0;
+    }
+    if (k == 1)
+        printf("Test 5 in binary_insert function is passed\n");
+    else
+    {
+        printf("Test 5 in binary_insert function is failed\n");
+    }
 }
 
 void read_array_tests(void)
 {
     FILE *f1,*f2,*f3;
     f1 = fopen("read_test1.txt","r");
-    f2 = fopen("read_test1.txt","r");
-    f3 = fopen("read_test1.txt","r");
+    f2 = fopen("read_test2.txt","r");
+    f3 = fopen("read_test3.txt","r");
 
     int a1[5];
     int a11[5]={2,-4,5,1,0};
     int a2[2];
-    int a22[1]={1};
+    int a22[1]={8};
     int a3[1];
     int counter;
     int *pb, *pe;
@@ -311,6 +362,66 @@ void read_array_tests(void)
 
 }
 
+
+void rewrite_array_test(void)
+{
+	int k;
+	int *new_begin;
+	int *new_end;
+	// Test1
+	k = 1;
+	int a1[5] = {3,1,-4,7,6};
+	int b1[2] = {1,-4};
+	int c1[2];
+	new_begin = c1;
+	rewrite_array(a1+1,a1+3,&new_begin, &new_end);
+	for (int i = 0;i<2;i++)
+    {
+        if (b1[i] != c1[i])
+            k = 0;
+    }
+	if (k == 1)
+        printf("Test 1 in rewrite_array function is passed\n");
+    else
+    {
+        printf("Test 1 in rewrite_array function is failed\n");
+    } 
+
+	// Test2
+	k = 1;
+	int a2[3] = {1,2,3};
+	int b2[3] = {1,2,3};
+	int c2[3];
+	new_begin = c2;
+	rewrite_array(a2,a2+3,&new_begin, &new_end);
+	for (int i = 0;i<2;i++)
+    {
+        if (b2[i] != c2[i])
+            k = 0;
+    }
+	if (k == 1)
+        printf("Test 2 in rewrite_array function is passed\n");
+    else
+    {
+        printf("Test 2 in rewrite_array function is failed\n");
+    } 
+	
+	// Test3
+	k = 1;
+	int err;
+	int a3[3] = {1,2,3};
+	int c3[3];
+	new_begin = c3;
+	err = rewrite_array(a3+1,a3+1,&new_begin, &new_end);
+	if (err == ARRAY_EMPTY)
+        printf("Test 3 in rewrite_array function is passed\n");
+    else
+    {
+        printf("Test 3 in rewrite_array function is failed\n");
+    } 
+	
+}
+
     
 int main(void)
 {
@@ -319,5 +430,6 @@ int main(void)
     search_min_max_tests();
     binary_insert_tests();
     read_array_tests();
+	rewrite_array_test();
     return 0;
 }

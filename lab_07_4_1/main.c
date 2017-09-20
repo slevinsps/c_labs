@@ -13,14 +13,7 @@ int compare_int(const void* p, const void* q)
     return *a - *b; 
     
 }
-        
-unsigned long long tick(void)
-{
- unsigned long long d;
- __asm__ __volatile__ ("rdtsc" : "=A" (d) );
- return d;
-}
-    
+          
 int main(int argc, char** argv)
 {
     FILE *f1;
