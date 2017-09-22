@@ -6,10 +6,11 @@
 #include <string.h>
 #include <inttypes.h>
 
-
 #include "functions.h"
+#include "io.h"
+#include "binary_sort.h"
 #include "defines.h"
-
+    
 int compare_int(const void* p, const void* q)
 {
     const int *a = p;

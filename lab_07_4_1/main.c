@@ -4,8 +4,10 @@
 #include <stdlib.h>
 #include <string.h>
 #include "functions.h"
+#include "io.h"
+#include "binary_sort.h"
 #include "defines.h"
-
+    
 int compare_int(const void* p, const void* q)
 {
     const int *a = p;
@@ -61,7 +63,7 @@ int main(int argc, char** argv)
                 {
                     pb = a;
                     pe = a;
-                    err = read_array(f1, &pb, &pe,k);
+                    err = read_array(f1, pb, &pe,k);
                     if (err == FILE_EMPTY)
                     {
                         fprintf(stderr,"File is empty");    
