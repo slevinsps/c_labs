@@ -12,8 +12,7 @@ int compare_int(const void* p, const void* q)
 {
     const int *a = p;
     const int *b = q;
-    return *a - *b; 
-    
+    return *a - *b;     
 }
           
 int main(int argc, char** argv)

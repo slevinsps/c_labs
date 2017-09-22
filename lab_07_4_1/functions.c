@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <assert.h>
 #include "defines.h"
+#include "functions.h"
     
 int count_numbers(FILE *f)
 {
@@ -29,7 +30,6 @@ void search_min_max(int *pb, int const *const pe, int **ppb, int **ppe)
             max = pb;
 
         }
-        
         if (*pb < *min)
         {
             min = pb;

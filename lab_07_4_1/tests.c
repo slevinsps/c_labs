@@ -4,7 +4,7 @@
 #include "io.h"
 #include "binary_sort.h"
 #include "defines.h"  
-    
+      
 void count_numbers_tests(void)
 {
     FILE *f1, *f2, *f3;

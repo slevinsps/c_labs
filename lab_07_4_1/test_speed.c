@@ -88,16 +88,14 @@ int main(int argc, char** argv)
         a[i] = rand() % (100)+1;
     }
     print_results(a,n);
-    
-    /////////////////
+
     n = 100;
     for(int i = 0;i<n;i++)
     {
         a1[i] = rand() % (100)+1;
     }
     print_results(a1,n);
-    
-    /////////////////
+
     n = 1000;
 
     for(int i = 0;i<n;i++)
@@ -114,8 +112,7 @@ int main(int argc, char** argv)
         a[i] = i;
     }
     print_results(a,n);
-    
-    /////////////////
+
     n = 100;
 
     for(int i = 0;i<n;i++)
@@ -123,8 +120,7 @@ int main(int argc, char** argv)
         a1[i] = i;
     }
     print_results(a1,n);
-    
-    /////////////////
+
     n = 1000;
 
     for(int i = 0;i<n;i++)
@@ -143,7 +139,6 @@ int main(int argc, char** argv)
     }
     print_results(a,n);
     
-    /////////////////
     n = 100;
 
     for(int i = 0;i<n;i++)
@@ -151,8 +146,7 @@ int main(int argc, char** argv)
         a1[i] = n-i;
     }
     print_results(a1,n);
-    
-    /////////////////
+
     n = 1000;
 
     for(int i = 0;i<n;i++)
@@ -169,7 +163,7 @@ int main(int argc, char** argv)
         a[i] = 5;
     }
     print_results(a,n);
-    /////////////////
+
     n = 100;
 
     for(int i = 0;i<n;i++)
@@ -177,8 +171,7 @@ int main(int argc, char** argv)
         a1[i] = 5;
     }
     print_results(a1,n);
-    
-    /////////////////
+
     n = 1000;
 
     for(int i = 0;i<n;i++)
@@ -186,6 +179,4 @@ int main(int argc, char** argv)
         a2[i] = 5;
     }
     print_results(a2,n);
-    /////////////////
-
 }

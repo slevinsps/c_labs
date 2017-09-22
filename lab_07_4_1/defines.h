@@ -13,6 +13,3 @@
 #define MEMORY_ERROR -8
 
 #endif // DEFINES
-
-
-

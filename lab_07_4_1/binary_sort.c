@@ -1,7 +1,8 @@
 #include <stdlib.h>
 #include <assert.h>
 #include "defines.h"
-    
+#include "binary_sort.h"
+
 void swap(void *a, void *b,size_t size)                                                                                                                     
 {                                                     
     char *a1 = a, *b1 = b;
@@ -16,47 +17,47 @@ void swap(void *a, void *b,size_t size)
     }
 }
     
-void* binary_search(void *first,void *right, size_t size,int (*compare)(const void*, const void*))
+void* binary_search(void *first,void *right, size_t size,comparator compare)
 {
     assert(first<right);
     void *l,*r,*m;
     l = first;
-    r = right-size;
+    r = (char*)right-size;
     while (l<=r)
     {
-        m = l+((r-l)/(2));   
-        while ((m-first)%size !=0)
+        m = (char*)l+(((char*)r-(char*)l)/(2));   
+        while (((char*)m-(char*)first)%size !=0)
         {
-            m--;
+            m = (char*)m - 1;
         }
         if (compare((char*)m,((char*)right))>0)
         {
-            r = m - size;
+            r = (char*)m - size;
         }
         else
         {
-            l = m + size;
+            l = (char*)m + size;
         }   
     }
     return l;
 }
-    
-void binary_insert(void * first, size_t number, size_t size,int (*compare)(const void*, const void*))
+
+void binary_insert(void * first, size_t number, size_t size, comparator compare)
 {
     void *l, *right2;
-    void *right = first+size;
-    while(right < first+number*size)
+    void *right = (char*)first+size;
+    while((char*)right < (char*)first+number*size)
     {
-        right2 = right-size;
+        right2 = (char*)right-size;
         l = binary_search(first,right,size,compare);
         
         while (l<=right2)
         {
             
             swap(((char*)right2 + size), ((char*)right2), size);
-            right2-=size;
+            right2= (char*)right2 - size;
         }
         
-        right+=size;
+        right = (char*)right + size;
     }
 }
