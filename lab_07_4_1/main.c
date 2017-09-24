@@ -31,9 +31,9 @@ int main(int argc, char** argv)
     int *new_end;
     char* pstr;
     
-    if (argc != 4)
+    if (argc < 3)
     {
-        fprintf(stderr, "main1.exe <file_input-name> <file_output-name> <filter>\n");
+        fprintf(stderr, "app.exe <file_input-name> <file_output-name> <filter or nothing>\n");
         err = NOT_ALL_ARGUMENTS;
     }
     else    
@@ -69,13 +69,18 @@ int main(int argc, char** argv)
                     }
                     else
                     {
-                        pstr = argv[3];
-                        if(pstr[0] == 'y' && pstr[1] == 0)
+                        
+                        if (argc == 4)
+                            pstr = argv[3];
+                        
+                        if(argc == 4 && pstr[0] == 'f' && pstr[1] == 0)
                         {
-                            search_min_max(pb,pe,&ppb,&ppe);
+                            ppb = pb;
+                            ppe = pb;
+                            key(pb,pe,&ppb,&ppe);
                             a2 = malloc((ppe-ppb)*sizeof(int));
                             if (a2 != NULL)
-                            {
+                            {    
                                 new_begin = a2;
                                 err = rewrite_array(ppb,ppe,&new_begin,&new_end);
                                 
@@ -85,12 +90,7 @@ int main(int argc, char** argv)
                                 }
                                 else
                                 {
-    
-                                    //qsort(new_begin,n,sizeof(int),compare_int);
-                                    binary_insert(new_begin,new_end-new_begin,sizeof(int),compare_int);
-
-                                    
-                                    
+                                    mysort(new_begin,new_end-new_begin,sizeof(int),compare_int);
                                     print_array(new_begin, new_end,f2);
                                 }
                                 free(a2);
@@ -101,18 +101,12 @@ int main(int argc, char** argv)
                                 err = MEMORY_ERROR;
                             }    
                         }
+                        
                         else
                         {
-                            if(pstr[0] == 'n' && pstr[1] == 0)
-                            {
-                                binary_insert(pb,pe-pb,sizeof(int),compare_int);
-                                print_array(pb, pe,f2);
-                            }
-                            else
-                            {
-                                fprintf(stderr, "Enter filter value: y/n");
-                                err = INCORRECT_FILTER;
-                            }
+                            mysort(pb,pe-pb,sizeof(int),compare_int);
+                            print_array(pb, pe,f2);
+                            
                         }
                         free(a);
                     }

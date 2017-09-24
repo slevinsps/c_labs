@@ -14,13 +14,13 @@ int count_numbers(FILE *f)
     }
     
     return k;
-}
+}    
 
-void search_min_max(int *pb, int const *const pe, int **ppb, int **ppe)
+int key(const int *pb,const int *pe,int **ppb, int **ppe)
 {
-    int *k;  
-    int *min = pb; 
-    int *max = pb;
+    const int *k;  
+    const int *min = pb; 
+    const int *max = pb;
     assert(pe > pb);
     while(pe > pb)
     {
@@ -43,8 +43,15 @@ void search_min_max(int *pb, int const *const pe, int **ppb, int **ppe)
         min = max;
         max = k;
     }
-    *ppb = min + 1;
-    *ppe = max;
+    while (*ppb < min+1)
+    {
+        *ppb += 1;
+    }
+    while (*ppe < max)
+    {
+        *ppe += 1;
+    }
+    return 0;
 }
 
 

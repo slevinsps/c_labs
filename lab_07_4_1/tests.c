@@ -90,7 +90,7 @@ void swap_tests(void)
 }
 
 
-void search_min_max_tests(void)
+void key_tests(void)
 {
     int *pb, *pe, *ppb, *ppe;
     double expected_ppb,expected_ppe, actual_ppb,actual_ppe;
@@ -98,46 +98,52 @@ void search_min_max_tests(void)
     int a[9] = {8,2,0,1,5,7,2,-1,3};
     pb = a;
     pe = pb + 9;
-    search_min_max(pb,pe,&ppb,&ppe);
+    ppb = pb;
+    ppe = pb;
+    key(pb,pe,&ppb,&ppe);
     expected_ppb = 2;
     expected_ppe = -1;
     actual_ppb = *ppb;
     actual_ppe = *ppe;
     if (fabs(actual_ppb - expected_ppb) < 0.0001 && fabs(actual_ppe - expected_ppe) < 0.0001)
-        printf("Test 1 in search_min_max function is passed\n");
+        printf("Test 1 in key function is passed\n");
     else
     {
-        printf("Test 1 in search_min_max function is failed:\n    expected = %f; %f, actual = %f; %f\n",expected_ppb,expected_ppe,actual_ppb,actual_ppe);
+        printf("Test 1 in key function is failed:\n    expected = %f; %f, actual = %f; %f\n",expected_ppb,expected_ppe,actual_ppb,actual_ppe);
     } 
     //2 Между минимальным и максимальным находится одно значение
     int b[9] = {8,2,0,1,5,7,2,5,3};
     pb = b;
     pe = pb + 9;
-    search_min_max(pb,pe,&ppb,&ppe);
+    ppb = pb;
+    ppe = pb;
+    key(pb,pe,&ppb,&ppe);
     expected_ppb = 2;
     expected_ppe = 0;
     actual_ppb = *ppb;
     actual_ppe = *ppe;
     if (fabs(actual_ppb - expected_ppb) < 0.0001 && fabs(actual_ppe - expected_ppe) < 0.0001)
-        printf("Test 2 in search_min_max function is passed\n");
+        printf("Test 2 in key function is passed\n");
     else
     {
-        printf("Test 2 in search_min_max function is failed:\n    expected = %f; %f, actual = %f; %f\n",expected_ppb,expected_ppe,actual_ppb,actual_ppe);
+        printf("Test 2 in key function is failed:\n    expected = %f; %f, actual = %f; %f\n",expected_ppb,expected_ppe,actual_ppb,actual_ppe);
     } 
     //3 Между минимальным и максимальным нет значений
     int c[8] = {1,-1,8,4,5,6,7,3};
     pb = c;
     pe = pb + 8;
-    search_min_max(pb,pe,&ppb,&ppe);
+    ppb = pb;
+    ppe = pb;
+    key(pb,pe,&ppb,&ppe);
     expected_ppb = 8;
     expected_ppe = 8;
     actual_ppb = *ppb;
     actual_ppe = *ppe;
     if (fabs(actual_ppb - expected_ppb) < 0.0001 && fabs(actual_ppe - expected_ppe) < 0.0001)
-        printf("Test 3 in search_min_max function is passed\n");
+        printf("Test 3 in key function is passed\n");
     else
     {
-        printf("Test 3 in search_min_max function is failed:\n    expected = %f; %f, actual = %f; %f\n",expected_ppb,expected_ppe,actual_ppb,actual_ppe);
+        printf("Test 3 in key function is failed:\n    expected = %f; %f, actual = %f; %f\n",expected_ppb,expected_ppe,actual_ppb,actual_ppe);
     } 
 }
 
@@ -174,7 +180,7 @@ int compare_double(const void* p, const void* q)
     return -1;
 }
 
-void binary_insert_tests(void)
+void mysort_tests(void)
 {
     int *pb;
     int k = 1;
@@ -182,17 +188,17 @@ void binary_insert_tests(void)
     int a[9] = {8,2,0,1,5,7,2,-1,3};
     int a1[9] = {-1,0,1,2,2,3,5,7,8};
     pb = a;
-    binary_insert(pb,9,sizeof(int),compare_int);
+    mysort(pb,9,sizeof(int),compare_int);
     for (int i = 0;i<9;i++)
     {
         if (a[i] != a1[i])
             k = 0;
     }
     if (k == 1)
-        printf("Test 1 in binary_insert function is passed\n");
+        printf("Test 1 in mysort function is passed\n");
     else
     {
-        printf("Test 1 in binary_insert function is failed\n");
+        printf("Test 1 in mysort function is failed\n");
     } 
     //2 Сортировка элементов типа float
     float *pb1;
@@ -200,17 +206,17 @@ void binary_insert_tests(void)
     float b[6] = {2.6,-1.23,0,2.5,0,1};
     float b1[6] = {-1.23,0,0,1,2.5,2.6};
     pb1 = b;
-    binary_insert(pb1,6,sizeof(float),compare_float);
+    mysort(pb1,6,sizeof(float),compare_float);
     for (int i = 0;i<6;i++)
     {
         if (fabs(b[i] - b1[i])>0.001)
             k = 0;
     }
     if (k == 1)
-        printf("Test 2 in binary_insert function is passed\n");
+        printf("Test 2 in mysort function is passed\n");
     else
     {
-        printf("Test 2 in binary_insert function is failed\n");
+        printf("Test 2 in mysort function is failed\n");
     } 
     //3 Сортировка элементов типа double
     double *pb2;
@@ -218,7 +224,7 @@ void binary_insert_tests(void)
     double c[5] = {2.5,-1.23,0,0,1};
     double c1[5] = {-1.23,0,0,1,2.5};
     pb2 = c;
-    binary_insert(pb2,5,sizeof(double),compare_double);
+    mysort(pb2,5,sizeof(double),compare_double);
     for (int i = 0;i<5;i++)
     {
         if (fabs(c[i] - c1[i])>0.001)
@@ -226,10 +232,10 @@ void binary_insert_tests(void)
 
     }
     if (k == 1)
-        printf("Test 3 in binary_insert function is passed\n");
+        printf("Test 3 in mysort function is passed\n");
     else
     {
-        printf("Test 3 in binary_insert function is failed\n");
+        printf("Test 3 in mysort function is failed\n");
     } 
     
     //4 Сортировка одного элемента
@@ -238,17 +244,17 @@ void binary_insert_tests(void)
     int d1[1] = {8};
     k = 1;
     pb3 = d;
-    binary_insert(pb3,1,sizeof(int),compare_int);
+    mysort(pb3,1,sizeof(int),compare_int);
     for (int i = 0;i<1;i++)
     {
         if (d[i] != d1[i])
             k = 0;
     }
     if (k == 1)
-        printf("Test 4 in binary_insert function is passed\n");
+        printf("Test 4 in mysort function is passed\n");
     else
     {
-        printf("Test 4 in binary_insert function is failed\n");
+        printf("Test 4 in mysort function is failed\n");
     }
     
     //5 Сортировка двух элементов
@@ -257,17 +263,17 @@ void binary_insert_tests(void)
     int e1[2] = {-1,8};
     k = 1;
     pb4 = e;
-    binary_insert(pb4,2,sizeof(int),compare_int);
+    mysort(pb4,2,sizeof(int),compare_int);
     for (int i = 0;i<2;i++)
     {
         if (e[i] != e1[i])
             k = 0;
     }
     if (k == 1)
-        printf("Test 5 in binary_insert function is passed\n");
+        printf("Test 5 in mysort function is passed\n");
     else
     {
-        printf("Test 5 in binary_insert function is failed\n");
+        printf("Test 5 in mysort function is failed\n");
     }
     
     //5 Сортировка элементов расположенных в правильном порядке
@@ -276,17 +282,17 @@ void binary_insert_tests(void)
     int f1[7] = {1,2,3,4,5,6,7};
     k = 1;
     pb5 = f;
-    binary_insert(pb5,7,sizeof(int),compare_int);
+    mysort(pb5,7,sizeof(int),compare_int);
     for (int i = 0;i<7;i++)
     {
         if (f[i] != f1[i])
             k = 0;
     }
     if (k == 1)
-        printf("Test 6 in binary_insert function is passed\n");
+        printf("Test 6 in mysort function is passed\n");
     else
     {
-        printf("Test 6 in binary_insert function is failed\n");
+        printf("Test 6 in mysort function is failed\n");
     }
 }
 
@@ -551,15 +557,13 @@ void print_array_test(void)
     }
 
 }
-
-    
     
 int main(void)
 {
     count_numbers_tests();
     swap_tests();
-    search_min_max_tests();
-    binary_insert_tests();
+    key_tests();
+    mysort_tests();
     read_array_tests();
     rewrite_array_test();
     print_array_test();

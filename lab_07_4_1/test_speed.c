@@ -40,7 +40,7 @@ void print_results(int*a,int n)
             b[j] = a[j];
         }
         tb = tick();
-        binary_insert(b,n,sizeof(int),compare_int);
+        mysort(b,n,sizeof(int),compare_int);
         te = tick();
         if (te >= tb)
         {
@@ -49,7 +49,7 @@ void print_results(int*a,int n)
         else
             count--;
     }
-    printf("binary_insert %d: %I64d\n",n, t_mid / count);
+    printf("mysort %d: %I64d\n",n, t_mid / count);
     
     t_mid = 0;
     for(int i = 0;i<count;i++)

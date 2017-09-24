@@ -10,7 +10,7 @@ ifeq ($(mode), release)
 	CFLAGS += -DNDEBUG -g0
 endif
 
-main.exe : main.o functions.o io.o binary_sort.o
+app.exe : main.o functions.o io.o binary_sort.o
 	$(CC) $(CFLAGS) $^ -o $@
 tests.exe : tests.o functions.o io.o binary_sort.o
 	$(CC) $(CFLAGS) $^ -o $@
