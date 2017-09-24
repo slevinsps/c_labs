@@ -110,7 +110,7 @@ int main(int argc, char** argv)
                         }
                         free(a);
                     }
-                }
+                }        
                 else
                 {
                     printf("Memory error\n");
