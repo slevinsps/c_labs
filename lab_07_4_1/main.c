@@ -14,19 +14,17 @@ int compare_int(const void* p, const void* q)
     const int *b = q;
     return *a - *b;     
 }
-          
+            
 int main(int argc, char** argv)
 {
     FILE *f1;
     FILE *f2;
-    int *a, *a2;
+    int *a;
 
     int err = OK;
     int *pb;
     int *pe;
     int k;
-    int *ppb;
-    int *ppe;
     int *new_begin;
     int *new_end;
     char* pstr;
@@ -75,38 +73,26 @@ int main(int argc, char** argv)
                         
                         if(argc == 4 && pstr[0] == 'f' && pstr[1] == 0)
                         {
-                            ppb = pb;
-                            ppe = pb;
-                            key(pb,pe,&ppb,&ppe);
-                            a2 = malloc((ppe-ppb)*sizeof(int));
-                            if (a2 != NULL)
-                            {    
-                                new_begin = a2;
-                                err = rewrite_array(ppb,ppe,&new_begin,&new_end);
-                                
-                                if (err == ARRAY_EMPTY)
-                                {
-                                    fprintf(stderr,"Array is empty");    
-                                }
-                                else
-                                {
-                                    mysort(new_begin,new_end-new_begin,sizeof(int),compare_int);
-                                    print_array(new_begin, new_end,f2);
-                                }
-                                free(a2);
-                            }    
-                            else
+                            err = key(pb,pe,&new_begin,&new_end);    
+                            if (err == ARRAY_EMPTY)
                             {
-                                printf("Memory error\n");
-                                err = MEMORY_ERROR;
-                            }    
-                        }
-                        
+                                fprintf(stderr,"Array is empty");    
+                            }
+                            if (err == MEMORY_ERROR)
+                            {
+                                fprintf(stderr,"Memory error");    
+                            }
+                            if (err == OK)
+                            {
+                                mysort(new_begin,new_end-new_begin,sizeof(int),compare_int);
+                                print_array(new_begin, new_end,f2);
+                                free(new_begin);
+                            }
+                        }                        
                         else
                         {
                             mysort(pb,pe-pb,sizeof(int),compare_int);
-                            print_array(pb, pe,f2);
-                            
+                            print_array(pb, pe,f2);                        
                         }
                         free(a);
                     }

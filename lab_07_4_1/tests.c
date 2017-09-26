@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <stdlib.h>
 #include <math.h>
 #include "functions.h"
 #include "io.h"
@@ -90,62 +91,7 @@ void swap_tests(void)
 }
 
 
-void key_tests(void)
-{
-    int *pb, *pe, *ppb, *ppe;
-    double expected_ppb,expected_ppe, actual_ppb,actual_ppe;
-    //1 Между минимальным и максимальным находится несколько значений
-    int a[9] = {8,2,0,1,5,7,2,-1,3};
-    pb = a;
-    pe = pb + 9;
-    ppb = pb;
-    ppe = pb;
-    key(pb,pe,&ppb,&ppe);
-    expected_ppb = 2;
-    expected_ppe = -1;
-    actual_ppb = *ppb;
-    actual_ppe = *ppe;
-    if (fabs(actual_ppb - expected_ppb) < 0.0001 && fabs(actual_ppe - expected_ppe) < 0.0001)
-        printf("Test 1 in key function is passed\n");
-    else
-    {
-        printf("Test 1 in key function is failed:\n    expected = %f; %f, actual = %f; %f\n",expected_ppb,expected_ppe,actual_ppb,actual_ppe);
-    } 
-    //2 Между минимальным и максимальным находится одно значение
-    int b[9] = {8,2,0,1,5,7,2,5,3};
-    pb = b;
-    pe = pb + 9;
-    ppb = pb;
-    ppe = pb;
-    key(pb,pe,&ppb,&ppe);
-    expected_ppb = 2;
-    expected_ppe = 0;
-    actual_ppb = *ppb;
-    actual_ppe = *ppe;
-    if (fabs(actual_ppb - expected_ppb) < 0.0001 && fabs(actual_ppe - expected_ppe) < 0.0001)
-        printf("Test 2 in key function is passed\n");
-    else
-    {
-        printf("Test 2 in key function is failed:\n    expected = %f; %f, actual = %f; %f\n",expected_ppb,expected_ppe,actual_ppb,actual_ppe);
-    } 
-    //3 Между минимальным и максимальным нет значений
-    int c[8] = {1,-1,8,4,5,6,7,3};
-    pb = c;
-    pe = pb + 8;
-    ppb = pb;
-    ppe = pb;
-    key(pb,pe,&ppb,&ppe);
-    expected_ppb = 8;
-    expected_ppe = 8;
-    actual_ppb = *ppb;
-    actual_ppe = *ppe;
-    if (fabs(actual_ppb - expected_ppb) < 0.0001 && fabs(actual_ppe - expected_ppe) < 0.0001)
-        printf("Test 3 in key function is passed\n");
-    else
-    {
-        printf("Test 3 in key function is failed:\n    expected = %f; %f, actual = %f; %f\n",expected_ppb,expected_ppe,actual_ppb,actual_ppe);
-    } 
-}
+
 
 int compare_int(const void* p, const void* q)
 {
@@ -295,7 +241,7 @@ void mysort_tests(void)
         printf("Test 6 in mysort function is failed\n");
     }
 }
-
+    
 void read_array_tests(void)
 {
     FILE *f1,*f2,*f3,*f4,*f5;
@@ -425,64 +371,76 @@ void read_array_tests(void)
 
 }
 
-
-void rewrite_array_test(void)
+void key_tests(void)
 {
     int k;
     int *new_begin;
     int *new_end;
     
-    // Перезапись двух элементов
+    //1 Между минимальным и максимальным находится несколько значений
     k = 1;
-    int a1[5] = {3,1,-4,7,6};
-    int b1[2] = {1,-4};
-    int c1[2];
-    new_begin = c1;
-    rewrite_array(a1+1,a1+3,&new_begin, &new_end);
-    for (int i = 0;i<2;i++)
+    int a1[9] = {8,2,0,1,5,7,2,-1,3};
+    int b1[6] = {2,0,1,5,7,2};
+    key(a1,a1+9,&new_begin, &new_end);
+    for (int i = 0;i<new_end-new_begin;i++)
     {
-        if (b1[i] != c1[i])
+        if (b1[i] != new_begin[i])
             k = 0;
     }
     if (k == 1)
-        printf("Test 1 in rewrite_array function is passed\n");
+        printf("Test 1 in key function is passed\n");
     else
     {
-        printf("Test 1 in rewrite_array function is failed\n");
+        printf("Test 1 in key function is failed\n");
     } 
-
-    // Перезапись всего массива 
+    free(new_begin);
+    //2 Между минимальным и максимальным находится одно значение
     k = 1;
-    int a2[3] = {1,2,3};
-    int b2[3] = {1,2,3};
-    int c2[3];
-    new_begin = c2;
-    rewrite_array(a2,a2+3,&new_begin, &new_end);
-    for (int i = 0;i<2;i++)
+    int a2[9] = {8,2,0,1,5,7,2,5,3};
+    int b2[1] = {2};
+    key(a2,a2+9,&new_begin, &new_end);
+    for (int i = 0;i<new_end-new_begin;i++)
     {
-        if (b2[i] != c2[i])
+        if (b2[i] != new_begin[i])
             k = 0;
     }    
     if (k == 1)
-        printf("Test 2 in rewrite_array function is passed\n");
+        printf("Test 2 in key function is passed\n");
     else
     {
-        printf("Test 2 in rewrite_array function is failed\n");
+        printf("Test 2 in key function is failed\n");
     } 
-    
-    // Конечный и начальный элемент перезаписи совпадает 
+    free(new_begin);
+    //3 Между минимальным и максимальным нет значений
     k = 1;
     int err;
-    int a3[3] = {1,2,3};
-    int c3[3];
-    new_begin = c3;
-    err = rewrite_array(a3+1,a3+1,&new_begin, &new_end);
+    int a3[8] =  {1,-1,8,4,5,6,7,3};
+    err = key(a3,a3+8,&new_begin, &new_end);
     if (err == ARRAY_EMPTY)
-        printf("Test 3 in rewrite_array function is passed\n");
+        printf("Test 3 in key function is passed\n");
     else
     {
-        printf("Test 3 in rewrite_array function is failed\n");
-    }
+        printf("Test 3 in key function is failed\n");
+        free(new_begin);
+    } 
+    //2 Несколько минимальных и максимальных значений
+    k = 1;
+    int a4[7] = {1,1,1,2,8,8,8};
+    int b4[3] = {1,1,2};
+    key(a4,a4+7,&new_begin, &new_end);
+    for (int i = 0;i<new_end-new_begin;i++)
+    {
+        if (b4[i] != new_begin[i])
+            k = 0;
+    }    
+    if (k == 1)
+        printf("Test 4 in key function is passed\n");
+    else
+    {
+        printf("Test 4 in key function is failed\n");
+    } 
+    free(new_begin);
+    
 }
     
     
@@ -565,7 +523,6 @@ int main(void)
     key_tests();
     mysort_tests();
     read_array_tests();
-    rewrite_array_test();
     print_array_test();
     return 0;
 }

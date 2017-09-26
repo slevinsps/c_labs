@@ -17,7 +17,7 @@ int read_array(FILE *f, int *pb, int **pe, int k)
     }
     return err;        
 }
-
+    
 void print_array(const int* pb,const int* pe,FILE *f)
 {
     while (pe>pb)

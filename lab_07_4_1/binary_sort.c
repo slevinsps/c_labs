@@ -16,7 +16,7 @@ void swap(void *a, void *b,size_t size)
         b1++;                
     }
 }
-    
+        
 void* binary_search(void *first,void *right, size_t size,comparator compare)
 {
     assert(first<right);

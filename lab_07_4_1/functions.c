@@ -15,12 +15,13 @@ int count_numbers(FILE *f)
     
     return k;
 }    
-
-int key(const int *pb,const int *pe,int **ppb, int **ppe)
+    
+int key(const int *pb,const int *pe,int **new_begin, int **new_end)
 {
     const int *k;  
     const int *min = pb; 
     const int *max = pb;
+    int err = OK;
     assert(pe > pb);
     while(pe > pb)
     {
@@ -42,38 +43,30 @@ int key(const int *pb,const int *pe,int **ppb, int **ppe)
         k = min;
         min = max;
         max = k;
-    }
-    while (*ppb < min+1)
-    {
-        *ppb += 1;
-    }
-    while (*ppe < max)
-    {
-        *ppe += 1;
-    }
-    return 0;
-}
-
-
-int rewrite_array(int *min,int *max,int **new_begin, int **new_end)
-{
-    int err = OK;
-    *new_end = *new_begin;
+    }    
+    min = min + 1;
     if (min == max)
     {
         err = ARRAY_EMPTY;
     }
     else
     {
-        while(min < max)
+        *new_begin = malloc((max-min)*sizeof(int));
+        if (*new_begin != NULL)
+        {    
+            *new_end = *new_begin;
+            while(min < max)
+            {
+                **new_end = *min;
+                min = min + 1;
+                *new_end = *new_end + 1;
+            } 
+        }
+        else
         {
-            
-            **new_end = *min;
-            min = min + 1;
-            *new_end = *new_end + 1;
-        }     
+            err = MEMORY_ERROR;
+        }
+        
     }
     return err;
 }
-
-
