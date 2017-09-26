@@ -136,6 +136,26 @@ int multiply_matrix(double **matrix1, double **matrix2, int n1, int m1,int n2, i
     return err;
 }
 
+
+int gauss(FILE *f,double **matrix1,int n1, int m1)
+{
+	int err = OK;
+	if (n1 == m1)
+	{
+		for (int i = 0; i<n1;i++)
+        {
+            for (int j = 0; j<m1;j++)
+            {
+                (*matrix3)[ii][i] += matrix1[ii][j] * matrix2[j][i];
+            }
+        }  
+		
+	}
+	else
+		err = DONT_EQUAL_SIZE;
+	return err;
+}
+
 int menu(double **matrix1,double **matrix2,int n1,int m1,int n2,int m2,char* argv)
 {
     int err = OK;
