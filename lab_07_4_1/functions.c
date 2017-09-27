@@ -18,56 +18,62 @@ int count_numbers(FILE *f)
     
 int key(const int *pb,const int *pe,int **new_begin, int **new_end)
 {
-	return 1;
+	//return 1;
     const int *k;  
     const int *min = pb; 
     const int *max = pb;
     int err = OK;
-    //assert(pe > pb);
-    while(pe > pb)
+	if (pe == pb)
     {
-        
-        if (*pb > *max)
-        {
-            max = pb;
-
-        }
-        if (*pb < *min)
-        {
-            min = pb;
-        }
-        
-        pb = pb + 1;
+        err = FILE_EMPTY;
     }
-    if (min > max)
-    {
-        k = min;
-        min = max;
-        max = k;
-    }    
-    min = min + 1;
-    if (min >= max)
-    {
-        err = ARRAY_EMPTY;
-    }
-    else
-    {
-        *new_begin = malloc((max-min)*sizeof(int));
-        if (*new_begin != NULL)
-        {    
-            *new_end = *new_begin;
-            while(min < max)
-            {
-                **new_end = *min;
-                min = min + 1;
-                *new_end = *new_end + 1;
-            } 
-        }
-        else
-        {
-            err = MEMORY_ERROR;
-        }
-        
-    }
+	else
+	{
+		while(pe > pb)
+		{
+			
+			if (*pb > *max)
+			{
+				max = pb;
+	
+			}
+			if (*pb < *min)
+			{
+				min = pb;
+			}
+			
+			pb = pb + 1;
+		}
+		if (min > max)
+		{
+			k = min;
+			min = max;
+			max = k;
+		}    
+		min = min + 1;
+		if (min >= max)
+		{
+			err = ARRAY_EMPTY;
+		}
+		else
+		{
+			*new_begin = malloc((max-min)*sizeof(int));
+			if (*new_begin != NULL)
+			{    
+				*new_end = *new_begin;
+				while(min < max)
+				{
+					**new_end = *min;
+					min = min + 1;
+					*new_end = *new_end + 1;
+				} 
+			}
+			else
+			{
+				err = MEMORY_ERROR;
+			}
+			
+		}
+	}
     return err;
 }
