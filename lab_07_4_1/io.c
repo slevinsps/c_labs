@@ -6,11 +6,10 @@
 int read_array(FILE *f, int *pb, int **pe, int k)
 {
     int err = OK;
-    while((fscanf(f,"%d",*pe) == 1) && (*pe-pb < k))
+    while ((fscanf(f, "%d", *pe) == 1) && (*pe - pb < k))
     {
         *pe = *pe + 1;  
-    }
-    
+    }  
     if (*pe == pb)
     {
         err = FILE_EMPTY;
@@ -18,11 +17,11 @@ int read_array(FILE *f, int *pb, int **pe, int k)
     return err;        
 }
     
-void print_array(const int* pb,const int* pe,FILE *f)
+void print_array(const int* pb, const int* pe, FILE *f)
 {
-    while (pe>pb)
+    while (pe > pb)
     {
-        fprintf(f,"%d ",*pb);
-        pb = pb +1;
+        fprintf(f, "%d ", *pb);
+        pb = pb + 1;
     }
 }
