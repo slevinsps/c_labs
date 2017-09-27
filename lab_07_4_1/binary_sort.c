@@ -26,11 +26,11 @@ void *binary_search(void *first, void *right, size_t size, comparator compare)
     while (l <= r)
     {
         m = (char*)l + (((char*)r - (char*)l) / 2);   
-        while (((char*)m - (char*)first) % size !=0)
+        while (((char*)m - (char*)first) % size != 0)
         {
             m = (char*)m - 1;
         }
-        if (compare((char*)m,((char*)right)) > 0)
+        if (compare((char*)m, ((char*)right)) > 0)
         {
             r = (char*)m - size;
         }
@@ -42,18 +42,17 @@ void *binary_search(void *first, void *right, size_t size, comparator compare)
     return l;
 }
 
-void mysort(void * first, size_t number, size_t size, comparator compare)
+void mysort(void *first, size_t number, size_t size, comparator compare)
 {
     void *l, *right2;
     void *right = (char*)first + size;
-    while((char*)right < (char*)first + number * size)
+    while ((char*)right < (char*)first + number * size)
     {
         right2 = (char*)right - size;
-        l = binary_search(first,right,size,compare);
+        l = binary_search(first, right, size, compare);
         
         while (l <= right2)
         {
-            
             swap(((char*)right2 + size), ((char*)right2), size);
             right2 = (char*)right2 - size;
         }
