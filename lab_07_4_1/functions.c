@@ -18,8 +18,7 @@ int count_numbers(FILE *f)
     
 int key(const int *pb,const int *pe,int **new_begin, int **new_end)
 {
-	//return 1;
-    const int *k;  
+	const int *k;  
     const int *min = pb; 
     const int *max = pb;
     int err = OK;

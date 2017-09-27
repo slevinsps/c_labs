@@ -81,6 +81,7 @@ int main(int argc, char** argv)
                             if (err == MEMORY_ERROR)
                             {
                                 fprintf(stderr,"Memory error");    
+								free(new_begin);
                             }
                             if (err == OK)
                             {
