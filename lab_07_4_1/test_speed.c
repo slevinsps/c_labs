@@ -68,10 +68,8 @@ void print_results(int *a, int n)
         else
             count--;
     }    
-    printf("qsort %d: %I64d\n", n,t_mid / count);
-    
+    printf("qsort %d: %I64d\n", n, t_mid / count);  
 }
-
 
 int main(int argc, char **argv)
 {
@@ -83,14 +81,14 @@ int main(int argc, char **argv)
     srand(time(NULL));
     printf("В случайном порядке:\n");
     n = 10;
-    for(int i = 0;i < n;i++)
+    for (int i = 0;i < n;i++)
     {
         a[i] = rand() % (100) + 1;
     }
     print_results(a, n);
 
     n = 100;
-    for(int i = 0;i < n;i++)
+    for (int i = 0;i < n;i++)
     {
         a1[i] = rand() % (100) + 1;
     }
@@ -98,7 +96,7 @@ int main(int argc, char **argv)
 
     n = 1000;
 
-    for(int i = 0;i < n;i++)
+    for (int i = 0;i < n;i++)
     {
         a2[i] = rand() % (100) + 1;
     }
@@ -107,7 +105,7 @@ int main(int argc, char **argv)
     /////////////////
     printf("\n\nВ порядке возрастания:\n");
     n = 10;
-    for(int i = 0;i < n;i++)
+    for (int i = 0;i < n;i++)
     {
         a[i] = i;
     }
@@ -115,7 +113,7 @@ int main(int argc, char **argv)
 
     n = 100;
 
-    for(int i = 0;i < n;i++)
+    for (int i = 0;i < n;i++)
     {
         a1[i] = i;
     }
@@ -123,7 +121,7 @@ int main(int argc, char **argv)
 
     n = 1000;
 
-    for(int i = 0;i < n;i++)
+    for (int i = 0;i < n;i++)
     {
         a2[i] = i;
     }
@@ -133,7 +131,7 @@ int main(int argc, char **argv)
     printf("\n\nВ порядке убывания:\n");
     n = 10;
 
-    for(int i = 0;i < n;i++)
+    for (int i = 0;i < n;i++)
     {
         a[i] = n - i;
     }
@@ -141,7 +139,7 @@ int main(int argc, char **argv)
     
     n = 100;
 
-    for(int i = 0;i < n;i++)
+    for (int i = 0;i < n;i++)
     {
         a1[i] = n - i;
     }
@@ -149,7 +147,7 @@ int main(int argc, char **argv)
 
     n = 1000;
 
-    for(int i = 0;i < n;i++)
+    for (int i = 0;i < n;i++)
     {
         a2[i] = n - i;
     }
@@ -158,7 +156,7 @@ int main(int argc, char **argv)
     /////////////////
     printf("\n\nОдинаковые значения:\n");
     n = 10;
-    for(int i = 0;i < n;i++)
+    for (int i = 0;i < n;i++)
     {
         a[i] = 5;
     }
@@ -166,7 +164,7 @@ int main(int argc, char **argv)
 
     n = 100;
 
-    for(int i = 0;i < n;i++)
+    for (int i = 0;i < n;i++)
     {
         a1[i] = 5;
     }
@@ -174,7 +172,7 @@ int main(int argc, char **argv)
 
     n = 1000;
 
-    for(int i = 0;i < n;i++)
+    for (int i = 0;i < n;i++)
     {
         a2[i] = 5;
     }
