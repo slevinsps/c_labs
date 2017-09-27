@@ -45,7 +45,7 @@ int key(const int *pb,const int *pe,int **new_begin, int **new_end)
         max = k;
     }    
     min = min + 1;
-    if (min == max)
+    if (min >= max)
     {
         err = ARRAY_EMPTY;
     }
