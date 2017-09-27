@@ -81,7 +81,6 @@ int main(int argc, char** argv)
                             if (err == MEMORY_ERROR)
                             {
                                 fprintf(stderr,"Memory error");    
-								free(new_begin);
                             }
                             if (err == OK)
                             {
@@ -95,9 +94,10 @@ int main(int argc, char** argv)
                             mysort(pb,pe-pb,sizeof(int),compare_int);
                             print_array(pb, pe,f2);                        
                         }
-                        free(a);
+                       
                     }
-                }        
+                }
+				free(a);				
                 else
                 {
                     printf("Memory error\n");
