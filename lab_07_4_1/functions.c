@@ -8,15 +8,14 @@ int count_numbers(FILE *f)
 {
     int k = 0;
     int n;
-    while (fscanf(f,"%d",&n) == 1)
+    while (fscanf(f, "%d", &n) == 1)
     {
         k++;
     }
-    
     return k;
 }    
     
-int key(const int *pb,const int *pe,int **new_begin, int **new_end)
+int key(const int *pb, const int *pe, int **new_begin, int **new_end)
 {
 	const int *k;  
     const int *min = pb; 
@@ -28,19 +27,16 @@ int key(const int *pb,const int *pe,int **new_begin, int **new_end)
     }
 	else
 	{
-		while(pe > pb)
+		while (pe > pb)
 		{
-			
 			if (*pb > *max)
 			{
-				max = pb;
-	
+				max = pb;	
 			}
 			if (*pb < *min)
 			{
 				min = pb;
 			}
-			
 			pb = pb + 1;
 		}
 		if (min > max)
@@ -56,7 +52,7 @@ int key(const int *pb,const int *pe,int **new_begin, int **new_end)
 		}
 		else
 		{
-			*new_begin = malloc((max-min)*sizeof(int));
+			*new_begin = malloc((max - min)*sizeof(int));
 			if (*new_begin != NULL)
 			{    
 				*new_end = *new_begin;
@@ -70,8 +66,7 @@ int key(const int *pb,const int *pe,int **new_begin, int **new_end)
 			else
 			{
 				err = MEMORY_ERROR;
-			}
-			
+			}			
 		}
 	}
     return err;
