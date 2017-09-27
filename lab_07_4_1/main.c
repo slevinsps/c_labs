@@ -17,8 +17,8 @@ int compare_int(const void *p, const void *q)
             
 int main(int argc, char **argv)
 {
-    FILE *f1;
-    FILE *f2;
+    FILE* f1;
+    FILE* f2;
     int *a;
     int err = OK;
     int *pb;
@@ -54,7 +54,7 @@ int main(int argc, char **argv)
                 k = count_numbers(f1);
                 rewind(f1);
                 
-                a = malloc(k*sizeof(int));
+                a = malloc(k * sizeof(int));
                 if (a != NULL)
                 {
                     pb = a;
@@ -69,7 +69,7 @@ int main(int argc, char **argv)
                         if (argc == 4)
                             pstr = argv[3];
                         
-                        if(argc == 4 && pstr[0] == 'f' && pstr[1] == 0)
+                        if (argc == 4 && pstr[0] == 'f' && pstr[1] == 0)
                         {
                             err = key(pb, pe, &new_begin, &new_end);    
                             if (err == ARRAY_EMPTY)
@@ -82,14 +82,14 @@ int main(int argc, char **argv)
                             }
                             if (err == OK)
                             {
-                                mysort(new_begin, new_end-new_begin, sizeof(int), compare_int);
-                                print_array(new_begin, new_end,f2);
+                                mysort(new_begin, new_end - new_begin, sizeof(int), compare_int);
+                                print_array(new_begin, new_end, f2);
                                 free(new_begin);
                             }
                         }                        
                         else
                         {
-                            mysort(pb, pe-pb, sizeof(int), compare_int);
+                            mysort(pb, pe - pb, sizeof(int), compare_int);
                             print_array(pb, pe, f2);                        
                         }                      
                     }
