@@ -141,7 +141,7 @@ int main(int argc, char **argv)
 
     for (int i = 0;i < n;i++)
     {
-        a1[i] = n - i;
+        a1[i]  = n - i;
     }
     print_results(a1, n);
 
