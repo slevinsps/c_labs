@@ -16,7 +16,7 @@ int compare_int(const void *p, const void *q)
 }
             
 int main(int argc, char **argv)
-{
+{    
     FILE *f1;
     FILE *f2;
     int *a;
@@ -93,8 +93,8 @@ int main(int argc, char **argv)
                             print_array(pb, pe, f2);                        
                         }                      
                     }
-					free(a);
-                }								
+                    free(a);
+                }                                
                 else
                 {
                     printf("Memory error\n");
