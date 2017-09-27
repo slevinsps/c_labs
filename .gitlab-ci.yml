@@ -1,6 +1,6 @@
 image: testing 
 test: 
-tags: 
+  tags: 
     -testing-docker 
-script: 
+  script: 
     -testing 
