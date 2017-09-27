@@ -17,8 +17,8 @@ int compare_int(const void *p, const void *q)
             
 int main(int argc, char **argv)
 {
-    FILE* f1;
-    FILE* f2;
+    FILE *f1;
+    FILE *f2;
     int *a;
     int err = OK;
     int *pb;
