@@ -33,9 +33,9 @@ void print_results(int *a, int n)
     int b[n];
     t_mid = 0;
     int count = 100;
-    for(int i = 0;i < count;i++)
+    for (int i = 0;i < count;i++)
     {
-        for(int j = 0;j < n;j++)
+        for (int j = 0;j < n;j++)
         {
             b[j] = a[j];
         }
@@ -52,9 +52,9 @@ void print_results(int *a, int n)
     printf("mysort %d: %I64d\n", n, t_mid / count);
     
     t_mid = 0;
-    for(int i = 0;i < count;i++)
+    for (int i = 0;i < count;i++)
     {
-        for(int j = 0;j < n;j++)
+        for (int j = 0;j < n;j++)
         {
             b[j] = a[j];
         }
