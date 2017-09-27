@@ -52,11 +52,11 @@ int key(const int *pb, const int *pe, int **new_begin, int **new_end)
 		}
 		else
 		{
-			*new_begin = malloc((max - min)*sizeof(int));
+			*new_begin = malloc((max - min) * sizeof(int));
 			if (*new_begin != NULL)
 			{    
 				*new_end = *new_begin;
-				while(min < max)
+				while (min < max)
 				{
 					**new_end = *min;
 					min = min + 1;
