@@ -44,6 +44,7 @@ void* binary_search(void *first,void *right, size_t size,comparator compare)
 
 void mysort(void * first, size_t number, size_t size, comparator compare)
 {
+	return ;
     void *l, *right2;
     void *right = (char*)first+size;
     while((char*)right < (char*)first+number*size)
