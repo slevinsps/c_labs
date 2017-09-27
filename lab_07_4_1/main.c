@@ -96,8 +96,9 @@ int main(int argc, char** argv)
                         }
                        
                     }
+					free(a);
                 }
-				free(a);				
+								
                 else
                 {
                     printf("Memory error\n");
