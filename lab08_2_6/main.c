@@ -176,7 +176,7 @@ void subtraction(double *row1,double *row2, int number, double *chislo1, double 
 
 int choos_main_element(double ***matrix1,int j,int n,double **edin,int jj,double *ans)
 {
-    int err;
+    int err = OK;
     int k;
     int bool1 = 0;
     double *row;
@@ -215,59 +215,63 @@ int gauss(FILE *f,double **matrix1,int n1, int m1)
         int k = 0;
         double **edin =  allocate_matrix_row(n1,m1);
         creat_edin(edin,n1);
-        
-        print_matrix(f,matrix1,n1,m1);
-            printf("@@@@\n\n");    
+		
         for (int j = 0;j<n1;j++)
         {
-            choos_main_element(&matrix1,j,n1,edin,0,&arr_operations[k]);
-            k++;
-            arr_operations[k] = matrix1[j][j];
-            gauss_divide(matrix1[j],j,&edin[j][0], n1);
-            print_matrix(f,matrix1,n1,m1);
-            printf("@@@@\n\n");    
-            k++;
-            for (int v = 0;v<n1;v++)
-            {
-                if (v != j)
-                {
-                    arr_operations[k] = matrix1[v][j];
-                    subtraction(matrix1[v],matrix1[j], j, &edin[v][0], &edin[j][0],n1);
+            err = choos_main_element(&matrix1, j, n1, edin, 0, &arr_operations[k]);
+			if (err == DETERMINATE_0)
+			{				
+				break;				
+			}
+			else
+			{
+				k++;
+				arr_operations[k] = matrix1[j][j];
+				gauss_divide(matrix1[j],j,&edin[j][0], n1);
+   
+				k++;
+				for (int v = 0;v<n1;v++)
+				{
+					if (v != j)
+					{
+						arr_operations[k] = matrix1[v][j];
+						subtraction(matrix1[v], matrix1[j], j, &edin[v][0], &edin[j][0],n1);
+	
+						k++;
+					}
+				}
+			}                    
+        } 
 
-                    k++;
-                }
-            }
-                    
-        }    
-        printf("\n");
-        print_matrix(f,edin,n1,m1);
-        printf("\n\n");
-        int tmp;
-        for (int i = 1;i<n1;i++)
-        {
-            k = 0;
-            for (int j = 0;j<n1;j++)
-            {
-                tmp = edin[j][i];
-                edin[j][i] = edin[(int)arr_operations[k]][i];
-                edin[(int)arr_operations[k]][i] = tmp;
-                k++;
-                edin[j][i] /= arr_operations[k];
-                k++;
-                for (int v = 0;v<n1;v++)
-                {
-                    if (v != j)
-                    {
-                        edin[v][i] -= arr_operations[k]*edin[j][i];
-                        k++;
-                    }
-                }    
-            }    
-        }    
-        
-        printf("\n");
-        print_matrix(f,edin,n1,m1);
-        printf("\n\n");
+		if (err == OK)
+		{
+			int tmp;
+			for (int i = 1;i<n1;i++)
+			{
+				k = 0;
+				for (int j = 0;j<n1;j++)
+				{
+					tmp = edin[j][i];
+					edin[j][i] = edin[(int)arr_operations[k]][i];
+					edin[(int)arr_operations[k]][i] = tmp;
+					k++;
+					edin[j][i] /= arr_operations[k];
+					k++;
+					for (int v = 0;v<n1;v++)
+					{
+						if (v != j)
+						{
+							edin[v][i] -= arr_operations[k]*edin[j][i];
+							k++;
+						}
+					}    
+				}    
+			}    
+			
+			printf("\n");
+			print_matrix(f,edin,n1,m1);
+			printf("\n\n");
+		}
         
     }
     else
@@ -327,7 +331,11 @@ int menu(double **matrix1,double **matrix2,int n1,int m1,int n2,int m2,char* arg
             //fclose(f3);
             //printf("Done!");
         }
-        else
+		if (err == DETERMINATE_0)
+		{
+			printf("Determinate = 0\n");
+		}
+        if (err == DONT_EQUAL_SIZE)
         {
             printf("The number of columns and rows ​​not equal");        
         }
