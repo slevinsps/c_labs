@@ -129,7 +129,7 @@ int main(int argc, char **argv)
     
     /////////////////
     printf("\n\nВ порядке убывания:\n");
-    n = 10; 
+    n = 10;
 
     for (int i = 0;i < n;i++)
     {
