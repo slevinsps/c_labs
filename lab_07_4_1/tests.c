@@ -64,7 +64,7 @@ void swap_tests(void)
         printf("Test 1 in swap function is failed:\n    expected = %f; %f, actual = %f; %f\n", expected1, expected2, actual1, actual2);
     }
     //2 Обмен значениями переменных типа float
-    swap(&a1,&b1,sizeof(float));
+    swap(&a1, &b1, sizeof(float));
     expected1 = 6.25;
     expected2 = 1.15;
     actual1 = a1;
@@ -76,7 +76,7 @@ void swap_tests(void)
         printf("Test 2 in swap function is failed:\n    expected = %f; %f, actual = %f; %f\n", expected1, expected2, actual1, actual2);
     }
     //3 Обмен значениями переменных типа double
-    swap(&a2,&b2,sizeof(double));
+    swap(&a2, &b2, sizeof(double));
     expected1 = 4.32;
     expected2 = 5.5;
     actual1 = a2;
@@ -130,8 +130,8 @@ void mysort_tests(void)
     int *pb;
     int k = 1;
     //1 Сортировка целочисленных элементов
-    int a[9] = {8, 2, 0, 1, 5, 7, 2, -1, 3};
-    int a1[9] = {-1, 0, 1, 2, 2, 3, 5, 7, 8};
+    int a[9] = { 8, 2, 0, 1, 5, 7, 2, -1, 3 };
+    int a1[9] = { -1, 0, 1, 2, 2, 3, 5, 7, 8 };
     pb = a;
     mysort(pb, 9, sizeof(int), compare_int);
     for (int i = 0;i < 9;i++)
@@ -148,8 +148,8 @@ void mysort_tests(void)
     //2 Сортировка элементов типа float
     float *pb1;
     k = 1;
-    float b[6] = {2.6, -1.23, 0, 2.5, 0,1};
-    float b1[6] = {-1.23, 0, 0, 1, 2.5, 2.6};
+    float b[6] = { 2.6, -1.23, 0, 2.5, 0,1 };
+    float b1[6] = { -1.23, 0, 0, 1, 2.5, 2.6 ;
     pb1 = b;
     mysort(pb1, 6, sizeof(float), compare_float);
     for (int i = 0;i < 6;i++)
@@ -166,8 +166,8 @@ void mysort_tests(void)
     //3 Сортировка элементов типа double
     double *pb2;
     k = 1;
-    double c[5] = {2.5, -1.23, 0, 0, 1};
-    double c1[5] = {-1.23, 0, 0, 1, 2.5};
+    double c[5] = { 2.5, -1.23, 0, 0, 1 };
+    double c1[5] = { -1.23, 0, 0, 1, 2.5 };
     pb2 = c;
     mysort(pb2, 5, sizeof(double), compare_double);
     for (int i = 0;i < 5;i++)
@@ -184,8 +184,8 @@ void mysort_tests(void)
     
     //4 Сортировка одного элемента
     int *pb3;
-    int d[1] = {8};
-    int d1[1] = {8};
+    int d[1] = { 8 };
+    int d1[1] = { 8 };
     k = 1;
     pb3 = d;
     mysort(pb3, 1, sizeof(int), compare_int);
