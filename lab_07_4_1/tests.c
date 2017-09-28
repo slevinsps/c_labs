@@ -443,7 +443,7 @@ void print_array_test(void)
     f2 = fopen("print_test2.txt", "w");
 
     int a1[5];
-    int a11[5 = { 2, -4, 5, 1, 0 };
+    int a11[5] = { 2, -4, 5, 1, 0 };
     int a2[2];
     int a22[1] = { 8 };
    
