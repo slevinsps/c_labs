@@ -250,14 +250,14 @@ void read_array_tests(void)
     f5 = fopen("read_test5.txt", "r");
 
     int a1[5];
-    int a11[5]={ 2, -4, 5, 1, 0 };
+    int a11[5] = { 2, -4, 5, 1, 0 };
     int a2[2];
-    int a22[1]={ 8 };
+    int a22[1] = { 8 };
     int a3[1];
     int a4[3];
-    int a44[3]={ 1, 2, 3 };
+    int a44[3] = { 1, 2, 3 };
     int a5[4];
-    int a55[4]={ 2, 2, 2, 2 };
+    int a55[4] = { 2, 2, 2, 2 };
     int counter;
     int *pb, *pe;
 
@@ -374,7 +374,7 @@ void key_tests(void)
     k = 1;
     int a1[9] = { 8, 2, 0, 1, 5, 7, 2, -1, 3 };
     int b1[6] = { 2, 0, 1, 5, 7, 2 };
-    key(a1, a1+9, &new_begin, &new_end);
+    key(a1, a1 + 9, &new_begin, &new_end);
     for (int i = 0;i < new_end - new_begin;i++)
     {
         if (b1[i] != new_begin[i])
@@ -391,7 +391,7 @@ void key_tests(void)
     k = 1;
     int a2[9] = { 8, 2, 0, 1, 5, 7, 2, 5, 3 };
     int b2[1] = { 2 };
-    key(a2, a2+9, &new_begin, &new_end);
+    key(a2, a2 + 9, &new_begin, &new_end);
     for (int i = 0;i < new_end - new_begin;i++)
     {
         if (b2[i] != new_begin[i])
@@ -407,8 +407,8 @@ void key_tests(void)
     //3 Между минимальным и максимальным нет значений
     k = 1;
     int err;
-    int a3[8] =  { 1, -1, 8, 4, 5, 6, 7, 3 };
-    err = key(a3, a3+8, &new_begin, &new_end);
+    int a3[8] = { 1, -1, 8, 4, 5, 6, 7, 3 };
+    err = key(a3, a3 + 8, &new_begin, &new_end);
     if (err == ARRAY_EMPTY)
         printf("Test 3 in key function is passed\n");
     else
@@ -432,21 +432,20 @@ void key_tests(void)
     {
         printf("Test 4 in key function is failed\n");
     } 
-    free(new_begin);
-    
+    free(new_begin);   
 }
     
     
 void print_array_test(void)
 {
-    FILE * f1,* f2;
+    FILE * f1, * f2;
     f1 = fopen("print_test1.txt", "w");
     f2 = fopen("print_test2.txt", "w");
 
     int a1[5];
-    int a11[5]={ 2, -4, 5, 1, 0 };
+    int a11[5 = { 2, -4, 5, 1, 0 };
     int a2[2];
-    int a22[1]={ 8 };
+    int a22[1] = { 8 };
    
     int counter;
     int *pb, *pe;
@@ -463,7 +462,6 @@ void print_array_test(void)
     counter = 0;
     for (int i = 0;i < 5;i++)
     {
-        
         if (a1[i] != a11[i])
         {
             counter = 1;
