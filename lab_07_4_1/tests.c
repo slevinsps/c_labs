@@ -149,7 +149,7 @@ void mysort_tests(void)
     float *pb1;
     k = 1;
     float b[6] = { 2.6, -1.23, 0, 2.5, 0,1 };
-    float b1[6] = { -1.23, 0, 0, 1, 2.5, 2.6 ;
+    float b1[6] = { -1.23, 0, 0, 1, 2.5, 2.6 } ;
     pb1 = b;
     mysort(pb1, 6, sizeof(float), compare_float);
     for (int i = 0;i < 6;i++)
