@@ -203,8 +203,8 @@ void mysort_tests(void)
     
     //5 Сортировка двух элементов
     int *pb4;
-    int e[2] = {8, -1};
-    int e1[2] = {-1, 8};
+    int e[2] = { 8, -1 };
+    int e1[2] = { -1, 8 };
     k = 1;
     pb4 = e;
     mysort(pb4, 2, sizeof(int), compare_int);
@@ -222,8 +222,8 @@ void mysort_tests(void)
     
     //5 Сортировка элементов расположенных в правильном порядке
     int *pb5;
-    int f[7] = {1, 2, 3, 4, 5, 6, 7};
-    int f1[7] = {1, 2, 3, 4, 5, 6, 7};
+    int f[7] = { 1, 2, 3, 4, 5, 6, 7 };
+    int f1[7] = { 1, 2, 3, 4, 5, 6, 7 };
     k = 1;
     pb5 = f;
     mysort(pb5, 7, sizeof(int), compare_int);
@@ -242,22 +242,22 @@ void mysort_tests(void)
     
 void read_array_tests(void)
 {
-    FILE *f1, *f2, *f3, *f4, *f5;
-    f1 = fopen("read_test1.txt","r");
-    f2 = fopen("read_test2.txt","r");
-    f3 = fopen("read_test3.txt","r");
-    f4 = fopen("read_test4.txt","r");
-    f5 = fopen("read_test5.txt","r");
+    FILE * f1, * f2, * f3, * f4, * f5;
+    f1 = fopen("read_test1.txt", "r");
+    f2 = fopen("read_test2.txt", "r");
+    f3 = fopen("read_test3.txt", "r");
+    f4 = fopen("read_test4.txt", "r");
+    f5 = fopen("read_test5.txt", "r");
 
     int a1[5];
-    int a11[5]={2, -4, 5, 1, 0};
+    int a11[5]={ 2, -4, 5, 1, 0 };
     int a2[2];
-    int a22[1]={8};
+    int a22[1]={ 8 };
     int a3[1];
     int a4[3];
-    int a44[3]={1, 2, 3};
+    int a44[3]={ 1, 2, 3 };
     int a5[4];
-    int a55[4]={2, 2, 2, 2};
+    int a55[4]={ 2, 2, 2, 2 };
     int counter;
     int *pb, *pe;
 
@@ -362,7 +362,6 @@ void read_array_tests(void)
     {
         printf("Test 5 in read_array function is passed\n");       
     }
-
 }
 
 void key_tests(void)
@@ -373,8 +372,8 @@ void key_tests(void)
     
     //1 Между минимальным и максимальным находится несколько значений
     k = 1;
-    int a1[9] = {8, 2, 0, 1, 5, 7, 2, -1, 3};
-    int b1[6] = {2, 0, 1, 5, 7, 2};
+    int a1[9] = { 8, 2, 0, 1, 5, 7, 2, -1, 3 };
+    int b1[6] = { 2, 0, 1, 5, 7, 2 };
     key(a1, a1+9, &new_begin, &new_end);
     for (int i = 0;i < new_end - new_begin;i++)
     {
@@ -390,8 +389,8 @@ void key_tests(void)
     free(new_begin);
     //2 Между минимальным и максимальным находится одно значение
     k = 1;
-    int a2[9] = {8, 2, 0, 1, 5, 7, 2, 5, 3};
-    int b2[1] = {2};
+    int a2[9] = { 8, 2, 0, 1, 5, 7, 2, 5, 3 };
+    int b2[1] = { 2 };
     key(a2, a2+9, &new_begin, &new_end);
     for (int i = 0;i < new_end - new_begin;i++)
     {
@@ -408,7 +407,7 @@ void key_tests(void)
     //3 Между минимальным и максимальным нет значений
     k = 1;
     int err;
-    int a3[8] =  {1, -1, 8, 4, 5, 6, 7, 3};
+    int a3[8] =  { 1, -1, 8, 4, 5, 6, 7, 3 };
     err = key(a3, a3+8, &new_begin, &new_end);
     if (err == ARRAY_EMPTY)
         printf("Test 3 in key function is passed\n");
@@ -419,8 +418,8 @@ void key_tests(void)
     } 
     //2 Несколько минимальных и максимальных значений
     k = 1;
-    int a4[7] = {1, 1, 1, 2, 8, 8, 8};
-    int b4[3] = {1, 1, 2};
+    int a4[7] = { 1, 1, 1, 2, 8, 8, 8 };
+    int b4[3] = { 1, 1, 2 };
     key(a4, a4 + 7, &new_begin, &new_end);
     for (int i = 0;i < new_end - new_begin;i++)
     {
@@ -441,13 +440,13 @@ void key_tests(void)
 void print_array_test(void)
 {
     FILE * f1,* f2;
-    f1 = fopen("print_test1.txt","w");
-    f2 = fopen("print_test2.txt","w");
+    f1 = fopen("print_test1.txt", "w");
+    f2 = fopen("print_test2.txt", "w");
 
     int a1[5];
-    int a11[5]={2, -4, 5, 1, 0};
+    int a11[5]={ 2, -4, 5, 1, 0 };
     int a2[2];
-    int a22[1]={8};
+    int a22[1]={ 8 };
    
     int counter;
     int *pb, *pe;
@@ -495,7 +494,6 @@ void print_array_test(void)
         {
             counter = 1;
         }
-
     }
     if (counter == 1)
     {
@@ -505,7 +503,6 @@ void print_array_test(void)
     {
         printf("Test 2 in print_array function is passed\n");       
     }
-
 }
     
 int main(void)
