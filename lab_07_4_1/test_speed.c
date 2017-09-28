@@ -135,7 +135,7 @@ int main(int argc, char **argv)
     {
         a[i] = n - i;
     }
-    print_results(a,n);
+    print_results(a, n);
     
     n = 100;
 
