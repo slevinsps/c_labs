@@ -155,7 +155,7 @@ void creat_edin(double **edin,int n)
 void gauss_divide(double *row,int number, double *chislo, int n1)
 {
     double div = row[number];
-    *chislo = *chislo/div;
+    *chislo = *chislo/div; // изменение значения элемента единичной матрицы
     
     for (int i = 0;i<n1;i++)
     {
@@ -171,27 +171,28 @@ void subtraction(double *row1,double *row2, int number, double *chislo1, double 
     {
         row1[i] = row1[i] - sub*row2[i];
     }
-    *chislo1 = *chislo1 - sub*(*chislo2);
+    *chislo1 = *chislo1 - sub*(*chislo2); // изменение значения элемента единичной матрицы
 }
 
-int choos_main_element(double ***matrix1,int j,int n,double **edin,int jj,double *ans)
+int choos_not_zero_element(double ***matrix1,int column,int n,double **edin,int column_edin,double *arr_operations)
 {
+    // функция меняет строки местами, для того, чтобы вверху оставался не нулевой элемент
     int err = OK;
-    int k;
+    double k;
     int bool1 = 0;
     double *row;
-    for(int i = j;i<n;i++)
+    for(int i = column;i<n;i++)
     {
-        if ((*matrix1)[i][j] > 0.0001)
+        if ((*matrix1)[i][column] > 0.0001)
         {
             bool1 = 1;
             row = (*matrix1)[i];
-            (*matrix1)[i] = (*matrix1)[j];
-            (*matrix1)[j] = row;
-            k = edin[i][jj];
-            edin[i][jj] = edin[j][jj]; 
-            edin[j][jj] = k;
-            *ans = i;
+            (*matrix1)[i] = (*matrix1)[column];
+            (*matrix1)[column] = row;
+            k = edin[i][column_edin];
+            edin[i][column_edin] = edin[column][column_edin]; 
+            edin[column][column_edin] = k;
+            *arr_operations = i; // запись в массив операций
             break;
         }
     }
@@ -204,7 +205,7 @@ int choos_main_element(double ***matrix1,int j,int n,double **edin,int jj,double
 }
 
 
-int gauss(FILE *f,double **matrix1,int n1, int m1)
+int gauss(FILE *f,double **matrix1,double ***edin, int n1, int m1)
 {
     /// Пытался сделать сохранение операций, чтоб с остальными стобцами просто применить их
     /// сделал это, но не уверен, что это сделало программу легче, хотелось бы услышать ваше мнение
@@ -212,67 +213,66 @@ int gauss(FILE *f,double **matrix1,int n1, int m1)
     if (n1 == m1)    
     {
         double arr_operations[n1+n1*n1+n1]; // в этот массив сохраняются операции
-        int k = 0;
-        double **edin =  allocate_matrix_row(n1,m1);
-        creat_edin(edin,n1);
-		
-        for (int j = 0;j<n1;j++)
-        {
-            err = choos_main_element(&matrix1, j, n1, edin, 0, &arr_operations[k]);
-			if (err == DETERMINATE_0)
-			{				
-				break;				
-			}
-			else
-			{
-				k++;
-				arr_operations[k] = matrix1[j][j];
-				gauss_divide(matrix1[j],j,&edin[j][0], n1);
-   
-				k++;
-				for (int v = 0;v<n1;v++)
-				{
-					if (v != j)
-					{
-						arr_operations[k] = matrix1[v][j];
-						subtraction(matrix1[v], matrix1[j], j, &edin[v][0], &edin[j][0],n1);
-	
-						k++;
-					}
-				}
-			}                    
-        } 
-
-		if (err == OK)
-		{
-			int tmp;
-			for (int i = 1;i<n1;i++)
-			{
-				k = 0;
-				for (int j = 0;j<n1;j++)
-				{
-					tmp = edin[j][i];
-					edin[j][i] = edin[(int)arr_operations[k]][i];
-					edin[(int)arr_operations[k]][i] = tmp;
-					k++;
-					edin[j][i] /= arr_operations[k];
-					k++;
-					for (int v = 0;v<n1;v++)
-					{
-						if (v != j)
-						{
-							edin[v][i] -= arr_operations[k]*edin[j][i];
-							k++;
-						}
-					}    
-				}    
-			}    
-			
-			printf("\n");
-			print_matrix(f,edin,n1,m1);
-			printf("\n\n");
-		}
+        int k = -1;
+        *edin =  allocate_matrix_row(n1,m1);
+        creat_edin(*edin,n1);
         
+        for (int j = 0;j<n1;j++)
+        {            
+            k++;
+            err = choos_not_zero_element(&matrix1, j, n1, *edin, 0, &arr_operations[k]);
+            
+            if (err == DETERMINATE_0)
+            {                
+                break;                
+            }
+            else
+            {
+                k++;
+                arr_operations[k] = matrix1[j][j];
+                gauss_divide(matrix1[j],j,&(*edin)[j][0], n1);
+
+                for (int v = 0;v<n1;v++)
+                {
+                    if (v != j)
+                    {
+                        k++;
+                        arr_operations[k] = matrix1[v][j];
+                        subtraction(matrix1[v], matrix1[j], j, &(*edin)[v][0], &(*edin)[j][0],n1);                        
+                    }
+                }
+            }                    
+        } 
+        
+        if (err == OK)
+        {
+            double tmp;
+            for (int i = 1;i<n1;i++)
+            {
+                k = 0;
+                for (int j = 0;j<n1;j++)
+                {
+                    tmp = (*edin)[j][i];
+                    
+                    (*edin)[j][i] = (*edin)[(int)arr_operations[k]][i];
+                    (*edin)[(int)arr_operations[k]][i] = tmp;
+                    k++;
+                    (*edin)[j][i] /= arr_operations[k];
+    
+                    k++;
+                    for (int v = 0;v<n1;v++)
+                    {
+                        if (v != j)
+                        {
+                            
+                            (*edin)[v][i] -= arr_operations[k]*(*edin)[j][i];
+        
+                            k++;
+                        }
+                    }    
+                }    
+            }    
+        }    
     }
     else
         err = DONT_EQUAL_SIZE;
@@ -285,11 +285,15 @@ int menu(double **matrix1,double **matrix2,int n1,int m1,int n2,int m2,char* arg
     int choice;
     FILE *f3;
     double **matrix_sum = NULL;
+    setbuf(stdout,NULL);
+    
     printf("1 - сложить матрицы\n");
     printf("2 - перемножить матрицы\n");
     printf("3 - вычислить обратную матрицу методом Гаусса\n\n");
     printf("0 - выйти\n");
+        
     
+    printf("Ваш выбор: ");
     scanf("%d",&choice);
     if(choice == 1)
     {
@@ -323,18 +327,19 @@ int menu(double **matrix1,double **matrix2,int n1,int m1,int n2,int m2,char* arg
     }
     if(choice == 3)
     {
-        err = gauss(stdout,matrix1,n1,m1);
+        double **edin = NULL;
+        err = gauss(stdout,matrix1,&edin,n1,m1);
         if (err == OK)
         {                        
-            //f3 = fopen(argv, "w");
-            //print_matrix(f3,matrix_sum,n1,n1);
-            //fclose(f3);
-            //printf("Done!");
+            f3 = fopen(argv, "w");
+            print_matrix(f3,edin,n1,n1);
+            fclose(f3);
+            printf("Done!");
         }
-		if (err == DETERMINATE_0)
-		{
-			printf("Determinate = 0\n");
-		}
+        if (err == DETERMINATE_0)
+        {
+            printf("Determinate = 0\n");
+        }
         if (err == DONT_EQUAL_SIZE)
         {
             printf("The number of columns and rows ​​not equal");        
