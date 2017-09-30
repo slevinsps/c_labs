@@ -25,7 +25,7 @@ unsigned long long tick(void)
     return d;
 }
 
-void equation(int *a,int *b, int n)
+void equation(int *a, int *b, int n)
 {
     for (int j = 0;j < n;j++)
     {
@@ -43,7 +43,7 @@ void print_results(int *a, int n)
     int i = 0;        
     while (i < count)
     {
-        equation(a,b,n);
+        equation(a, b, n);
         tb = tick();
         mysort(b, n, sizeof(int), compare_int);
         te = tick();
@@ -59,7 +59,7 @@ void print_results(int *a, int n)
     i = 0;
     while (i < count)
     {
-        equation(a,b,n);
+        equation(a, b, n);
         tb = tick();
         qsort(b, n, sizeof(int), compare_int);
         te = tick();
@@ -72,7 +72,7 @@ void print_results(int *a, int n)
     printf("qsort %d: %I64d\n\n", n, t_mid / count);  
 }
 
-void creat_array(int n,char c)
+void creat_array(int n, char c)
 {
     int a[n];
     
@@ -114,45 +114,45 @@ int main(int argc, char **argv)
 {
     srand(time(NULL));
     printf("В случайном порядке:\n");
-    for (int i = 1;i<10;i++)
+    for (int i = 1;i < 10;i++)
     {
-        creat_array(i,'r');
+        creat_array(i, 'r');
     }
-    for (int i = 10;i<=100;i+=10)
+    for (int i = 10;i <= 100;i += 10)
     {
-        creat_array(i,'r');
+        creat_array(i, 'r');
     }
     
     /////////////////
     printf("\n-----------------------\nВ порядке возрастания:\n");
-    for (int i = 1;i<10;i++)
+    for (int i = 1;i < 10;i++)
     {
-        creat_array(i,'v');
+        creat_array(i, 'v');
     }
-    for (int i = 10;i<=100;i+=10)
+    for (int i = 10;i <= 100;i += 10)
     {
-        creat_array(i,'v');
+        creat_array(i, 'v');
     }
     
     /////////////////
     printf("\n-----------------------\nВ порядке убывания:\n");
-    for (int i = 1;i<10;i++)
+    for (int i = 1;i < 10;i++)
     {
-        creat_array(i,'u');
+        creat_array(i, 'u');
     }
-    for (int i = 10;i<=100;i+=10)
+    for (int i = 10;i <= 100;i += 10)
     {
-        creat_array(i,'u');
+        creat_array(i, 'u');
     }
     
     /////////////////
     printf("\n-----------------------\nОдинаковые значения:\n");
-    for (int i = 1;i<10;i++)
+    for (int i = 1;i < 10;i++)
     {
-        creat_array(i,'s');
+        creat_array(i, 's');
     }
-    for (int i = 10;i<=100;i+=10)
+    for (int i = 10;i <= 100;i += 10)
     {
-        creat_array(i,'s');
+        creat_array(i, 's');
     }
 }
