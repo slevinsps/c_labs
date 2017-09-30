@@ -88,15 +88,12 @@ void swap_tests(void)
         printf("Test 3 in swap function is failed:\n    expected = %f; %f, actual = %f; %f\n", expected1, expected2, actual1, actual2);
     }   
 }
-
-
-
-
+    
 int compare_int(const void *p, const void *q)
 {
     const int *a = p;
     const int *b = q;
-    if (*a - *b > 0)
+    if (*a - *b >= 0)
     {
         return 1; 
     }
@@ -107,7 +104,7 @@ int compare_float(const void *p, const void *q)
 {
     const float *a = p;
     const float *b = q;
-    if (*a - *b > 0)
+    if (*a - *b >= 0)
     {
         return 1; 
     }
@@ -118,7 +115,7 @@ int compare_double(const void *p, const void *q)
 {
     const double *a = p;
     const double *b = q;
-    if (*a - *b > 0)
+    if (*a - *b >= 0)
     {
         return 1; 
     }

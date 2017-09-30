@@ -20,11 +20,18 @@ int compare_int(const void *p, const void *q)
 
 unsigned long long tick(void)
 {
-	unsigned long long d;
-	__asm__ __volatile__ ("rdtsc" : "=A" (d));
-	return d;
+    unsigned long long d;
+    __asm__ __volatile__ ("rdtsc" : "=A" (d));
+    return d;
 }
 
+void equation(int *a,int *b, int n)
+{
+    for (int j = 0;j < n;j++)
+    {
+        b[j] = a[j];
+    }
+}
 
 void print_results(int *a, int n)
 {
@@ -33,148 +40,119 @@ void print_results(int *a, int n)
     int b[n];
     t_mid = 0;
     int count = 100;
-    for (int i = 0;i < count;i++)
+    int i = 0;        
+    while (i < count)
     {
-        for (int j = 0;j < n;j++)
-        {
-            b[j] = a[j];
-        }
+        equation(a,b,n);
         tb = tick();
         mysort(b, n, sizeof(int), compare_int);
         te = tick();
         if (te >= tb)
         {
             t_mid += (te - tb);
+            i++;
         }
-        else
-            count--;
     }
     printf("mysort %d: %I64d\n", n, t_mid / count);
     
     t_mid = 0;
-    for (int i = 0;i < count;i++)
+    i = 0;
+    while (i < count)
     {
-        for (int j = 0;j < n;j++)
-        {
-            b[j] = a[j];
-        }
+        equation(a,b,n);
         tb = tick();
         qsort(b, n, sizeof(int), compare_int);
         te = tick();
         if (te >= tb)
         {
             t_mid += (te - tb);
+            i++;
         }
-        else
-            count--;
     }    
-    printf("qsort %d: %I64d\n", n, t_mid / count);  
+    printf("qsort %d: %I64d\n\n", n, t_mid / count);  
+}
+
+void creat_array(int n,char c)
+{
+    int a[n];
+    
+    if (c == 'r')
+    {
+        for (int i = 0;i < n;i++)
+        {
+            a[i] = rand() % (100) + 1;
+        }
+        print_results(a, n);
+    }
+    if (c == 'v')
+    {
+        for (int i = 0;i < n;i++)
+        {
+            a[i] = i;
+        }
+        print_results(a, n);
+    }
+    if (c == 'u')
+    {
+        for (int i = 0;i < n;i++)
+        {
+            a[i] = n - i;
+        }
+        print_results(a, n);
+    }
+    if (c == 's')
+    {
+        for (int i = 0;i < n;i++)
+        {
+            a[i] = 5;
+        }
+        print_results(a, n);
+    }
 }
 
 int main(int argc, char **argv)
 {
-    int a[10];
-    int a1[100];
-    int a2[1000];
-    int n;
-
     srand(time(NULL));
     printf("В случайном порядке:\n");
-    n = 10;
-    for (int i = 0;i < n;i++)
+    for (int i = 1;i<10;i++)
     {
-        a[i] = rand() % (100) + 1;
+        creat_array(i,'r');
     }
-    print_results(a, n);
-
-    n = 100;
-    for (int i = 0;i < n;i++)
+    for (int i = 10;i<=100;i+=10)
     {
-        a1[i] = rand() % (100) + 1;
+        creat_array(i,'r');
     }
-    print_results(a1, n);
-
-    n = 1000;
-
-    for (int i = 0;i < n;i++)
-    {
-        a2[i] = rand() % (100) + 1;
-    }
-    print_results(a2, n);
-        
-    /////////////////
-    printf("\n\nВ порядке возрастания:\n");
-    n = 10;
-    for (int i = 0;i < n;i++)
-    {
-        a[i] = i;
-    }
-    print_results(a, n);
-
-    n = 100;
-
-    for (int i = 0;i < n;i++)
-    {
-        a1[i] = i;
-    }
-    print_results(a1, n);
-
-    n = 1000;
-
-    for (int i = 0;i < n;i++)
-    {
-        a2[i] = i;
-    }
-    print_results(a2, n);
     
     /////////////////
-    printf("\n\nВ порядке убывания:\n");
-    n = 10;
-
-    for (int i = 0;i < n;i++)
+    printf("\n-----------------------\nВ порядке возрастания:\n");
+    for (int i = 1;i<10;i++)
     {
-        a[i] = n - i;
+        creat_array(i,'v');
     }
-    print_results(a, n);
-    
-    n = 100;
-
-    for (int i = 0;i < n;i++)
+    for (int i = 10;i<=100;i+=10)
     {
-        a1[i] = n - i;
+        creat_array(i,'v');
     }
-    print_results(a1, n);
-
-    n = 1000;
-
-    for (int i = 0;i < n;i++)
-    {
-        a2[i] = n - i;
-    }
-    print_results(a2, n);
     
     /////////////////
-    printf("\n\nОдинаковые значения:\n");
-    n = 10;
-    for (int i = 0;i < n;i++)
+    printf("\n-----------------------\nВ порядке убывания:\n");
+    for (int i = 1;i<10;i++)
     {
-        a[i] = 5;
+        creat_array(i,'u');
     }
-    print_results(a, n);
-
-    n = 100;
-
-    for (int i = 0;i < n;i++)
+    for (int i = 10;i<=100;i+=10)
     {
-        a1[i] = 5;
+        creat_array(i,'u');
     }
-    print_results(a1, n);
-
-    n = 1000;
-
-    for (int i = 0;i < n;i++)
+    
+    /////////////////
+    printf("\n-----------------------\nОдинаковые значения:\n");
+    for (int i = 1;i<10;i++)
     {
-        a2[i] = 5;
+        creat_array(i,'s');
     }
-    print_results(a2, n);
+    for (int i = 10;i<=100;i+=10)
+    {
+        creat_array(i,'s');
+    }
 }
