@@ -113,7 +113,7 @@ int main(int argc, char** argv)
                     pstr = argv[1];
                     if (pstr[0] == 'o' && pstr[1] == 0)
                     {                                            
-                        err = gauss(stdout,matrix1,&edin,n1,m1);
+                        err = gauss(matrix1,&edin,n1,m1);
                         if (err == OK)
                         {                        
                             f_res = fopen(argv[3], "w");

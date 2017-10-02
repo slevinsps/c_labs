@@ -1,6 +1,8 @@
 #include <stdio.h>
+#include <math.h>
     
 #include "create_free_matrix.h"
+#include "io.h"
 #include "defines.h"
 void creat_edin(double **edin,int n)
 {
@@ -47,7 +49,7 @@ int choos_not_zero_element(double ***matrix1,int column,int n,double **edin,int 
     double *row;
     for(int i = column;i<n;i++)
     {
-        if ((*matrix1)[i][column] > 0.0001)
+        if (fabs((*matrix1)[i][column]) > 0.0001)
         {
             bool1 = 1;
             row = (*matrix1)[i];
@@ -63,13 +65,11 @@ int choos_not_zero_element(double ***matrix1,int column,int n,double **edin,int 
     if (!bool1)
     {
         err = DETERMINATE_0;
-    }    
-    
+    }       
     return err;
 }
 
-
-int gauss(FILE *f,double **matrix1,double ***edin, int n1, int m1)
+int gauss(double **matrix1,double ***edin, int n1, int m1)
 {
     /// Пытался сделать сохранение операций, чтоб с остальными стобцами просто применить их
     /// сделал это, но не уверен, что это сделало программу легче, хотелось бы услышать ваше мнение
@@ -80,12 +80,14 @@ int gauss(FILE *f,double **matrix1,double ***edin, int n1, int m1)
         int k = -1;
         *edin =  allocate_matrix_row(n1,m1);
         creat_edin(*edin,n1);
-        
+        //print_matrix(stdout,matrix1,n1,n1);
+        //printf("\n");
         for (int j = 0;j<n1;j++)
         {            
             k++;
             err = choos_not_zero_element(&matrix1, j, n1, *edin, 0, &arr_operations[k]);
-            
+            //print_matrix(stdout,matrix1,n1,n1);
+            //printf("выше выбор\n");
             if (err == DETERMINATE_0)
             {                
                 break;                
@@ -95,14 +97,17 @@ int gauss(FILE *f,double **matrix1,double ***edin, int n1, int m1)
                 k++;
                 arr_operations[k] = matrix1[j][j];
                 gauss_divide(matrix1[j],j,&(*edin)[j][0], n1);
-
+                //print_matrix(stdout,matrix1,n1,n1);
+                //printf("выше деление\n");
                 for (int v = 0;v<n1;v++)
                 {
                     if (v != j)
                     {
                         k++;
                         arr_operations[k] = matrix1[v][j];
-                        subtraction(matrix1[v], matrix1[j], j, &(*edin)[v][0], &(*edin)[j][0],n1);                        
+                        subtraction(matrix1[v], matrix1[j], j, &(*edin)[v][0], &(*edin)[j][0],n1);        
+                        //print_matrix(stdout,matrix1,n1,n1);
+                        //printf("выше вычитание\n");
                     }
                 }
             }                    
@@ -127,17 +132,15 @@ int gauss(FILE *f,double **matrix1,double ***edin, int n1, int m1)
                     for (int v = 0;v<n1;v++)
                     {
                         if (v != j)
-                        {
-                            
-                            (*edin)[v][i] -= arr_operations[k]*(*edin)[j][i];
-        
+                        {                            
+                            (*edin)[v][i] -= arr_operations[k]*(*edin)[j][i];        
                             k++;
                         }
                     }    
                 }    
             }    
         }    
-    }
+    }    
     else
         err = DONT_EQUAL_SIZE;
     return err;

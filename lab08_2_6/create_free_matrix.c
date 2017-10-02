@@ -9,7 +9,7 @@ void free_matrix_rows(double **data, double n)
     }
     free(data);    
 }
-
+    
 double** allocate_matrix_row(int n,int m)
 {
     double **data = calloc(n,sizeof(double*));
