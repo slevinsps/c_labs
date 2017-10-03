@@ -32,6 +32,10 @@ int read_matrix(FILE *f,double ***matrix1,int *n1, int *m1)
             err = INVALID_ARGUMENT_MATRIX;
         }
     }
+    else
+    {
+        err = INVALID_ARGUMENT_MATRIX;
+    }
     return err;
 }
 
