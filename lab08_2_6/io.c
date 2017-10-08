@@ -3,7 +3,7 @@
 #include "create_free_matrix.h"
     
 int read_matrix(FILE *f,double ***matrix1,int *n1, int *m1)
-{
+{   
     int err = OK;   
     if (fscanf(f,"%d",n1)==1 && *n1>0)
     {
