@@ -109,6 +109,7 @@ void sum_matrix_tests(void)
 
 void multiply_matrix_tests(void)
 {
+    double eps = 0.0001;
     int k;
     //1 Умножение матриц размера 3х4 на 4х3
     int n11 = 3,m11 = 4;
@@ -126,14 +127,14 @@ void multiply_matrix_tests(void)
     double **actual1 = NULL;
 
     multiply_matrix(mat11,mat21,n11,m11,n21,m21,&actual1);
-    
+        
     double expected1[3][3] = {{51,44,33},{57,47,48},{27,5,36}};
     
     k = 1;
     for (int i = 0;i < n11;i++)
     {
         for (int j = 0;j < m21;j++)
-        if (fabs(actual1[i][j] - expected1[i][j])>0.0001)
+        if (fabs(actual1[i][j] - expected1[i][j])>eps)
             k = 0;
     }
     if (k == 1)
@@ -166,7 +167,7 @@ void multiply_matrix_tests(void)
     for (int i = 0;i < n12;i++)
     {
         for (int j = 0;j < m12;j++)
-        if (fabs(actual2[i][j] - expected2[i][j])>0.0001)
+        if (fabs(actual2[i][j] - expected2[i][j])>eps)
             k = 0;
     }
     if (k == 1)
@@ -223,7 +224,7 @@ void multiply_matrix_tests(void)
     for (int i = 0;i < n14;i++)
     {
         for (int j = 0;j < m14;j++)
-        if (fabs(actual4[i][j] - expected4[i][j])>0.0001)
+        if (fabs(actual4[i][j] - expected4[i][j])>eps)
             k = 0;
     }
     if (k == 1)

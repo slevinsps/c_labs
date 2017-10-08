@@ -41,15 +41,16 @@ void subtraction(double *row1,double *row2, int number, double *chislo1, double 
 }
 
 int choos_not_zero_element(double ***matrix1,int column,int n,double **edin,int column_edin,double *arr_operations)
-{
+{    
     // функция меняет строки местами, для того, чтобы вверху оставался не нулевой элемент
+    double eps = 0.0001;
     int err = OK;
     double k;
     int bool1 = 0;
     double *row;
     for(int i = column;i<n;i++)
     {
-        if (fabs((*matrix1)[i][column]) > 0.0001)
+        if (fabs((*matrix1)[i][column]) > eps)
         {
             bool1 = 1;
             row = (*matrix1)[i];
