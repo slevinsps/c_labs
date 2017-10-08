@@ -9,7 +9,7 @@
 #include "gauss.h"
 #include "create_free_matrix.h"
 #include "defines.h"
-    
+
 int main(int argc, char** argv)
 {
     int err = OK;
