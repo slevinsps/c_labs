@@ -12,7 +12,7 @@ endif
 
 app.exe : main.o functions.o io.o binary_sort.o
 	$(CC) $(CFLAGS) $^ -o $@
-tests.exe : tests.o functions.o io.o binary_sort.o
+test.exe : tests.o functions.o io.o binary_sort.o
 	$(CC) $(CFLAGS) $^ -o $@
 test_speed.exe : test_speed.o functions.o io.o binary_sort.o
 	$(CC) $(CFLAGS2) $^ -o $@
