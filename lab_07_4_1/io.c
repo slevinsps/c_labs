@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include "defines.h"
 #include "io.h"
-    
+        
 int read_array(FILE *f, int *pb, int **pe, int k)
 {
     int err = OK;
