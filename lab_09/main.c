@@ -2,42 +2,36 @@
 # include <string.h>
 # include <stdlib.h>
 
+# include "str.h"
+# include "sort.h"
 
-int compare(char *s1, char *s2)
+
+void input(char s[]) 
 {
-	int len1 = strlen(s1);
-	int len2 = strlen(s2);
-	int len_min;
-	int k = 1;
-	if (len1 <= len2)
-		len_min = len1;
-	else
-		len_min = len2;
-	for (int i = 0; i < len_min; i++)
-	{
-		if (s1[i] < s2[i])
-		{
-			k = 0;
-			break;
-		}
-	}
-	return k;
+    int i, c;
+    i = 0;
+    while ((c = getchar()) != '\n') {
+        s[i] = c;
+        ++i;
+    }
+    s[i] = '\0';
 }
-
-/* void sort(char **words, int n)
-{
-	for (int )
-	
-	
-} */
 
 
 int main(void)
 {
+	int n;
+	char s[100];
+	setbuf(stdout,NULL);
 	
-	char *s1 = "првиет";
-	char *s2 = "абба";
-	printf("%d\n",compare(s1, s2));
 	
+	printf("Введите строку:\n");
+	input(s);
+	n = count_words(s);
+    char **words = malloc(n*sizeof(char *));
+    split_words(s, words);
+	sort(words, n);
+	for(int i = 0; i < n;i++)
+		printf("%s ", words[i]);
 
 }
