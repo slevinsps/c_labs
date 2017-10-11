@@ -82,12 +82,49 @@ int test4(void)
 }
 
 
+void test5(void)
+{
+	char s[] = ".h! e llo";
+	int n;
+	n = count_words(s);
+	if (n == 3)
+		printf("Passed_count 1\n");
+	else
+		printf("Not passed_count 1\n");
+}
+
+
+void test6(void)
+{
+	char s[] = "hello";
+	int n;
+	n = count_words(s);
+	if (n == 1)
+		printf("Passed_count 2\n");
+	else
+		printf("Not passed_count 2\n");
+}
+
+void test7(void)
+{
+	char s[] = "";
+	int n;
+	n = count_words(s);
+	if (n == 0)
+		printf("Passed_count 3\n");
+	else
+		printf("Not passed_count 3\n");
+}
+
 int main(void)
 {
 	test1();
 	test2();
 	test3();
 	test4();
+	test5();
+	test6();
+	test7();
 }
 	
 
