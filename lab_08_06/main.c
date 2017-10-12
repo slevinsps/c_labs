@@ -50,8 +50,8 @@ int main(int argc, char** argv)
             {    
                 printf("Invalid arguments of matrix 1\n");
             }
-            if (err == OK)
-            {
+            //if (err == OK)
+            //{
                 if (argc == 5)
                 {
                     f2 = fopen(argv[3], "r");
@@ -165,7 +165,7 @@ int main(int argc, char** argv)
 					}
                 } 
 				free_matrix_rows(matrix1, n1);				
-            }           
+            //}           
 			
 		} 
 				
