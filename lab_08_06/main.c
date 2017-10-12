@@ -72,8 +72,8 @@ int main(int argc, char** argv)
                         {    
                             printf("Invalid arguments of matrix 2\n");
                         }
-                        if (err == OK)
-                        {
+                        //if (err == OK)
+                        //{
                             if (strcmp(argv[1],"a") == 0)
                             {       						
                                 err = sum_matrix(matrix1,matrix2,n1,m1,n2,m2,&matrix_res);
@@ -81,10 +81,9 @@ int main(int argc, char** argv)
                                 //if (err == OK)
                                 //{                        
                                     f_res = fopen(argv[4], "w");
-									print_matrix(f_res,matrix_res,n1,m1);
 									if (f_res)
 									{
-										
+										print_matrix(f_res,matrix_res,n1,m1);
 										fclose(f_res);
 								
 									}
@@ -125,7 +124,7 @@ int main(int argc, char** argv)
 							}
 							
 							free_matrix_rows(matrix2, n2);
-                        }  
+                        //}  
 						
                     }
 					
