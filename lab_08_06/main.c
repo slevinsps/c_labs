@@ -41,8 +41,7 @@ int main(int argc, char** argv)
             err = NO_FILE;
         }
         else
-        {
-			matrix1 = allocate_matrix_row(3,3);            
+        {           
             err = read_matrix(f1,&matrix1,&n1, &m1);
             if (err == INVALID_NUMBER)
             {    
@@ -65,7 +64,6 @@ int main(int argc, char** argv)
                     }
                     else
                     {
-						matrix2 = allocate_matrix_row(3,3); 
                         err = read_matrix(f2,&matrix2,&n2, &m2);
                         if (err == INVALID_NUMBER)
                         {    
