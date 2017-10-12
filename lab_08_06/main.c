@@ -93,7 +93,7 @@ int main(int argc, char** argv)
                                     printf("Matrices should have the same size"); 									
                                 }
                             }
-                            if (pstr[0] == 'm' && pstr[1] == 0)
+                            else if (pstr[0] == 'm' && pstr[1] == 0)
                             {                                
                                 err = multiply_matrix(matrix1,matrix2,n1,m1,n2,m2,&matrix_res);
                                 if (err == OK)
@@ -108,6 +108,10 @@ int main(int argc, char** argv)
                                     printf("The number of columns of the first matrix ​​not equal to the number of rows of the second matrix.");        
 								}
                             }
+							else
+							{
+								err = -10;								
+							}
 							
 							free_matrix_rows(matrix2, n2);
                         }  
@@ -139,6 +143,10 @@ int main(int argc, char** argv)
                             printf("The number of columns and rows ​​not equal");							
                         }
                     }
+					else
+					{
+						err = -10;								
+					}
                 } 
 				free_matrix_rows(matrix1, n1);				
             }           
