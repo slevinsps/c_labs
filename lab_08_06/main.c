@@ -133,8 +133,8 @@ int main(int argc, char** argv)
                    if (strcmp(argv[1],"o") == 0)
                     {                                            
                         err = gauss(matrix1,&edin,n1,m1);
-                        if (err == OK)
-                        {                        
+                        //if (err == OK)
+                        // {                        
                             f_res = fopen(argv[3], "w");
 							if (f_res)
 							{
@@ -146,7 +146,7 @@ int main(int argc, char** argv)
 								err = NO_FILE;
 							
 							free_matrix_rows(edin, n1);
-                        }
+                        //}
                         if (err == DETERMINATE_0)
                         {
                             printf("Determinate = 0\n");
