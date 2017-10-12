@@ -81,9 +81,10 @@ int main(int argc, char** argv)
                                 //if (err == OK)
                                 //{                        
                                     f_res = fopen(argv[4], "w");
+									print_matrix(f_res,matrix_res,n1,m1);
 									if (f_res)
 									{
-										print_matrix(f_res,matrix_res,n1,m1);
+										
 										fclose(f_res);
 								
 									}
