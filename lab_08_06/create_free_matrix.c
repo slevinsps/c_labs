@@ -1,7 +1,7 @@
 #include <stdlib.h>
     
 #include "defines.h"
-void free_matrix_rows(double **data, double n)
+void free_matrix_rows(double **data, int n)
 {
     for (int i = 0;i < n; i++)
     {
