@@ -6,8 +6,8 @@ int multiply_matrix(double **matrix1, double **matrix2, int n1, int m1,int n2, i
     int err = OK;
     if (n1 == m2 && m1 == n2)
     {
-        *matrix3 = allocate_matrix_row(n1,m2);
-		if (*matrix3)
+        matrix3 = allocate_matrix_row(n1,m2);
+		if (matrix3)
 		{
 			for (int i = 0; i<n1;i++)
 			{
