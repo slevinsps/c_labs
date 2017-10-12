@@ -23,9 +23,7 @@ int main(int argc, char** argv)
     FILE * f1;
     FILE * f2;
     FILE * f_res;
-    
-    char *pstr;
-    
+
     setbuf(stdout,NULL);
     if (argc < 4 || argc > 5)
     {
@@ -76,7 +74,6 @@ int main(int argc, char** argv)
                         }
                         if (err == OK)
                         {
-                            pstr = argv[1];
                             if (strcmp(argv[1],"a") == 0)
                             {       						
                                 err = sum_matrix(matrix1,matrix2,n1,m1,n2,m2,&matrix_res);
@@ -99,7 +96,7 @@ int main(int argc, char** argv)
                                     printf("Matrices should have the same size"); 									
                                 }
                             }
-                            else if (pstr[0] == 'm' && pstr[1] == 0)
+                            else if (strcmp(argv[1],"m") == 0)
                             {                                
                                 err = multiply_matrix(matrix1,matrix2,n1,m1,n2,m2,&matrix_res);
                                 if (err == OK)
@@ -133,8 +130,7 @@ int main(int argc, char** argv)
                 }
                 if (argc == 4)
                 {        
-                    pstr = argv[1];
-                    if (pstr[0] == 'o' && pstr[1] == 0)
+                   if (strcmp(argv[1],"o") == 0)
                     {                                            
                         err = gauss(matrix1,&edin,n1,m1);
                         if (err == OK)
