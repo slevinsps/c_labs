@@ -77,8 +77,8 @@ int main(int argc, char** argv)
                             if (strcmp(argv[1],"a") == 0)
                             {       						
                                 err = sum_matrix(matrix1,matrix2,n1,m1,n2,m2,&matrix_res);
-                                if (err == OK)
-                                {                        
+                                //if (err == OK)
+                                //{                        
                                     f_res = fopen(argv[4], "w");
 									if (f_res)
 									{
@@ -90,11 +90,11 @@ int main(int argc, char** argv)
 										err = NO_FILE;
 									free_matrix_rows(matrix_res, n1);
 									
-                                }
-                                else
-                                {
-                                    printf("Matrices should have the same size"); 									
-                                }
+                                //}
+                                //else
+                                //{
+                                //    printf("Matrices should have the same size"); 									
+                                //}
                             }
                             else if (strcmp(argv[1],"m") == 0)
                             {                                
