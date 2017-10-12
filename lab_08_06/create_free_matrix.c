@@ -20,7 +20,7 @@ double** allocate_matrix_row(int n,int m)
         data[i] = malloc(m*sizeof(double));
         if (!data[i])
         {
-            free_matrix_rows(data,i);
+            free_matrix_rows(data,n);
             return NULL;
         }
     
