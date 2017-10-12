@@ -80,40 +80,46 @@ int gauss(double **matrix1,double ***edin, int n1, int m1)
         double arr_operations[n1+n1*n1+n1]; // в этот массив сохраняются операции
         int k = -1;
         *edin =  allocate_matrix_row(n1,m1);
-        creat_edin(*edin,n1);
-        //print_matrix(stdout,matrix1,n1,n1);
-        //printf("\n");
-        for (int j = 0;j<n1;j++)
-        {            
-            k++;
-            err = choos_not_zero_element(&matrix1, j, n1, *edin, 0, &arr_operations[k]);
-            //print_matrix(stdout,matrix1,n1,n1);
-            //printf("выше выбор\n");
-            if (err == DETERMINATE_0)
-            {                
-                break;                
-            }
-            else
-            {
-                k++;
-                arr_operations[k] = matrix1[j][j];
-                gauss_divide(matrix1[j],j,&(*edin)[j][0], n1);
-                //print_matrix(stdout,matrix1,n1,n1);
-                //printf("выше деление\n");
-                for (int v = 0;v<n1;v++)
-                {
-                    if (v != j)
-                    {
-                        k++;
-                        arr_operations[k] = matrix1[v][j];
-                        subtraction(matrix1[v], matrix1[j], j, &(*edin)[v][0], &(*edin)[j][0],n1);        
-                        //print_matrix(stdout,matrix1,n1,n1);
-                        //printf("выше вычитание\n");
-                    }
-                }
-            }                    
-        } 
-        
+		if (*edin)
+		{
+			creat_edin(*edin,n1);
+			//print_matrix(stdout,matrix1,n1,n1);
+			//printf("\n");
+			for (int j = 0;j<n1;j++)
+			{            
+				k++;
+				err = choos_not_zero_element(&matrix1, j, n1, *edin, 0, &arr_operations[k]);
+				//print_matrix(stdout,matrix1,n1,n1);
+				//printf("выше выбор\n");
+				if (err == DETERMINATE_0)
+				{                
+					break;                
+				}
+				else
+				{
+					k++;
+					arr_operations[k] = matrix1[j][j];
+					gauss_divide(matrix1[j],j,&(*edin)[j][0], n1);
+					//print_matrix(stdout,matrix1,n1,n1);
+					//printf("выше деление\n");
+					for (int v = 0;v<n1;v++)
+					{
+						if (v != j)
+						{
+							k++;
+							arr_operations[k] = matrix1[v][j];
+							subtraction(matrix1[v], matrix1[j], j, &(*edin)[v][0], &(*edin)[j][0],n1);        
+							//print_matrix(stdout,matrix1,n1,n1);
+							//printf("выше вычитание\n");
+						}
+					}
+				}                    
+			}
+		}
+		else		
+		{
+			err = MEMORY_ERROR;
+		}
         if (err == OK)
         {
             double tmp;

@@ -9,5 +9,6 @@
 #define DONT_EQUAL_SIZE -5
 #define DONT_RIGHT_SIZE -6
 #define DETERMINATE_0 -7
+#define MEMORY_ERROR -8
 
 #endif // DEFINES
