@@ -108,9 +108,10 @@ int main(int argc, char** argv)
                             }
 							
 							free_matrix_rows(matrix2, n2);
-                        }                    
+                        }  
+						fclose(f2);
                     }
-					fclose(f2);
+					
                 }
                 if (argc == 4)
                 {        
@@ -139,8 +140,9 @@ int main(int argc, char** argv)
                 } 
 				free_matrix_rows(matrix1, n1);				
             }           
-        } 
-		fclose(f1);		
+			fclose(f1);
+		} 
+				
     }
 	//printf("%d\n",err);
 	
