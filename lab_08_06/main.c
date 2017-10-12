@@ -84,14 +84,11 @@ int main(int argc, char** argv)
                                     print_matrix(f_res,matrix_res,n1,m1);
                                     fclose(f_res);
 									free_matrix_rows(matrix_res, n1);
-									free_matrix_rows(matrix1, n1);
-									free_matrix_rows(matrix2, n2);
+									
                                 }
                                 else
                                 {
-                                    printf("Matrices should have the same size"); 
-									free_matrix_rows(matrix1, n1);
-									free_matrix_rows(matrix2, n2);									
+                                    printf("Matrices should have the same size"); 									
                                 }
                             }
                             if (pstr[0] == 'm' && pstr[1] == 0)
@@ -103,16 +100,14 @@ int main(int argc, char** argv)
                                     print_matrix(f_res,matrix_res,n1,n1);
                                     fclose(f_res);
 									free_matrix_rows(matrix_res, n1);
-									free_matrix_rows(matrix1, n1);
-									free_matrix_rows(matrix2, n2);
-                                }
+								}
                                 else
                                 {
                                     printf("The number of columns of the first matrix ​​not equal to the number of rows of the second matrix.");        
-									free_matrix_rows(matrix1, n1);
-									free_matrix_rows(matrix2, n2);
 								}
                             }
+							
+							free_matrix_rows(matrix2, n2);
                         }                    
                     }
                 }
@@ -128,23 +123,20 @@ int main(int argc, char** argv)
                             print_matrix(f_res,edin,n1,n1);
                             fclose(f_res);
 							free_matrix_rows(edin, n1);
-							free_matrix_rows(matrix1, n1);
                         }
                         if (err == DETERMINATE_0)
                         {
                             printf("Determinate = 0\n");
 							free_matrix_rows(edin, n1);
-							free_matrix_rows(matrix1, n1);
 							
                         }
                         if (err == DONT_EQUAL_SIZE)
                         {
-                            printf("The number of columns and rows ​​not equal");
-							free_matrix_rows(matrix1, n1);
-							
+                            printf("The number of columns and rows ​​not equal");							
                         }
                     }
-                }                          
+                } 
+				free_matrix_rows(matrix1, n1);				
             }           
         }   
     }
