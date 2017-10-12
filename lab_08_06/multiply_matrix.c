@@ -28,7 +28,10 @@ int multiply_matrix(double **matrix1, double **matrix2, int n1, int m1,int n2, i
 			}  
 		}
 		else
+		{
+			free(*matrix3);
 			err = MEMORY_ERROR;
+		}
     }    
     else
         err = DONT_RIGHT_SIZE;

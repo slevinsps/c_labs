@@ -20,7 +20,10 @@ int sum_matrix(double **matrix1, double **matrix2, int n1, int m1,int n2, int m2
 			}
 		}
 		else
+		{
+			free(*matrix3);
 			err = MEMORY_ERROR;
+		}
     }
     else
     {
