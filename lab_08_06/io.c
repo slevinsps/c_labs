@@ -22,7 +22,7 @@ int read_matrix(FILE *f,double ***matrix1,int *n1, int *m1)
 				}
 				if (err == INVALID_NUMBER)
 				{
-					free_matrix_rows(*matrix1,i);
+					free_matrix_rows(*matrix1,*n1);
 					break;
 				}
 			}  
