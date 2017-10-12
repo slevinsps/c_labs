@@ -76,12 +76,12 @@ int main(int argc, char** argv)
                         {
                             pstr = argv[1];
                             if (pstr[0] == 'a' && pstr[1] == 0)
-                            {                                
+                            {       						
                                 err = sum_matrix(matrix1,matrix2,n1,m1,n2,m2,&matrix_res);
                                 if (err == OK)
                                 {                        
                                     f_res = fopen(argv[4], "w");
-                                    print_matrix(f_res,matrix_res,n1,n2);
+                                    print_matrix(f_res,matrix_res,n1,m1);
                                     fclose(f_res);
                                     printf("Done!");
                                 }

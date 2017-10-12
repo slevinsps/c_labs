@@ -34,6 +34,7 @@ int read_matrix(FILE *f,double ***matrix1,int *n1, int *m1)
 
 void print_matrix(FILE *f,double **matrix1,int n1, int m1)
 {
+	fprintf(f,"%d %d\n",n1,m1);
     for (int i = 0; i<n1;i++)
     {
         for (int j = 0; j<m1;j++)
