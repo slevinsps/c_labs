@@ -55,6 +55,7 @@ int main(int argc, char** argv)
             {
                 if (argc>4)
                 {
+					
                     f2 = fopen(argv[3], "r");
                     if (f2 == NULL)
                     {
@@ -134,7 +135,7 @@ int main(int argc, char** argv)
             }           
         }   
     }
-	printf("%d\n",err);
+	//printf("%d\n",err);
     return err;
 }
 
