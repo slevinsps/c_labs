@@ -120,7 +120,7 @@ int main(int argc, char** argv)
                             f_res = fopen(argv[3], "w");
                             print_matrix(f_res,edin,n1,n1);
                             fclose(f_res);
-							free_matrix_rows(matrix_res, n1);
+							free_matrix_rows(edin, n1);
                         }
                         if (err == DETERMINATE_0)
                         {
