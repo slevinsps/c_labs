@@ -14,10 +14,9 @@ int read_matrix(FILE *f,double ***matrix1,int *n1, int *m1)
 			{
 				for (int j = 0; j<*m1;j++)
 				{
-					if (fscanf(f,"%lf",&(*matrix1)[i][j]) != 1)
+					if (feof(f) == 0 && fscanf(f,"%lf",&(*matrix1)[i][j]) != 1)
 					{
 						err = INVALID_NUMBER;
-						free_matrix_rows(*matrix1,*n1);
 						break;
 					}
 				}
