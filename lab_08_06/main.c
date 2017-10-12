@@ -27,7 +27,7 @@ int main(int argc, char** argv)
     char *pstr;
     
     setbuf(stdout,NULL);
-    if (argc < 4)
+    if (argc < 4 || argc > 5)
     {
         fprintf(stderr, "main1.exe <action> <mtr_1.txt> [mtr_2.txt] <res.txt>\n");
         err = NOT_ALL_ARGUMENTS;
@@ -53,9 +53,8 @@ int main(int argc, char** argv)
             }
             if (err == OK)
             {
-                if (argc>4)
+                if (argc == 5)
                 {
-					
                     f2 = fopen(argv[3], "r");
                     if (f2 == NULL)
                     {
@@ -109,7 +108,7 @@ int main(int argc, char** argv)
                         }                    
                     }
                 }
-                else
+                if (argc == 4)
                 {        
                     pstr = argv[1];
                     if (pstr[0] == 'o' && pstr[1] == 0)
