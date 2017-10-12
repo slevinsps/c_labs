@@ -118,7 +118,6 @@ int gauss(double **matrix1,double ***edin, int n1, int m1)
 		}
 		else		
 		{
-			free(*edin);
 			err = MEMORY_ERROR;
 		}
         if (err == OK)
