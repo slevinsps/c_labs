@@ -43,6 +43,7 @@ int main(int argc, char** argv)
         else
         {           
             err = read_matrix(f1,&matrix1,&n1, &m1);
+			fclose(f1);
             if (err == INVALID_NUMBER)
             {    
                 printf("Invalid number in matrix 1\n");
@@ -64,6 +65,7 @@ int main(int argc, char** argv)
                     else
                     {
                         err = read_matrix(f2,&matrix2,&n2, &m2);
+						fclose(f2);
                         if (err == INVALID_NUMBER)
                         {    
                             printf("Invalid number in matrix 2\n");
@@ -109,7 +111,7 @@ int main(int argc, char** argv)
 							
 							free_matrix_rows(matrix2, n2);
                         }  
-						fclose(f2);
+						
                     }
 					
                 }
@@ -140,7 +142,7 @@ int main(int argc, char** argv)
                 } 
 				free_matrix_rows(matrix1, n1);				
             }           
-			fclose(f1);
+			
 		} 
 				
     }
