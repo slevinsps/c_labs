@@ -75,7 +75,7 @@ int main(int argc, char** argv)
                         if (err == OK)
                         {
                             pstr = argv[1];
-                            if (pstr[0] == 'a' && pstr[1] == 0)
+                            if (strcmp(argv[1],"a") == 0)
                             {       						
                                 err = sum_matrix(matrix1,matrix2,n1,m1,n2,m2,&matrix_res);
                                 if (err == OK)
@@ -130,7 +130,8 @@ int main(int argc, char** argv)
                 }                          
             }           
         }   
-    }   
+    }
+	printf("%d\n",err);
     return err;
 }
 
