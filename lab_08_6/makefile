@@ -12,7 +12,7 @@ endif
 
 app.exe : main.o io.o create_free_matrix.o gauss.o multiply_matrix.o sum_matrix.o
 	$(CC) $(CFLAGS) $^ -o $@
-tests.exe : tests.o io.o create_free_matrix.o gauss.o multiply_matrix.o sum_matrix.o
+test.exe : tests.o io.o create_free_matrix.o gauss.o multiply_matrix.o sum_matrix.o
 	$(CC) $(CFLAGS) $^ -o $@
 	
 %.o : %.c *.h
