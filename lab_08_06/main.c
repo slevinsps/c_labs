@@ -77,6 +77,7 @@ int main(int argc, char** argv)
                             if (strcmp(argv[1],"a") == 0)
                             {       						
                                 err = sum_matrix(matrix1,matrix2,n1,m1,n2,m2,&matrix_res);
+								printf("%d \n",err);
                                 //if (err == OK)
                                 //{                        
                                     f_res = fopen(argv[4], "w");
@@ -99,8 +100,8 @@ int main(int argc, char** argv)
                             else if (strcmp(argv[1],"m") == 0)
                             {                                
                                 err = multiply_matrix(matrix1,matrix2,n1,m1,n2,m2,&matrix_res);
-                                if (err == OK)
-                                {                        
+                                //if (err == OK)
+                                //{                        
                                     f_res = fopen(argv[4], "w");
 									if (f_res)
 									{
@@ -111,11 +112,11 @@ int main(int argc, char** argv)
 									else
 										err = NO_FILE;
 									free_matrix_rows(matrix_res, n1);
-								}
-                                else
-                                {
-                                    printf("The number of columns of the first matrix ​​not equal to the number of rows of the second matrix.");        
-								}
+								//}
+                                //else
+                                //{
+                                //    printf("The number of columns of the first matrix ​​not equal to the number of rows of the second matrix.");        
+								//}
                             }
 							else
 							{
