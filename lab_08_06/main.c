@@ -136,7 +136,8 @@ int main(int argc, char** argv)
         }   
     }
 	//printf("%d\n",err);
-    return err;
+	
+    return 0;
 }
 
 
