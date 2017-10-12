@@ -83,7 +83,6 @@ int main(int argc, char** argv)
                                     f_res = fopen(argv[4], "w");
                                     print_matrix(f_res,matrix_res,n1,m1);
                                     fclose(f_res);
-                                    printf("Done!");
                                 }
                                 else
                                 {
@@ -98,7 +97,6 @@ int main(int argc, char** argv)
                                     f_res = fopen(argv[4], "w");
                                     print_matrix(f_res,matrix_res,n1,n1);
                                     fclose(f_res);
-                                    printf("Done!");
                                 }
                                 else
                                 {
@@ -119,7 +117,6 @@ int main(int argc, char** argv)
                             f_res = fopen(argv[3], "w");
                             print_matrix(f_res,edin,n1,n1);
                             fclose(f_res);
-                            printf("Done!");
                         }
                         if (err == DETERMINATE_0)
                         {
