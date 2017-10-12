@@ -4,6 +4,7 @@
 #include "create_free_matrix.h"
 #include "io.h"
 #include "defines.h"
+
 void creat_edin(double **edin,int n)
 {
     for (int i = 0; i<n;i++)
