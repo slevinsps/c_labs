@@ -15,8 +15,8 @@ int main(int argc, char** argv)
     int err = OK;
     int n1 = 0,m1 = 0;
     int n2 = 0,m2 = 0;
-    double **matrix1 = NULL;
-    double **matrix2 = NULL;
+    double **matrix1;
+    double **matrix2;
     //double **matrix_res = NULL;
     //double **edin = NULL;
     
