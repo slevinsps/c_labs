@@ -10,20 +10,19 @@ void free_matrix_rows(double ***data, int n)
     free(*data);    
 }
     
-double** allocate_matrix_row(int n,int m)
+double** allocate_matrix_row(int n, int m)
 {
-    double **data = (double**)malloc(n*sizeof(double*));
+    double **data = (double**)malloc(n * sizeof(double*));
     if (!data)
         return NULL;
     for (int i = 0;i < n;i++)
     {
-        data[i] = (double*)malloc(m*sizeof(double));
+        data[i] = (double*)malloc(m * sizeof(double));
         if (!data[i])
         {
-            free_matrix_rows(&data,n);
+            free_matrix_rows(&data, n);
             return NULL;
-        }
-    
+        } 
     }
     return data;
 }
