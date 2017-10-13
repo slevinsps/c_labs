@@ -126,7 +126,7 @@ int main(int argc, char **argv)
                 }
                 if (argc == 4)
                 {        
-                   if (strcmp(argv[1], "o") == 0)
+                    if (strcmp(argv[1], "o") == 0)
                     {                                            
                         err = gauss(matrix1, &edin, n1, m1);
                         if (err == OK)
@@ -163,6 +163,3 @@ int main(int argc, char **argv)
     }
     return err;
 }
-
-
-
