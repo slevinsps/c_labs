@@ -204,8 +204,8 @@ int main(int argc, char** argv)
                 
     } */
     //printf("%d\n",err);
-    
-    return 0;
+    err = 0;
+    return err;
 }
 
 
