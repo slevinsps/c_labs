@@ -44,7 +44,7 @@ void subtraction(double *row1,double *row2, int number, double *chislo1, double 
 int choos_not_zero_element(double ***matrix1,int column,int n,double **edin,int column_edin,double *arr_operations)
 {    
     // функция меняет строки местами, для того, чтобы вверху оставался не нулевой элемент
-    double eps = 0.00001;
+    double eps = 0.000000000001;
     int err = OK;
     double k;
     int bool1 = 0;
@@ -76,7 +76,7 @@ int gauss(double **matrix1,double ***edin, int n1, int m1)
     /// Пытался сделать сохранение операций, чтоб с остальными стобцами просто применить их
     /// сделал это, но не уверен, что это сделало программу легче, хотелось бы услышать ваше мнение
     int err = OK;
-    if (n1 == m1 && n1 > 1)    
+    if (n1 == m1)    
     {
         double arr_operations[n1+n1*n1+n1]; // в этот массив сохраняются операции
         int k = -1;
