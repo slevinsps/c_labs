@@ -21,7 +21,7 @@ int main(int argc, char** argv)
     double **edin = NULL;
     
     FILE * f1;
-    FILE * f2;
+    //FILE * f2;
     FILE * f_res;
 
     setbuf(stdout,NULL);
