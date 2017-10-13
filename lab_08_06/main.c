@@ -14,43 +14,40 @@ int main(int argc, char** argv)
 {
     int err = OK;
     int n1 = 0,m1 = 0;
-    //int n2 = 0,m2 = 0;
+    int n2 = 0,m2 = 0;
     double **matrix1 = NULL;
-    //double **matrix2 = NULL;
-    //double **matrix_res = NULL;
-    double **edin = NULL;
+    double **matrix2 = NULL;
+    double **matrix_res = NULL;
+    //double **edin = NULL;
     
     FILE * f1;
-    //FILE * f2;
+    FILE * f2;
     FILE * f_res;
 
     setbuf(stdout,NULL);
 	f1 = fopen(argv[2], "r");
 	read_matrix(f1,&matrix1,&n1, &m1);
-    err = gauss(matrix1,&edin,n1,m1);
+	f2 = fopen(argv[3], "r");
+	err = read_matrix(f2,&matrix2,&n2, &m2);
+    err = sum_matrix(matrix1,matrix2,n1,m1,n2,m2,&matrix_res);
+    printf("%d \n",err);
     if (err == OK)
     {                        
-			f_res = fopen(argv[3], "w");
-			if (f_res)
-			{
-				print_matrix(f_res,edin,n1,n1);
-				fclose(f_res);
-				
-			}
-			else        
-				err = NO_FILE;
-			
-			free_matrix_rows(edin, n1);
+        f_res = fopen(argv[4], "w");
+        if (f_res)
+        {
+            print_matrix(f_res,matrix_res,n1,m1);
+            fclose(f_res);
+    
+        }
+        else
+            err = NO_FILE;
+        free_matrix_rows(matrix_res, n1);
+        
     }
-    if (err == DETERMINATE_0)
+    else
     {
-        printf("Determinate = 0\n");
-     free_matrix_rows(edin, n1);
-     
-    }
-    if (err == DONT_EQUAL_SIZE)
-    {
-        printf("The number of columns and rows ​​not equal");                            
+        printf("Matrices should have the same size");                                     
     }
     /* if (argc < 4 || argc > 5)
     {
