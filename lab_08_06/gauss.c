@@ -19,7 +19,7 @@ void creat_edin(double **edin, int n)
     } 
 }    
 
-void gauss_divide(double *row,int number, double *chislo, int n1)
+void gauss_divide(double *row, int number, double *chislo, int n1)
 {
     double div = row[number];
     *chislo = *chislo / div; // изменение значения элемента единичной матрицы
