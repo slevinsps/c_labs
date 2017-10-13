@@ -12,16 +12,18 @@ void free_matrix_rows(double **data, int n)
     
 double** allocate_matrix_row(int n,int m)
 {
-    double **data = malloc(n * sizeof(double*) + n * m * sizeof(double));
+    double **data = calloc(n,sizeof(double*));
     if (!data)
-    {
         return NULL;
-    }
-
-    for (int i = 0; i < n; i++)
+    for (int i = 0;i < n;i++)
     {
-        data[i] = (double*)((char*) data + n * sizeof(double*) + 
-            i * m * sizeof(double));
+        data[i] = malloc(m*sizeof(double));
+        if (!data[i])
+        {
+            free_matrix_rows(data,n);
+            return NULL;
+        }
+    
     }
     return data;
 }
