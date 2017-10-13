@@ -18,7 +18,7 @@ int main(int argc, char** argv)
     double **matrix1;
     double **matrix2;
     double **matrix_res = NULL;
-    double **edin = NULL;
+    //double **edin = NULL;
     
     FILE * f1;
     FILE * f2;
@@ -167,7 +167,7 @@ int main(int argc, char** argv)
                     }
                     
                 }
-                if (argc == 4)
+                /* if (argc == 4)
                 {        
                    if (strcmp(argv[1],"o") == 0)
                     {                                            
@@ -177,7 +177,7 @@ int main(int argc, char** argv)
                             f_res = fopen(argv[3], "w");
                             if (f_res)
                             {
-                                //print_matrix(f_res,edin,n1,n1);
+                                print_matrix(f_res,edin,n1,n1);
                                 fclose(f_res);
                                 
                             }
@@ -201,7 +201,7 @@ int main(int argc, char** argv)
                     {
                         err = -10;                                
                     }
-                } 
+                } */ 
                 free_matrix_rows(&matrix1, n1);                
             }           
             
