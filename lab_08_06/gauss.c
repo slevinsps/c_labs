@@ -11,10 +11,10 @@ void creat_edin(double **edin, int n)
     {
         for (int j = 0; j < n; j++)
         {
-        if (i == j)
-            edin[i][j] = 1;
-        else
-            edin[i][j] = 0;
+            if (i == j)
+                edin[i][j] = 1;
+            else    
+                edin[i][j] = 0;
         }
     } 
 }    
@@ -41,7 +41,7 @@ void subtraction(double *row1, double *row2, int number, double *chislo1, double
     *chislo1 = *chislo1 - sub * (*chislo2); // изменение значения элемента единичной матрицы
 }
 
-int choos_not_zero_element(double ***matrix1,int column,int n,double **edin,int column_edin,double *arr_operations)
+int choos_not_zero_element(double ***matrix1, int column, int n, double **edin, int column_edin, double *arr_operations)
 {    
     // функция меняет строки местами, для того, чтобы вверху оставался не нулевой элемент
     double eps = 0.000000000001;
@@ -49,7 +49,7 @@ int choos_not_zero_element(double ***matrix1,int column,int n,double **edin,int 
     double k;
     int bool1 = 0;
     double *row;
-    for(int i = column;i < n;i++)
+    for (int i = column; i < n; i++)
     {
         if (fabs((*matrix1)[i][column]) > eps)
         {
@@ -78,49 +78,49 @@ int gauss(double **matrix1, double ***edin, int n1, int m1)
     int err = OK;
     if (n1 == m1)    
     {
-        double arr_operations[n1+n1*n1+n1]; // в этот массив сохраняются операции
+        double arr_operations[n1 + n1 * n1 + n1]; // в этот массив сохраняются операции
         int k = -1;
-        *edin =  allocate_matrix_row(n1, m1);
-		if (*edin)
-		{
-			creat_edin(*edin, n1);
-			//print_matrix(stdout,matrix1,n1,n1);
-			//printf("\n");
-			for (int j = 0;j < n1;j++)
-			{            
-				k++;
-				err = choos_not_zero_element(&matrix1, j, n1, *edin, 0, &arr_operations[k]);
-				//print_matrix(stdout,matrix1,n1,n1);
-				//printf("выше выбор\n");
-				if (err == DETERMINATE_0)
-				{                
-					break;                
-				}
-				else
-				{
-					k++;
-					arr_operations[k] = matrix1[j][j];
-					gauss_divide(matrix1[j], j, &(*edin)[j][0], n1);
-					//print_matrix(stdout,matrix1,n1,n1);
-					//printf("выше деление\n");
-					for (int v = 0; v < n1; v++)
-					{
-						if (v != j)
-						{
-							k++;
-							arr_operations[k] = matrix1[v][j];
-							subtraction(matrix1[v], matrix1[j], j, &(*edin)[v][0], &(*edin)[j][0],  n1);        
-							//print_matrix(stdout,matrix1,n1,n1);
-							//printf("выше вычитание\n");
-						}
-					}
-				}                    
-			}
-		}
-		else		
-		{
-			err = MEMORY_ERROR;
-		}
+        *edin = allocate_matrix_row(n1, m1);
+        if (*edin)
+        {
+            creat_edin(*edin, n1);
+            //print_matrix(stdout,matrix1,n1,n1);
+            //printf("\n");
+            for (int j = 0;j < n1;j++)
+            {            
+                k++;
+                err = choos_not_zero_element(&matrix1, j, n1, *edin, 0, &arr_operations[k]);
+                //print_matrix(stdout,matrix1,n1,n1);
+                //printf("выше выбор\n");
+                if (err == DETERMINATE_0)
+                {                
+                    break;                
+                }
+                else
+                {
+                    k++;
+                    arr_operations[k] = matrix1[j][j];
+                    gauss_divide(matrix1[j], j, &(*edin)[j][0], n1);
+                    //print_matrix(stdout,matrix1,n1,n1);
+                    //printf("выше деление\n");
+                    for (int v = 0; v < n1; v++)
+                    {
+                        if (v != j)
+                        {
+                            k++;
+                            arr_operations[k] = matrix1[v][j];
+                            subtraction(matrix1[v], matrix1[j], j, &(*edin)[v][0], &(*edin)[j][0], n1);        
+                            //print_matrix(stdout,matrix1,n1,n1);
+                            //printf("выше вычитание\n");
+                        }
+                    }
+                }                    
+            }
+        }
+        else        
+        {
+            err = MEMORY_ERROR;
+        }
         if (err == OK)
         {
             double tmp;
@@ -140,7 +140,7 @@ int gauss(double **matrix1, double ***edin, int n1, int m1)
                     {
                         if (v != j)
                         {                            
-                            (*edin)[v][i] -= arr_operations[k]*(*edin)[j][i];        
+                            (*edin)[v][i] -= arr_operations[k] * (*edin)[j][i];        
                             k++;
                         }
                     }    
