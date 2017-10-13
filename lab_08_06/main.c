@@ -44,7 +44,7 @@ int main(int argc, char** argv)
 	fclose(f2);
 	fclose(f_res);
 	free_matrix_rows(matrix1, n1);
-	free_matrix_rows(matrix2, n1);
+	free_matrix_rows(matrix2, n2);
     //if (err == OK)
     //{                        
         // f_res = fopen(argv[4], "w");
