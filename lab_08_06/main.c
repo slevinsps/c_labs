@@ -40,6 +40,11 @@ int main(int argc, char** argv)
 			
 		}
 	}
+	fclose(f1);
+	fclose(f2);
+	fclose(f_res);
+	free_matrix_rows(matrix1, n1);
+	free_matrix_rows(matrix2, n2);
     //if (err == OK)
     //{                        
         // f_res = fopen(argv[4], "w");
@@ -204,7 +209,7 @@ int main(int argc, char** argv)
                 
     } */
     //printf("%d\n",err);
-    err = 0;
+    
     return err;
 }
 
