@@ -10,7 +10,7 @@
 #include "create_free_matrix.h"
 #include "defines.h"
 
-int main(int argc, char** argv)
+int main(int argc, char **argv)
 {
     int err = OK;
     int n1 = 0, m1 = 0;
@@ -24,7 +24,7 @@ int main(int argc, char** argv)
     FILE * f2;
     FILE * f_res;
 
-    setbuf(stdout,NULL);
+    setbuf(stdout, NULL);
     if (argc < 4 || argc > 5)
     {
         fprintf(stderr, "main1.exe <action> <mtr_1.txt> [mtr_2.txt] <res.txt>\n");
@@ -84,13 +84,11 @@ int main(int argc, char** argv)
                                     if (f_res)
                                     {
                                         print_matrix(f_res, matrix_res, n1, m1);
-                                        fclose(f_res);
-                                
+                                        fclose(f_res);                               
                                     }
                                     else
                                         err = NO_FILE;
-                                    free_matrix_rows(&matrix_res, n1);
-                                    
+                                    free_matrix_rows(&matrix_res, n1);                                    
                                 }
                                 else
                                 {
@@ -106,8 +104,7 @@ int main(int argc, char** argv)
                                     if (f_res)
                                     {
                                         print_matrix(f_res, matrix_res, n1, m2);
-                                        fclose(f_res);
-                                        
+                                        fclose(f_res);                                   
                                     }
                                     else
                                         err = NO_FILE;
@@ -138,8 +135,7 @@ int main(int argc, char** argv)
                             if (f_res)
                             {
                                 print_matrix(f_res, edin, n1, n1);
-                                fclose(f_res);
-                                
+                                fclose(f_res);   
                             }
                             else
                                 err = NO_FILE;
@@ -149,8 +145,7 @@ int main(int argc, char** argv)
                         if (err == DETERMINATE_0)
                         {
                             printf("Determinate = 0\n");
-                            free_matrix_rows(&edin, n1);
-                            
+                            free_matrix_rows(&edin, n1);                            
                         }
                         if (err == DONT_EQUAL_SIZE)
                         {
