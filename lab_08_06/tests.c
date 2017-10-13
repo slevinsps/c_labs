@@ -23,7 +23,7 @@ void sum_matrix_tests(void)
     
     int n21 = 3, m21 = 4;
     double matrix21[3][4] = { { -4, 2, 5, 2 }, { 3, 5, 2, 1 }, { 7, -1, 1, 0 } };
-    double* mat21[n21];
+    double *mat21[n21];
     for (int i = 0; i < m21; i++)
         mat21[i] = matrix21[i];
     
@@ -37,8 +37,8 @@ void sum_matrix_tests(void)
     for (int i = 0; i < n11; i++)
     {
         for (int j = 0; j < m11; j++)
-        if (actual1[i][j] != expected1[i][j])
-            k = 0;
+            if (actual1[i][j] != expected1[i][j])
+                k = 0;        
     }
     if (k == 1)
         printf("Test 1 in sum_matrix function is passed\n");
@@ -70,8 +70,8 @@ void sum_matrix_tests(void)
     for (int i = 0; i < n12; i++)
     {
         for (int j = 0;j < m12; j++)
-        if (actual2[i][j] != expected2[i][j])
-            k = 0;        
+            if (actual2[i][j] != expected2[i][j])
+                k = 0;        
     }
     if (k == 1)
         printf("Test 2 in sum_matrix function is passed\n");
@@ -83,7 +83,7 @@ void sum_matrix_tests(void)
     
     //3 Матрицы имеют разный размер
     int n13 = 1, m13 = 1;
-    double matrix13[1][1] = {{5}};
+    double matrix13[1][1] = { { 5 } };
     double *mat13[n11];
     for (int i = 0; i < m13; i++)
         mat13[i] = matrix13[i];
@@ -112,13 +112,13 @@ void multiply_matrix_tests(void)
     double eps = 0.0001;
     int k;
     //1 Умножение матриц размера 3х4 на 4х3
-    int n11 = 3,m11 = 4;
+    int n11 = 3, m11 = 4;
     double matrix11[3][4] = { { 1, 2, 3, 7 }, { 4, 5, 6, 4 }, { 7, 8, 9, -8 } };
     double *mat11[n11];
     for (int i = 0;i < n11;i++)
         mat11[i] = matrix11[i];
     
-    int n21 = 4,m21 = 3;
+    int n21 = 4, m21 = 3;
     double matrix21[4][3] = { { -4, 2, 5 }, { 3, 5, 2 }, { 7, -1, 1 }, { 4, 5, 3 } };
     double *mat21[n21];
     for (int i = 0;i < n21;i++)
@@ -128,14 +128,14 @@ void multiply_matrix_tests(void)
 
     multiply_matrix(mat11, mat21, n11, m11, n21, m21, &actual1);
         
-    double expected1[3][3] = { { 51, 44, 33}, { 57, 47, 48 }, { 27, 5, 36 } };
+    double expected1[3][3] = { { 51, 44, 33 }, { 57, 47, 48 }, { 27, 5, 36 } };
     
     k = 1;
     for (int i = 0;i < n11;i++)
     {
         for (int j = 0;j < m21;j++)
-        if (fabs(actual1[i][j] - expected1[i][j]) > eps)
-            k = 0;
+            if (fabs(actual1[i][j] - expected1[i][j]) > eps)
+                k = 0;
     }
     if (k == 1)
         printf("Test 1 in multiply_matrix function is passed\n");
@@ -167,8 +167,8 @@ void multiply_matrix_tests(void)
     for (int i = 0; i < n12; i++)
     {
         for (int j = 0; j < m12; j++)
-        if (fabs(actual2[i][j] - expected2[i][j]) > eps)
-            k = 0;
+            if (fabs(actual2[i][j] - expected2[i][j]) > eps)
+                k = 0;
     }
     if (k == 1)
         printf("Test 2 in multiply_matrix function is passed\n");
@@ -224,8 +224,8 @@ void multiply_matrix_tests(void)
     for (int i = 0; i < n14; i++)
     {
         for (int j = 0; j < m14; j++)
-        if (fabs(actual4[i][j] - expected4[i][j]) > eps)
-            k = 0;
+            if (fabs(actual4[i][j] - expected4[i][j]) > eps)
+                k = 0;
     }
     if (k == 1)
         printf("Test 4 in multiply_matrix function is passed\n");
@@ -240,7 +240,7 @@ void gauss_tests(void)
 {
     int k;
     //1 Вычисление обратной матрицы размера 3х3
-    int n11 = 3,m11 = 3;
+    int n11 = 3, m11 = 3;
     double matrix11[3][3] = { { 1, 2, 3 }, { 4, 5, 6 }, { 7, 8, 10 } };
     double *mat11[n11];
     for (int i = 0;i < m11;i++)
@@ -248,11 +248,11 @@ void gauss_tests(void)
     
     double **actual1 = NULL;
 
-    gauss(mat11,&actual1,n11,m11);
+    gauss(mat11, &actual1, n11, m11);
     
-    double expected1[3][3] = {{(double)-2 / 3, (double)-4 / 3, 1}, {(double)-2 / 3, (double)11 / 3, -2}, {1, -2, 1}};
+    double expected1[3][3] = { { (double)-2 / 3, (double)-4 / 3, 1 }, { (double)-2 / 3, (double)11 / 3, -2 }, { 1, -2, 1 } };
     
-    k = 1;
+    k = 1;        
 
     for (int i = 0;i < n11;i++)
     {
