@@ -31,8 +31,8 @@ int main(int argc, char** argv)
 	err = read_matrix(f2,&matrix2,&n2, &m2);
     err = sum_matrix(matrix1,matrix2,n1,m1,n2,m2,&matrix_res);
     printf("%d \n",err);
-    if (err == OK)
-    {                        
+    //if (err == OK)
+    //{                        
         f_res = fopen(argv[4], "w");
         if (f_res)
         {
@@ -44,11 +44,11 @@ int main(int argc, char** argv)
             err = NO_FILE;
         free_matrix_rows(matrix_res, n1);
         
-    }
-    else
-    {
-        printf("Matrices should have the same size");                                     
-    }
+    //}
+    //else
+    //{
+    //    printf("Matrices should have the same size");                                     
+    //}
     /* if (argc < 4 || argc > 5)
     {
         fprintf(stderr, "main1.exe <action> <mtr_1.txt> [mtr_2.txt] <res.txt>\n");
