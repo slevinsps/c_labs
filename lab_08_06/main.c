@@ -177,7 +177,7 @@ int main(int argc, char** argv)
                             f_res = fopen(argv[3], "w");
                             if (f_res)
                             {
-                                print_matrix(f_res,edin,n1,n1);
+                                //print_matrix(f_res,edin,n1,n1);
                                 fclose(f_res);
                                 
                             }
