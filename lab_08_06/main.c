@@ -143,7 +143,7 @@ int main(int argc, char** argv)
                                     f_res = fopen(argv[4], "w");
                                     if (f_res)
                                     {
-                                        print_matrix(f_res,matrix_res,n1,n1);
+                                        print_matrix(f_res,matrix_res,n1,m2);
                                         fclose(f_res);
                                         
                                     }
