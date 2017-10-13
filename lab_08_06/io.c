@@ -2,7 +2,7 @@
 #include "defines.h"
 #include "create_free_matrix.h"
         
-int read_matrix(FILE * f, double ***matrix1, int *n1, int *m1)
+int read_matrix(FILE *f, double ***matrix1, int *n1, int *m1)
 {
     if (fscanf(f, "%d %d", n1, m1) != 2 || (*n1 <= 0) || (*m1 <= 0))
     {
@@ -24,7 +24,7 @@ int read_matrix(FILE * f, double ***matrix1, int *n1, int *m1)
     return OK;
 }
 
-void print_matrix(FILE *f,double **matrix1,int n1, int m1)
+void print_matrix(FILE *f, double **matrix1, int n1, int m1)
 {
 	fprintf(f, "%d %d", n1, m1);
     for (int i = 0; i < n1; i++)
