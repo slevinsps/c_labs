@@ -17,7 +17,7 @@ int main(int argc, char** argv)
     int n2 = 0,m2 = 0;
     double **matrix1 = NULL;
     double **matrix2 = NULL;
-    double **matrix_res = NULL;
+    //double **matrix_res = NULL;
     //double **edin = NULL;
     
     FILE * f1;
@@ -29,20 +29,29 @@ int main(int argc, char** argv)
 	read_matrix(f1,&matrix1,&n1, &m1);
 	f2 = fopen(argv[3], "r");
 	err = read_matrix(f2,&matrix2,&n2, &m2);
-    err = sum_matrix(matrix1,matrix2,n1,m1,n2,m2,&matrix_res);
-    printf("%d \n",err);
+	f_res = fopen(argv[4], "w");
+	fprintf(f_res,"%d %d",n1,m1);
+	for (int i = 0; i<n1;i++)
+	{
+		fprintf(f_res,"\n");
+		for (int j = 0; j<m1;j++)
+		{
+			fprintf(f_res,"%f ",matrix1[i][j] + matrix2[i][j]);
+			
+		}
+	}
     //if (err == OK)
     //{                        
-        f_res = fopen(argv[4], "w");
-        if (f_res)
-        {
-            print_matrix(f_res,matrix_res,n1,m1);
-            fclose(f_res);
+        // f_res = fopen(argv[4], "w");
+        // if (f_res)
+        // {
+            // print_matrix(f_res,matrix_res,n1,m1);
+            // fclose(f_res);
     
-        }
-        else
-            err = NO_FILE;
-        free_matrix_rows(matrix_res, n1);
+        // }
+        // else
+            // err = NO_FILE;
+        // free_matrix_rows(matrix_res, n1);
         
     //}
     //else
