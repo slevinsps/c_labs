@@ -1,13 +1,13 @@
 #include <stdlib.h>
     
 #include "defines.h"
-void free_matrix_rows(double **data, int n)
+void free_matrix_rows(double ***data, int n)
 {
     for (int i = 0;i < n; i++)
     {
-        free(data[i]);        
+        free((*data)[i]);        
     }
-    free(data);    
+    free(*data);    
 }
     
 double** allocate_matrix_row(int n,int m)
