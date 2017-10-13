@@ -15,13 +15,13 @@ void sum_matrix_tests(void)
 {
     int k;
     //1 Сложение матриц размера 3х4
-    int n11 = 3,m11 = 4;
-    double matrix11[3][4] = {{1, 2, 3, 7}, {4, 5, 6, 4}, {7, 8, 9, -8}};
+    int n11 = 3, m11 = 4;
+    double matrix11[3][4] = { { 1, 2, 3, 7 }, { 4, 5, 6, 4 }, { 7, 8, 9, -8 } };
     double *mat11[n11];
     for (int i = 0; i < m11; i++)
         mat11[i] = matrix11[i];
     
-    int n21 = 3,m21 = 4;
+    int n21 = 3, m21 = 4;
     double matrix21[3][4] = {{-4, 2, 5, 2}, {3, 5, 2, 1}, {7, -1, 1, 0}};
     double* mat21[n21];
     for (int i = 0; i < m21; i++)
