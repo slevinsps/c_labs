@@ -10,7 +10,7 @@ void free_matrix_rows(double ***data, int n)
     free(*data);    
 }
     
-double** allocate_matrix_row(int n, int m)
+double **allocate_matrix_row(int n, int m)
 {
     double **data = (double**)malloc(n * sizeof(double*));
     if (!data)
