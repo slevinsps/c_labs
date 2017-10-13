@@ -50,8 +50,8 @@ int main(int argc, char** argv)
             {    
                 printf("Invalid arguments of matrix 1\n");
             }
-            //if (err == OK)
-            //{
+            if (err == OK)
+            {
                 if (argc == 5)
                 {
                     f2 = fopen(argv[3], "r");
@@ -72,14 +72,14 @@ int main(int argc, char** argv)
                         {    
                             printf("Invalid arguments of matrix 2\n");
                         }
-                        //if (err == OK)
-                        //{
+                        if (err == OK)
+                        {
                             if (strcmp(argv[1],"a") == 0)
                             {       						
                                 err = sum_matrix(matrix1,matrix2,n1,m1,n2,m2,&matrix_res);
 								printf("%d \n",err);
-                                //if (err == OK)
-                                //{                        
+                                if (err == OK)
+                                {                        
                                     f_res = fopen(argv[4], "w");
 									if (f_res)
 									{
@@ -91,17 +91,17 @@ int main(int argc, char** argv)
 										err = NO_FILE;
 									free_matrix_rows(matrix_res, n1);
 									
-                                //}
-                                //else
-                                //{
-                                //    printf("Matrices should have the same size"); 									
-                                //}
+                                }
+                                else
+                                {
+                                    printf("Matrices should have the same size"); 									
+                                }
                             }
                             else if (strcmp(argv[1],"m") == 0)
                             {                                
                                 err = multiply_matrix(matrix1,matrix2,n1,m1,n2,m2,&matrix_res);
-                                //if (err == OK)
-                                //{                        
+                                if (err == OK)
+                                {                        
                                     f_res = fopen(argv[4], "w");
 									if (f_res)
 									{
@@ -112,11 +112,11 @@ int main(int argc, char** argv)
 									else
 										err = NO_FILE;
 									free_matrix_rows(matrix_res, n1);
-								//}
-                                //else
-                                //{
-                                //    printf("The number of columns of the first matrix ​​not equal to the number of rows of the second matrix.");        
-								//}
+								}
+                                else
+                                {
+                                    printf("The number of columns of the first matrix ​​not equal to the number of rows of the second matrix.");        
+								}
                             }
 							else
 							{
@@ -124,7 +124,7 @@ int main(int argc, char** argv)
 							}
 							
 							free_matrix_rows(matrix2, n2);
-                        //}  
+                        }  
 						
                     }
 					
@@ -134,8 +134,8 @@ int main(int argc, char** argv)
                    if (strcmp(argv[1],"o") == 0)
                     {                                            
                         err = gauss(matrix1,&edin,n1,m1);
-                        //if (err == OK)
-                        // {                        
+                        if (err == OK)
+                        {                        
                             f_res = fopen(argv[3], "w");
 							if (f_res)
 							{
@@ -147,7 +147,7 @@ int main(int argc, char** argv)
 								err = NO_FILE;
 							
 							free_matrix_rows(edin, n1);
-                        //}
+                        }
                         if (err == DETERMINATE_0)
                         {
                             printf("Determinate = 0\n");
@@ -165,7 +165,7 @@ int main(int argc, char** argv)
 					}
                 } 
 				free_matrix_rows(matrix1, n1);				
-            //}           
+            }           
 			
 		} 
 				
