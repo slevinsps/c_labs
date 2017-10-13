@@ -13,8 +13,8 @@
 int main(int argc, char** argv)
 {
     int err = OK;
-    int n1,m1;
-    int n2,m2;
+    int n1 = 0,m1 = 0;
+    int n2 = 0,m2 = 0;
     double **matrix1 = NULL;
     double **matrix2 = NULL;
     double **matrix_res = NULL;
