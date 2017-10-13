@@ -17,15 +17,15 @@ int main(int argc, char** argv)
     int n2 = 0,m2 = 0;
     double **matrix1;
     double **matrix2;
-    //double **matrix_res = NULL;
-    //double **edin = NULL;
+    double **matrix_res = NULL;
+    double **edin = NULL;
     
     FILE * f1;
     FILE * f2;
     FILE * f_res;
 
     setbuf(stdout,NULL);
-	f1 = fopen(argv[2], "r");
+	/* f1 = fopen(argv[2], "r");
 	read_matrix(f1,&matrix1,&n1, &m1);
 	f2 = fopen(argv[3], "r");
 	err = read_matrix(f2,&matrix2,&n2, &m2);
@@ -44,7 +44,7 @@ int main(int argc, char** argv)
 	fclose(f2);
 	fclose(f_res);
 	free_matrix_rows(&matrix1, n1);
-	free_matrix_rows(&matrix2, n2);
+	free_matrix_rows(&matrix2, n2); */
     //if (err == OK)
     //{                        
         // f_res = fopen(argv[4], "w");
@@ -63,7 +63,7 @@ int main(int argc, char** argv)
     //{
     //    printf("Matrices should have the same size");                                     
     //}
-    /* if (argc < 4 || argc > 5)
+    if (argc < 4 || argc > 5)
     {
         fprintf(stderr, "main1.exe <action> <mtr_1.txt> [mtr_2.txt] <res.txt>\n");
         err = NOT_ALL_ARGUMENTS;
@@ -127,7 +127,7 @@ int main(int argc, char** argv)
                                     }
                                     else
                                         err = NO_FILE;
-                                    free_matrix_rows(matrix_res, n1);
+                                    free_matrix_rows(&matrix_res, n1);
                                     
                                 }
                                 else
@@ -149,7 +149,7 @@ int main(int argc, char** argv)
                                     }
                                     else
                                         err = NO_FILE;
-                                    free_matrix_rows(matrix_res, n1);
+                                    free_matrix_rows(&matrix_res, n1);
                                 }
                                 else
                                 {
@@ -161,7 +161,7 @@ int main(int argc, char** argv)
                                 err = -10;                                
                             }
                             
-                            free_matrix_rows(matrix2, n2);
+                            free_matrix_rows(&matrix2, n2);
                         }  
                         
                     }
@@ -184,12 +184,12 @@ int main(int argc, char** argv)
                             else
                                 err = NO_FILE;
                             
-                            free_matrix_rows(edin, n1);
+                            free_matrix_rows(&edin, n1);
                         }
                         if (err == DETERMINATE_0)
                         {
                             printf("Determinate = 0\n");
-                            free_matrix_rows(edin, n1);
+                            free_matrix_rows(&edin, n1);
                             
                         }
                         if (err == DONT_EQUAL_SIZE)
@@ -202,12 +202,12 @@ int main(int argc, char** argv)
                         err = -10;                                
                     }
                 } 
-                free_matrix_rows(matrix1, n1);                
+                free_matrix_rows(&matrix1, n1);                
             }           
             
         } 
                 
-    } */
+    }
     //printf("%d\n",err);
     
     return err;
