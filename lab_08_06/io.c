@@ -4,13 +4,9 @@
         
 int read_matrix(FILE *f,double ***matrix1,int *n1, int *m1)
 {
-    if (fscanf(f, "%d %d", n1, m1) != 2)
+    if (fscanf(f, "%d %d", n1, m1) != 2 || (*n1 <= 0) || (*m1 <= 0))
     {
-        return -1;
-    }
-    if ((*n1 <= 0) || (*m1 <= 0))
-    {
-        return -2;
+        return INVALID_ARGUMENT_MATRIX;
     }
 	*matrix1 = allocate_matrix_row(*n1,*m1);
 
@@ -20,11 +16,12 @@ int read_matrix(FILE *f,double ***matrix1,int *n1, int *m1)
         {
             if (fscanf(f, "%lf", &(*matrix1)[i][j]) != 1)
             {
-                return -3;
+				free_matrix_rows(matrix1,*n1);
+                return INVALID_NUMBER;
             }
         }
     }
-    return 0;
+    return OK;
 }
 
 void print_matrix(FILE *f,double **matrix1,int n1, int m1)
