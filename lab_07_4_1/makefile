@@ -1,6 +1,5 @@
 CC := gcc
-CFLAGS := -std=c99 -Wall -Werror -pedantic -ggdb
-CFLAGS2 := -std=c99 -Wall -Werror -ggdb
+CFLAGS := -std=c99 -Wall -Werror -ggdb
 
 ifeq ($(mode), debug)
 	CFLAGS += -g3
@@ -15,9 +14,9 @@ app.exe : main.o functions.o io.o binary_sort.o
 test.exe : tests.o functions.o io.o binary_sort.o
 	$(CC) $(CFLAGS) $^ -o $@
 test_speed.exe : test_speed.o functions.o io.o binary_sort.o
-	$(CC) $(CFLAGS2) $^ -o $@
+	$(CC) $(CFLAGS) $^ -o $@
 
 %.o : %.c *.h
-	$(CC) $(CFLAGS2) -c $<
+	$(CC) $(CFLAGS) -c $<
 clean :
 	RM *.o *.exe
