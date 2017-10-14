@@ -2,7 +2,8 @@
 
 #include "defines.h"
 #include "create_free_matrix.h"
-    
+   
+// Суммировние матриц   
 int sum_matrix(double **matrix1, double **matrix2, int n1, int m1, int n2, int m2, double ***matrix3)
 {
     if (n1 != n2 || m1 != m2)

@@ -1,6 +1,7 @@
 #include "defines.h"
 #include "create_free_matrix.h"
 
+// Умножение матриц
 int multiply_matrix(double **matrix1, double **matrix2, int n1, int m1, int n2, int m2, double ***matrix3)
 {
     if (m1 != n2)

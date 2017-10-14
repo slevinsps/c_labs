@@ -1,6 +1,8 @@
 #include <stdlib.h>
     
 #include "defines.h"
+
+// Освобождение памяти почему-то не работает с 2мя звездами
 void free_matrix_rows(double ***data, int n)
 {
     for (int i = 0;i < n; i++)
@@ -9,7 +11,8 @@ void free_matrix_rows(double ***data, int n)
     }
     free(*data);    
 }
-    
+  
+// Выделение памяти  
 double **allocate_matrix_row(int n, int m)
 {
     double **data = (double**)malloc(n * sizeof(double*));

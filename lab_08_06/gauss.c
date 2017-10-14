@@ -5,6 +5,7 @@
 #include "io.h"
 #include "defines.h"
 
+// Заполняет единичную матрицу
 void creat_edin(double **edin, int n)
 {
     for (int i = 0; i < n; i++)
@@ -19,6 +20,8 @@ void creat_edin(double **edin, int n)
     } 
 }    
 
+// Делит строчку исходной матрицы на диагональный элемент матрицы
+// также делит элемент столбца единичной матрицы
 void gauss_divide(double *row, int number, double *chislo, int n1)
 {
     double div = row[number];
@@ -30,6 +33,8 @@ void gauss_divide(double *row, int number, double *chislo, int n1)
     }    
 }
 
+// Вычитает одну строчку исходной матрицы из другой
+// также вычитает один элемент столбца единичной матрицы из другого
 void subtraction(double *row1, double *row2, int number, double *chislo1, double *chislo2, int n1)
 {
     double sub = row1[number];
@@ -41,9 +46,12 @@ void subtraction(double *row1, double *row2, int number, double *chislo1, double
     *chislo1 = *chislo1 - sub * (*chislo2); // изменение значения элемента единичной матрицы
 }
 
+// Меняет строки местами, для того, чтобы вверху оставался не нулевой элемент,
+// также меняет местами элемент столбца единичной матрицы
+// также здесь происходит проверка на нулевой определитель, смысл в том,
+// что если внизу нет больше таких строк, с ненулевым элементом, то значит, что определитель равен нулю
 int choos_not_zero_element(double ***matrix1, int column, int n, double **edin, int column_edin, double *arr_operations)
 {    
-    // функция меняет строки местами, для того, чтобы вверху оставался не нулевой элемент
     double eps = 0.000000000001;
     int err = OK;
     double k;
@@ -71,6 +79,7 @@ int choos_not_zero_element(double ***matrix1, int column, int n, double **edin, 
     return err;
 }
 
+// Главная функция
 int gauss(double **matrix1, double ***edin, int n1, int m1)
 {
     /// Пытался сделать сохранение операций, чтоб с остальными стобцами просто применить их
@@ -80,7 +89,7 @@ int gauss(double **matrix1, double ***edin, int n1, int m1)
     {
         double arr_operations[n1 + n1 * n1 + n1]; // в этот массив сохраняются операции
         int k = -1;
-        *edin = allocate_matrix_row(n1, m1);
+        *edin = allocate_matrix_row(n1, m1); // создание единичной матрицы
         if (*edin)
         {
             creat_edin(*edin, n1);
@@ -147,7 +156,7 @@ int gauss(double **matrix1, double ***edin, int n1, int m1)
                 }    
             }    
         }    
-    }    
+    }            
     else
         err = DONT_EQUAL_SIZE;
     return err;
