@@ -96,7 +96,7 @@ int main(int argc, char **argv)
 								else
 								{
 									err = -11;
-									printf("Incorrect key")
+									printf("Incorrect key");
 								}
 							}
 							else
