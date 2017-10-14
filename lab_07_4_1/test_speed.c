@@ -72,7 +72,7 @@ void print_results(int *a, int n)
     printf("qsort %d: %I64d\n\n", n, t_mid / count);  
 }
 
-void creat_array(int n, char c)
+void test_sorts(int n, char c)
 {
     int a[n];
     
@@ -116,43 +116,43 @@ int main(int argc, char **argv)
     printf("В случайном порядке:\n");
     for (int i = 1;i < 10;i++)
     {
-        creat_array(i, 'r');
+        test_sorts(i, 'r');
     }
     for (int i = 10;i <= 100;i += 10)
     {
-        creat_array(i, 'r');
+        test_sorts(i, 'r');
     }
     
     /////////////////
     printf("\n-----------------------\nВ порядке возрастания:\n");
     for (int i = 1;i < 10;i++)
     {
-        creat_array(i, 'v');
+        test_sorts(i, 'v');
     }
     for (int i = 10;i <= 100;i += 10)
     {
-        creat_array(i, 'v');
+        test_sorts(i, 'v');
     }
     
     /////////////////
     printf("\n-----------------------\nВ порядке убывания:\n");
     for (int i = 1;i < 10;i++)
     {
-        creat_array(i, 'u');
+        test_sorts(i, 'u');
     }
     for (int i = 10;i <= 100;i += 10)
     {
-        creat_array(i, 'u');
+        test_sorts(i, 'u');
     }
     
     /////////////////
     printf("\n-----------------------\nОдинаковые значения:\n");
     for (int i = 1;i < 10;i++)
     {
-        creat_array(i, 's');
+        test_sorts(i, 's');
     }
     for (int i = 10;i <= 100;i += 10)
     {
-        creat_array(i, 's');
+        test_sorts(i, 's');
     }
 }
