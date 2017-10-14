@@ -53,7 +53,7 @@ void print_results(int *a, int n)
             i++;
         }
     }
-    printf("mysort %d: %I64d\n", n, t_mid / count);
+    printf("|mysort %d| %I64d|\n", n, t_mid / count);
     
     t_mid = 0;
     i = 0;
@@ -69,7 +69,7 @@ void print_results(int *a, int n)
             i++;
         }
     }    
-    printf("qsort %d: %I64d\n\n", n, t_mid / count);  
+    printf("|qsort %d| %I64d|\n", n, t_mid / count);  
 }
 
 void test_sorts(int n, char c)
