@@ -28,7 +28,7 @@ int main(int argc, char **argv)
     int *new_end;
     char *pstr;
     
-    if (argc < 3)
+    if (argc < 3 || argc > 4)
     {
         fprintf(stderr, "app.exe <file_input-name> <file_output-name> <filter or nothing>\n");
         err = NOT_ALL_ARGUMENTS;
@@ -73,32 +73,38 @@ int main(int argc, char **argv)
 						else
 						{                        
 							if (argc == 4)
-								pstr = argv[3];
-							
-							if (argc == 4 && pstr[0] == 'f' && pstr[1] == 0)
 							{
-								err = key(pb, pe, &new_begin, &new_end);    
-								if (err == ARRAY_EMPTY)
+								pstr = argv[3];
+								if (pstr[0] == 'f' && pstr[1] == 0)
 								{
-									fprintf(stderr, "Array is empty");    
+									err = key(pb, pe, &new_begin, &new_end);    
+									if (err == ARRAY_EMPTY)
+									{
+										fprintf(stderr, "Array is empty");    
+									}
+									if (err == MEMORY_ERROR)
+									{
+										fprintf(stderr, "Memory error");    
+									}
+									if (err == OK)
+									{
+										mysort(new_begin, new_end - new_begin, sizeof(int), compare_int);
+										print_array(new_begin, new_end, f2);
+										free(new_begin);
+									}
 								}
-								if (err == MEMORY_ERROR)
+								else
 								{
-									fprintf(stderr, "Memory error");    
+									err = -11;
+									printf("Incorrect key");
 								}
-								if (err == OK)
-								{
-									mysort(new_begin, new_end - new_begin, sizeof(int), compare_int);
-									print_array(new_begin, new_end, f2);
-									free(new_begin);
-								}
-							}                        
+							}
 							else
 							{
 								mysort(pb, pe - pb, sizeof(int), compare_int);
 								print_array(pb, pe, f2);                        
-							}                      
-						}
+							}
+						}					
 						free(a);
 					}                                
 					else
