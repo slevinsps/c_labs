@@ -81,13 +81,13 @@ int main(int argc, char **argv)
                                 if (err == OK)
                                 {                        
                                     f_res = fopen(argv[4], "w");
-                                    //if (f_res)
-                                    //{
+                                    if (f_res)
+                                    {
                                         print_matrix(f_res, matrix_res, n1, m1);
                                         fclose(f_res);                               
-                                    //}
-                                    //else
-                                    //   err = NO_FILE;
+                                    }
+                                    else
+                                        err = NO_FILE;
                                     free_matrix_rows(&matrix_res, n1);                                    
                                 }
                                 else
@@ -101,13 +101,13 @@ int main(int argc, char **argv)
                                 if (err == OK)
                                 {                        
                                     f_res = fopen(argv[4], "w");
-                                    //if (f_res)
-                                    //{
+                                    if (f_res)
+                                    {
                                         print_matrix(f_res, matrix_res, n1, m2);
                                         fclose(f_res);                                   
-                                    //}
-                                    //else
-                                    //    err = NO_FILE;
+                                    }
+                                    else
+                                        err = NO_FILE;
                                     free_matrix_rows(&matrix_res, n1);
                                 }
                                 else
@@ -132,13 +132,13 @@ int main(int argc, char **argv)
                         if (err == OK)
                         {                        
                             f_res = fopen(argv[3], "w");
-                            //if (f_res)
-                            //{
+                            if (f_res)
+                            {
                                 print_matrix(f_res, edin, n1, n1);
                                 fclose(f_res);   
-                            //}
-                            //else
-                            //    err = NO_FILE;
+                            }
+                            else
+                                err = NO_FILE;
                             
                             free_matrix_rows(&edin, n1);
                         }
