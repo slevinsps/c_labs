@@ -23,6 +23,12 @@ void creat_edin(double **edin, int n)
 
 // Делит строчку исходной матрицы на диагональный элемент матрицы
 // также делит элемент столбца единичной матрицы
+
+// double *row  -  строка матрицы
+// int number  -  номер элемента строки, на который нужно делить
+// double *chislo  -  элемент единичной матрицы
+// int n1  -  размер матрицы
+
 void gauss_divide(double *row, int number, double *chislo, int n1)
 {
 	assert(number >= 0);
@@ -37,6 +43,14 @@ void gauss_divide(double *row, int number, double *chislo, int n1)
 
 // Вычитает одну строчку исходной матрицы из другой
 // также вычитает один элемент столбца единичной матрицы из другого
+
+// double *row1  - 1ая строка матрицы
+// double *row2  - 2ая строка матрицы
+// int number  -  номер элемента строки, на который нужно умножить строку
+// double *chislo1  -  1ый элемент единичной матрицы
+// double *chislo2  -  2ой элемент единичной матрицы
+// int n1  -  размер матрицы
+
 void subtraction(double *row1, double *row2, int number, double *chislo1, double *chislo2, int n1)
 {
 	assert(number >= 0);
@@ -53,6 +67,15 @@ void subtraction(double *row1, double *row2, int number, double *chislo1, double
 // также меняет местами элемент столбца единичной матрицы
 // также здесь происходит проверка на нулевой определитель, смысл в том,
 // что если внизу нет больше таких строк, с ненулевым элементом, то значит, что определитель равен нулю
+
+// double **matrix1  - матрица
+// int column - номер столбца
+// int number  -  номер элемента строки, на который нужно умножить строку
+// int n  -  размер матрицы
+// double **edin  -  единичная матрица
+// int column_edin  -  номер столбца единичной матрицы
+// double *arr_operations  -  массив операций
+
 int choos_not_zero_element(double **matrix1, int column, int n, double **edin, int column_edin, double *arr_operations)
 {    
     double eps = 0.000000001;
@@ -90,7 +113,7 @@ int gauss(double **matrix1, double ***edin, int n1, int m1)
     int err = OK;
     if (n1 == m1)    
     {
-        double arr_operations[n1 + n1 * n1]; // в этот массив сохраняются операции (два цикла, вложеных n1*n1, затем максимальное количество перестановок n1, )
+        double arr_operations[n1 + n1 * n1]; // в этот массив сохраняются операции (два цикла, вложеных n1*n1 + максимальное количество перестановок n1)
         int k = -1;
         *edin = allocate_matrix_row(n1, m1); // создание единичной матрицы
         if (*edin)

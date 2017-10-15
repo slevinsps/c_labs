@@ -117,7 +117,8 @@ int main(int argc, char **argv)
                             }
                             else
                             {
-                                err = -10;                                
+								printf("incorrect operation\n");
+                                err = INCORECT_OPERATION;                                
                             }
                             
                             free_matrix_rows(&matrix2, n2); 
@@ -154,7 +155,8 @@ int main(int argc, char **argv)
                     }
                     else
                     {
-                        err = -10;                                
+						printf("incorrect operation\n");
+                        err = INCORECT_OPERATION;                                
                     }
                 } 
                 free_matrix_rows(&matrix1, n1);                

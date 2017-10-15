@@ -10,5 +10,6 @@
 #define DONT_RIGHT_SIZE -6
 #define DETERMINATE_0 -7
 #define MEMORY_ERROR -8
+#define INCORECT_OPERATION -9
 
 #endif // DEFINES
