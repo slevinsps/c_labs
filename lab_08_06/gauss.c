@@ -90,7 +90,7 @@ int gauss(double **matrix1, double ***edin, int n1, int m1)
     int err = OK;
     if (n1 == m1)    
     {
-        double arr_operations[n1 + n1 * n1 + n1]; // в этот массив сохраняются операции
+        double arr_operations[n1 + n1 * n1]; // в этот массив сохраняются операции (два цикла, вложеных n1*n1, затем максимальное количество перестановок n1, )
         int k = -1;
         *edin = allocate_matrix_row(n1, m1); // создание единичной матрицы
         if (*edin)
