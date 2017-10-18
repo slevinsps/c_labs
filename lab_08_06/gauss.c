@@ -76,7 +76,7 @@ void subtraction(double *row1, double *row2, int number, double *chislo1, double
 // int column_edin  -  номер столбца единичной матрицы
 // double *arr_operations  -  массив операций
 
-int choos_not_zero_element(double **matrix1, int column, int n, double **edin, int column_edin, double *arr_operations)
+int choos_max_element(double **matrix1, int column, int n, double **edin, int column_edin, double *arr_operations)
 {    
     double eps = 0.000000001;
     int err = OK;
@@ -124,7 +124,7 @@ int gauss(double **matrix1, double ***edin, int n1, int m1)
             for (int j = 0;j < n1;j++)
             {            
                 k++;
-                err = choos_not_zero_element(matrix1, j, n1, *edin, 0, &arr_operations[k]);
+                err = choos_max_element(matrix1, j, n1, *edin, 0, &arr_operations[k]);
                 //print_matrix(stdout,matrix1,n1,n1);
                 //printf("выше выбор\n");
                 if (err == DETERMINATE_0)
