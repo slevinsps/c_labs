@@ -85,7 +85,7 @@ int choos_not_zero_element(double **matrix1, int column, int n, double **edin, i
 	int max_i = column;
     for (int i = column; i < n; i++)
     {
-        if (matrix1[i][column] > matrix1[max_i][column])
+        if (fabs(matrix1[i][column]) > fabs(matrix1[max_i][column]))
 			max_i = i;
     }
 	if (fabs(matrix1[max_i][column]) > eps)
