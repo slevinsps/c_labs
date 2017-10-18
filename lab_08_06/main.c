@@ -88,7 +88,7 @@ int main(int argc, char **argv)
                                     }
                                     else
                                         err = NO_FILE;
-                                    free_matrix_rows(&matrix_res, n1);                                    
+                                    free_matrix_rows(matrix_res, n1);                                    
                                 }
                                 else
                                 {
@@ -108,7 +108,7 @@ int main(int argc, char **argv)
                                     }
                                     else
                                         err = NO_FILE;
-                                    free_matrix_rows(&matrix_res, n1);
+                                    free_matrix_rows(matrix_res, n1);
                                 }
                                 else
                                 {
@@ -121,7 +121,7 @@ int main(int argc, char **argv)
                                 err = INCORECT_OPERATION;                                
                             }
                             
-                            free_matrix_rows(&matrix2, n2); 
+                            free_matrix_rows(matrix2, n2); 
                         }  
                     }   
                 }
@@ -141,12 +141,12 @@ int main(int argc, char **argv)
                             else
                                 err = NO_FILE;
                             
-                            free_matrix_rows(&edin, n1);
+                            free_matrix_rows(edin, n1);
                         }
                         if (err == DETERMINATE_0)
                         {
                             printf("Determinate = 0\n");
-                            free_matrix_rows(&edin, n1);                            
+                            free_matrix_rows(edin, n1);                            
                         }
                         if (err == DONT_EQUAL_SIZE)
                         {
@@ -159,7 +159,7 @@ int main(int argc, char **argv)
                         err = INCORECT_OPERATION;                                
                     }
                 } 
-                free_matrix_rows(&matrix1, n1);                
+                free_matrix_rows(matrix1, n1);                
             }                      
         }                
     }

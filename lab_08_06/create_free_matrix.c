@@ -3,13 +3,13 @@
 #include "defines.h"
 
 // Освобождение памяти почему-то не работает с 2мя звездами
-void free_matrix_rows(double ***data, int n)
+void free_matrix_rows(double **data, int n)
 {
     for (int i = 0;i < n; i++)
     {
-        free((*data)[i]);        
+        free((data)[i]);        
     }
-    free(*data);    
+    free(data);    
 }
   
 // Выделение памяти  
@@ -23,7 +23,7 @@ double **allocate_matrix_row(int n, int m)
         data[i] = (double*)malloc(m * sizeof(double));
         if (!data[i])
         {
-            free_matrix_rows(&data, n);
+            free_matrix_rows(data, n);
             return NULL;
         } 
     }

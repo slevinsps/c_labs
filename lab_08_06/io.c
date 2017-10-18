@@ -17,7 +17,7 @@ int read_matrix(FILE *f, double ***matrix1, int *n1, int *m1)
 			{
 				if (fscanf(f, "%lf", &(*matrix1)[i][j]) != 1)
 				{
-					free_matrix_rows(matrix1, *n1);
+					free_matrix_rows(*matrix1, *n1);
 					return INVALID_NUMBER;
 				}
 			}
