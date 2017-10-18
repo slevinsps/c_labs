@@ -2,9 +2,17 @@
 #include <string.h>
 #include <stdlib.h>
 
+
+int strlen1(const char *string)
+{
+	int k = 0;
+	while (string[k] != 0)
+		k++;
+	return k;
+}
 int check_affiliation(char ch, const char *string2)
 {
-	int len = strlen(string2);
+	int len = strlen1(string2);
 	for (int i = 0; i < len; i++)
 	{
 		if (ch == string2[i])
@@ -24,7 +32,7 @@ size_t strspn1( const char *string1, const char *string2 )
 
 char *strdup1(const char *str1)
 {
-	int len = strlen(str1);
+	int len = strlen1(str1);
 	char *res = malloc((len+1)*sizeof(char));
 	if (res)
 	{
@@ -79,8 +87,8 @@ void read_line(char **str, FILE *f)
 
 int strcat1(char **s1, char *s2)
 {
-	int len1 = strlen(*s1);
-	int len2 = strlen(s2);
+	int len1 = strlen1(*s1);
+	int len2 = strlen1(s2);
 	
 	*s1 = realloc(*s1,len1 + len2);
 	if (*s1)
@@ -99,13 +107,71 @@ int strcat1(char **s1, char *s2)
 
 
 
-
-char* str_replace(const char *source, const char *serach, const char *replace);
+int find_underline(const char *source, const char *search, int *pos1, int *pos2)
 {
-	len1 = strlen(source);
-	for (int i = 0; i < len1)
+	int len1 = strlen1(source);
+	int len2 = strlen1(search);
+	int count = 1;
+	for(int i = 0; i < len1 - len2; i++ )
 	{
-		
+		for(int j = i; j < len2; j++ )
+		{
+			if (source[j] != search[j])
+			{
+				count = 0;
+				break;
+			}
+		}
+		if (count)
+		{
+			
+			*pos1 = i;
+			*pos2 = i + len2;
+			//printf("%d   %d\n",*pos1,*pos2);
+			return 1;
+		}
+		else
+		{
+			*pos1 = -1;
+			*pos2 = -1;
+			count = 1;
+		}
+	}
+	return 0;
+}
+
+
+
+void str_replace(char *source, const char *search, const char *replace)
+{
+	char *s;
+	int len1 = strlen1(source);
+	int len2 = strlen1(search);
+	int len3 = strlen1(replace);
+	int len_res = len1 - len2 + len3;
+	int pos1;
+	int pos2;
+	s = source;
+	while (find_underline(s, search, &pos1, &pos2))
+	{
+		s = malloc(len_res);
+		for (int i = 0; i < pos1; i++ )
+		{
+			s[i] = source[i];
+		}
+		for (int i = pos1; i < pos1 + len3; i++ )
+		{
+			s[i] = replace[i-pos1];
+		}
+		int j = pos2;
+		for (int i = pos1 + len3; i < len_res; i++ )
+		{
+			s[i] = source[j];
+			j++;
+		}
+		//printf("%s\n",s);
+	}
+	
 	
 }
 size_t  getline(char **lineptr, size_t *n, int delimiter, FILE *stream)
@@ -114,19 +180,20 @@ size_t  getline(char **lineptr, size_t *n, int delimiter, FILE *stream)
     char buf[buf_size];
 	*lineptr = malloc(sizeof(char));
 	(*lineptr)[0] = 0;
-	int k = 0;
-	while (fgets(buf, buf_size, stream))
+	//int k = 0;
+	while (fgets(buf, buf_size-1, stream))
 	{ 
-		if (buf[strlen(buf)-1] == '\n')
+		//printf("@%s\n",buf);
+		if (buf[strlen1(buf)-1] == '\n')
 		{	
-			buf[strlen(buf)-1] = 0;
+			buf[strlen1(buf)-1] = 0;
 			strcat1(lineptr, buf);
 			break;
 		}
 		else
 			strcat1(lineptr, buf);
 	}
-	printf("%s",*lineptr);
+	//printf("%s",*lineptr);
 	*n = 1;
 	return *n;
 } 
@@ -140,10 +207,11 @@ int main(void)
 	char *s;
 	FILE *f = fopen("text.txt","r");
 	getline(&s, &n, 5, f);
+	str_replace(s, "name", "barabula");
 	printf("\n");
-	getline(&s, &n, 5, f);
+	//getline(&s, &n, 5, f);
 	//char *ss = "7sdsdsdsdk;jlkjkljkj915";
-	//printf("%I64d   %I64d \n",strlen(s),strlen(ss));
+	//printf("%I64d   %I64d \n",strlen1(s),strlen1(ss));
 	//strcut1(&s, ss);
 	//printf("%s",s);
 	//printf("%I64d",strspn1( strtext, digit ));
