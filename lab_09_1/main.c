@@ -109,14 +109,16 @@ int strcat1(char **s1, char *s2)
 
 int find_underline(const char *source, const char *search, int *pos1, int *pos2)
 {
+	//printf("%s\n",source);
 	int len1 = strlen1(source);
+	//printf("%d \n",len1);
 	int len2 = strlen1(search);
 	int count = 1;
-	for(int i = 0; i < len1 - len2; i++ )
+	for(int i = 0; i < len1 - len2+1; i++ )
 	{
-		for(int j = i; j < len2; j++ )
+		for(int j = i; j < i+len2; j++ )
 		{
-			if (source[j] != search[j])
+			if (source[j] != search[j-i])
 			{
 				count = 0;
 				break;
@@ -127,16 +129,20 @@ int find_underline(const char *source, const char *search, int *pos1, int *pos2)
 			
 			*pos1 = i;
 			*pos2 = i + len2;
+			//printf("%d   %d",*pos1,*pos2);
+			/* for(int r = *pos1; r < *pos2; r++ )
+				printf("%c",source[r]);
+			printf("\n@@@@   %s \n",search); */
+			
 			//printf("%d   %d\n",*pos1,*pos2);
 			return 1;
 		}
 		else
 		{
-			*pos1 = -1;
-			*pos2 = -1;
 			count = 1;
 		}
 	}
+
 	return 0;
 }
 
@@ -145,20 +151,28 @@ int find_underline(const char *source, const char *search, int *pos1, int *pos2)
 void str_replace(char *source, const char *search, const char *replace)
 {
 	char *s;
-	int len1 = strlen1(source);
+	int len1;
 	int len2 = strlen1(search);
 	int len3 = strlen1(replace);
-	int len_res = len1 - len2 + len3;
-	int pos1;
-	int pos2;
-	s = source;
-	while (find_underline(s, search, &pos1, &pos2))
+	int len_res;
+	int pos1 = 0;
+	int pos2 = 0;
+	while (find_underline(source, search, &pos1, &pos2))
 	{
-		s = malloc(len_res);
+		//printf("%s\n",s);
+		len1 = strlen1(source);
+		len_res = len1 - len2 + len3;
+		//printf("%%  %d\n",len_res);
+		s = malloc(len_res+1);
+		//printf("%d    %d\n",pos1, pos2);
+		//printf("%s\n",source);
+		//printf("dsd\n");
+		
 		for (int i = 0; i < pos1; i++ )
 		{
 			s[i] = source[i];
 		}
+		
 		for (int i = pos1; i < pos1 + len3; i++ )
 		{
 			s[i] = replace[i-pos1];
@@ -169,7 +183,13 @@ void str_replace(char *source, const char *search, const char *replace)
 			s[i] = source[j];
 			j++;
 		}
-		//printf("%s\n",s);
+		//printf("%s\n",source);
+		s[len_res] = 0;
+		free(source);
+		source = s;
+		
+		
+		
 	}
 	
 	
@@ -207,8 +227,8 @@ int main(void)
 	char *s;
 	FILE *f = fopen("text.txt","r");
 	getline(&s, &n, 5, f);
-	str_replace(s, "name", "barabula");
-	printf("\n");
+	str_replace(s, "aa", "bbb");
+	printf("%s",s);
 	//getline(&s, &n, 5, f);
 	//char *ss = "7sdsdsdsdk;jlkjkljkj915";
 	//printf("%I64d   %I64d \n",strlen1(s),strlen1(ss));
