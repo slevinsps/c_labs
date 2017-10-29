@@ -31,7 +31,7 @@ void creat_edin(double **edin, int n)
 
 void gauss_divide(double *row, int number, double *chislo, int n1)
 {
-	assert(number >= 0);
+	assert(number >= 0 && number < n1);
     double div = row[number];
     *chislo = *chislo / div; // изменение значения элемента единичной матрицы
     

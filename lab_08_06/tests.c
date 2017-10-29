@@ -25,21 +25,17 @@ void array_into_pointer(double matrix[][M], int n, double **mat)
 int compare_matrix(double **matrix1, double **matrix2, int n, int m)
 {
     float eps = 0.0001;
-    int tmp = 1;
     for (int i = 0; i < n; i++)
     {
         for (int j = 0; j < m; j++)
         {
             if (fabs(matrix1[i][j] - matrix2[i][j]) > eps)
-            {
-                tmp = 0;    
-                break;
+            {   
+                return 0;
             }
-            if (tmp == 0)
-                break;
         }    
     }
-    return tmp;
+    return 1;
 }
 
 
@@ -66,6 +62,7 @@ void sum_matrix_tests(void)
     array_into_pointer(expected1, n11, expect1);
     
     k = compare_matrix(expect1, actual1, n11, m11);
+	
     if (k == 1)
         printf("Test 1 in sum_matrix function is passed\n");
     else
@@ -73,6 +70,7 @@ void sum_matrix_tests(void)
         printf("Test 1 in sum_matrix function is failed\n");
         print_matrix(stdout, actual1, n11, m21);
     } 
+	free_matrix_rows(actual1, n11);
     //2 Сложение матриц размера 1х1
     int n12 = 1, m12 = 1;
     double matrix12[N][M] = { { 5 } };
@@ -100,7 +98,7 @@ void sum_matrix_tests(void)
         printf("Test 2 in sum_matrix function is failed\n");
         print_matrix(stdout, actual2, n12, m22);
     } 
-    
+    free_matrix_rows(actual2, n12);
     //3 Матрицы имеют разный размер
     int n13 = 1, m13 = 1;
     double matrix13[N][M] = { { 5 } };
@@ -156,6 +154,7 @@ void multiply_matrix_tests(void)
         printf("Test 1 in multiply_matrix function is failed\n");
         print_matrix(stdout, actual1, n11, m21);
     } 
+	free_matrix_rows(actual1, n11);
     //2 Умножение матриц одинакого размера 2х2 на 2х2
     int n12 = 2, m12 = 2;
     double matrix12[N][M] = { { 1, 2 }, { 3, 4 } };
@@ -184,7 +183,7 @@ void multiply_matrix_tests(void)
         printf("Test 2 in multiply_matrix function is failed\n");
         print_matrix(stdout, actual2, n12, m22);
     } 
-    
+    free_matrix_rows(actual2, n12);
     //3 Матрицы имеют неподходящий размер
     int n13 = 1, m13 = 1;
     double matrix13[N][M] = { { 5 } };
@@ -204,8 +203,7 @@ void multiply_matrix_tests(void)
     else
     {
         printf("Test 3 in multiply_matrix function is failed\n");
-        print_matrix(stdout, actual2, n13, m23);
-    }  
+    } 	
     //4 Умножение матриц 1х1 на 1х1
     int n14 = 1, m14 = 1;
     double matrix14[N][M] = { { 5 } };
@@ -232,8 +230,7 @@ void multiply_matrix_tests(void)
     else
     {
         printf("Test 4 in multiply_matrix function is failed\n");
-        print_matrix(stdout, actual2, n14, m24);
-    }
+    }	
 }
 
 void gauss_tests(void)
@@ -249,7 +246,7 @@ void gauss_tests(void)
 
     gauss(mat11, &actual1, n11, m11);
     
-    double expected1[N][M] = { { (double)-2 / 3, (double)-4 / 3, 1 }, { (double)-2 / 3, (double)11 / 3, -2 }, { 1, -2, 1 } };
+    double expected1[N][M] = { { -2.0 / 3, -4.0 / 3, 1 }, { -2.0 / 3,11.0 / 3, -2 }, { 1, -2, 1 } };
 
     double *expect1[n11];
     array_into_pointer(expected1, n11, expect1);
@@ -263,7 +260,8 @@ void gauss_tests(void)
         printf("Test 1 in gauss function is failed\n");
         print_matrix(stdout, actual1, n11, m11);          
     } 
-    
+    free_matrix_rows(actual1, n11);
+	
     //2 Вычисление обратной матрицы размера 1х1
     int n12 = 1, m12 = 1;
     double matrix12[N][M] = { { 5 } };
@@ -288,7 +286,7 @@ void gauss_tests(void)
         printf("Test 2 in gauss function is failed\n");
         print_matrix(stdout, actual2, n12, m12);        
     }
-    
+    free_matrix_rows(actual2, n12);
     //3 Определитель матрицы равен 0
     int n13 = 3, m13 = 3;
     double matrix13[N][M] = { { 1, 2, 3 }, { 4, 5, 6 }, { 7, 8, 9 } };
