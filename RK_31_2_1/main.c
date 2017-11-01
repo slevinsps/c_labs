@@ -11,23 +11,37 @@ int main(int argc,char **argv)
 	FILE *f;
 	double **matrix;
 	int n,m;
+	int err = OK;
 	if (argc == 2)
 	{
 		f = fopen(argv[1],"r");
 		if (!f)
 		{
-			printf("Такого файла нет");
+			printf("Такого файла нет\n");
 			return INVALID_FILE;
 		}
-		read_matrix(f,&matrix, &n, &m);
-		max_in_ugol(matrix, n, m);
-		//sort_1(matrix, n, m);
-        print_mat(matrix,n, m);
+		err = read_matrix(f,&matrix, &n, &m);
+		if (err == MEMORY_ERROR)
+			printf("Ошибка выделения памяти\n");
+		if (err == INVALID_SIZE)
+			printf("Некорректный размер матрицы\n");
+		if (err == INVALI_NUMBER)
+		{
+			printf("Некорректный элемент в матрице\n");
+			free_matrix(matrix, n);
+		}
+		if (err == OK)
+		{
+			max_in_ugol(matrix, n, m);
+			sort_1(matrix, n, m);
+			print_mat(matrix,n, m);
+			free_matrix(matrix, n);
+		}
+		fclose(f);
 		
 	}
 	else
-		printf("Неверное количество аргументов");
-	
+		printf("Вводите в следующем формате: ./main.exe <text.txt>\n");
 }
 
 

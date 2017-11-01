@@ -5,5 +5,6 @@
 #define INVALI_NUMBER -1
 #define INVALID_SIZE -2
 #define INVALID_FILE -3
+#define MEMORY_ERROR -4
 
 #endif // DIFINE

@@ -1,9 +1,12 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <assert.h>
 #include "defines.h"
-int srednee(double *res, int m)
+
+int srednee(const double *res, int m)
 {
 	double sr = 0.0;
+	assert(m > 0);
 	for (int i = 0; i < m; i++)
 	{
 		sr += res[i];
