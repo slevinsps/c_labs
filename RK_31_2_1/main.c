@@ -41,7 +41,10 @@ int main(int argc,char **argv)
         fclose(f);
     }
     else
+    {
         printf("Вводите в следующем формате: ./main.exe <file.txt>\n");
+        err = NOT_ALL_ARGUMENTS;        
+    }
     return err;
 }
 
