@@ -3,6 +3,10 @@
 #include <stdlib.h>
 
 
+#define OK 0
+#define NOT_ALL_ARGUMENTS -1
+#define NO_FILE -2
+
 int strlen1(const char *string)
 {
 	int k = 0;
@@ -129,7 +133,7 @@ int find_underline(const char *source, const char *search, int *pos1, int *pos2)
 			
 			*pos1 = i;
 			*pos2 = i + len2;
-			//printf("%d   %d",*pos1,*pos2);
+			//printf("%d   %d\n",*pos1,*pos2);
 			/* for(int r = *pos1; r < *pos2; r++ )
 				printf("%c",source[r]);
 			printf("\n@@@@   %s \n",search); */
@@ -148,7 +152,7 @@ int find_underline(const char *source, const char *search, int *pos1, int *pos2)
 
 
 
-void str_replace(char *source, const char *search, const char *replace)
+void str_replace(char **source, const char *search, const char *replace)
 {
 	char *s;
 	int len1;
@@ -157,42 +161,43 @@ void str_replace(char *source, const char *search, const char *replace)
 	int len_res;
 	int pos1 = 0;
 	int pos2 = 0;
-	while (find_underline(source, search, &pos1, &pos2))
+	while (find_underline(*source, search, &pos1, &pos2))
 	{
 		//printf("%s\n",s);
-		len1 = strlen1(source);
+		len1 = strlen1(*source);
 		len_res = len1 - len2 + len3;
-		//printf("%%  %d\n",len_res);
-		s = malloc(len_res+1);
+		//printf("%%  %d\n", pos1 + len3);
+		s = malloc(len_res+2);
 		//printf("%d    %d\n",pos1, pos2);
-		//printf("%s\n",source);
+		
 		//printf("dsd\n");
 		
 		for (int i = 0; i < pos1; i++ )
 		{
-			s[i] = source[i];
+			s[i] = (*source)[i];
 		}
 		
 		for (int i = pos1; i < pos1 + len3; i++ )
 		{
 			s[i] = replace[i-pos1];
 		}
+		
 		int j = pos2;
 		for (int i = pos1 + len3; i < len_res; i++ )
 		{
-			s[i] = source[j];
+			
+			s[i] = (*source)[j];
 			j++;
 		}
 		//printf("%s\n",source);
 		s[len_res] = 0;
-		free(source);
-		source = s;
+		free((*source));
 		
+		(*source) = s;
+		//printf("%s\n",(*source));
 		
 		
 	}
-	
-	
 }
 size_t  getline(char **lineptr, size_t *n, int delimiter, FILE *stream)
 {
@@ -219,16 +224,51 @@ size_t  getline(char **lineptr, size_t *n, int delimiter, FILE *stream)
 } 
 
 
-int main(void)
+int main(int argc, char **argv)
 {
-	//char *strtext = "129thjhjhhjh7";
-    //char digit[] = "1234567890"; 
+	FILE *f1;
+	FILE *f2;
 	size_t n = 5;
 	char *s;
-	FILE *f = fopen("text.txt","r");
+	int err = OK;
+	
+	if (argc < 7)
+    {
+        fprintf(stderr, "app.exe <in.txt> <out.txt> –s <search> –r <replace>\n");
+        err = NOT_ALL_ARGUMENTS;
+    }
+    else 
+	{
+		f1 = fopen(argv[1], "r");
+        if (f1 == NULL)
+        {
+            fprintf(stderr, "%s\n", strerror(errno));
+            err = NO_FILE;
+        }
+        else
+		{
+			f2 = fopen(argv[2], "w");
+			
+			getline(&s, &n, 5, f1);
+			while (strlen(s) > 0)
+			{
+				str_replace(&s, argv[4], argv[6]);
+				fprintf(stdout,"%s\n",s);
+				getline(&s, &n, 5, f1);
+				//fprintf(stdout,"%s\n",s);
+				//str_replace(s, argv[4], argv[6]);
+				
+			}
+		}
+
+	}
+	//char *strtext = "129thjhjhhjh7";
+    //char digit[] = "1234567890"; 
+	
+	/* FILE *f = fopen("text.txt","r");
 	getline(&s, &n, 5, f);
 	str_replace(s, "aa", "bbb");
-	printf("%s",s);
+	printf("%s",s); */
 	//getline(&s, &n, 5, f);
 	//char *ss = "7sdsdsdsdk;jlkjkljkj915";
 	//printf("%I64d   %I64d \n",strlen1(s),strlen1(ss));
@@ -242,5 +282,5 @@ int main(void)
 		printf("## %s\n",s);
 	} */
 	
-	return 0;
+	return err;
 }
