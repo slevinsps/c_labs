@@ -32,12 +32,12 @@ int main(int argc, char **argv)
 		{
 			f2 = fopen(argv[2], "w");
 			
-			getline(&s, &n, f1);
+			my_getline(&s, &n, f1);
 			while (strlen(s) > 0)
 			{
 				str_replace(&s, argv[4], argv[6]);
 				fprintf(f2,"%s\n",s);
-				getline(&s, &n, f1);
+				my_getline(&s, &n, f1);
 				//fprintf(stdout,"%s\n",s);
 				//str_replace(s, argv[4], argv[6]);
 				
@@ -48,10 +48,10 @@ int main(int argc, char **argv)
     //char digit[] = "1234567890"; 
 	
 	/* FILE *f = fopen("text.txt","r");
-	getline(&s, &n, 5, f);
+	my_getline(&s, &n, 5, f);
 	str_replace(s, "aa", "bbb");
 	printf("%s",s); */
-	//getline(&s, &n, 5, f);
+	//my_getline(&s, &n, 5, f);
 	//char *ss = "7sdsdsdsdk;jlkjkljkj915";
 	//printf("%I64d   %I64d \n",strlen1(s),strlen1(ss));
 	//strcut1(&s, ss);
