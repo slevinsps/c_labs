@@ -25,7 +25,8 @@ int main(int argc, char **argv)
 		f1 = fopen(argv[1], "r");
         if (f1 == NULL)
         {
-            fprintf(stderr, "%s\n", strerror(errno));
+            //fprintf(stderr, "%s\n", strerror(errno));
+			printf("NO FILE\n");
             err = NO_FILE;
         }
         else
