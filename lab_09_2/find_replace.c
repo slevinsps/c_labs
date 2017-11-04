@@ -125,6 +125,7 @@ size_t my_getdelim(char **lineptr, size_t *n, int delimiter, FILE *stream)
 			if (delim != '/n' && buf[i] == '/n')
 				buf[i] = ' ';
 		} */
+		return 0;
 		for (int i = 0; i < buf_size-1; i++)
 		{
 			if (buf[i] == delim)
@@ -156,7 +157,7 @@ size_t my_getdelim(char **lineptr, size_t *n, int delimiter, FILE *stream)
 				return *n;
 			}
 		}
-		return 0;
+		
 		strcat1(lineptr, buf);
 		
 	}
