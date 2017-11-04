@@ -112,7 +112,7 @@ size_t my_getdelim(char **lineptr, size_t *n, int delimiter, FILE *stream)
     char buf[buf_size];
 	
 	*lineptr = realloc(*lineptr,sizeof(char));
-	return 0;
+	
 	if (!*lineptr)
 		return 0;
 	(*lineptr)[0] = 0;
@@ -157,6 +157,7 @@ size_t my_getdelim(char **lineptr, size_t *n, int delimiter, FILE *stream)
 			}
 		}
 		strcat1(lineptr, buf);
+		return 0;
 	}
 	//printf("%s",*lineptr);
 	*n = strlen1(*lineptr);
