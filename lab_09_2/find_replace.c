@@ -11,7 +11,7 @@ int find_underline(const char *source, const char *search, int *pos1, int *pos2)
 	//printf("%d \n",len1);
 	int len2 = strlen1(search);
 	int count = 1;
-	for(int i = 0; i < len1 - len2+1; i++ )
+	for(int i = 0; i < len1 - len2+2; i++ )
 	{
 		for(int j = i; j < i+len2; j++ )
 		{
@@ -51,9 +51,10 @@ void str_replace(char **source, const char *search, const char *replace)
 	int len1;
 	int len2 = strlen1(search);
 	int len3 = strlen1(replace);
-	int len_res;
+	int len_res = strlen1(*source);
 	int pos1 = 0;
 	int pos2 = 0;
+	int j;
 	while (find_underline(*source, search, &pos1, &pos2))
 	{
 		//printf("%s\n",s);
@@ -75,71 +76,80 @@ void str_replace(char **source, const char *search, const char *replace)
 			s[i] = replace[i-pos1];
 		}
 		
-		int j = pos2;
+		j = pos2;
 		for (int i = pos1 + len3; i < len_res; i++ )
 		{
 			
 			s[i] = (*source)[j];
 			j++;
 		}
+
 		//printf("%s\n",source);
+		
 		s[len_res] = 0;
 		*source = realloc(*source,len_res);
 		for (int i = 0; i < len_res; i++)
 		{
 			(*source)[i] = s[i];
 		}
-		//free(s);
+		free(s);
+		(*source)[len_res] = 0;
 		//printf("%s\n",(*source));
 	}
+	
 }
 
-size_t my_getline(char **lineptr, size_t *n, FILE *stream)
+size_t my_getdelim(char **lineptr, size_t *n, int delimiter, FILE *stream)
 {
+	char delim = (char)delimiter;
 	int buf_size = 5;
 	int err = OK;
     char buf[buf_size];
-	//free(*lineptr);
 	*lineptr = realloc(*lineptr,sizeof(char));
 	if (!*lineptr)
 		return 0;
 	(*lineptr)[0] = 0;
-	// int k = 0;
+	int len_dop;
 	while (fgets(buf, buf_size, stream))
 	{ 
-		strcat1(lineptr, buf);
-		for (int i = 0; i < buf_size; i++)
+		//printf("%d  %s\n",strlen1(buf),buf);
+		/* for (int i = 0; i < buf_size; i++)
 		{
-			if (buf[i] == '\n')
-			{
-				buf[i] = 0;
-				//strcat1(lineptr, buf);
-				*n = strlen1(*lineptr);
-				//printf("%d\n",*n);
-				return 0;
-			}
-		} 
-		
-		//printf("@%s\n",buf);
-		/* if (buf[strlen1(buf)-1] == '\n')
-		{	
-			buf[strlen1(buf)-1] = 0;
-			err = strcat1(lineptr, buf);	
-			if (err == MEMORY_ERROR)
-			{
-				printf("memory\n");
-			}			
-			break;
-		}
-		else
-		{
-			strcat1(lineptr, buf);
-			if (err == MEMORY_ERROR)
-			{
-				printf("memory\n");
-				break;
-			}
+			if (delim != '/n' && buf[i] == '/n')
+				buf[i] = ' ';
 		} */
+		for (int i = 0; i < buf_size-1; i++)
+		{
+			if (buf[i] == delim)
+			{
+				len_dop = strlen1(buf);
+				//printf("!!! %d    %d \n",i,ftell(stream));
+				
+				//printf(" %d\n",strlen1(buf)-(i));
+				//printf(" %d\n",ftell(stream)-(strlen1(buf)-(i)));
+				//if (buf_size - i > 2)
+				//{
+					//printf("%d\n",ftell(stream)-1);
+					
+				//}
+				//buf[i] = 0;
+				buf[i] = 0;
+				
+				if (strlen1(buf) != 0)
+					strcat1(lineptr, buf);
+				//printf("%d ^^^^ %d\n",strlen1(*lineptr),strlen1(buf));
+				
+				
+				
+				
+				*n = strlen1(*lineptr);
+				//printf("@@ %d\n", ftell(stream)-(len_dop-i));
+				fseek( stream , ftell(stream)-(len_dop-i)+1 , SEEK_SET );
+				//printf("%d\n",*n);
+				return *n;
+			}
+		}
+		strcat1(lineptr, buf);
 	}
 	//printf("%s",*lineptr);
 	//*n = strlen1(*lineptr);
