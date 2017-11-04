@@ -6,8 +6,11 @@
 int strlen1(const char *string)
 {
 	int k = 0;
-	while (string[k] != 0)
-		k++;
+	if (string)
+	{
+		while (string[k] != 0)
+			k++;
+	}
 	return k;
 }
 
