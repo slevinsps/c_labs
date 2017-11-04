@@ -54,7 +54,6 @@ char* str_replace(const char *source, const char *search, const char *replace)
 	
 	int len2 = strlen1(search);
 	int len3 = strlen1(replace);
-	//return NULL;
 	int len_res = strlen1(source);
 	
 	int pos1 = 0;
@@ -72,14 +71,9 @@ char* str_replace(const char *source, const char *search, const char *replace)
 	
 	while (find_underline(new_source, search, &pos1, &pos2))
 	{
-		//printf("%s\n",s);
 		len1 = strlen1(new_source);
 		len_res = len1 - len2 + len3;
-		//printf("%%  %d\n", pos1 + len3);
 		s = malloc(len_res+1);
-		//printf("%d    %d\n",pos1, pos2);
-		
-		//printf("dsd\n");
 		
 		for (int i = 0; i < pos1; i++ )
 		{
@@ -97,10 +91,7 @@ char* str_replace(const char *source, const char *search, const char *replace)
 			
 			s[i] = (new_source)[j];
 			j++;
-		}
-
-		//printf("%s\n",source);
-		
+		}	
 		s[len_res] = 0;
 		new_source = realloc(new_source,len_res+1);
 		for (int i = 0; i < len_res; i++)
@@ -109,16 +100,17 @@ char* str_replace(const char *source, const char *search, const char *replace)
 		}
 		free(s);
 		new_source[len_res] = 0;
-		//printf("%s\n",(*source));
 	} 
 	return new_source;
 }
 
 size_t my_getdelim(char **lineptr, size_t *n, int delimiter, FILE *stream)
 {
+	
 	char delim = (char)delimiter;
 	int buf_size = 5;
     char buf[buf_size];
+	return 0;
 	*lineptr = realloc(*lineptr,sizeof(char));
 	if (!*lineptr)
 		return 0;
@@ -166,6 +158,6 @@ size_t my_getdelim(char **lineptr, size_t *n, int delimiter, FILE *stream)
 		strcat1(lineptr, buf);
 	}
 	//printf("%s",*lineptr);
-	//*n = strlen1(*lineptr);
-	return 0;
+	*n = strlen1(*lineptr);
+	return *n;
 } 

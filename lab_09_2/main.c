@@ -68,25 +68,5 @@ int main(int argc, char **argv)
 			fclose(f2);
 		}
 	}
-	//char *strtext = "129thjhjhhjh7";
-    //char digit[] = "1234567890"; 
-	
-	/* FILE *f = fopen("text.txt","r");
-	my_getline(&s, &n, 5, f);
-	str_replace(s, "aa", "bbb");
-	printf("%s",s); */
-	//my_getline(&s, &n, 5, f);
-	//char *ss = "7sdsdsdsdk;jlkjkljkj915";
-	//printf("%I64d   %I64d \n",strlen1(s),strlen1(ss));
-	//strcut1(&s, ss);
-	//printf("%s",s);
-	//printf("%I64d",strspn1( strtext, digit ));
-	/*
-	while(fgets(s,25,f))
-	{
-		printf("@");
-		printf("## %s\n",s);
-	} */
-	
 	return err;
 }
