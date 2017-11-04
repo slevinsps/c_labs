@@ -39,14 +39,13 @@ int main(int argc, char **argv)
 			s2[0] = 0;
 			strcat1(&s1,s2);
 			printf("%s",s1); */
-			//my_getdelim(&s, &n, '\n', f1);
-			char* ss;
-			printf("%I64d",strlen1(ss));
+			my_getdelim(&s, &n, '\n', f1);
+
 			//fprintf(stdout,"%s\n",s);
 			//str_replace(&s, argv[4], argv[6]);
 			
 			//int l = 0;
-			/* char *s1;
+			char *s1;
 			while (!feof(f1))
 			{
 				//
@@ -64,7 +63,7 @@ int main(int argc, char **argv)
 				//str_replace(s, argv[4], argv[6]);
 				//if (l++>55)
 					//break;
-			}  */ 
+			}  
 			fclose(f1);
 			fclose(f2);
 		}
