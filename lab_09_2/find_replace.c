@@ -106,7 +106,8 @@ char* str_replace(const char *source, const char *search, const char *replace)
 
 size_t my_getdelim(char **lineptr, size_t *n, int delimiter, FILE *stream)
 {
-	
+	if (!f)
+		return 0;
 	char delim = (char)delimiter;
 	int buf_size = 5;
     char buf[buf_size];
@@ -120,7 +121,7 @@ size_t my_getdelim(char **lineptr, size_t *n, int delimiter, FILE *stream)
 	
 	while (fgets(buf, buf_size, stream))
 	{ 
-		return 0;
+		//return 0;
 		//printf("%d  %s\n",strlen1(buf),buf);
 		/* for (int i = 0; i < buf_size; i++)
 		{
