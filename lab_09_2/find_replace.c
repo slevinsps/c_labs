@@ -107,19 +107,19 @@ size_t my_getline(char **lineptr, size_t *n, FILE *stream)
 	// int k = 0;
 	while (fgets(buf, buf_size, stream))
 	{ 
-		
+		strcat1(lineptr, buf);
 		for (int i = 0; i < buf_size; i++)
 		{
 			if (buf[i] == '\n')
 			{
 				buf[i] = 0;
-				strcat1(lineptr, buf);
+				//strcat1(lineptr, buf);
 				*n = strlen1(*lineptr);
 				//printf("%d\n",*n);
 				return 0;
 			}
 		} 
-		strcat1(lineptr, buf);
+		
 		//printf("@%s\n",buf);
 		/* if (buf[strlen1(buf)-1] == '\n')
 		{	

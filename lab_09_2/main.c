@@ -41,7 +41,7 @@ int main(int argc, char **argv)
 			while (strlen(s) > 0)
 			{
 				str_replace(&s, argv[4], argv[6]);
-				fprintf(f2,"%s\n",s);
+				fprintf(f2,"%s",s);
 				my_getline(&s, &n, f1);
 				
 				//fprintf(stdout,"%s\n",s);
