@@ -117,9 +117,10 @@ size_t my_getdelim(char **lineptr, size_t *n, int delimiter, FILE *stream)
 		return 0;
 	(*lineptr)[0] = 0;
 	int len_dop;
-	return 0;
+	
 	while (fgets(buf, buf_size, stream))
 	{ 
+		return 0;
 		//printf("%d  %s\n",strlen1(buf),buf);
 		/* for (int i = 0; i < buf_size; i++)
 		{
