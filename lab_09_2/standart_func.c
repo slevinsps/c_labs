@@ -3,7 +3,7 @@
 #include <stdlib.h>
 #include "defines.h"
 
-int strlen11(const char *string)
+int strlen1(const char *string)
 {
 	int k = 0;
 	if (string)
@@ -14,7 +14,7 @@ int strlen11(const char *string)
 	return k;
 }
 
-int strlen1(const char *str)
+int get_size(const char *str)
 {
 	int n = 0;
 	const char *symbol = str;
