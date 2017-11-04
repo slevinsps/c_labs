@@ -47,7 +47,7 @@ int find_underline(const char *source, const char *search, int *pos1, int *pos2)
 
 char* str_replace(const char *source, const char *search, const char *replace)
 {
-	return NULL;
+	
 	char *s = NULL;
 	int len1;
 	int len2 = strlen1(search);
@@ -62,6 +62,7 @@ char* str_replace(const char *source, const char *search, const char *replace)
 		new_source[i] = source[i];		
 	}
 	new_source[len_res] = 0;
+	return NULL;
 	while (find_underline(new_source, search, &pos1, &pos2))
 	{
 		//printf("%s\n",s);
