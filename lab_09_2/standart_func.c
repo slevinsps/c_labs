@@ -25,9 +25,12 @@ int strcat1(char **s1, char *s2)
 			//printf("%d\n",i-len1);
 			(*s1)[i] = s2[i - len1];
 		}
+		(*s1)[len1 + len2] = 0;
 	}
-	(*s1)[len1 + len2] = 0;
+	else 
+		return MEMORY_ERROR;
 	
-	return 0;
+	
+	return OK;
 }
 

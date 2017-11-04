@@ -47,7 +47,7 @@ int find_underline(const char *source, const char *search, int *pos1, int *pos2)
 
 void str_replace(char **source, const char *search, const char *replace)
 {
-	char *s;
+	char *s = NULL;
 	int len1;
 	int len2 = strlen1(search);
 	int len3 = strlen1(replace);
@@ -60,7 +60,7 @@ void str_replace(char **source, const char *search, const char *replace)
 		len1 = strlen1(*source);
 		len_res = len1 - len2 + len3;
 		//printf("%%  %d\n", pos1 + len3);
-		s = malloc(len_res+2);
+		s = malloc(len_res);
 		//printf("%d    %d\n",pos1, pos2);
 		
 		//printf("dsd\n");
@@ -84,35 +84,64 @@ void str_replace(char **source, const char *search, const char *replace)
 		}
 		//printf("%s\n",source);
 		s[len_res] = 0;
-		free((*source));
-		
-		(*source) = s;
+		*source = realloc(*source,len_res);
+		for (int i = 0; i < len_res; i++)
+		{
+			(*source)[i] = s[i];
+		}
+		//free(s);
 		//printf("%s\n",(*source));
-		
-		
 	}
 }
 
 size_t my_getline(char **lineptr, size_t *n, FILE *stream)
 {
 	int buf_size = 5;
+	int err = OK;
     char buf[buf_size];
-	*lineptr = malloc(sizeof(char));
+	//free(*lineptr);
+	*lineptr = realloc(*lineptr,sizeof(char));
+	if (!*lineptr)
+		return 0;
 	(*lineptr)[0] = 0;
 	// int k = 0;
-	while (fgets(buf, buf_size-1, stream))
+	while (fgets(buf, buf_size, stream))
 	{ 
+		
+		for (int i = 0; i < buf_size; i++)
+		{
+			if (buf[i] == '\n')
+			{
+				buf[i] = 0;
+				strcat1(lineptr, buf);
+				*n = strlen1(*lineptr);
+				//printf("%d\n",*n);
+				return 0;
+			}
+		} 
+		strcat1(lineptr, buf);
 		//printf("@%s\n",buf);
-		if (buf[strlen1(buf)-1] == '\n')
+		/* if (buf[strlen1(buf)-1] == '\n')
 		{	
 			buf[strlen1(buf)-1] = 0;
-			strcat1(lineptr, buf);
+			err = strcat1(lineptr, buf);	
+			if (err == MEMORY_ERROR)
+			{
+				printf("memory\n");
+			}			
 			break;
 		}
 		else
+		{
 			strcat1(lineptr, buf);
+			if (err == MEMORY_ERROR)
+			{
+				printf("memory\n");
+				break;
+			}
+		} */
 	}
 	//printf("%s",*lineptr);
-	*n = strlen1(*lineptr);
-	return *n;
+	//*n = strlen1(*lineptr);
+	return 0;
 } 

@@ -12,7 +12,7 @@ int main(int argc, char **argv)
 	FILE *f1;
 	FILE *f2;
 	size_t n = 5;
-	char *s;
+	char *s = NULL;
 	int err = OK;
 	
 	if (argc < 7)
@@ -34,15 +34,22 @@ int main(int argc, char **argv)
 			f2 = fopen(argv[2], "w");
 			
 			my_getline(&s, &n, f1);
+			//fprintf(stdout,"%s\n",s);
+			//str_replace(&s, argv[4], argv[6]);
+			//fprintf(stdout,"%s\n",s);
+			//int l = 0;
 			while (strlen(s) > 0)
 			{
 				str_replace(&s, argv[4], argv[6]);
 				fprintf(f2,"%s\n",s);
 				my_getline(&s, &n, f1);
+				
 				//fprintf(stdout,"%s\n",s);
 				//str_replace(s, argv[4], argv[6]);
-				
+			
 			}
+			fclose(f1);
+			fclose(f2);
 		}
 	}
 	//char *strtext = "129thjhjhhjh7";
