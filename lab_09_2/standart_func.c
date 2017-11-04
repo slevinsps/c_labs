@@ -3,7 +3,7 @@
 #include <stdlib.h>
 #include "defines.h"
 
-int strlen1(const char *string)
+int strlen11(const char *string)
 {
 	int k = 0;
 	if (string)
@@ -13,6 +13,19 @@ int strlen1(const char *string)
 	}
 	return k;
 }
+
+int strlen1(const char *str)
+{
+	int n = 0;
+	const char *symbol = str;
+	while (*symbol != '\0')
+	{
+		n++;
+		symbol++;
+	}
+	return n;
+}
+
 
 
 int strcat1(char **s1, char *s2)
