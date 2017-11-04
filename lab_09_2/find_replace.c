@@ -50,13 +50,14 @@ char* str_replace(const char *source, const char *search, const char *replace)
 	
 	char *s = NULL;
 	int len1;
+	return NULL;
 	int len2 = strlen1(search);
 	int len3 = strlen1(replace);
 	int len_res = strlen1(source);
 	int pos1 = 0;
 	int pos2 = 0;
 	int j;
-	return NULL;
+	
 	char *new_source = malloc(len_res+1);
 	
 	
