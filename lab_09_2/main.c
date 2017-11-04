@@ -53,6 +53,7 @@ int main(int argc, char **argv)
 				{
 					s1 = str_replace(s, argv[4], argv[6]);
 					fprintf(f2,"%s\n",s1);
+					free(s1);
 				}
 				//my_getline(&s, &n, f1);
 				my_getdelim(&s, &n, '\n', f1);
