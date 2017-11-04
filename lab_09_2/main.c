@@ -49,10 +49,11 @@ int main(int argc, char **argv)
 			while (!feof(f1))
 			{
 				//
+				s1 = str_replace(s, argv[4], argv[6]);
 				if (s)
 				{
-					s1 = str_replace(s, argv[4], argv[6]);
-					fprintf(f2,"%s\n",s1);
+					
+					fprintf(stdout,"%s\n",s1);
 					free(s1);
 				}
 				//my_getline(&s, &n, f1);

@@ -57,6 +57,8 @@ char* str_replace(const char *source, const char *search, const char *replace)
 	int pos2 = 0;
 	int j;
 	char *new_source = malloc(len_res+1);
+	
+	return NULL;
 	for (int i = 0; i < len_res; i++)
 	{
 		new_source[i] = source[i];		
@@ -111,7 +113,6 @@ size_t my_getdelim(char **lineptr, size_t *n, int delimiter, FILE *stream)
 {
 	char delim = (char)delimiter;
 	int buf_size = 5;
-	int err = OK;
     char buf[buf_size];
 	*lineptr = realloc(*lineptr,sizeof(char));
 	if (!*lineptr)
