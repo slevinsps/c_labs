@@ -106,7 +106,7 @@ char* str_replace(const char *source, const char *search, const char *replace)
 
 size_t my_getdelim(char **lineptr, size_t *n, int delimiter, FILE *stream)
 {
-	if (!f)
+	if (!stream)
 		return 0;
 	char delim = (char)delimiter;
 	int buf_size = 5;
