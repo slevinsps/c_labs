@@ -110,8 +110,9 @@ size_t my_getdelim(char **lineptr, size_t *n, int delimiter, FILE *stream)
 	char delim = (char)delimiter;
 	int buf_size = 5;
     char buf[buf_size];
-	return 0;
+	
 	*lineptr = realloc(*lineptr,sizeof(char));
+	return 0;
 	if (!*lineptr)
 		return 0;
 	(*lineptr)[0] = 0;
