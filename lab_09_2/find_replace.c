@@ -56,9 +56,10 @@ char* str_replace(const char *source, const char *search, const char *replace)
 	int pos1 = 0;
 	int pos2 = 0;
 	int j;
+	return NULL;
 	char *new_source = malloc(len_res+1);
 	
-	return NULL;
+	
 	for (int i = 0; i < len_res; i++)
 	{
 		new_source[i] = source[i];		
