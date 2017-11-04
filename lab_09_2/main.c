@@ -53,7 +53,7 @@ int main(int argc, char **argv)
 				if (s)
 				{
 					
-					fprintf(stdout,"%s\n",s1);
+					fprintf(f2,"%s\n",s1);
 					free(s1);
 				}
 				//my_getline(&s, &n, f1);
