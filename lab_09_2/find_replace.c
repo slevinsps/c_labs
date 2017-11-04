@@ -53,8 +53,9 @@ char* str_replace(const char *source, const char *search, const char *replace)
 	
 	int len2 = strlen1(search);
 	int len3 = strlen1(replace);
-	return NULL;
+	
 	int len_res = strlen1(source);
+	return NULL;
 	int pos1 = 0;
 	int pos2 = 0;
 	int j;
