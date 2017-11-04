@@ -156,8 +156,9 @@ size_t my_getdelim(char **lineptr, size_t *n, int delimiter, FILE *stream)
 				return *n;
 			}
 		}
-		strcat1(lineptr, buf);
 		return 0;
+		strcat1(lineptr, buf);
+		
 	}
 	//printf("%s",*lineptr);
 	*n = strlen1(*lineptr);
