@@ -14,20 +14,6 @@ int strlen1(const char *string)
 	return k;
 }
 
-int get_size(const char *str)
-{
-	int n = 0;
-	const char *symbol = str;
-	while (*symbol != '\0')
-	{
-		n++;
-		symbol++;
-	}
-	return n;
-}
-
-
-
 int strcat1(char **s1, char *s2)
 {
 	int len1 = strlen1(*s1);

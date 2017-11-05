@@ -123,22 +123,41 @@ void test_my_getdelim(void)
 		int k = 0;
 		int check_right = 1;
 		int count_numbers;
+		/* count_numbers = my_getdelim(&lineptr, &n, delimiter, stream);
+		printf("%s    %d\n",lineptr,strlen(expected[k])+1);
+		count_numbers = my_getdelim(&lineptr, &n, delimiter, stream);
+		printf("%s    %d\n",lineptr,strlen(expected[k])+1);
+		count_numbers = my_getdelim(&lineptr, &n, delimiter, stream);
+		printf("%s    %d\n",lineptr,strlen(expected[k])+1);
+		count_numbers = my_getdelim(&lineptr, &n, delimiter, stream);
+		printf("%s    %d\n",lineptr,strlen(expected[k])+1);
+		count_numbers = my_getdelim(&lineptr, &n, delimiter, stream);
+		printf("%s    %d\n",lineptr,strlen(expected[k])+1);
+		count_numbers = my_getdelim(&lineptr, &n, delimiter, stream);
+		printf("%s    %d\n",lineptr,strlen(expected[k])+1);
+		count_numbers = my_getdelim(&lineptr, &n, delimiter, stream);
+		printf("%s    %d\n",lineptr,strlen(expected[k])+1);
+		count_numbers = my_getdelim(&lineptr, &n, delimiter, stream);
+		printf("%s    %d\n",lineptr,strlen(expected[k])+1); */
+		//printf("%d    %d\n",count_numbers,strlen(expected[k])+1);
+
 		while (!feof(stream))
 		{
 			count_numbers = my_getdelim(&lineptr, &n, delimiter, stream);
 			if (lineptr)
 			{
-				if (strcmp(expected[k], lineptr) != 0 || count_numbers != strlen(expected[k]))
+				if (strcmp(expected[k], lineptr) != 0 || count_numbers != strlen(expected[k])+1)
 				{
-					printf("Test 1 in my_getdelim FALED\n");
-					printf("%s\n", lineptr);
-					printf("%s\n", expected[k]);
+					printf("Test 1 in my_getdelim FAILED\n");
+					printf("#%s#\n", lineptr);
+					printf("#%s#\n", expected[k]);
+					
 					check_right = 0;
 					break;
 				}
 				k++;
-			}
-		}  
+			} 
+		}
 		if (check_right)
 			printf("Test 1 in my_getdelim PASSED\n");
 		free(lineptr);
@@ -175,9 +194,9 @@ void test_my_getdelim(void)
 			count_numbers = my_getdelim(&lineptr, &n, delimiter, stream);
 			if (lineptr)
 			{
-				if (strcmp(expected[k], lineptr) != 0 || count_numbers != strlen(expected[k]))
+				if (strcmp(expected[k], lineptr) != 0 || count_numbers != strlen(expected[k])+1)
 				{
-					printf("Test 2 in my_getdelim FALED\n");
+					printf("Test 2 in my_getdelim FAILED\n");
 					printf("%s#\n", lineptr);
 					printf("%s#\n", expected[k]);
 					check_right = 0;
@@ -207,9 +226,9 @@ void test_my_getdelim(void)
 			count_numbers = my_getdelim(&lineptr, &n, delimiter, stream);
 			if (lineptr)
 			{
-				if (strcmp(expected[k], lineptr) != 0 || count_numbers != strlen(expected[k]))
+				if (strcmp(expected[k], lineptr) != 0 || count_numbers != strlen(expected[k])+1)
 				{
-					printf("Test 3 in my_getdelim FALED\n");
+					printf("Test 3 in my_getdelim FAILED\n");
 					printf("%s#\n", lineptr);
 					printf("%s#\n", expected[k]);
 					check_right = 0;
@@ -257,9 +276,9 @@ void test_my_getdelim(void)
 			count_numbers = my_getdelim(&lineptr, &n, delimiter, stream);
 			if (lineptr)
 			{
-				if (strcmp(expected[k], lineptr) != 0 || count_numbers != strlen(expected[k]))
+				if (strcmp(expected[k], lineptr) != 0 || count_numbers != strlen(expected[k])+1)
 				{
-					printf("Test 4 in my_getdelim FALED\n");
+					printf("Test 4 in my_getdelim FAILED\n");
 					printf("lineptr = #%s#\n", lineptr);
 					printf("expected = #%s#\n", expected[k]);
 					check_right = 0;
@@ -293,9 +312,9 @@ void test_my_getdelim(void)
 			count_numbers = my_getdelim(&lineptr, &n, delimiter, stream);
 			if (lineptr)
 			{
-				if (strcmp(expected[k], lineptr) != 0 || count_numbers != strlen(expected[k]))
+				if (strcmp(expected[k], lineptr) != 0 || count_numbers != strlen(expected[k])+1)
 				{
-					printf("Test 5 in my_getdelim FALED\n");
+					printf("Test 5 in my_getdelim FAILED\n");
 					printf("lineptr = #%s#\n", lineptr);
 					printf("expected = #%s#\n", expected[k]);
 					check_right = 0;
@@ -325,9 +344,9 @@ void test_my_getdelim(void)
 			count_numbers = my_getdelim(&lineptr, &n, delimiter, stream);
 			if (lineptr)
 			{
-				if (strcmp(expected[k], lineptr) != 0 || count_numbers != strlen(expected[k]))
+				if (strcmp(expected[k], lineptr) != 0 || count_numbers != strlen(expected[k])+1)
 				{
-					printf("Test 6 in my_getdelim FALED\n");
+					printf("Test 6 in my_getdelim FAILED\n");
 					printf("lineptr = #%s#\n", lineptr);
 					printf("expected = #%s#\n", expected[k]);
 					check_right = 0;

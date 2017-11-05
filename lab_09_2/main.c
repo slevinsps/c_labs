@@ -32,34 +32,33 @@ int main(int argc, char **argv)
         else
 		{
 			f2 = fopen(argv[2], "w");
-			/* char *s1 = malloc(3);
-			s1[0] = 0;
-			//s1[1] = 0;
-			char s2[3];
-			s2[0] = 0;
-			strcat1(&s1,s2);
-			printf("%s",s1); */
-			
-
-			//fprintf(stdout,"%s\n",s);
-			//str_replace(&s, argv[4], argv[6]);
-			
-			//int l = 0;
 			char *s1;
 			while (!feof(f1))
 			{
-				my_getdelim(&s, &n, '\n', f1);
-				s1 = str_replace(s, argv[4], argv[6]);
+				err = my_getdelim(&s, &n, '\n', f1);
+				if (err == MEMORY_ERROR)
+				{
+					printf("Memory error\n");
+				}
+				if (err == ERROR)
+				{
+					printf("incorrect parameters\n");
+				}
 				if (s)
 				{
-					
-					fprintf(f2,"%s\n",s1);
-					free(s1);
+					s1 = str_replace(s, argv[4], argv[6]);
+					if (s1)
+					{
+						fprintf(f2,"%s",s1);
+						free(s1);
+						s1 = NULL;
+					}
 				}				
-				//fprintf(stdout,"%s\n",s);
-				//str_replace(s, argv[4], argv[6]);
-				//if (l++>55)
-					//break;
+				if (s)
+				{
+					free(s);
+					s = NULL;
+				}
 			}  
 			fclose(f1);
 			fclose(f2);
