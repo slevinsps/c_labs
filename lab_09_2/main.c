@@ -39,7 +39,7 @@ int main(int argc, char **argv)
 			s2[0] = 0;
 			strcat1(&s1,s2);
 			printf("%s",s1); */
-			my_getdelim(&s, &n, '\n', f1);
+			
 
 			//fprintf(stdout,"%s\n",s);
 			//str_replace(&s, argv[4], argv[6]);
@@ -48,17 +48,14 @@ int main(int argc, char **argv)
 			char *s1;
 			while (!feof(f1))
 			{
-				//
+				my_getdelim(&s, &n, '\n', f1);
 				s1 = str_replace(s, argv[4], argv[6]);
 				if (s)
 				{
 					
 					fprintf(f2,"%s\n",s1);
 					free(s1);
-				}
-				//my_getline(&s, &n, f1);
-				my_getdelim(&s, &n, '\n', f1);
-				
+				}				
 				//fprintf(stdout,"%s\n",s);
 				//str_replace(s, argv[4], argv[6]);
 				//if (l++>55)

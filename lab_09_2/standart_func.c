@@ -33,7 +33,7 @@ int strcat1(char **s1, char *s2)
 	int len1 = strlen1(*s1);
 	int len2 = strlen1(s2);
 	// printf("%d    %d\n",len1,len2);
-	*s1 = realloc(*s1,len1 + len2);
+	*s1 = realloc(*s1,len1 + len2+1);
 	if (*s1)
 	{
 		for (int i = len1; i < len1 + len2; i++)

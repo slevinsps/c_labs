@@ -49,6 +49,7 @@ char* str_replace(const char *source, const char *search, const char *replace)
 {
 	if ((source == NULL) || (search == NULL) || (replace == NULL))
 		return NULL;
+	
 	char *s = NULL;
 	int len1;
 	
@@ -107,22 +108,26 @@ char* str_replace(const char *source, const char *search, const char *replace)
 size_t my_getdelim(char **lineptr, size_t *n, int delimiter, FILE *stream)
 {
 	if (!stream)
+	{
 		return 0;
+	}
 	char delim = (char)delimiter;
 	int buf_size = 5;
     char buf[buf_size];
-	
 	*lineptr = realloc(*lineptr,sizeof(char));
 	
 	if (!*lineptr)
+	{
+		*lineptr = NULL;
 		return 0;
+	}
 	(*lineptr)[0] = 0;
 	int len_dop;
 	
 	while (fgets(buf, buf_size, stream))
 	{ 
 		//return 0;
-		//printf("%d  %s\n",strlen1(buf),buf);
+		
 		/* for (int i = 0; i < buf_size; i++)
 		{
 			if (delim != '/n' && buf[i] == '/n')
@@ -136,35 +141,29 @@ size_t my_getdelim(char **lineptr, size_t *n, int delimiter, FILE *stream)
 				len_dop = strlen1(buf);
 				//printf("!!! %d    %d \n",i,ftell(stream));
 				
-				//printf(" %d\n",strlen1(buf)-(i));
-				//printf(" %d\n",ftell(stream)-(strlen1(buf)-(i)));
-				//if (buf_size - i > 2)
-				//{
-					//printf("%d\n",ftell(stream)-1);
-					
-				//}
-				//buf[i] = 0;
 				buf[i] = 0;
 				
+				//printf("%d  %d\n",len_dop,i);
 				if (strlen1(buf) != 0)
 					strcat1(lineptr, buf);
 				//printf("%d ^^^^ %d\n",strlen1(*lineptr),strlen1(buf));
-				
-				
-				
-				
 				*n = strlen1(*lineptr);
+				if (*n == 0)
+					*lineptr = NULL;
+				
 				//printf("@@ %d\n", ftell(stream)-(len_dop-i));
 				fseek( stream , ftell(stream)-(len_dop-i)+1 , SEEK_SET );
-				//printf("%d\n",*n);
+				//printf("%d  @%s@\n",strlen1(*lineptr),*lineptr);
 				return *n;
 			}
 		}
-		
-		strcat1(lineptr, buf);
-		
+		if (strlen1(buf) != 0)
+			strcat1(lineptr, buf);	
 	}
 	//printf("%s",*lineptr);
+	//printf("%d  &%s&\n",strlen1(*lineptr),*lineptr);
 	*n = strlen1(*lineptr);
+	if (*n == 0)
+		*lineptr = NULL;
 	return *n;
 } 
