@@ -158,4 +158,9 @@ size_t my_getdelim(char **lineptr, size_t *n, int delimiter, FILE *stream)
 		*lineptr = NULL;	
 	}
 	return *n+1;
-} 
+}
+
+size_t my_getline(char **lineptr, size_t *n, FILE *stream)
+{
+	return(my_getdelim(lineptr, n, '\n', stream));
+}

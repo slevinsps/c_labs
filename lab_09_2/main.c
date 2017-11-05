@@ -35,6 +35,7 @@ int main(int argc, char **argv)
 			char *s1;
 			while (!feof(f1))
 			{
+				//err = my_getline(&s, &n, f1);
 				err = my_getdelim(&s, &n, '\n', f1);
 				if (err == MEMORY_ERROR)
 				{
@@ -49,7 +50,7 @@ int main(int argc, char **argv)
 					s1 = str_replace(s, argv[4], argv[6]);
 					if (s1)
 					{
-						fprintf(f2,"%s",s1);
+						fprintf(f2,"%s\n",s1);
 						free(s1);
 						s1 = NULL;
 					}
