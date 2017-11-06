@@ -4,7 +4,7 @@
 #include "standart_func.h"
 #include "find_replace.h"
 #include "defines.h"
-
+#include "getdelim.h"
 
 void test_str_replace(void)
 {
@@ -113,12 +113,12 @@ void test_my_getdelim(void)
 		size_t n;
 		int delimiter = '\n';
 		FILE *stream = fopen("source_1.txt", "r");
-		char *expected[7] = { "Amy normally hated Monday mornings. but this year was different.",       
-							"Kamal was in her art class and she liked Kamal. She was waiting outside the classroom when her friend Tara arrived.",
-							" Hi Amy! Your mum sent me a text. You forgot your inhaler.",
-							"Amy don t you turn your phone on?  Amy didn t like technology.",
-							"She never sent text messages and she hated Facebook too.",
-							" Did Kamal ask you to the disco?  Tara was Amy s best friend,",
+		char *expected[7] = { "Amy normally hated Monday mornings. but this year was different.\n",       
+							"Kamal was in her art class and she liked Kamal. She was waiting outside the classroom when her friend Tara arrived.\n",
+							" Hi Amy! Your mum sent me a text. You forgot your inhaler.\n",
+							"Amy don t you turn your phone on?  Amy didn t like technology.\n",
+							"She never sent text messages and she hated Facebook too.\n",
+							" Did Kamal ask you to the disco?  Tara was Amy s best friend,\n",
 							"and she wanted to know everything that was happening in Amy s life." };
 		int k = 0;
 		int check_right = 1;
@@ -143,15 +143,16 @@ void test_my_getdelim(void)
 
 		while (!feof(stream))
 		{
+			//count_numbers = getdelim(&lineptr, &n, delimiter, stream);
 			count_numbers = my_getdelim(&lineptr, &n, delimiter, stream);
 			if (lineptr)
 			{
-				if (strcmp(expected[k], lineptr) != 0 || count_numbers != strlen(expected[k])+1)
+				if (strcmp(expected[k], lineptr) != 0 || count_numbers != strlen(expected[k]))
 				{
 					printf("Test 1 in my_getdelim FAILED\n");
-					printf("#%s#\n", lineptr);
-					printf("#%s#\n", expected[k]);
-					
+					printf("lineptr = #%s#\n", lineptr);
+					printf("expected = #%s#\n", expected[k]);
+					printf("count_numbers = %d   orig = %d\n",count_numbers,strlen(expected[k]));
 					check_right = 0;
 					break;
 				}
