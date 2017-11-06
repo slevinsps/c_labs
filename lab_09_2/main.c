@@ -37,6 +37,7 @@ int main(int argc, char **argv)
 			{
 				//err = my_getline(&s, &n, f1);
 				err = my_getdelim(&s, &n, '!', f1);
+				//err = getdelim(&s, &n, '!', f1);
 				if (err == MEMORY_ERROR)
 				{
 					printf("Memory error\n");
