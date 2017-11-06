@@ -143,6 +143,7 @@ size_t my_getdelim(char **lineptr, size_t *n, int delimiter, FILE *stream)
 				{
 					free(*lineptr);
 					*lineptr = NULL;
+					return ERROR;
 				}
 				fseek( stream , ftell(stream) - (len_dop-i)+1 , SEEK_SET );
 				return *n+1;
