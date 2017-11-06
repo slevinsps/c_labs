@@ -1,5 +1,5 @@
 CC := gcc
-CFLAGS := -std=c99 -Wall -ggdb
+CFLAGS := -std=gnu99 -Wall -ggdb
 
 ifeq ($(mode), debug)
 	CFLAGS += -g3
@@ -12,7 +12,7 @@ endif
 app.exe : main.o func.o
 	$(CC) $(CFLAGS) $^ -o $@
 
-test.exe : main.o func.o
+test.exe : test.o func.o
 	$(CC) $(CFLAGS) $^ -o $@
 
 %.o : %.c *.h
