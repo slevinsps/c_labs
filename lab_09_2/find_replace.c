@@ -150,7 +150,7 @@ size_t my_getdelim(char **lineptr, size_t *n, int delimiter, FILE *stream)
 					*lineptr = NULL;
 				}	
 				fseek( stream , ftell(stream) - (len_dop-i)+1 , SEEK_SET );
-				if (*n > n_new)
+				if (n_new > *n)
 					*n = n_new;
 				return n_new;
 			}
@@ -164,12 +164,12 @@ size_t my_getdelim(char **lineptr, size_t *n, int delimiter, FILE *stream)
 	*n = strlen1(*lineptr);
 	if (*n == 0)
 	{
-		free(*lineptr);
-		*lineptr = NULL;
+		//free(*lineptr);
+		//*lineptr = "";
 	}
-	if (*n > n_new)
+	if (n_new > *n)
 		*n = n_new;
-	return n_new;
+	return ERROR;
 }
 
 size_t my_getline(char **lineptr, size_t *n, FILE *stream)
