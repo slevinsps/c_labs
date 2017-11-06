@@ -110,7 +110,7 @@ void test_my_getdelim(void)
 	{
 		// 1 разделитель \n
 		char *lineptr = NULL;
-		size_t n;
+		size_t n = 0;
 		int delimiter = '\n';
 		FILE *stream = fopen("source_1.txt", "r");
 		char *expected[7] = { "Amy normally hated Monday mornings. but this year was different.\n",       
@@ -167,7 +167,7 @@ void test_my_getdelim(void)
 	{
 		// 2 разделитель \n
 		char *lineptr = NULL;
-		size_t n;
+		size_t n = 0;
 		int delimiter = '\n';
 		FILE *stream = fopen("source_2.txt", "r");
 		char *expected[17] = { "Amy \n",
@@ -314,9 +314,9 @@ void test_my_getdelim(void)
 		{			
 			count_numbers = my_getdelim(&lineptr, &n, delimiter, stream);
 			//count_numbers = getdelim(&lineptr, &n, delimiter, stream);
-			printf("lineptr = #%s#\n", lineptr);
-			printf("%d\n",count_numbers);
-	/* 		if (lineptr)
+			//printf("lineptr = #%s#\n", lineptr);
+			//printf("%d\n",count_numbers);
+	 		if (lineptr)
 			{
 				if (strcmp(expected[k], lineptr) != 0 || count_numbers != strlen(expected[k]))
 				{
@@ -332,7 +332,7 @@ void test_my_getdelim(void)
 					break;
 				}
 				k++;
-			} */
+			}
 		}  
 		if (check_right)
 			printf("Test 5 in my_getdelim PASSED\n");
