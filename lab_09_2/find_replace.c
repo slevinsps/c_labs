@@ -158,7 +158,6 @@ size_t my_getdelim(char **lineptr, size_t *n, int delimiter, FILE *stream)
 	{
 		free(*lineptr);
 		*lineptr = NULL;
-		return ERROR;
 	}
 	return *n+1;
 }
