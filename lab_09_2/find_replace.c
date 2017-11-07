@@ -112,13 +112,12 @@ size_t my_getdelim(char **lineptr, size_t *n, int delimiter, FILE *stream)
 	
 	if (*lineptr == NULL || *n == 0)
     {
-		*n = 1;
+		*n = 120;
 		*lineptr = malloc(sizeof(char));
 		if (*lineptr == NULL)
 		{
 			return ERROR;
 		}
-		(*lineptr)[0] = 0;
     }
 
 	char delim = (char)delimiter;
@@ -137,7 +136,7 @@ size_t my_getdelim(char **lineptr, size_t *n, int delimiter, FILE *stream)
 			if (buf[i] == delim)
 			{
 				len_dop = strlen1(buf);
-				printf("$$$$ %s\n",buf);
+				//printf("$$$$ %s\n",buf);
 				buf[i+1] = 0;
 				
 				if (strlen1(buf) != 0)
@@ -153,9 +152,7 @@ size_t my_getdelim(char **lineptr, size_t *n, int delimiter, FILE *stream)
 		if (strlen1(buf) != 0)
 		{
 			n_new += strlen1(buf);
-			strcat1(lineptr, buf, n_new, n);
-			if (n_new > *n)
-				*n = n_new;			
+			strcat1(lineptr, buf, n_new, n);		
 		}
 	}	
 	(*lineptr)[n_new] = 0;
@@ -165,8 +162,6 @@ size_t my_getdelim(char **lineptr, size_t *n, int delimiter, FILE *stream)
 			return ERROR;
 	}
 	return n_new;
-	
-	//return n_new;
 }
 
 size_t my_getline(char **lineptr, size_t *n, FILE *stream)

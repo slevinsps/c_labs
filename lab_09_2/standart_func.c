@@ -19,10 +19,10 @@ int strcat1(char **s1, char *s2, int n_new, size_t *n)
 	int len2 = strlen1(s2);
 	if (n_new > *n)
 	{
-		*s1 = realloc(*s1,n_new + len2+1);
+		*s1 = realloc(*s1,n_new+1);
 		if (!*s1)
 			return MEMORY_ERROR;
-		*n = n_new;
+		*n = n_new+1;
 	}
 	for (int i = n_new - len2; i < n_new; i++)
 	{
