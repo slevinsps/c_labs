@@ -113,7 +113,7 @@ size_t my_getdelim(char **lineptr, size_t *n, int delimiter, FILE *stream)
 	
 	if (*lineptr == NULL || *n == 0)
     {
-		*n = 120;
+		*n = 1;
 		*lineptr = malloc(*n*sizeof(char));
 		if (*lineptr == NULL)
 		{
