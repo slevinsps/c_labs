@@ -3,7 +3,6 @@
 #include <stdlib.h>
 #include "standart_func.h"
 #include "defines.h"
-#include "getdelim.h"
 
 int find_underline(const char *source, const char *search, int *pos1, int *pos2)
 {
@@ -108,62 +107,76 @@ char* str_replace(const char *source, const char *search, const char *replace)
 
 size_t my_getdelim(char **lineptr, size_t *n, int delimiter, FILE *stream)
 {
-	return(getdelim(lineptr, n, delimiter, stream));
-/* 	if ((lineptr == NULL) || (n == NULL) || (!stream))
+	
+	if ((lineptr == NULL) || (n == NULL) || (!stream))
 		return ERROR;
 	
 	if (*lineptr == NULL || *n == 0)
     {
 		*n = 120;
-		*lineptr = malloc(sizeof(char));
+		*lineptr = malloc(*n*sizeof(char));
 		if (*lineptr == NULL)
 		{
 			return ERROR;
 		}
     }
-
+	
 	char delim = (char)delimiter;
 	int buf_size = 5;
+	//printf("-------\n");
     char buf[buf_size];
+	
 	int n_new = 0;
 
 	
 	int len_dop;
-	
-	while (!feof(stream))
+		
+	while (1)
 	{ 
-		fgets(buf, buf_size, stream);
+		
+		if (fgets(buf, buf_size-2, stream) == NULL)
+		{
+			(*lineptr)[n_new] = 0;
+			if (n_new == 0) 
+				return ERROR;
+			else
+				return n_new;
+		}	
+
+		
 		for (int i = 0; i < buf_size - 1; i++)
 		{
 			if (buf[i] == delim)
 			{
+				
+				//printf("@@@@ #%s# %d \n",buf,strlen1(buf));
 				len_dop = strlen1(buf);
 				//printf("$$$$ %s\n",buf);
 				buf[i+1] = 0;
 				
 				if (strlen1(buf) != 0)
 				{
+					
 					n_new += strlen1(buf);
 					strcat1(lineptr, buf, n_new, n);
 				}
 				fseek( stream , ftell(stream) - (len_dop-i)+1 , SEEK_SET );
 				(*lineptr)[n_new] = 0;
+				//printf("%d\n",n_new);
 				return n_new;
 			}
 		}
+
+		
 		if (strlen1(buf) != 0)
 		{
 			n_new += strlen1(buf);
 			strcat1(lineptr, buf, n_new, n);		
 		}
 	}	
-	(*lineptr)[n_new] = 0;
-	for(int i = 0; buf[i] != 0; i++)
-	{
-		if (buf[i] == EOF)
-			return ERROR;
-	}
-	return n_new; */
+	//(*lineptr)[n_new] = 0;
+	
+	//return n_new;
 }
 
 size_t my_getline(char **lineptr, size_t *n, FILE *stream)
