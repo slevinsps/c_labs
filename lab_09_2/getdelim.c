@@ -23,77 +23,76 @@
    necessary.  Returns the number of characters read (not including
    the null terminator), or -1 on error or EOF.  */
 
-ssize_t
-getdelim (char **lineptr, size_t *n, int delimiter, FILE *fp)
+ssize_t getdelim (char **lineptr, size_t *n, int delimiter, FILE *fp)
 {
-  int result = 0;
-  ssize_t cur_len = 0;
-  ssize_t len;
-
-  if (lineptr == NULL || n == NULL || fp == NULL)
-    {
-      errno = EINVAL;
-      return -1;
-    }
-
-  flockfile (fp);
-
-  if (*lineptr == NULL || *n == 0)
-    {
-      *n = 120;
-      *lineptr = (char *) malloc (*n);
-      if (*lineptr == NULL)
+	int result = 0;
+	ssize_t cur_len = 0;
+	ssize_t len;
+	
+	if (lineptr == NULL || n == NULL || fp == NULL)
 	{
-	  result = -1;
-	  goto unlock_return;
+		errno = EINVAL;        
+		return -1;
 	}
-    }
-
-  for (;;)
-    {
-      char *t;
-      int i;
-
-      i = getc (fp);
-      if (i == EOF)
-      {
-	result = -1;
-	break;
-      }
-
-      /* Make enough space for len+1 (for final NUL) bytes.  */
-      if (cur_len + 1 >= *n)
+	
+	flockfile (fp);
+	
+	if (*lineptr == NULL || *n == 0)
 	{
-	  size_t needed = 2 * (cur_len + 1) + 1;   /* Be generous. */
-	  char *new_lineptr;
-
-	  if (needed < cur_len)
-	    {
-	      result = -1;
-	      goto unlock_return;
-	    }
-
-	  new_lineptr = (char *) realloc (*lineptr, needed);
-	  if (new_lineptr == NULL)
-	    {
-	      result = -1;
-	      goto unlock_return;
-	    }
-
-	  *lineptr = new_lineptr;
-	  *n = needed;
+		*n = 120;
+		*lineptr = (char *) malloc (*n);
+		if (*lineptr == NULL)
+			{
+				result = -1;
+				goto unlock_return;
+			}
 	}
-
-      (*lineptr)[cur_len] = i;
-      cur_len++;
-
-      if (i == delimiter)
-	break;
-    }
-  (*lineptr)[cur_len] = '\0';
-  result = cur_len ? cur_len : result;
-
- unlock_return:
-  funlockfile (fp);
-  return result;
+	
+	for (;;)
+	{
+		char *t;
+		int i;
+		
+		i = getc (fp);
+		if (i == EOF)
+		{
+		result = -1;
+		break;
+		}
+		
+		/* Make enough space for len+1 (for final NUL) bytes.  */
+		if (cur_len + 1 >= *n)
+		{
+			size_t needed = 2 * (cur_len + 1) + 1;   /* Be generous. */
+			char *new_lineptr;
+			
+			if (needed < cur_len)
+			{
+				result = -1;
+				goto unlock_return;
+			}
+			
+			new_lineptr = (char *) realloc (*lineptr, needed);
+			if (new_lineptr == NULL)
+			{
+				result = -1;
+				goto unlock_return;
+			}
+			
+			*lineptr = new_lineptr;
+			*n = needed;
+		}
+			
+		(*lineptr)[cur_len] = i;
+		cur_len++;
+			
+		if (i == delimiter)
+			break;
+	}
+	(*lineptr)[cur_len] = '\0';
+	result = cur_len ? cur_len : result;
+	
+	unlock_return:
+	funlockfile (fp);
+	return result;
 }
