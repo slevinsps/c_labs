@@ -33,20 +33,18 @@ int main(int argc, char **argv)
 		{
 			f2 = fopen(argv[2], "w");
 			char *s1;
-			while (my_getdelim(&s, &n, '\n', f1) != -1)
+			while (1)
 			{
-				//err = my_getline(&s, &n, f1);
 				err = my_getdelim(&s, &n, '\n', f1);
+
+				//err = my_getline(&s, &n, f1);
+				//err = my_getdelim(&s, &n, '\n', f1);
 				//err = getdelim(&s, &n, '!', f1);
-				if (err == MEMORY_ERROR)
-				{
-					printf("Memory error\n");
-				}
 				if (err == ERROR)
 				{
-					printf("incorrect parameters\n");
+					break;
 				}
-				if (s)
+				else
 				{
 					s1 = str_replace(s, argv[4], argv[6]);
 					if (s1)
@@ -56,12 +54,8 @@ int main(int argc, char **argv)
 						s1 = NULL;
 					}
 				}				
-				if (s)
-				{
-					free(s);
-					s = NULL;
-				}
 			}  
+			free(s);
 			fclose(f1);
 			fclose(f2);
 		}
