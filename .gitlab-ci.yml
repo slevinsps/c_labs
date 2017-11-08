@@ -4,3 +4,13 @@ test:
     - testing-docker 
   script: 
     - testing 
+
+image: testing 
+test: 
+  tags: 
+    - testing-docker 
+  script: 
+    - testing; 
+  artifacts: 
+    paths: [report.txt.enc] 
+    when: always

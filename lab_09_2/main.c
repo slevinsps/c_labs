@@ -4,8 +4,6 @@
 #include "standart_func.h"
 #include "find_replace.h"
 #include "defines.h"
-#include "getdelim.h"
-
 
 
 int main(int argc, char **argv)
@@ -39,8 +37,6 @@ int main(int argc, char **argv)
 				err = my_getdelim(&s, &n, '\n', f1);
 
 				//err = my_getline(&s, &n, f1);
-				//err = my_getdelim(&s, &n, '\n', f1);
-				//err = getdelim(&s, &n, '!', f1);
 				if (err == ERROR)
 				{
 					break;
@@ -57,8 +53,7 @@ int main(int argc, char **argv)
 					}
 					if (feof(f1))
 						break;
-				}
-				
+				}		
 			}  
 			free(s);
 			fclose(f1);

@@ -4,7 +4,7 @@
 #include "standart_func.h"
 #include "find_replace.h"
 #include "defines.h"
-#include "getdelim.h"
+
 
 void test_str_replace(void)
 {
