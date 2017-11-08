@@ -53,7 +53,9 @@ int main(int argc, char **argv)
 						free(s1);
 						s1 = NULL;
 					}
-				}				
+				}
+				if (feof(f1))
+					break;
 			}  
 			free(s);
 			fclose(f1);
