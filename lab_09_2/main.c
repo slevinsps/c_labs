@@ -51,7 +51,7 @@ int main(int argc, char **argv)
 					s1 = str_replace(s, argv[4], argv[6]);
 					if (s1)
 					{
-						fprintf(stdout,"%d #%s#\n",err, s1);
+						fprintf(stdout,"%s\n",s1);
 						free(s1);
 						s1 = NULL;
 					}

@@ -122,8 +122,7 @@ size_t my_getdelim(char **lineptr, size_t *n, int delimiter, FILE *stream)
     }
 	
 	char delim = (char)delimiter;
-	int buf_size = 5;
-    char buf[buf_size];
+    char buf;
 	
 	int n_new = 0;
 
@@ -132,49 +131,26 @@ size_t my_getdelim(char **lineptr, size_t *n, int delimiter, FILE *stream)
 		
 	while (1)
 	{ 
-		
-		if (fgets(buf, buf_size-2, stream) == NULL)
+		buf = fgetc(stream);
+		if (buf == EOF)
 		{
 			(*lineptr)[n_new] = 0;
 			if (n_new == 0) 
 				return ERROR;
 			else
 				return n_new;
-		}	
-
-		
-		for (int i = 0; i < buf_size - 2; i++)
-		{
-			if (buf[i] == delim)
-			{
-				
-				//printf("@@@@ #%s# %d \n",buf,strlen1(buf));
-				len_dop = strlen1(buf);
-				//printf("$$$$ %s\n",buf);
-				buf[i+1] = 0;
-				
-				//if (strlen1(buf) != 0)
-				//{
-				n_new += strlen1(buf);
-				strcat1(lineptr, buf, n_new, n);
-				//}
-				fseek( stream , ftell(stream) - (len_dop-i)+1 , SEEK_SET );
-				(*lineptr)[n_new] = 0;
-				//printf("%d\n",n_new);
-				return n_new;
-			}
 		}
-
-		
-		//if (strlen1(buf) != 0)
-		//{
-		n_new += strlen1(buf);
-		strcat1(lineptr, buf, n_new, n);		
-		//}
+				
+		if (buf == delim)
+		{
+			strcat1(lineptr, buf, n_new, n);
+			
+			(*lineptr)[n_new+1] = 0;
+			return n_new+1;
+		}
+		strcat1(lineptr, buf, n_new, n);
+		n_new++;		
 	}	
-	//(*lineptr)[n_new] = 0;
-	
-	//return n_new;
 }
 
 size_t my_getline(char **lineptr, size_t *n, FILE *stream)

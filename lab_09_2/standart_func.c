@@ -14,20 +14,16 @@ int strlen1(const char *string)
 	return k;
 }
 
-int strcat1(char **s1, char *s2, int n_new, size_t *n)
+int strcat1(char **s1, char c, int n_new, size_t *n)
 {
-	int len2 = strlen1(s2);
 	if (n_new > *n)
 	{
-		*n = n_new*2;
-		*s1 = realloc(*s1,*n);
+		*n = n_new;
+		*s1 = realloc(*s1,*n+1);
 		if (!*s1)
 			return MEMORY_ERROR;
 	}
-	for (int i = n_new - len2; i < n_new; i++)
-	{
-		(*s1)[i] = s2[i - n_new + len2];
-	}		
+	(*s1)[n_new] = c;	
 	return OK;
 }
 
