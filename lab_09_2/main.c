@@ -36,7 +36,7 @@ int main(int argc, char **argv)
 			char *s1;
 			while (1)
 			{
-				err = getdelim(&s, &n, '\n', f1);
+				err = my_getdelim(&s, &n, '\n', f1);
 
 				//err = my_getline(&s, &n, f1);
 				//err = my_getdelim(&s, &n, '\n', f1);
@@ -47,6 +47,7 @@ int main(int argc, char **argv)
 				}
 				else
 				{
+					err = OK;
 					s1 = str_replace(s, argv[4], argv[6]);
 					if (s1)
 					{
@@ -54,9 +55,10 @@ int main(int argc, char **argv)
 						free(s1);
 						s1 = NULL;
 					}
+					if (feof(f1))
+						break;
 				}
-				if (feof(f1))
-					break;
+				
 			}  
 			free(s);
 			fclose(f1);
