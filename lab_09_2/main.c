@@ -33,7 +33,7 @@ int main(int argc, char **argv)
 		{
 			f2 = fopen(argv[2], "w");
 			char *s1;
-			while (!feof(f1))
+			while (my_getdelim(&s, &n, '\n', f1) != -1)
 			{
 				//err = my_getline(&s, &n, f1);
 				err = my_getdelim(&s, &n, '\n', f1);
@@ -51,7 +51,7 @@ int main(int argc, char **argv)
 					s1 = str_replace(s, argv[4], argv[6]);
 					if (s1)
 					{
-						fprintf(stdout,"%s\n",s1);
+						fprintf(f2,"%s\n",s1);
 						free(s1);
 						s1 = NULL;
 					}
