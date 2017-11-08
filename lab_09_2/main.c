@@ -47,7 +47,7 @@ int main(int argc, char **argv)
                     s1 = str_replace(s, argv[4], argv[6]);
                     if (s1)
                     {
-                        fprintf(f2,"%s\n",s1);
+                        fprintf(f2,"%s",s1);
                         free(s1);
                         s1 = NULL;
                     }
@@ -60,5 +60,5 @@ int main(int argc, char **argv)
             fclose(f2);
         }
     }
-    return OK;
+    return err;
 }
