@@ -36,7 +36,7 @@ int main(int argc, char **argv)
 			while (!feof(f1))
 			{
 				//err = my_getline(&s, &n, f1);
-				err = my_getdelim(&s, &n, '!', f1);
+				err = my_getdelim(&s, &n, '\n', f1);
 				//err = getdelim(&s, &n, '!', f1);
 				if (err == MEMORY_ERROR)
 				{
