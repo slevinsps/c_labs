@@ -60,5 +60,5 @@ int main(int argc, char **argv)
             fclose(f2);
         }
     }
-    return err;
+    return OK;
 }
