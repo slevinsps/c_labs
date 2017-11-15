@@ -99,7 +99,7 @@ char* str_replace(const char *source, const char *search, const char *replace)
 // n - количество считанных бит
 // delimiter - разделитель строк
 // stream - файл с текстом
-size_t my_getdelim(char **lineptr, size_t *n, int delimiter, FILE *stream)
+ssize_t my_getdelim(char **lineptr, size_t *n, int delimiter, FILE *stream)
 {
     
     if ((lineptr == NULL) || (n == NULL) || (!stream))
@@ -107,7 +107,7 @@ size_t my_getdelim(char **lineptr, size_t *n, int delimiter, FILE *stream)
     
     if (*lineptr == NULL || *n == 0)
     {
-        *n = 120;
+        *n = 2;
         *lineptr = malloc(*n*sizeof(char));
         if (*lineptr == NULL)
         {
@@ -133,17 +133,15 @@ size_t my_getdelim(char **lineptr, size_t *n, int delimiter, FILE *stream)
                 return n_new;
         }
                 
-        if (buf == delim)
-        {
-            strcat1(lineptr, buf, n_new, n);
-            
-            (*lineptr)[n_new+1] = 0;
-            return n_new+1;
-        }
         strcat1(lineptr, buf, n_new, n);
-        n_new++;        
+        n_new++; 
+		if (buf == delim)
+        {
+            (*lineptr)[n_new] = 0;
+            return n_new;
+        }		
     }
-	return n_new;
+	return ERROR;
 }
 
 size_t my_getline(char **lineptr, size_t *n, FILE *stream)
