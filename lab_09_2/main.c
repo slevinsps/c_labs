@@ -15,10 +15,10 @@ int main(int argc, char **argv)
     size_t n = 0;        
     char *s = NULL;
     int err = OK;
-    int res;
 	char *s1;
 	if (argc != 7 || strcmp(argv[3], "-s") != 0 || strcmp(argv[5], "-r") != 0)
     {
+		printf("./app.exe input.txt output.txt -s <SEARCH> -r <REPLACE>\n");
         err = NOT_ALL_ARGUMENTS;
     }
     else 
@@ -26,7 +26,6 @@ int main(int argc, char **argv)
         f1 = fopen(argv[1], "r");
         if (f1 == NULL)
         {
-            //fprintf(stderr, "%s\n", strerror(errno));
             printf("NO FILE 1\n");
             err = NO_FILE;
         }
@@ -35,29 +34,30 @@ int main(int argc, char **argv)
             f2 = fopen(argv[2], "w");
 			if (f2 == NULL)
 			{
-				//fprintf(stderr, "%s\n", strerror(errno));
 				printf("NO FILE 2\n");
 				err = NO_FILE;
 			}
-            
-			while ((res = my_getdelim(&s, &n, '\n', f1)) != -1)
-            {
-                s1 = str_replace(s, argv[4], argv[6]);
-                if (!s1)
-                {
-					err = -4;
-					break;
-                    
-                }
-				else
+			else
+			{
+				while (my_getdelim(&s, &n, '\n', f1) != -1)
 				{
-					fprintf(f2,"%s",s1);
-                    free(s1);
+					s1 = str_replace(s, argv[4], argv[6]);
+					if (!s1)
+					{
+						err = ERROR_IN_REPLACE;
+						break; 
+					}
+					else
+					{
+						fprintf(f2,"%s",s1);
+						free(s1);
+					}
 				}
-            }  
-            free(s);
-            fclose(f1);
-            fclose(f2);
+				fclose(f2);
+			}
+			if (s)
+				free(s);
+            fclose(f1);  
         }
     }
     return err;
