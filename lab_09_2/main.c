@@ -7,7 +7,7 @@
 
 
 
-/*
+
 int main(int argc, char **argv)
 {
     FILE *f1;
@@ -55,8 +55,8 @@ int main(int argc, char **argv)
     }
     return err;
 }
-*/
 
+/*
 int main(int argc, char **argv)
 {
     char *line = NULL;
@@ -116,4 +116,4 @@ int main(int argc, char **argv)
     }
     //ferror?
     return rc;
-} 
+} */

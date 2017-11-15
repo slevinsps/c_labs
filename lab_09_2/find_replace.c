@@ -4,11 +4,15 @@
 #include "standart_func.h"
 #include "defines.h"
 
+
+// нахождение подстроки в строке
+// source - исходная строка
+// search - подстрока, кторую нужно найти в source
+// pos1 - начало вхождения подстроки
+// pos2 - конец вхождения подстроки
 int find_underline(const char *source, const char *search, int *pos1, int *pos2)
 {
-    //printf("%s\n",source);
     int len1 = strlen1(source);
-    //printf("%d \n",len1);
     int len2 = strlen1(search);        
     int count = 1;
     for(int i = 0; i < len1 - len2+2; i++ )
@@ -26,12 +30,6 @@ int find_underline(const char *source, const char *search, int *pos1, int *pos2)
             
             *pos1 = i;
             *pos2 = i + len2;
-            //printf("%d   %d\n",*pos1,*pos2);
-            /* for(int r = *pos1; r < *pos2; r++ )
-                printf("%c",source[r]);
-            printf("\n@@@@   %s \n",search); */
-            
-            //printf("%d   %d\n",*pos1,*pos2);
             return 1;
         }
         else
