@@ -145,7 +145,7 @@ size_t my_getdelim(char **lineptr, size_t *n, int delimiter, FILE *stream)
         strcat1(lineptr, buf, n_new, n);
         n_new++;        
     }
-	return ERROR;
+	return n_new;
 }
 
 size_t my_getline(char **lineptr, size_t *n, FILE *stream)

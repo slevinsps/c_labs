@@ -4,7 +4,7 @@
 #include "standart_func.h"
 #include "find_replace.h"
 #include "defines.h"
-
+#include "getdelim.h"
 
 
 
@@ -39,7 +39,7 @@ int main(int argc, char **argv)
 			}
 			else
 			{
-				while (my_getdelim(&s, &n, '\n', f1) != -1)
+				while (getdelim(&s, &n, '\n', f1) != -1)
 				{
 					s1 = str_replace(s, argv[4], argv[6]);
 					if (!s1)
@@ -48,10 +48,10 @@ int main(int argc, char **argv)
 						break; 
 					}
 					else
-					{
+					{ 
 						fprintf(f2,"%s",s1);
-						free(s1);
 					}
+					//free(s1);
 				}
 				fclose(f2);
 			}
