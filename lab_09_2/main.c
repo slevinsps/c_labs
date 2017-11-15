@@ -74,10 +74,9 @@ int main(int argc, char **argv)
     size_t n = 5;        
     char *s = NULL;
     int err = OK;
-    size_t res;
-    if (argc < 7)
+    int res;
+	if (argc != 7 || strcmp(argv[3], "-s") != 0 || strcmp(argv[5], "-r") != 0)
     {
-        fprintf(stderr, "app.exe <in.txt> <out.txt> –s <search> –r <replace>\n");
         err = NOT_ALL_ARGUMENTS;
     }
     else 
@@ -93,10 +92,8 @@ int main(int argc, char **argv)
         {
             f2 = fopen(argv[2], "w");
             char *s1;
-            while (1)
+			while ((res = my_getdelim(&s, &n, '\n', f1)) != -1)
             {
-                err = my_getdelim(&s, &n, '\n', f1);
-
                 //err = my_getline(&s, &n, f1);
                 if (err == ERROR)
                 {
