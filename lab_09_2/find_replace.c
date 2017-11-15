@@ -65,9 +65,8 @@ char* str_replace(const char *source, const char *search, const char *replace)
     
     int pos1 = 0;
     int pos2 = 0;
-    int j;
-    
-    char *new_source = copy_string(source);
+	
+    char *new_source = copy_string(source), *tmp;
 	if (!*new_source)
 		return NULL;
     
@@ -75,29 +74,17 @@ char* str_replace(const char *source, const char *search, const char *replace)
     {
         len1 = strlen1(new_source);
         len_res = len1 - len2 + len3;
-        s = malloc(len_res+1);
+        s = calloc(len_res+1,sizeof(char));
         if (!s)
 			return NULL;
 		memcpy(s, new_source, pos1);
-        /* for (int i = 0; i < pos1; i++ )
-        {
-            s[i] = new_source[i];
-        } */
         memcpy(s + pos1, replace, len3);
-        /* for (int i = pos1; i < pos1 + len3; i++ )
-        {
-            s[i] = replace[i-pos1];
-        } */
         memcpy(s +pos1 + len3, new_source + pos2, len_res - ( pos1 + len3));
-        /* j = pos2;
-        for (int i = pos1 + len3; i < len_res; i++ )
-        {
-            
-            s[i] = (new_source)[j];
-            j++;
-        } */    
-        s[len_res] = 0;
-        new_source = realloc(new_source,len_res+1);
+    
+        tmp = realloc(new_source,len_res+1);
+		if (!tmp)
+			return NULL;
+		new_source = tmp;
         for (int i = 0; i < len_res; i++)
         {
             new_source[i] = s[i];
@@ -131,7 +118,7 @@ size_t my_getdelim(char **lineptr, size_t *n, int delimiter, FILE *stream)
     }
     
     char delim = (char)delimiter;
-    char buf;
+    int buf;
     
     size_t n_new = 0;
 
