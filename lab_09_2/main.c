@@ -7,7 +7,7 @@
 
 
 
-int main(int argc, char **argv)
+/* int main(int argc, char **argv)
 {
     char *line = NULL;
     char *res = NULL;
@@ -66,15 +66,15 @@ int main(int argc, char **argv)
     }
     //ferror?
     return rc;
-}
-/* int main(int argc, char **argv)
+} */
+int main(int argc, char **argv)
 {
     FILE *f1;
     FILE *f2;
     size_t n = 5;        
     char *s = NULL;
     int err = OK;
-    
+    size_t res;
     if (argc < 7)
     {
         fprintf(stderr, "app.exe <in.txt> <out.txt> –s <search> –r <replace>\n");
@@ -95,7 +95,7 @@ int main(int argc, char **argv)
             char *s1;
             while (1)
             {
-                err = my_getdelim(&s, &n, '\n', f1);
+                size_t = my_getdelim(&s, &n, '\n', f1);
 
                 //err = my_getline(&s, &n, f1);
                 if (err == ERROR)
@@ -122,4 +122,4 @@ int main(int argc, char **argv)
         }
     }
     return err;
-} */
+}
