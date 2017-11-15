@@ -15,7 +15,7 @@ int find_underline(const char *source, const char *search, int *pos1, int *pos2)
     int len1 = strlen1(source);
     int len2 = strlen1(search);        
     int count = 1;
-    for(int i = 0; i < len1 - len2+2; i++ )
+    for(int i = 0; i < len1 - len2 + 1; i++ )
     {
         for(int j = i; j < i+len2; j++ )
         {
@@ -42,7 +42,10 @@ int find_underline(const char *source, const char *search, int *pos1, int *pos2)
 }
 
 
-
+// замена подстроки в строке
+// source - исходная строка
+// search - подстрока, которую нужно заменить в source
+// replace - подстрока, на которую нужно заменить search
 char* str_replace(const char *source, const char *search, const char *replace)
 {
     if ((source == NULL) || (search == NULL) || (replace == NULL))
@@ -103,6 +106,12 @@ char* str_replace(const char *source, const char *search, const char *replace)
     return new_source;
 }
 
+
+// выделение строки в тексте
+// lineptr - полученная строка
+// n - количество считанных бит
+// delimiter - разделитель строк
+// stream - файл с текстом
 size_t my_getdelim(char **lineptr, size_t *n, int delimiter, FILE *stream)
 {
     
