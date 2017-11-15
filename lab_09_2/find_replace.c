@@ -123,7 +123,7 @@ size_t my_getdelim(char **lineptr, size_t *n, int delimiter, FILE *stream)
     size_t n_new = 0;
 
         
-    while (1)
+    while (!feof(stream))
     { 
         buf = fgetc(stream);
         if (buf == EOF)
