@@ -42,15 +42,15 @@ int main(int argc, char **argv)
 				char *s1;
 				while (getdelim(&s, &n, '\n', f1) != ERROR)
 				{
-					s1 = str_replace(s, argv[4], argv[6]);
+					/* s1 = str_replace(s, argv[4], argv[6]);
                     if (s1)
                     {
                         fprintf(f2,"%s",s1);
                         free(s1);
-                        s1 = NULL;
+                        //s1 = NULL;
                     }
                     if (feof(f1))
-                        break;
+                        break; */
 
 					s1 = str_replace(s, argv[4], argv[6]);
 					if (!s1)
@@ -69,7 +69,6 @@ int main(int argc, char **argv)
 				fclose(f2);
 				free(s);
 			}
-			
             fclose(f1);  
         }
     }
