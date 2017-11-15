@@ -9,10 +9,10 @@ ifeq ($(mode), release)
 	CFLAGS += -DNDEBUG -g0
 endif
 
-app.exe : main.o func.o
+app.exe : main.o func.o standart_func.o
 	$(CC) $(CFLAGS) $^ -o $@
 
-test.exe : test.o func.o
+test.exe : test.o func.o standart_func.o
 	$(CC) $(CFLAGS) $^ -o $@
 
 %.o : %.c *.h

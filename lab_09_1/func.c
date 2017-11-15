@@ -1,14 +1,7 @@
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
-
-int strlen1(const char *string)
-{
-	int k = 0;
-	while (string[k] != 0)
-		k++;
-	return k;
-}
+#include "standart_func.h"
 
 int check_affiliation(char ch, const char *string2)
 {

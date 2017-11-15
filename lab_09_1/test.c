@@ -2,7 +2,7 @@
 #include <string.h>
 #include <stdlib.h>
 #include "func.h"
-
+#include "standart_func.h"
 
 void test_my_strspn(void)
 {

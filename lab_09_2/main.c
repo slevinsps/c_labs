@@ -16,6 +16,7 @@ int main(int argc, char **argv)
     char *s = NULL;
     int err = OK;
     int res;
+	char *s1;
 	if (argc != 7 || strcmp(argv[3], "-s") != 0 || strcmp(argv[5], "-r") != 0)
     {
         err = NOT_ALL_ARGUMENTS;
@@ -26,13 +27,19 @@ int main(int argc, char **argv)
         if (f1 == NULL)
         {
             //fprintf(stderr, "%s\n", strerror(errno));
-            printf("NO FILE\n");
+            printf("NO FILE 1\n");
             err = NO_FILE;
         }
         else
         {
             f2 = fopen(argv[2], "w");
-            char *s1;
+			if (f2 == NULL)
+			{
+				//fprintf(stderr, "%s\n", strerror(errno));
+				printf("NO FILE 2\n");
+				err = NO_FILE;
+			}
+            
 			while ((res = my_getdelim(&s, &n, '\n', f1)) != -1)
             {
                 s1 = str_replace(s, argv[4], argv[6]);
