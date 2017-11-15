@@ -124,10 +124,8 @@ size_t my_getdelim(char **lineptr, size_t *n, int delimiter, FILE *stream)
     char delim = (char)delimiter;
     char buf;
     
-    int n_new = 0;
+    size_t n_new = 0;
 
-    
-    int len_dop;
         
     while (1)
     { 

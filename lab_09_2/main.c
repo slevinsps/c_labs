@@ -66,7 +66,7 @@ int main(int argc, char **argv)
     int rc = OK;
     FILE * f;
     FILE * g;
-    int n = 0;
+    size_t n = 0;
     int  read = 0;
     setbuf(stdout, NULL);
 
