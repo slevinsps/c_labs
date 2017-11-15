@@ -40,11 +40,8 @@ int main(int argc, char **argv)
 			else
 			{
 				char *s1;
-				while (getdelim(&s, &n, '\n', f1) != -1)
+				while (getdelim(&s, &n, '\n', f1) != ERROR)
 				{
-					
-					
-					
 					s1 = str_replace(s, argv[4], argv[6]);
                     if (s1)
                     {
@@ -70,8 +67,8 @@ int main(int argc, char **argv)
 					}
 				}
 				fclose(f2);
+				free(s);
 			}
-			free(s);
 			
             fclose(f1);  
         }
