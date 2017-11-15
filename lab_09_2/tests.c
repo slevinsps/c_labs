@@ -134,7 +134,6 @@ void test_my_getdelim(void)
                     printf("Test 1 in my_getdelim FAILED\n");
                     printf("lineptr = #%s#\n", lineptr);
                     printf("expected = #%s#\n", expected[k]);
-                    printf("count_numbers = %d   orig = %I64d\n",count_numbers,strlen(expected[k]));
                     check_right = 0;
                     break;
                 }
@@ -182,8 +181,7 @@ void test_my_getdelim(void)
                 {
                     printf("Test 2 in my_getdelim FAILED\n");
                     printf("#%s# \n", lineptr);
-                    printf("#%s# \n", expected[k]);
-                    printf("count_numbers = %d   orig = %I64d\n",count_numbers,strlen(expected[k]));
+                    printf("#%s# \n", expected[k]);                    
                     check_right = 0;
                     break;
                 }
@@ -268,8 +266,7 @@ void test_my_getdelim(void)
                 if (strcmp(expected[k], lineptr) != 0 || ((k < 20) && count_numbers != strlen(expected[k]))|| ((k == 20) && count_numbers != -1))
                 {
                     printf("Test 4 in my_getdelim FAILED\n");
-                    printf("lineptr = #%s# %d\n", lineptr, count_numbers);
-                    printf("expected = #%s#   %I64d\n", expected[k], strlen(expected[k]));
+                    printf("lineptr = #%s# %d\n", lineptr, count_numbers);                    
                     check_right = 0;
                     break;
                 }
