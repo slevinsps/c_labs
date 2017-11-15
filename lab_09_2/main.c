@@ -94,24 +94,18 @@ int main(int argc, char **argv)
             char *s1;
 			while ((res = my_getdelim(&s, &n, '\n', f1)) != -1)
             {
-                //err = my_getline(&s, &n, f1);
-                if (err == ERROR)
+                s1 = str_replace(s, argv[4], argv[6]);
+                if (!s1)
                 {
-                    break;
+					err = -4;
+					break;
+                    
                 }
-                else
-                {
-                    err = OK;
-                    s1 = str_replace(s, argv[4], argv[6]);
-                    if (s1)
-                    {
-                        fprintf(f2,"%s",s1);
-                        free(s1);
-                        s1 = NULL;
-                    }
-                    if (feof(f1))
-                        break;
-                }        
+				else
+				{
+					fprintf(f2,"%s",s1);
+                    free(s1);
+				}
             }  
             free(s);
             fclose(f1);
