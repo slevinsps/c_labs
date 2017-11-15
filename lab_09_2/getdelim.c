@@ -71,11 +71,11 @@ ssize_t getdelim (char **lineptr, size_t *n, int delimiter, FILE *fp)
 			//}
 			
 			new_lineptr = (char *) realloc (*lineptr, needed);
-			if (new_lineptr == NULL)
+			/* if (new_lineptr == NULL)
 			{
 				result = -1;
 				goto unlock_return;
-			}
+			} */
 			
 			*lineptr = new_lineptr;
 			*n = needed;
