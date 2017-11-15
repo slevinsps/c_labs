@@ -40,7 +40,7 @@ int main(int argc, char **argv)
 			else
 			{
 				char *s1;
-				while (my_getdelim(&s, &n, '\n', f1) != ERROR)
+				while (getdelim(&s, &n, '\n', f1) != ERROR)
 				{
 					s1 = str_replace(s, argv[4], argv[6]);
 					if (!s1)
