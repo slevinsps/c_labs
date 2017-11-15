@@ -7,7 +7,7 @@
 
 
 
-/* int main(int argc, char **argv)
+int main(int argc, char **argv)
 {
     char *line = NULL;
     char *res = NULL;
@@ -15,7 +15,7 @@
     FILE * f;
     FILE * g;
     size_t n = 0;
-    ssize_t read = 0;
+    size_t read = 0;
     setbuf(stdout, NULL);
 
     if (argc != 7 || strcmp(argv[3], "-s") != 0 || strcmp(argv[5], "-r") != 0)
@@ -66,8 +66,8 @@
     }
     //ferror?
     return rc;
-} */
-int main(int argc, char **argv)
+}
+/* int main(int argc, char **argv)
 {
     FILE *f1;
     FILE *f2;
@@ -122,4 +122,4 @@ int main(int argc, char **argv)
         }
     }
     return err;
-}
+} */
