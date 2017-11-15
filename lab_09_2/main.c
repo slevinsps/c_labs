@@ -95,7 +95,7 @@ int main(int argc, char **argv)
             char *s1;
             while (1)
             {
-                size_t = my_getdelim(&s, &n, '\n', f1);
+                err = my_getdelim(&s, &n, '\n', f1);
 
                 //err = my_getline(&s, &n, f1);
                 if (err == ERROR)
