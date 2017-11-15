@@ -13,34 +13,39 @@
 int find_underline(const char *source, const char *search, int *pos1, int *pos2)
 {
     int len1 = strlen1(source);
-    int len2 = strlen1(search);        
-    int count = 1;
+    int len2 = strlen1(search);     
+    int count;
     for(int i = 0; i < len1 - len2 + 1; i++ )
     {
-        for(int j = i; j < i+len2; j++ )
+		count = 1;
+        for (int j = i; j < i+len2; j++ )
         {
             if (source[j] != search[j-i])
             {
                 count = 0;
-                break;
             }
         }
         if (count)
         {
-            
             *pos1 = i;
             *pos2 = i + len2;
             return 1;
         }
-        else
-        {
-            count = 1;
-        }
     }
-
     return 0;
 }
-
+char *copy_string(const char *source)
+{
+	int len_res = strlen1(source);
+	char *new_source = malloc(len_res+1);
+    if (!*new_source)
+		return NULL;
+    for (int i = 0; i < len_res + 1; i++)
+    {
+        new_source[i] = source[i];        
+    }
+	return new_source;
+}
 
 // замена подстроки в строке
 // source - исходная строка
@@ -62,38 +67,35 @@ char* str_replace(const char *source, const char *search, const char *replace)
     int pos2 = 0;
     int j;
     
-    char *new_source = malloc(len_res+1);
-    
-    
-    for (int i = 0; i < len_res; i++)
-    {
-        new_source[i] = source[i];        
-    }
-    new_source[len_res] = 0;
+    char *new_source = copy_string(source);
+	if (!*new_source)
+		return NULL;
     
     while (find_underline(new_source, search, &pos1, &pos2))
     {
         len1 = strlen1(new_source);
         len_res = len1 - len2 + len3;
         s = malloc(len_res+1);
-        
-        for (int i = 0; i < pos1; i++ )
+        if (!s)
+			return NULL;
+		memcpy(s, new_source, pos1);
+        /* for (int i = 0; i < pos1; i++ )
         {
             s[i] = new_source[i];
-        }
-        
-        for (int i = pos1; i < pos1 + len3; i++ )
+        } */
+        memcpy(s + pos1, replace, len3);
+        /* for (int i = pos1; i < pos1 + len3; i++ )
         {
             s[i] = replace[i-pos1];
-        }
-        
-        j = pos2;
+        } */
+        memcpy(s +pos1 + len3, new_source + pos2, len_res - ( pos1 + len3));
+        /* j = pos2;
         for (int i = pos1 + len3; i < len_res; i++ )
         {
             
             s[i] = (new_source)[j];
             j++;
-        }    
+        } */    
         s[len_res] = 0;
         new_source = realloc(new_source,len_res+1);
         for (int i = 0; i < len_res; i++)
