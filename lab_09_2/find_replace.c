@@ -34,17 +34,15 @@ int find_underline(const char *source, const char *search, int *pos1, int *pos2)
     }
     return 0;
 }
-char *copy_string(const char *source)
+
+void copy_string(char **new_source, const char *source)
 {
 	int len_res = strlen1(source);
-	char *new_source = malloc(len_res+1);
-    if (!*new_source)
-		return NULL;
+	*new_source = malloc(len_res+1);
     for (int i = 0; i < len_res + 1; i++)
     {
-        new_source[i] = source[i];        
+        (*new_source)[i] = source[i];        
     }
-	return new_source;
 }
 
 // замена подстроки в строке
@@ -66,7 +64,8 @@ char* str_replace(const char *source, const char *search, const char *replace)
     int pos1 = 0;
     int pos2 = 0;
 	
-    char *new_source = copy_string(source), *tmp;
+    char *new_source, *tmp;
+	copy_string(&new_source, source);
 	if (!*new_source)
 		return NULL;
     
@@ -80,7 +79,7 @@ char* str_replace(const char *source, const char *search, const char *replace)
 		memcpy(s, new_source, pos1);
         memcpy(s + pos1, replace, len3);
         memcpy(s +pos1 + len3, new_source + pos2, len_res - ( pos1 + len3));
-    
+
         tmp = realloc(new_source,len_res+1);
 		if (!tmp)
 			return NULL;
@@ -94,7 +93,6 @@ char* str_replace(const char *source, const char *search, const char *replace)
     } 
     return new_source;
 }
-
 
 // выделение строки в тексте
 // lineptr - полученная строка
