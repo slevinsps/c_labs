@@ -51,12 +51,12 @@ int main(int argc, char **argv)
 					{ 
 						fprintf(f2,"%s",s1);
 					}
-					//free(s1);
+					//
 				}
 				fclose(f2);
 			}
-			if (s)
-				free(s);
+			free(s);
+			free(s1);
             fclose(f1);  
         }
     }
