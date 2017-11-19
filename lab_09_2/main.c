@@ -52,9 +52,10 @@ int main(int argc, char **argv)
 					{ 
 						
 						fprintf(f2,"%s",s1);
-						free(s1);
+						
 					}
 				}
+				free(s1);
 				fclose(f2);
 				free(s);
 			}
