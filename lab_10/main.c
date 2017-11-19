@@ -13,12 +13,12 @@ void print_list(node_t *head)
 }
 
 
-int main(void)
+/* int main(void)
 {
 	return 0;
-}
+} */
 	
-/* int main(void)
+int main(void)
 {
 	node_t *head = malloc(sizeof(node_t));
 	node_t *head1;
@@ -52,11 +52,11 @@ int main(void)
 	
 	insert(&head, elem, before);
 	//print_list(head);
-	printf("%d\n",*(int*)pop_front(&head));
+    pop_front(&head1);
 	//print_list(head);
-	head1 = reverse(head);
-	printf("%d\n", *(int*)head1->data);
-	print_list(head1);
+	//head1 = reverse(head);
+	//printf("%d\n", *(int*)head1->data);
+	//print_list(head1);
 	
 	return 0;
-} */
+}
