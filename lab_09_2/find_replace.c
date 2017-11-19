@@ -3,7 +3,7 @@
 #include <stdlib.h>
 #include "standart_func.h"
 #include "defines.h"
-
+#include <unistd.h>
 
 // нахождение подстроки в строке
 // source - исходная строка

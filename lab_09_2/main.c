@@ -39,7 +39,6 @@ int main(int argc, char **argv)
 			}
 			else
 			{
-				
 				while (my_getdelim(&s, &n, '\n', f1) != ERROR)
 				{
 					char *s1;
