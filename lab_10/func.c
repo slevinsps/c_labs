@@ -151,12 +151,8 @@ node_t* sorted_merge(node_t **head_a, node_t **head_b, int (*comparator)(const v
 	return res;	
 }
 
-int comporator(const void* d1, const void* d2)
-{
-	return(*(int *)d1 - *(int *)d2);
-}
 
-node_t* sort(node_t *head_a)
+node_t* sort(node_t *head_a, int (*comparator)(const void *, const void *))
 {
 	if (!head_a)
 	{
@@ -165,9 +161,9 @@ node_t* sort(node_t *head_a)
 	node_t* back = NULL;
 	front_back_split(head_a, &back);
 	if (head_a && head_a->next)
-		head_a = sort(head_a);
+		head_a = sort(head_a, comparator);
 	if (back && back->next)
-		back = sort(back);
-	head_a = sorted_merge(&head_a, &back, comporator);
+		back = sort(back, comparator);
+	head_a = sorted_merge(&head_a, &back, comparator);
 	return head_a;
 }

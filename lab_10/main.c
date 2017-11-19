@@ -36,6 +36,10 @@ void load_list(node_t *head, int *arr, int n)
 }
 
 
+int comporator(const void* d1, const void* d2)
+{
+	return(*(int *)d1 - *(int *)d2);
+}
 
 int main(void)
 {
@@ -69,7 +73,7 @@ int main(void)
 	load_list(head, arr, n);
 	print_list(head);
 	//print_list(head);
-	head = sort(head);
+	head = sort(head, comporator);
 	//res = sorted_merge(&head, &head1, comporator);
 	
 	print_list(head);
