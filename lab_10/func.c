@@ -8,9 +8,9 @@ void* pop_front(node_t **head)
 	{
 		return NULL;
 	}
-	return NULL;
-	return (*head)->data;
+	
 	node_t *tmp = *head;
+	return NULL;
 	void *data = tmp->data;
 	*head = (*head)->next;
 	free(tmp);
