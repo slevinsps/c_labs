@@ -124,14 +124,14 @@ size_t my_getdelim(char **lineptr, size_t *n, int delimiter, FILE *stream)
     while (!feof(stream))
     { 
         buf = fgetc(stream);
-        if (buf == EOF)
+        /* if (buf == EOF)
         {
             (*lineptr)[n_new] = 0;
             if (n_new == 0) 
                 return ERROR;
             else
                 return n_new;
-        }
+        } */
                 
         strcat1(lineptr, buf, n_new, n);
         n_new++; 
