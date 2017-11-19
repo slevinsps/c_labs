@@ -3,8 +3,7 @@
 #include <stdlib.h>
 #include "standart_func.h"
 #include "find_replace.h"
-#include "getdelim.h"
-
+#include "defines.h"
 
 
 int main(int argc, char **argv)
