@@ -100,16 +100,16 @@ node_t* sorted_merge(node_t **head_a, node_t **head_b, int (*comparator)(const v
 {
 	node_t *res = NULL;
 	node_t *copy_res = NULL;
-	if (!head_b || !*head_b)
+	if (!*head_b)
 		return *head_a;
-	if (!head_a || !*head_a)
+	if (!*head_a)
 		return *head_b;
 	
 	if (comparator((*head_a)->data, (*head_b)->data) <= 0)
 	{
 		copy_res = *head_a;
 		res = copy_res;
-/* 		if (comparator((*head_a)->data, (*head_b)->data) == 0)
+		/*if (comparator((*head_a)->data, (*head_b)->data) == 0)
 		{
 			*head_a = (*head_a)->next;
 			*head_b = (*head_b)->next;
