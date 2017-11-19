@@ -1,70 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include "func.h"
 
-
-typedef struct node node_t;
-struct node
-{
-	void *data;
-	node_t *next;
-};
-
-
-void* pop_front(node_t **head)
-{
-	if (!*head)
-		return NULL;
-	node_t *tmp = *head;
-	void *data = tmp->data;
-	*head = (*head)->next;
-	free(tmp);
-	return data;
-}
-
-
-void insert(node_t **head, node_t *elem, node_t *before)
-{
-	node_t *tmp = *head;
-	node_t *prev = NULL;
-
-	while (tmp)
-	{
-		if (tmp == elem)
-		{
-			if (prev)
-			{
-				prev->next = before;
-				before->next = elem;
-			}
-			else
-			{
-				before->next = elem;
-				*head = before;
-			}
-		}
-		prev = tmp;
-		tmp = tmp->next;
-	}
-}
-	
-	
-	
-node_t* reverse(node_t *head)
-{
-	node_t *h;
-    if(head->next->next)
-    {
-        node_t* node = head->next;
-		h = reverse(node); 
-		node->next=head;
-        head->next = NULL;
-    }
-	else
-		h = head;
-	return h;
-}
-	
-	
 void print_list(node_t *head)
 {
 	while(head)
@@ -76,9 +13,12 @@ void print_list(node_t *head)
 }
 
 
-
-	
 int main(void)
+{
+	return 0;
+}
+	
+/* int main(void)
 {
 	node_t *head = malloc(sizeof(node_t));
 	node_t *head1;
@@ -119,4 +59,4 @@ int main(void)
 	print_list(head1);
 	
 	return 0;
-}
+} */
