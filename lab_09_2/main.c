@@ -8,7 +8,7 @@
 
 
 
-int main(int argc, char **argv)
+/* int main(int argc, char **argv)
 {
     FILE *f1;
     FILE *f2;
@@ -61,7 +61,53 @@ int main(int argc, char **argv)
         }
     }
     return err;
+} */
+
+
+
+int main(int argc, char **argv)
+{
+	
+	if (argc < 7)
+	{
+		printf("\n./app.exe in.txt out.txt вЂ“s search вЂ“r replace");
+		return -7;
+	}
+	FILE *f = fopen(argv[1], "r");
+	
+	
+	if (!f)
+	{
+		printf("\n no such file %s", argv[1]);
+		return -6;
+	}
+	
+	ssize_t s = 10;
+	size_t n = 1000;
+	char* string = NULL;
+	char* new_string = NULL;
+	FILE *f1 = fopen(argv[2], "w");
+	while (s != ERROR)
+	{
+		s = my_getdelim(&string, &n, '\n', f);
+		new_string = str_replace(string, argv[4], argv[6]);
+		if (new_string != NULL)
+		{
+			fprintf(f1, "%s", new_string);
+			//free(new_string);
+		}
+		else
+		{
+			break;
+		}
+	}
+	free(new_string);
+	free(string);
+	fclose(f);
+	fclose(f1);
+	return 0;
 }
+
 
 /*
 int main(int argc, char **argv)
