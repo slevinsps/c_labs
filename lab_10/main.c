@@ -13,12 +13,12 @@ void print_list(node_t *head)
 }
 
 
-/* int main(void)
+int main(void)
 {
 	return 0;
-} */
+}
 	
-int main(void)
+/* int main(void)
 {
 	node_t *head = malloc(sizeof(node_t));
 	node_t *head1;
@@ -59,4 +59,4 @@ int main(void)
 	//print_list(head1);
 	
 	return 0;
-}
+} */
