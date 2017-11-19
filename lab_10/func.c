@@ -100,9 +100,9 @@ node_t* sorted_merge(node_t **head_a, node_t **head_b, int (*comparator)(const v
 {
 	node_t *res = NULL;
 	node_t *copy_res = NULL;
-	if (!*head_b)
+	if (!head_b || !*head_b)
 		return *head_a;
-	if (!*head_a)
+	if (!head_a || !*head_a)
 		return *head_b;
 	
 	if (comparator((*head_a)->data, (*head_b)->data) <= 0)
@@ -124,9 +124,9 @@ node_t* sorted_merge(node_t **head_a, node_t **head_b, int (*comparator)(const v
 		*head_b = (*head_b)->next;
 	}
 	
-	while (*head_a  && *head_b)
+	while (*head_a  || *head_b)
 	{
-		if (comparator((*head_a)->data, (*head_b)->data) <= 0)
+		if (*head_a && comparator((*head_a)->data, (*head_b)->data) <= 0)
 		{
 			copy_res->next = *head_a;
 			copy_res = copy_res->next;
@@ -134,22 +134,13 @@ node_t* sorted_merge(node_t **head_a, node_t **head_b, int (*comparator)(const v
 		}
 		else
 		{
-			copy_res->next = *head_b;
-			copy_res = copy_res->next;
-			*head_b = (*head_b)->next;
+			if (*head_b)
+			{
+				copy_res->next = *head_b;
+				copy_res = copy_res->next;
+				*head_b = (*head_b)->next;
+			}
 		}
-	}
-	while (*head_a)
-	{
-		copy_res->next = *head_a;
-		copy_res = copy_res->next;
-		*head_a = (*head_a)->next;
-	}
-	while (*head_b)
-	{
-		copy_res->next = *head_b;
-		copy_res = copy_res->next;
-		*head_b = (*head_b)->next;
 	}
 	return res;	
 }
