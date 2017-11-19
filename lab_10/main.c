@@ -45,8 +45,8 @@ int main(void)
 {
 	node_t *head = malloc(sizeof(node_t));
 	node_t *head1 = malloc(sizeof(node_t));
-	//head->next = NULL;
-	//head->data = NULL;
+	head->next = NULL;
+	head->data = NULL;
 	node_t *copy_head = head;
 	
 	node_t *elem;
@@ -55,31 +55,32 @@ int main(void)
 	before->next = NULL;
 	before->data = &bef;
 	
-	int n = 6;
-	int arr[6] = {2, 2, 2, 1, 1, 1};
-	int *arr2 = malloc(n*sizeof(int));
-	int k = 0;
-	/* for (int i = n; i > 0; i--)
+	int n = 1;
+	int arr2[5] = {0,1,2,3,4};
+	int arr[5] = {5,6,7,8,10};
+	/* int k = 0;
+	for (int i = 0; i < n; i++)
 	{
-		arr[k] = 1;
-		k++;
-	} */
+		arr[i] = i*2;
+	}
 	
 	for (int i = 0; i < n; i++)
 	{
 		arr2[i] = 1;
-	}
+	} */
 	node_t *res;
-	load_list(head, arr, n);
-	print_list(head);
+	//load_list(head, arr, );
+	load_list(head1, arr2, 5);
 	//print_list(head);
-	head = sort(head, comporator);
-	//res = sorted_merge(&head, &head1, comporator);
+	print_list(head1);
+	//print_list(head);
+	//head = sort(head, comporator);
+	res = sorted_merge(&head, &head1, comporator);
 	
-	print_list(head);
+	print_list(res);
 	//front_back_split(head, &head1);
 	//print_list(head);
-	//print_list(head1);
+	print_list(head1);
 	//print_list(head);
 	
 	//insert(&head, elem, before);
