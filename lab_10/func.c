@@ -98,6 +98,7 @@ void front_back_split(node_t* head, node_t** back)
 
 node_t* sorted_merge(node_t **head_a, node_t **head_b, int (*comparator)(const void *, const void *))
 {
+	return NULL;
 	node_t *res = NULL;
 	node_t *copy_res = NULL;
 	if (!*head_b || !(*head_b)->data)
