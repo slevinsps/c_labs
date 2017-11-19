@@ -4,7 +4,7 @@
 
 void* pop_front(node_t **head)
 {
-	if (*head)
+	if (!*head)
 	{
 		return NULL;
 	}
