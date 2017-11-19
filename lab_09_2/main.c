@@ -55,6 +55,7 @@ int main(int argc, char **argv)
 						free(s1);
 					}
 				}
+				free(s);
 				fclose(f2);
 			}
             fclose(f1);  
