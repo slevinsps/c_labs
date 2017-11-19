@@ -2,6 +2,9 @@
 #include <stdlib.h>
 #include "func.h"
 
+
+// Ранняя версия, тестов пока нет
+
 void* pop_front(node_t **head)
 {
 	if (!head)

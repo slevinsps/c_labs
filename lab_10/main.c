@@ -13,12 +13,12 @@ void print_list(node_t *head)
 }
 
 
-/* int main(void)
+int main(void)
 {
 	return 0;
-}  */
+}
 
-void load_list(node_t *head, int *arr, int n)
+/* void load_list(node_t *head, int *arr, int n)
 {
 	head->data = (int*)&arr[0];
 	head->next = NULL;
@@ -67,7 +67,7 @@ int main(void)
 	for (int i = 0; i < n; i++)
 	{
 		arr2[i] = 1;
-	} */
+	}
 	node_t *res;
 	//load_list(head, arr, );
 	load_list(head1, arr2, 5);
@@ -92,4 +92,4 @@ int main(void)
 	
 
 	return 0;
-}
+} */
