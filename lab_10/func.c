@@ -17,7 +17,7 @@ void* pop_front(node_t **head)
 	void *data = tmp->data;
 	
 	*head = (*head)->next;
-	return NULL;
+	//return NULL;
 	free(tmp);
 	return data;
 }
