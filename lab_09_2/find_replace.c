@@ -104,11 +104,11 @@ size_t my_getdelim(char **lineptr, size_t *n, int delimiter, FILE *stream)
     
     if ((lineptr == NULL) || (n == NULL) || (!stream))
         return ERROR;
-    *lineptr = NULL;
+	
     if (*lineptr == NULL || *n == 0)
     {
         *n = 120;
-        *lineptr =(char *) malloc(*n*sizeof(char));
+        *lineptr =(char *) realloc(*lineptr,*n*sizeof(char));
         if (*lineptr == NULL)
         {
             return ERROR;

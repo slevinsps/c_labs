@@ -8,7 +8,7 @@
 
 
 
-/* int main(int argc, char **argv)
+int main(int argc, char **argv)
 {
     FILE *f1;
     FILE *f2;
@@ -40,7 +40,7 @@
 			else
 			{
 				
-				while (my_getdelim(&s, &n, '\n', f1) != ERROR)
+				while (getdelim(&s, &n, '\n', f1) != ERROR)
 				{
 					char *s1;
 					s1 = str_replace(s, argv[4], argv[6]);
@@ -61,11 +61,11 @@
         }
     }
     return err;
-} */
+}
 
 
 
-int main(int argc, char **argv)
+/* int main(int argc, char **argv)
 {
 	
 	if (argc < 7)
@@ -106,7 +106,7 @@ int main(int argc, char **argv)
 	fclose(f);
 	fclose(f1);
 	return 0;
-}
+} */
 
 
 /*

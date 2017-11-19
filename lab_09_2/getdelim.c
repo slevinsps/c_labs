@@ -64,18 +64,18 @@ ssize_t getdelim (char **lineptr, size_t *n, int delimiter, FILE *fp)
 			size_t needed = 2 * (cur_len + 1) + 1;   /* Be generous. */
 			char *new_lineptr;
 			
-			//if (needed < cur_len)
-			//{
-			//	result = -1;
-			//	goto unlock_return;
-			//}
-			
-			new_lineptr = (char *) realloc (*lineptr, needed);
-			/* if (new_lineptr == NULL)
+			if (needed < cur_len)
 			{
 				result = -1;
 				goto unlock_return;
-			} */
+			}
+			
+			new_lineptr = (char *) realloc (*lineptr, needed);
+			if (new_lineptr == NULL)
+			{
+				result = -1;
+				goto unlock_return;
+			} 
 			
 			*lineptr = new_lineptr;
 			*n = needed;
