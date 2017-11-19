@@ -52,7 +52,7 @@ int main(int argc, char **argv)
 					else
 					{ 
 						fprintf(f2,"%s",s1);
-						//free(s1);
+						free(s1);
 					}
 				}
 				fclose(f2);
