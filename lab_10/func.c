@@ -4,7 +4,6 @@
 
 void* pop_front(node_t **head)
 {
-	return NULL;
 	return (*head)->data;
 	node_t *tmp = *head;
 	void *data = tmp->data;
