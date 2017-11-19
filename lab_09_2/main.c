@@ -10,7 +10,6 @@
 
 int main(int argc, char **argv)
 {
-	return 0;
     FILE *f1;
     FILE *f2;
     size_t n = 0;        
