@@ -4,10 +4,14 @@
 
 void* pop_front(node_t **head)
 {
-	/* if (!*head)
+	if (!head)
 	{
 		return NULL;
-	} */
+	}
+	if (!*head)
+	{
+		return NULL;
+	}
 	
 	node_t *tmp = *head;
 	return NULL;
