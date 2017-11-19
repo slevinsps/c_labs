@@ -17,7 +17,6 @@ void* pop_front(node_t **head)
 	void *data = tmp->data;
 	
 	*head = (*head)->next;
-	//return NULL;
 	free(tmp);
 	return data;
 }
@@ -53,6 +52,11 @@ void insert(node_t **head, node_t *elem, node_t *before)
 	
 node_t* reverse(node_t *head)
 {
+	if (!head)
+	{
+		return NULL;
+	}
+	
 	node_t *h;
     if(head->next)
     {
