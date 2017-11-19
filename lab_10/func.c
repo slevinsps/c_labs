@@ -4,14 +4,18 @@
 
 void* pop_front(node_t **head)
 {
+	if (!*head)
+		return NULL;
 	if (!(*head)->data)
 		return NULL;
+	return (*head)->data;
 	node_t *tmp = *head;
 	void *data = tmp->data;
 	*head = (*head)->next;
 	free(tmp);
 	return data;
 }
+
 
 
 void insert(node_t **head, node_t *elem, node_t *before)
