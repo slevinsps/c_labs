@@ -11,7 +11,7 @@ endif
 
 app.exe : main.o func.o 
 	$(CC) $(CFLAGS) $^ -o $@
-tests.exe : main.o func.o 
+test.exe : main.o func.o 
 	$(CC) $(CFLAGS) $^ -o $@
 	
 %.o : %.c *.h

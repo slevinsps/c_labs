@@ -51,19 +51,19 @@ int main(void)
 	before->next = NULL;
 	before->data = &bef;
 	
-	int n = 2;
-	int *arr = malloc(n*sizeof(int));
+	int n = 6;
+	int arr[6] = {2, 2, 2, 1, 1, 1};
 	int *arr2 = malloc(n*sizeof(int));
 	int k = 0;
-	for (int i = n; i > 0; i--)
+	/* for (int i = n; i > 0; i--)
 	{
-		arr[k] = i;
+		arr[k] = 1;
 		k++;
-	}
+	} */
 	
 	for (int i = 0; i < n; i++)
 	{
-		arr2[i] = i+2;
+		arr2[i] = 1;
 	}
 	node_t *res;
 	load_list(head, arr, n);
