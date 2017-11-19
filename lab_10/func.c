@@ -44,7 +44,7 @@ void insert(node_t **head, node_t *elem, node_t *before)
 node_t* reverse(node_t *head)
 {
 	node_t *h;
-    if(head->next->next)
+    if(head->next)
     {
         node_t* node = head->next;
 		h = reverse(node); 
