@@ -4,7 +4,7 @@
 
 void print_list(node_t *head)
 {
-	while(head)
+	while(head->next)
 	{
 		printf("%d ",*(int*)(head->data));
 		head = head->next;
@@ -16,12 +16,12 @@ void print_list(node_t *head)
 int main(void)
 {
 	return 0;
-}
+} 
 	
-/* int main(void)
+/*  int main(void)
 {
 	node_t *head = malloc(sizeof(node_t));
-	node_t *head1;
+	//node_t *head1;
 	head->next = NULL;
 	head->data = NULL;
 	node_t *copy_head = head;
@@ -33,7 +33,7 @@ int main(void)
 	before->data = &bef;
 	int *arr = malloc(20*sizeof(int));
 	
-	for (int i = 0; i < 10; i++)
+	for (int i = 0; i < 2; i++)
 	{
 		arr[i] = i;
 		copy_head->data = (int*)&arr[i];
@@ -52,11 +52,14 @@ int main(void)
 	
 	insert(&head, elem, before);
 	//print_list(head);
-    pop_front(&head1);
+    pop_front(&head);
 	//print_list(head);
 	//head1 = reverse(head);
 	//printf("%d\n", *(int*)head1->data);
-	//print_list(head1);
-	
+	print_list(head);
+	pop_front(&head);
+	print_list(head);
+	pop_front(&head);
+	print_list(head);
 	return 0;
-} */
+}  */
