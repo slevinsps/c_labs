@@ -84,7 +84,7 @@ void front_back_split(node_t* head, node_t** back)
 		count = count / 2 + 1;
 	else
 		count = count / 2;
-	printf("%d \n", count);
+	//printf("%d \n", count);
 	for (int i = 0; i < count-1; i++)
 	{
 		head = head->next;
@@ -97,7 +97,10 @@ node_t* sorted_merge(node_t **head_a, node_t **head_b, int (*comparator)(const v
 {
 	node_t *res = NULL;
 	node_t *copy_res = NULL;
-	
+	if (!*head_b)
+		return *head_a;
+	if (!*head_a)
+		return *head_b;
 	if (comparator((*head_a)->data, (*head_b)->data) <= 0)
 	{
 		copy_res = *head_a;
@@ -141,4 +144,19 @@ node_t* sorted_merge(node_t **head_a, node_t **head_b, int (*comparator)(const v
 	return res;	
 }
 
-//void sort()
+int comporator(const void* d1, const void* d2)
+{
+	return(*(int *)d1 - *(int *)d2);
+}
+
+node_t* sort(node_t *head_a)
+{
+	node_t* back;
+	front_back_split(head_a, &back);
+	if (head_a && head_a->next)
+		head_a = sort(head_a);
+	if (back && back->next)
+		back = sort(back);
+	head_a = sorted_merge(&head_a, &back, comporator);
+	return head_a;
+}

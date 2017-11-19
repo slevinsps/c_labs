@@ -35,10 +35,8 @@ void load_list(node_t *head, int *arr, int n)
 	}	
 }
 
-int comporator(const void* d1, const void* d2)
-{
-	return(*(int *)d1 - *(int *)d2);
-}
+
+
 int main(void)
 {
 	node_t *head = malloc(sizeof(node_t));
@@ -53,12 +51,14 @@ int main(void)
 	before->next = NULL;
 	before->data = &bef;
 	
-	int n = 20;
+	int n = 2;
 	int *arr = malloc(n*sizeof(int));
 	int *arr2 = malloc(n*sizeof(int));
-	for (int i = 0; i < n; i++)
+	int k = 0;
+	for (int i = n; i > 0; i--)
 	{
-		arr[i] = i;
+		arr[k] = i;
+		k++;
 	}
 	
 	for (int i = 0; i < n; i++)
@@ -67,12 +67,12 @@ int main(void)
 	}
 	node_t *res;
 	load_list(head, arr, n);
-	load_list(head1, arr2, n);
 	print_list(head);
-	print_list(head1);
-	res = sorted_merge(&head, &head1, comporator);
+	//print_list(head);
+	head = sort(head);
+	//res = sorted_merge(&head, &head1, comporator);
 	
-	print_list(res);
+	print_list(head);
 	//front_back_split(head, &head1);
 	//print_list(head);
 	//print_list(head1);
