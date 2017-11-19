@@ -72,25 +72,28 @@ node_t* reverse(node_t *head)
 
 void front_back_split(node_t* head, node_t** back)
 {
-	node_t *copy_head = head;
-	int count = 0;
-	while (copy_head)
-	{
-		count++;
-		copy_head = copy_head->next;
+	if (head)
+	{		
+		node_t *copy_head = head;
+		int count = 0;
+		while (copy_head)
+		{
+			count++;
+			copy_head = copy_head->next;
+		}
+		
+		if (count % 2 != 0)
+			count = count / 2 + 1;
+		else
+			count = count / 2;
+		//printf("%d \n", count);
+		for (int i = 0; i < count-1; i++)
+		{
+			head = head->next;
+		}
+		(*back) = head->next;
+		head->next = NULL;
 	}
-	
-	if (count % 2 != 0)
-		count = count / 2 + 1;
-	else
-		count = count / 2;
-	//printf("%d \n", count);
-	for (int i = 0; i < count-1; i++)
-	{
-		head = head->next;
-	}
-	(*back) = head->next;
-	head->next = NULL;
 }
 
 node_t* sorted_merge(node_t **head_a, node_t **head_b, int (*comparator)(const void *, const void *))
