@@ -14,23 +14,31 @@ int find_underline(const char *source, const char *search, int *pos1, int *pos2)
 {
     int len1 = strlen1(source);
     int len2 = strlen1(search);     
-    int count;
-    for(int i = 0; i < len1 - len2 + 1; i++ )
+    int count = 0;
+    int i = 0;
+    int j = 0;
+	
+	while(i < len1 - len2 + 1 && !count)
     {
 		count = 1;
-        for (int j = i; j < i+len2; j++ )
+		j = i;
+		while(j < i + len2 && count)
         {
+			
             if (source[j] != search[j-i])
             {
                 count = 0;
             }
+			j++;
         }
-        if (count)
-        {
-            *pos1 = i;
-            *pos2 = i + len2;
-            return 1;
-        }
+		i++;
+    }
+	i--;
+	if (count)
+    {
+        *pos1 = i;
+        *pos2 = i + len2;
+        return 1;
     }
     return 0;
 }
@@ -39,10 +47,13 @@ void copy_string(char **new_source, const char *source)
 {
 	int len_res = strlen1(source);
 	*new_source = malloc(len_res+1);
-    for (int i = 0; i < len_res + 1; i++)
-    {
-        (*new_source)[i] = source[i];        
-    }
+	if (*new_source)
+	{
+		for (int i = 0; i < len_res + 1; i++)
+		{
+			(*new_source)[i] = source[i];        
+		}
+	}
 }
 
 // замена подстроки в строке
