@@ -44,7 +44,7 @@ int find_underline(const char *source, const char *search, int *pos1, int *pos2)
     return 0;
 }
 
-/* void copy_string(char **new_source, const char *source)
+void copy_string(char **new_source, const char *source)
 {
 	int len_res = strlen1(source);
 	*new_source = malloc(len_res+1);
@@ -55,7 +55,7 @@ int find_underline(const char *source, const char *search, int *pos1, int *pos2)
 			(*new_source)[i] = source[i];        
 		}
 	}
-} */
+}
 
 char *my_strdup(const char *str1)
 {
@@ -93,7 +93,7 @@ char* str_replace(const char *source, const char *search, const char *replace)
     int pos1 = 0;
     int pos2 = 0;
 	
-    char *new_source;
+    char *new_source, *tmp;
 	new_source = my_strdup(source);
 	if (!*new_source)
 		return NULL;
@@ -107,8 +107,12 @@ char* str_replace(const char *source, const char *search, const char *replace)
 			return NULL;
 		memcpy(s, new_source, pos1);
         memcpy(s + pos1, replace, len3);
-        memcpy(s +pos1 + len3, new_source + pos2, len_res - ( pos1 + len3));
+        memcpy(s + pos1 + len3, new_source + pos2, len_res - ( pos1 + len3));
 
+        tmp = realloc(new_source,len_res+1);
+		if (!tmp)
+			return NULL;
+		new_source = tmp;
         for (int i = 0; i < len_res; i++)
         {
             new_source[i] = s[i];
