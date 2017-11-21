@@ -148,7 +148,8 @@ ssize_t my_getdelim(char **lineptr, size_t *n, int delimiter, FILE *stream)
 			*n *= MULTIPLY;
 			tmp = realloc(*lineptr,*n);
 			if (!tmp)
-				return MEMORY_ERROR;
+				return ERROR;
+			free(*lineptr);
 			*lineptr = tmp;
 		}
 		
@@ -166,7 +167,9 @@ ssize_t my_getdelim(char **lineptr, size_t *n, int delimiter, FILE *stream)
 	if (buf == EOF)
     {
 		if (n_new == 0)
+		{
 			n_new = ERROR;
+		}
     }
 	return n_new;
 }

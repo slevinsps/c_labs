@@ -109,7 +109,7 @@ void test_my_getdelim(void)
 {
     {
         // 1 разделитель \n
-        char *lineptr = NULL;
+        char *lineptr = NULL;        
         size_t n = 0;
         int delimiter = '\n';
         FILE *stream = fopen("source_1.txt", "r");
@@ -361,7 +361,7 @@ int find_underline2(const char *source, const char *search, int *pos1, int *pos2
     int count;
     for(int i = 0; i < len1 - len2 + 1; i++ )
     {
-		count = 1;
+        count = 1;
         for (int j = i; j < i+len2; j++ )
         {
             if (source[j] != search[j-i])
@@ -384,15 +384,15 @@ int main(void)
 {
     test_str_replace();    
     test_my_getdelim();
-	/* char *source = "hello my name is ivan";
-	char *search = "is";
-	int pos1 = 0, pos2 = 0;
-	int pos3 = 0, pos4 = 0;
-	int res;
-	int res1;
-	res = find_underline(source, search, &pos1, &pos2);
-	res1 = find_underline1(source, search, &pos3, &pos4);
-	printf("%d %d %d\n", res, pos1, pos2 ); 
-	printf("%d %d %d", res1, pos3, pos4 );  */
+    /* char *source = "hello my name is ivan";
+    char *search = "is";
+    int pos1 = 0, pos2 = 0;
+    int pos3 = 0, pos4 = 0;
+    int res;
+    int res1;
+    res = find_underline(source, search, &pos1, &pos2);
+    res1 = find_underline1(source, search, &pos3, &pos4);
+    printf("%d %d %d\n", res, pos1, pos2 ); 
+    printf("%d %d %d", res1, pos3, pos4 );  */
     return 0;
 }
