@@ -44,18 +44,6 @@ int find_underline(const char *source, const char *search, int *pos1, int *pos2)
     return 0;
 }
 
-void copy_string(char **new_source, const char *source)
-{
-	int len_res = strlen1(source);
-	*new_source = malloc(len_res+1);
-	if (*new_source)
-	{
-		for (int i = 0; i < len_res + 1; i++)
-		{
-			(*new_source)[i] = source[i];        
-		}
-	}
-}
 
 char *my_strdup(const char *str1)
 {
@@ -127,15 +115,13 @@ ssize_t my_getdelim(char **lineptr, size_t *n, int delimiter, FILE *stream)
 	
     if (*lineptr == NULL || *n == 0)
     {
-        *n = 120;
+        *n = 2;
         *lineptr =(char *) realloc(*lineptr,*n*sizeof(char));
         if (*lineptr == NULL)
         {
             return ERROR;
         }
     }
-    
-    char delim = (char)delimiter;
     int buf;
     
     size_t n_new = 0;
@@ -152,9 +138,7 @@ ssize_t my_getdelim(char **lineptr, size_t *n, int delimiter, FILE *stream)
 			//free(*lineptr);
 			*lineptr = tmp;
 		}
-		
 		(*lineptr)[n_new] = buf;
-		
         n_new++; 		
     }
 	(*lineptr)[n_new] = 0;
