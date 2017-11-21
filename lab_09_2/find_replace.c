@@ -82,8 +82,7 @@ char* str_replace(const char *source, const char *search, const char *replace)
 {
     if ((source == NULL) || (search == NULL) || (replace == NULL))
         return NULL;
-    
-    char *s = NULL;
+
     int len1;
     
     int len2 = strlen1(search);
@@ -102,29 +101,13 @@ char* str_replace(const char *source, const char *search, const char *replace)
     {
         len1 = strlen1(new_source);
         len_res = len1 - len2 + len3;
-        s = calloc(len_res+1,sizeof(char));
-        if (!s)
-			return NULL;
-		/* memmove(s, new_source, pos1);
-        memmove(s + pos1, replace, len3);
-        memmove(s + pos1 + len3, new_source + pos2, len_res - ( pos1 + len3)); */
-
 		tmp = realloc(new_source,len_res+1);
 		if (!tmp)
 			return NULL;
 		new_source = tmp;
 		
-		//memmove(new_source, new_source, pos1);
 		memmove(new_source + pos1 + len3, new_source + pos2, len_res - ( pos1 + len3));
         memmove(new_source + pos1, replace, len3);
-        
-		
-        
-        /* for (int i = 0; i < len_res; i++)
-        {
-            new_source[i] = s[i];
-        } */
-        free(s);
         new_source[len_res] = 0;
     } 
     return new_source;
