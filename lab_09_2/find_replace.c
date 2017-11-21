@@ -105,18 +105,25 @@ char* str_replace(const char *source, const char *search, const char *replace)
         s = calloc(len_res+1,sizeof(char));
         if (!s)
 			return NULL;
-		memcpy(s, new_source, pos1);
-        memcpy(s + pos1, replace, len3);
-        memcpy(s + pos1 + len3, new_source + pos2, len_res - ( pos1 + len3));
+		/* memmove(s, new_source, pos1);
+        memmove(s + pos1, replace, len3);
+        memmove(s + pos1 + len3, new_source + pos2, len_res - ( pos1 + len3)); */
 
-        tmp = realloc(new_source,len_res+1);
+		tmp = realloc(new_source,len_res+1);
 		if (!tmp)
 			return NULL;
 		new_source = tmp;
-        for (int i = 0; i < len_res; i++)
+		
+		//memmove(new_source, new_source, pos1);
+		memmove(new_source + pos1 + len3, new_source + pos2, len_res - ( pos1 + len3));
+        memmove(new_source + pos1, replace, len3);
+        
+		
+        
+        /* for (int i = 0; i < len_res; i++)
         {
             new_source[i] = s[i];
-        }
+        } */
         free(s);
         new_source[len_res] = 0;
     } 
