@@ -62,8 +62,8 @@
 }
  */
 
-
-int main(int argc, char **argv)
+/*
+int main(int argc, char **argv) //  error while building app   // error while compiling lib
 {
 	
 	if (argc < 7)
@@ -104,10 +104,10 @@ int main(int argc, char **argv)
 	fclose(f);
 	fclose(f1);
 	return 0;
-}
+}*/
 
 
-/*
+
 int main(int argc, char **argv)
 {
     char *line = NULL;
@@ -167,4 +167,4 @@ int main(int argc, char **argv)
     }
     //ferror?
     return rc;
-} */
+} 
