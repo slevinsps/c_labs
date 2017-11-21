@@ -149,7 +149,7 @@ ssize_t my_getdelim(char **lineptr, size_t *n, int delimiter, FILE *stream)
 			tmp = realloc(*lineptr,*n);
 			if (!tmp)
 				return ERROR;
-			free(*lineptr);
+			//free(*lineptr);
 			*lineptr = tmp;
 		}
 		
