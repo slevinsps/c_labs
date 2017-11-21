@@ -6,7 +6,7 @@
 #include "defines.h"
 
 
-int main(int argc, char **argv)
+/* int main(int argc, char **argv)
 {
     FILE *f1;
     FILE *f2;
@@ -60,10 +60,10 @@ int main(int argc, char **argv)
     }
     return err;
 }
+ */
 
 
-
-/* int main(int argc, char **argv)
+int main(int argc, char **argv)
 {
 	
 	if (argc < 7)
@@ -104,7 +104,7 @@ int main(int argc, char **argv)
 	fclose(f);
 	fclose(f1);
 	return 0;
-} */
+}
 
 
 /*
