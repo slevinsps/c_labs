@@ -5,18 +5,18 @@
 #include "find_replace.h"
 #include "defines.h"
 
-
-/* int main(int argc, char **argv)
+        
+int main(int argc, char **argv) // основной main
 {
     FILE *f1;
     FILE *f2;
     size_t n = 0;        
     char *s = NULL;
     int err = OK;
-	
-	if (argc != 7 || strcmp(argv[3], "-s") != 0 || strcmp(argv[5], "-r") != 0)
+    
+    if (argc != 7 || strcmp(argv[3], "-s") != 0 || strcmp(argv[5], "-r") != 0)
     {
-		printf("./app.exe input.txt output.txt -s <SEARCH> -r <REPLACE>\n");
+        printf("./app.exe input.txt output.txt -s <SEARCH> -r <REPLACE>\n");
         err = NOT_ALL_ARGUMENTS;
     }
     else 
@@ -30,85 +30,84 @@
         else
         {
             f2 = fopen(argv[2], "w");
-			if (f2 == NULL)
-			{
-				printf("NO FILE 2\n");
-				err = NO_FILE;
-			}
-			else
-			{
-				while (my_getdelim(&s, &n, '\n', f1) != ERROR)
-				{
-					char *s1;
-					s1 = str_replace(s, argv[4], argv[6]);
-					if (!s1)
-					{
-						err = ERROR_IN_REPLACE;
-						break; 
-					}
-					else
-					{ 
-						fprintf(f2,"%s",s1);
-						free(s1);
-					}
-				}
-				free(s);
-				fclose(f2);
-			}
+            if (f2 == NULL)
+            {
+                printf("NO FILE 2\n");
+                err = NO_FILE;
+            }
+            else
+            {
+                while (my_getdelim(&s, &n, '\n', f1) != ERROR)
+                {
+                    char *s1;
+                    s1 = str_replace(s, argv[4], argv[6]);
+                    if (!s1)
+                    {
+                        err = ERROR_IN_REPLACE;
+                        break; 
+                    }
+                    else
+                    { 
+                        fprintf(f2,"%s",s1);
+                        free(s1);
+                    }
+                }
+                free(s);
+                fclose(f2);
+            }
             fclose(f1);  
         }
     }
     return err;
 }
- */
 
 /*
 int main(int argc, char **argv) //  error while building app   // error while compiling lib
 {
-	
-	if (argc < 7)
-	{
-		printf("\n./app.exe in.txt out.txt вЂ“s search вЂ“r replace");
-		return -7;
-	}
-	FILE *f = fopen(argv[1], "r");
-	
-	
-	if (!f)
-	{
-		printf("\n no such file %s", argv[1]);
-		return -6;
-	}
-	
-	ssize_t s = 10;
-	size_t n = 1000;
-	char* string = NULL;
-	char* new_string = NULL;
-	FILE *f1 = fopen(argv[2], "w");
-	while (s != ERROR)
-	{
-		s = my_getdelim(&string, &n, '\n', f);
-		new_string = str_replace(string, argv[4], argv[6]);
-		if (new_string != NULL)
-		{
-			fprintf(f1, "%s", new_string);
-			//free(new_string);
-		}
-		else
-		{
-			break;
-		}
-	}
-	free(new_string);
-	free(string);
-	fclose(f);
-	fclose(f1);
-	return 0;
+    
+    if (argc < 7)
+    {
+        printf("\n./app.exe in.txt out.txt вЂ“s search вЂ“r replace");
+        return -7;
+    }
+    FILE *f = fopen(argv[1], "r");
+    
+    
+    if (!f)
+    {
+        printf("\n no such file %s", argv[1]);
+        return -6;
+    }
+    
+    ssize_t s = 10;
+    size_t n = 1000;
+    char* string = NULL;
+    char* new_string = NULL;
+    FILE *f1 = fopen(argv[2], "w");
+    while (s != ERROR)
+    {
+        s = my_getdelim(&string, &n, '\n', f);
+        new_string = str_replace(string, argv[4], argv[6]);
+        if (new_string != NULL)
+        {
+            fprintf(f1, "%s", new_string);
+            //free(new_string);
+        }
+        else
+        {
+            break;
+        }
+    }
+    free(new_string);
+    free(string);
+    fclose(f);
+    fclose(f1);
+    return 0;
 }*/
 
 
-
-int main(int argc, char **argv)
+/*
+int main(int argc, char **argv)  //  error while building app   // error while compiling lib
 {
     char *line = NULL;
     char *res = NULL;
@@ -167,4 +166,4 @@ int main(int argc, char **argv)
     }
     //ferror?
     return rc;
-} 
+} */

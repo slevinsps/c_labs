@@ -6,7 +6,7 @@
 #include "defines.h"
 
 
-// нахождение подстроки в строке
+// нахождение подстроки в строке    
 // source - исходная строка
 // search - подстрока, кторую нужно найти в source
 // pos1 - начало вхождения подстроки
@@ -18,24 +18,24 @@ int find_underline(const char *source, const char *search, int *pos1, int *pos2)
     int count = 0;
     int i = 0;
     int j = 0;
-	
-	while(i < len1 - len2 + 1 && !count)
+    
+    while(i < len1 - len2 + 1 && !count)
     {
-		count = 1;
-		j = i;
-		while(j < i + len2 && count)
+        count = 1;
+        j = i;
+        while(j < i + len2 && count)
         {
-			
+            
             if (source[j] != search[j-i])
             {
                 count = 0;
             }
-			j++;
+            j++;
         }
-		i++;
+        i++;
     }
-	i--;
-	if (count)
+    i--;
+    if (count)
     {
         *pos1 = i;
         *pos2 = i + len2;
@@ -47,19 +47,19 @@ int find_underline(const char *source, const char *search, int *pos1, int *pos2)
 
 char *my_strdup(const char *str1)
 {
-	int len = strlen1(str1);
-	char *res = malloc((len+1)*sizeof(char));
-	if (res)
-	{
-		for (int i = 0;i < len; i++)
-		{
-			res[i] = str1[i];
-		}
-		res[len] = 0;
-	}
-	else
-		return NULL;
-	return res;
+    int len = strlen1(str1);
+    char *res = malloc((len+1)*sizeof(char));
+    if (res)
+    {
+        for (int i = 0;i < len; i++)
+        {
+            res[i] = str1[i];
+        }
+        res[len] = 0;
+    }
+    else
+        return NULL;
+    return res;
 }
 
 // замена подстроки в строке
@@ -79,24 +79,24 @@ char* str_replace(const char *source, const char *search, const char *replace)
     
     int pos1 = 0;
     int pos2 = 0;
-	
+    
     char *new_source, *tmp;
-	new_source = my_strdup(source);
-	if (!*new_source)
-		return NULL;
+    new_source = my_strdup(source);
+    if (!*new_source)
+        return NULL;
     
     while (find_underline(new_source, search, &pos1, &pos2))
     {
         len1 = strlen1(new_source);
         len_res = len1 - len2 + len3;
-		tmp = realloc(new_source,len_res+1);
-		if (!tmp)
-			return NULL;
-		new_source = tmp;
-		
-		memmove(new_source + pos1 + len3, new_source + pos2, len_res - ( pos1 + len3));
+        tmp = realloc(new_source,len_res+1);
+        if (!tmp)
+            return NULL;
+        new_source = tmp;
+        
+        memmove(new_source + pos1 + len3, new_source + pos2, len_res - ( pos1 + len3));
         memmove(new_source + pos1, replace, len3);
-		
+        
         new_source[len_res] = 0;
     }
     return new_source;
@@ -112,7 +112,7 @@ ssize_t my_getdelim(char **lineptr, size_t *n, int delimiter, FILE *stream)
     
     if ((lineptr == NULL) || (n == NULL) || (!stream))
         return ERROR;
-	
+    
     if (*lineptr == NULL || *n == 0)
     {
         *n = 120;
@@ -125,44 +125,44 @@ ssize_t my_getdelim(char **lineptr, size_t *n, int delimiter, FILE *stream)
     int buf;
     
     size_t n_new = 0;
-	char *tmp;
+    char *tmp;
         
     while ((buf = fgetc(stream)) != EOF && buf != delimiter)
     { 
         if (n_new > *n)
-		{
-			*n *= MULTIPLY;
-			tmp = realloc(*lineptr,*n);
-			if (!tmp)
-				return ERROR;
-			//free(*lineptr);
-			*lineptr = tmp;
-		}
-		(*lineptr)[n_new] = buf;
-        n_new++; 		
+        {
+            *n *= MULTIPLY;
+            tmp = realloc(*lineptr,*n);
+            if (!tmp)
+                return ERROR;
+            //free(*lineptr);
+            *lineptr = tmp;
+        }
+        (*lineptr)[n_new] = buf;
+        n_new++;         
     }
-	(*lineptr)[n_new] = 0;
-	if (buf == delimiter)
+    (*lineptr)[n_new] = 0;
+    if (buf == delimiter)
     {
         (*lineptr)[n_new] = delimiter;
-		n_new++;
-		(*lineptr)[n_new] = 0;
+        n_new++;
+        (*lineptr)[n_new] = 0;
     }
-	if (buf == EOF)
+    if (buf == EOF)
     {
-		if (n_new == 0)
-		{
-			n_new = ERROR;
-		}
+        if (n_new == 0)
+        {
+            n_new = ERROR;
+        }
     }
-	return n_new;
+    return n_new;
 }
 
 ssize_t my_getline(char **lineptr, size_t *n, FILE *stream)
 {
     if ((lineptr == NULL) || (n == NULL) || (!stream))
         return ERROR;
-	
+    
     if (*lineptr == NULL || *n == 0)
     {
         *n = 320;
@@ -172,47 +172,47 @@ ssize_t my_getline(char **lineptr, size_t *n, FILE *stream)
             return ERROR;
         }
     }
-	char *buf_string = calloc(120,sizeof(char));
+    char *buf_string = calloc(120,sizeof(char));
     char buf;
     
     size_t n_new = 0;
-	char *tmp;
-	int len = 0;
+    char *tmp;
+    int len = 0;
         
     while ((fgets(buf_string, 119, stream)) != NULL)
     { 
-		len = strlen1(buf_string);
-		for (int i = 0; i < len; i++)
-		{
-			buf = buf_string[i];
-			if (n_new > *n)
-			{
-				*n *= MULTIPLY;
-				tmp = realloc(*lineptr,*n);
-				if (!tmp)
-					return ERROR;
-				//free(*lineptr);
-				*lineptr = tmp;
-			}
-			(*lineptr)[n_new] = buf;
-			n_new++; 	
-		}
-		if (buf_string[len-1] == '\n')
-			break;
+        len = strlen1(buf_string);
+        for (int i = 0; i < len; i++)
+        {
+            buf = buf_string[i];
+            if (n_new > *n)
+            {
+                *n *= MULTIPLY;
+                tmp = realloc(*lineptr,*n);
+                if (!tmp)
+                    return ERROR;
+                //free(*lineptr);
+                *lineptr = tmp;
+            }
+            (*lineptr)[n_new] = buf;
+            n_new++;     
+        }
+        if (buf_string[len-1] == '\n')
+            break;
     }
-	(*lineptr)[n_new] = 0;
-	/* if (buf == delimiter)
+    (*lineptr)[n_new] = 0;
+    /* if (buf == delimiter)
     {
         (*lineptr)[n_new] = delimiter;
-		n_new++;
-		(*lineptr)[n_new] = 0;
+        n_new++;
+        (*lineptr)[n_new] = 0;
     } */
-	if (buf == EOF)
+    if (buf == EOF)
     {
-		if (n_new == 0)
-		{
-			n_new = ERROR;
-		}
+        if (n_new == 0)
+        {
+            n_new = ERROR;
+        }
     }
-	return n_new;
+    return n_new;
 }

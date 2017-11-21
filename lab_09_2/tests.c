@@ -476,83 +476,83 @@ void test_my_getline(void)
 
 void test_find_underline(void)
 {
-	{
+    {
         // 1 такой подстроки в строке нет 
-		
+        
         char source[20] = "aaaa";
         char search[20] = "b";
-		int pos1 = 0;
-		int pos2 = 0;
+        int pos1 = 0;
+        int pos2 = 0;
         int actual_pos1 = 0;
         int actual_pos2 = 0;
-		
+        
         if (!find_underline(source, search, &pos1, &pos2) && pos1 == actual_pos1 && pos2 == actual_pos2)
         {
             printf("Test 1 in find_underline PASSED\n");
         }
-		else
-		{
-			printf("Test 1 in find_underline FAILED\n");
-		}
+        else
+        {
+            printf("Test 1 in find_underline FAILED\n");
+        }
     }
-	{
+    {
         // 2 встречается вначале
-		
+        
         char source[30] = "hello my name is Ivan";
         char search[30] = "hello";
-		int pos1 = 0;
-		int pos2 = 0;
+        int pos1 = 0;
+        int pos2 = 0;
         int actual_pos1 = 0;
         int actual_pos2 = 5;
-		
+        
         if (find_underline(source, search, &pos1, &pos2) && pos1 == actual_pos1 && pos2 == actual_pos2)
         {
             printf("Test 2 in find_underline PASSED\n");
         }
-		else
-		{
-			printf("Test 2 in find_underline FAILED\n");
-		}
+        else
+        {
+            printf("Test 2 in find_underline FAILED\n");
+        }
     }
-	{
+    {
         // 3 встречается в конце
-		
+        
         char source[30] = "hello my name is Ivan";
         char search[30] = "Ivan";
-		int pos1 = 0;
-		int pos2 = 0;
+        int pos1 = 0;
+        int pos2 = 0;
         int actual_pos1 = 17;
         int actual_pos2 = 21;
-		
+        
         if (find_underline(source, search, &pos1, &pos2) && pos1 == actual_pos1 && pos2 == actual_pos2)
         {
             printf("Test 3 in find_underline PASSED\n");
         }
-		else
-		{
-			printf("Test 3 in find_underline FAILED\n");
-		}
+        else
+        {
+            printf("Test 3 in find_underline FAILED\n");
+        }
     }
-	{
+    {    
         // 4 несколько вхождений
-		
+        
         char source[30] = "hello my name my is Ivan";
         char search[30] = "my";
-		int pos1 = 0;
-		int pos2 = 0;
+        int pos1 = 0;
+        int pos2 = 0;
         int actual_pos1 = 6;
         int actual_pos2 = 8;
-		
+        
         if (find_underline(source, search, &pos1, &pos2) && pos1 == actual_pos1 && pos2 == actual_pos2)
         {
             printf("Test 4 in find_underline PASSED\n");
         }
-		else
-		{
-			printf("Test 4 in find_underline FAILED\n");
-		}
+        else
+        {
+            printf("Test 4 in find_underline FAILED\n");
+        }
     }
-	
+    
 }
 
 
@@ -562,6 +562,6 @@ int main(void)
     test_str_replace();    
     test_my_getdelim();
     test_my_getline();
-	test_find_underline();
+    test_find_underline();
     return 0;
 }
