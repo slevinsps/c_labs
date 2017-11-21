@@ -340,7 +340,6 @@ void test_my_getdelim(void)
                 {
                     printf("Test 6 in my_getdelim FAILED\n");
                     printf("lineptr = #%s#  %d \n", lineptr,count_numbers);
-                    printf("expected = #%s#\n", expected[k]);
                     check_right = 0;
                     break;
                 }
@@ -354,36 +353,131 @@ void test_my_getdelim(void)
     } 
 }
 
-int find_underline2(const char *source, const char *search, int *pos1, int *pos2)
+void test_my_getline(void)
 {
-    int len1 = strlen1(source);
-    int len2 = strlen1(search);     
-    int count;
-    for(int i = 0; i < len1 - len2 + 1; i++ )
     {
-        count = 1;
-        for (int j = i; j < i+len2; j++ )
+        // 1 разделитель \n
+        char *lineptr = NULL;        
+        size_t n = 0;
+        FILE *stream = fopen("source_1.txt", "r");
+        char *expected[7] = { "Amy normally hated Monday mornings. but this year was different.\n",       
+                            "Kamal was in her art class and she liked Kamal. She was waiting outside the classroom when her friend Tara arrived.\n",
+                            " Hi Amy! Your mum sent me a text. You forgot your inhaler.\n",
+                            "Amy don t you turn your phone on?  Amy didn t like technology.\n",
+                            "She never sent text messages and she hated Facebook too.\n",
+                            " Did Kamal ask you to the disco?  Tara was Amy s best friend,\n",
+                            "and she wanted to know everything that was happening in Amy s life." };
+        int k = 0;
+        int check_right = 1;
+        int count_numbers;
+        while (!feof(stream))
         {
-            if (source[j] != search[j-i])
+            //count_numbers = getdelim(&lineptr, &n, delimiter, stream);
+            count_numbers = my_getline(&lineptr, &n, stream);
+            if (lineptr)
             {
-                count = 0;
-            }
+                if (strcmp(expected[k], lineptr) != 0 || count_numbers != strlen(expected[k]))
+                {
+                    printf("Test 1 in my_getline FAILED\n");
+                    printf("lineptr = #%s#\n", lineptr);
+                    printf("expected = #%s#\n", expected[k]);               
+                    check_right = 0;
+                    break;
+                }
+                k++;
+            } 
         }
-        if (count)
-        {
-            *pos1 = i;
-            *pos2 = i + len2;
-            return 1;
-        }
+        if (check_right)
+            printf("Test 1 in my_getline PASSED\n");
+        free(lineptr);
+        fclose(stream);
     }
-    return 0;
+   {
+        // 2 разделитель \n
+        char *lineptr = NULL;
+        size_t n = 0;
+        FILE *stream = fopen("source_2.txt", "r");
+        char *expected[17] = { "Amy \n",
+                            "normally hated Monday \n",
+                            "mornings. but this year was different. \n",
+                            "Kamal was in her art class \n",
+                            "and she liked Kamal. She was waiting \n",
+                            "outside the classroom when her friend \n",
+                            "Tara arrived.\n",
+                            " Hi Amy! Your mum sent me a text. \n",
+                            "You forgot your inhaler. \n",
+                            "Amy don t you turn your phone on? \n",
+                            " Amy didn t like technology. \n",
+                            "She never sent text messages and \n",
+                            "she hated Facebook too.\n",
+                            " Did Kamal ask you to the disco?  \n",
+                            "Tara was Amy s best friend, \n",
+                            "and she wanted to know everything \n",
+                            "that was happening in Amy s life."};
+        int k = 0;
+        int check_right = 1;
+        int count_numbers;
+        while (!feof(stream))
+        {
+            count_numbers = my_getline(&lineptr, &n, stream);
+            //count_numbers = getdelim(&lineptr, &n, delimiter, stream);
+            if (lineptr)
+            {
+                if (strcmp(expected[k], lineptr) != 0 || count_numbers != strlen(expected[k]))
+                {
+                    printf("Test 2 in my_getline FAILED\n");
+                    printf("#%s# \n", lineptr);
+                    printf("#%s# \n", expected[k]);                    
+                    check_right = 0;
+                    break;
+                }
+                k++;
+            }
+        }  
+        if (check_right)
+            printf("Test 2 in my_getline PASSED\n");
+        free(lineptr);
+        fclose(stream);
+    }
+    
+    {
+        // 3 разделитель \n одна строчка
+        char *lineptr = NULL;
+        size_t n;
+        FILE *stream = fopen("source_3.txt", "r");
+        char *expected[1] = { "Amy normally hated Monday " };
+        int k = 0;
+        int check_right = 1;
+        int count_numbers;
+        while (!feof(stream))
+        {
+            count_numbers = my_getline(&lineptr, &n, stream);
+            //count_numbers = getdelim(&lineptr, &n, delimiter, stream);
+            if (lineptr)
+            {
+                if (strcmp(expected[k], lineptr) != 0 || count_numbers != strlen(expected[k]))
+                {
+                    printf("Test 3 in my_getline FAILED\n");
+                    printf("%s#\n", lineptr);
+                    printf("%s#\n", expected[k]);
+                    check_right = 0;
+                    break;
+                }
+                k++;
+            }
+        }  
+        if (check_right)
+            printf("Test 3 in my_getline PASSED\n");
+        free(lineptr);
+        fclose(stream); 
+    } 
 }
-
 
 int main(void)
 {
     test_str_replace();    
     test_my_getdelim();
+    test_my_getline();
     /* char *source = "hello my name is ivan";
     char *search = "is";
     int pos1 = 0, pos2 = 0;

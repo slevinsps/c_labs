@@ -115,8 +115,8 @@ ssize_t my_getdelim(char **lineptr, size_t *n, int delimiter, FILE *stream)
 	
     if (*lineptr == NULL || *n == 0)
     {
-        *n = 1200;
-        *lineptr =(char *) realloc(*lineptr,*n*sizeof(char));
+        *n = 120;
+        *lineptr = (char *) realloc(*lineptr,*n*sizeof(char));
         if (*lineptr == NULL)
         {
             return ERROR;
@@ -158,7 +158,61 @@ ssize_t my_getdelim(char **lineptr, size_t *n, int delimiter, FILE *stream)
 	return n_new;
 }
 
-size_t my_getline(char **lineptr, size_t *n, FILE *stream)
+ssize_t my_getline(char **lineptr, size_t *n, FILE *stream)
 {
-    return(my_getdelim(lineptr, n, '\n', stream));
+    if ((lineptr == NULL) || (n == NULL) || (!stream))
+        return ERROR;
+	
+    if (*lineptr == NULL || *n == 0)
+    {
+        *n = 320;
+        *lineptr = (char *) realloc(*lineptr,*n*sizeof(char));
+        if (*lineptr == NULL)
+        {
+            return ERROR;
+        }
+    }
+	char *buf_string = calloc(120,sizeof(char));
+    char buf;
+    
+    size_t n_new = 0;
+	char *tmp;
+	int len = 0;
+        
+    while ((fgets(buf_string, 119, stream)) != NULL)
+    { 
+		len = strlen1(buf_string);
+		for (int i = 0; i < len; i++)
+		{
+			buf = buf_string[i];
+			if (n_new > *n)
+			{
+				*n *= MULTIPLY;
+				tmp = realloc(*lineptr,*n);
+				if (!tmp)
+					return ERROR;
+				//free(*lineptr);
+				*lineptr = tmp;
+			}
+			(*lineptr)[n_new] = buf;
+			n_new++; 	
+		}
+		if (buf_string[len-1] == '\n')
+			break;
+    }
+	(*lineptr)[n_new] = 0;
+	/* if (buf == delimiter)
+    {
+        (*lineptr)[n_new] = delimiter;
+		n_new++;
+		(*lineptr)[n_new] = 0;
+    } */
+	if (buf == EOF)
+    {
+		if (n_new == 0)
+		{
+			n_new = ERROR;
+		}
+    }
+	return n_new;
 }
