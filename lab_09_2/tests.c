@@ -134,6 +134,7 @@ void test_my_getdelim(void)
                     printf("Test 1 in my_getdelim FAILED\n");
                     printf("lineptr = #%s#\n", lineptr);
                     printf("expected = #%s#\n", expected[k]);
+                    printf("%d   =   %d \n", count_numbers,strlen(expected[k]) );
                     check_right = 0;
                     break;
                 }

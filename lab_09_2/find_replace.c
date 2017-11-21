@@ -108,8 +108,9 @@ char* str_replace(const char *source, const char *search, const char *replace)
 		
 		memmove(new_source + pos1 + len3, new_source + pos2, len_res - ( pos1 + len3));
         memmove(new_source + pos1, replace, len3);
+		
         new_source[len_res] = 0;
-    } 
+    }
     return new_source;
 }
 
@@ -138,29 +139,36 @@ ssize_t my_getdelim(char **lineptr, size_t *n, int delimiter, FILE *stream)
     int buf;
     
     size_t n_new = 0;
-
+	char *tmp;
         
-    while (!feof(stream))
+    while ((buf = fgetc(stream)) != EOF && buf != delim)
     { 
-        buf = fgetc(stream);
-        if (buf == EOF)
-        {
-            (*lineptr)[n_new] = 0;
-            if (n_new == 0) 
-                return ERROR;
-            else
-                return n_new;
-        }
-                
-        strcat1(lineptr, buf, n_new, n);
-        n_new++; 
-		if (buf == delim)
-        {
-            (*lineptr)[n_new] = 0;
-            return n_new;
-        }		
+        if (n_new > *n)
+		{
+			*n *= MULTIPLY;
+			tmp = realloc(*lineptr,*n);
+			if (!tmp)
+				return MEMORY_ERROR;
+			*lineptr = tmp;
+		}
+		
+		(*lineptr)[n_new] = buf;
+		
+        n_new++; 		
     }
-	return ERROR;
+	(*lineptr)[n_new] = 0;
+	if (buf == delim)
+    {
+        (*lineptr)[n_new] = delim;
+		n_new++;
+		(*lineptr)[n_new] = 0;
+    }
+	if (buf == EOF)
+    {
+		if (n_new == 0)
+			n_new = ERROR;
+    }
+	return n_new;
 }
 
 size_t my_getline(char **lineptr, size_t *n, FILE *stream)

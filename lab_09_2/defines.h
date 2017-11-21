@@ -7,5 +7,6 @@
 #define NO_FILE -2
 #define MEMORY_ERROR -3
 #define ERROR -1
+#define MULTIPLY 2
 
 # endif // DEFINES
