@@ -104,14 +104,14 @@ node_t* sorted_merge(node_t **head_a, node_t **head_b, int (*comparator)(const v
 	
 	if (!*head_b || !(*head_b)->data)
 	{
-		copy_res = head_a;
-		head_a = NULL;
+		copy_res = *head_a;
+		*head_a = NULL;
 		return copy_res;
 	}
 	if (!*head_a || !(*head_a)->data)
 	{
-		copy_res = head_b;
-		head_b = NULL;
+		copy_res = *head_b;
+		*head_b = NULL;
 		return copy_res;
 	}
 	
