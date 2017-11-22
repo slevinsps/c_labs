@@ -23,7 +23,7 @@ int main(int argc, char **argv) // основной main
     {
         f1 = fopen(argv[1], "r");
         if (f1 == NULL)
-        {
+        {  
             printf("NO FILE 1\n");
             err = NO_FILE;
         }
