@@ -302,7 +302,7 @@ void test_reverse(void)
 
 void print_list(node_t *head)
 {
-    while(head)
+    while (head)
     {
         printf("%c ", *(char*)(head->data));
         head = head->next;
