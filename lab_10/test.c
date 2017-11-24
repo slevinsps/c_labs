@@ -62,7 +62,7 @@ void test_pop_front(void)
 		int *actual;
 		int n = 5;
 		node_t *head = malloc(sizeof(node_t));
-		int arr[5] = {8, 1, 4, 5, 4};
+		int arr[5] = { 8, 1, 4, 5, 4 };
 		int expect1 = arr[0];
 		int expect2 = arr[1];
 		
@@ -79,7 +79,7 @@ void test_pop_front(void)
 		int *actual;
 		int n = 1;
 		node_t *head = malloc(sizeof(node_t));
-		int arr[5] = {8};
+		int arr[5] = { 8 };
 		int expect1 = arr[0];		
 		load_list_int(head, arr, n);
 		actual = pop_front(&head);
@@ -103,7 +103,7 @@ void test_pop_front(void)
 	}
 }
 
-int compare_list_arr_int(node_t *head,int arr[N])
+int compare_list_arr_int(node_t *head, int arr[N])
 {
 	int k = 0;
 	while (head)
@@ -119,7 +119,7 @@ int compare_list_arr_int(node_t *head,int arr[N])
 }
 
 
-int compare_list_arr_double(node_t *head,double arr[N])
+int compare_list_arr_double(node_t *head, double arr[N])
 {
 	int k = 0;
 	while (head)
@@ -131,8 +131,7 @@ int compare_list_arr_double(node_t *head,double arr[N])
 		head = head->next;
 		k++;
 	}
-	return 1;
-	
+	return 1;	
 }
 
 
@@ -149,7 +148,6 @@ int compare_list_arr_char(node_t *head,char arr[N])
 		k++;
 	}
 	return 1;
-	
 }
 
 void test_insert(void)
@@ -164,9 +162,8 @@ void test_insert(void)
 		before->data = &data;
 		before->next = NULL;
 		
-		
-		int arr[N] = {8, 1, 4, 5, 4};
-		int arr_exp[N+1] = {8, 1, 100, 4, 5, 4};
+		int arr[N] = { 8, 1, 4, 5, 4 };
+		int arr_exp[N+1] = { 8, 1, 100, 4, 5, 4 };
 		
 		load_list_int(head, arr, n);
 		elem = head;
@@ -192,14 +189,14 @@ void test_insert(void)
 		before->next = NULL;
 		
 		
-		int arr[N] = {8, 1, 4, 5, 4};
-		int arr_exp[N+1] = {100, 8, 1, 4, 5, 4};
+		int arr[N] = { 8, 1, 4, 5, 4 };
+		int arr_exp[N+1] = { 100, 8, 1, 4, 5, 4 };
 		
 		load_list_int(head, arr, n);
 		elem = head;
 		insert(&head, elem, before);
 		
-		if (compare_list_arr_int(head,arr_exp))
+		if (compare_list_arr_int(head, arr_exp))
 			printf("test 2 in insert PASSED\n");
 		else
 			printf("test 2 in insert FAILED\n");
@@ -215,8 +212,8 @@ void test_insert(void)
 		before->next = NULL;
 		
 		
-		int arr[N] = {8, 1, 4, 5, 4};
-		int arr_exp[N+1] = {8, 1, 4, 5, 100, 4};
+		int arr[N] = { 8, 1, 4, 5, 4 };
+		int arr_exp[N+1] = { 8, 1, 4, 5, 100, 4 };
 		
 		load_list_int(head, arr, n);
 		elem = head;
@@ -243,8 +240,8 @@ void test_reverse(void)
 		node_t *head_reverse;
 		
 		
-		int arr[N] = {8, 1, 4, 5, 4};
-		int arr_exp[N] = {4, 5, 4, 1, 8};
+		int arr[N] = { 8, 1, 4, 5, 4 };
+		int arr_exp[N] = { 4, 5, 4, 1, 8 };
 		
 		load_list_int(head, arr, n);
 		
@@ -262,8 +259,8 @@ void test_reverse(void)
 		node_t *head_reverse;
 		
 		
-		int arr[N] = {8};
-		int arr_exp[N] = {8};
+		int arr[N] = { 8 };
+		int arr_exp[N] = { 8 };
 		
 		load_list_int(head, arr, n);
 		
@@ -281,8 +278,8 @@ void test_reverse(void)
 		node_t *head_reverse;
 		
 		
-		int arr[N] = {8, 8, 8, 8, 8};
-		int arr_exp[N] = {8, 8, 8, 8, 8};
+		int arr[N] = { 8, 8, 8, 8, 8 };
+		int arr_exp[N] = { 8, 8, 8, 8, 8 };
 		
 		load_list_int(head, arr, n);
 		
@@ -308,7 +305,7 @@ void print_list(node_t *head)
 {
 	while(head)
 	{
-		printf("%c ",*(char*)(head->data));
+		printf("%c ", *(char*)(head->data));
 		head = head->next;
 	}
 	printf("\n");
@@ -323,9 +320,9 @@ void test_front_back_split(void)
 		node_t *back;
 		
 		
-		int arr[N] = {8, 1, 4, 5, 4};
-		int arr_exp1[N] = {8, 1, 4};
-		int arr_exp2[N] = {5, 4};
+		int arr[N] = { 8, 1, 4, 5, 4 };
+		int arr_exp1[N] = { 8, 1, 4 };
+		int arr_exp2[N] = { 5, 4 };
 		
 		load_list_int(head, arr, n);
 		
@@ -343,9 +340,9 @@ void test_front_back_split(void)
 		node_t *back;
 		
 		
-		int arr[N] = {8, 1, 4, 5, 4, 10};
-		int arr_exp1[N] = {8, 1, 4};
-		int arr_exp2[N] = {5, 4, 10};
+		int arr[N] = { 8, 1, 4, 5, 4, 10 };
+		int arr_exp1[N] = { 8, 1, 4 };
+		int arr_exp2[N] = { 5, 4, 10 };
 		
 		load_list_int(head, arr, n);
 		
@@ -363,8 +360,8 @@ void test_front_back_split(void)
 		node_t *back;
 		
 		
-		int arr[N] = {8};
-		int arr_exp1[N] = {8};
+		int arr[N] = { 8 };
+		int arr_exp1[N] = { 8 };
 		
 		load_list_int(head, arr, n);
 		
@@ -381,9 +378,9 @@ void test_front_back_split(void)
 		node_t *back;
 		
 		
-		int arr[N] = {8, 1};
-		int arr_exp1[N] = {8};
-		int arr_exp2[N] = {1};
+		int arr[N] = { 8, 1 };
+		int arr_exp1[N] = { 8 };
+		int arr_exp2[N] = { 1 };
 		
 		load_list_int(head, arr, n);
 		
@@ -431,10 +428,9 @@ void test_sorted_merge(void)
 		node_t *head_b = malloc(sizeof(node_t));
 		node_t *res;
 		
-		
-		int arr1[N] = {1, 3, 5, 7, 9};
-		int arr2[N] = {2, 4, 6, 8, 10};
-		int arr_exp[N] = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
+		int arr1[N] = { 1, 3, 5, 7, 9 };
+		int arr2[N] = { 2, 4, 6, 8, 10 };
+		int arr_exp[N] = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 };
 		
 		load_list_int(head_a, arr1, n);
 		load_list_int(head_b, arr2, n);
@@ -454,9 +450,9 @@ void test_sorted_merge(void)
 		node_t *res;
 		
 		
-		int arr1[N] = {8};
-		int arr2[N] = {2};
-		int arr_exp[N] = {2, 8};
+		int arr1[N] = { 8 };
+		int arr2[N] = { 2 };
+		int arr_exp[N] = { 2, 8 };
 		
 		load_list_int(head_a, arr1, n);
 		load_list_int(head_b, arr2, n);
@@ -477,9 +473,9 @@ void test_sorted_merge(void)
 		node_t *res;
 		
 		
-		int arr1[N] = {8, 10, 25, 50};
-		int arr2[N] = {1, 9, 20, 27, 29, 53, 82};
-		int arr_exp[N] = {1, 8, 9, 10, 20, 25, 27, 29, 50, 53, 82};
+		int arr1[N] = { 8, 10, 25, 50 };
+		int arr2[N] = { 1, 9, 20, 27, 29, 53, 82 };
+		int arr_exp[N] = { 1, 8, 9, 10, 20, 25, 27, 29, 50, 53, 82 };
 		
 		load_list_int(head_a, arr1, n1);
 		load_list_int(head_b, arr2, n2);
@@ -500,9 +496,9 @@ void test_sorted_merge(void)
 		node_t *res;
 		
 		
-		double arr1[N] = {8.256, 10, 25.268, 50.145};
-		double arr2[N] = {1, 8.253, 9, 20.5, 27, 29, 53, 82.487};
-		double arr_exp[N] = {1, 8.253, 8.256, 9, 10, 20.5, 25.268, 27, 29, 50.145, 53, 82.487};
+		double arr1[N] = { 8.256, 10, 25.268, 50.145 };
+		double arr2[N] = { 1, 8.253, 9, 20.5, 27, 29, 53, 82.487 };
+		double arr_exp[N] = { 1, 8.253, 8.256, 9, 10, 20.5, 25.268, 27, 29, 50.145, 53, 82.487 };
 		
 		load_list_double(head_a, arr1, n1);
 		load_list_double(head_b, arr2, n2);
@@ -522,9 +518,9 @@ void test_sorted_merge(void)
 		node_t *res;
 		
 		
-		char arr1[N] = {'1', '5', '8'};
-		char arr2[N] = {'3', '6', '7'};
-		char arr_exp[N] = {'1', '3', '5', '6', '7', '8'};			
+		char arr1[N] = { '1', '5', '8' };
+		char arr2[N] = { '3', '6', '7' };
+		char arr_exp[N] = { '1', '3', '5', '6', '7', '8' };			
 		load_list_char(head_a, arr1, n1);
 		load_list_char(head_b, arr2, n2);
 		res = sorted_merge(&head_a, &head_b, comporator_char);
@@ -544,8 +540,8 @@ void test_sort(void)
 		node_t *res;
 		
 		
-		int arr1[N] = {10, 9, 8, 7, 6, 5, 4, 3, 2, 1};
-		int arr_exp[N] = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
+		int arr1[N] = { 10, 9, 8, 7, 6, 5, 4, 3, 2, 1 };
+		int arr_exp[N] = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 };
 		
 		load_list_int(head_a, arr1, n);
 		
@@ -562,8 +558,8 @@ void test_sort(void)
 		node_t *res;
 		
 		
-		int arr1[N] = {10};
-		int arr_exp[N] = {10};
+		int arr1[N] = { 10 };
+		int arr_exp[N] = { 10 };
 		
 		load_list_int(head_a, arr1, n);
 		
@@ -580,8 +576,8 @@ void test_sort(void)
 		node_t *res;
 		
 		
-		double arr1[N] = {5.452, 5.450, 5.46, 4.99};
-		double arr_exp[N] = {4.99, 5.450, 5.452, 5.46};
+		double arr1[N] = { 5.452, 5.450, 5.46, 4.99 };
+		double arr_exp[N] = { 4.99, 5.450, 5.452, 5.46 };
 		
 		load_list_double(head_a, arr1, n);
 		
@@ -598,8 +594,8 @@ void test_sort(void)
 		node_t *res;
 		
 		
-		char arr1[N] = {'9', '4', '6', '0'};
-		char arr_exp[N] = {'0', '4', '6', '9'};
+		char arr1[N] = { '9', '4', '6', '0' };
+		char arr_exp[N] = { '0', '4', '6', '9' };
 		
 		load_list_char(head_a, arr1, n);
 		
@@ -610,7 +606,6 @@ void test_sort(void)
 			printf("test 4 in sort FAILED\n");
 	}
 }
-
 
 int main(void)
 {
