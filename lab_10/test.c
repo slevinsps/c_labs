@@ -392,12 +392,12 @@ void test_front_back_split(void)
     }
 }
 
-int comporator_int(const void* d1, const void* d2)
+int comporator_int(const void *d1, const void *d2)
 {
-    return(*(int *)d1 - *(int *)d2);
+    return *(int *)d1 - *(int *)d2;
 }
 
-int comporator_double(const void* d1, const void* d2)
+int comporator_double(const void *d1, const void *d2)
 {
     double res = *(double *)d1 - *(double *)d2;
     if (res < 0)
@@ -408,7 +408,7 @@ int comporator_double(const void* d1, const void* d2)
         return 0;
 }
 
-int comporator_char(const void* d1, const void* d2)
+int comporator_char(const void *d1, const void *d2)
 {
     if (*((char *)d1) < *((char *)d2))
         return -1;
