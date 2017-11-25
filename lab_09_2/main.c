@@ -4,7 +4,8 @@
 #include "standart_func.h"
 #include "find_replace.h"
 #include "defines.h"
-   
+
+        
 int main(int argc, char **argv) // основной main
 {
     FILE *f1;
@@ -22,7 +23,7 @@ int main(int argc, char **argv) // основной main
     {
         f1 = fopen(argv[1], "r");
         if (f1 == NULL)
-        {
+        {  
             printf("NO FILE 1\n");
             err = NO_FILE;
         }
@@ -47,7 +48,7 @@ int main(int argc, char **argv) // основной main
                     }
                     else
                     { 
-                        fprintf(f2, "%s", s1);
+                        fprintf(f2,"%s",s1);
                         free(s1);
                     }
                 }
