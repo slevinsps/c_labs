@@ -9,7 +9,7 @@ ifeq ($(mode), release)
 	CFLAGS += -DNDEBUG -g0
 endif
 
-app.exe : main.o func.o 
+app.exe : main.o func.o add_task.o
 	$(CC) $(CFLAGS) $^ -o $@
 test.exe : test.o func.o 
 	$(CC) $(CFLAGS) $^ -o $@
