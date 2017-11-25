@@ -8,7 +8,7 @@ void test_my_strspn(void)
 {
 	{
 		// 1 search > source
-		char source[] = "12-йгод";
+		char source[] = "12-йгод"; 
 		char search[] = "1234567890";
 		
 		if (my_strspn(source, search) == strspn(source, search))
