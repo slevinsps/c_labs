@@ -11,7 +11,7 @@ void test_my_strspn(void)
 		char source[] = "12-йгод";
 		char search[] = "1234567890";
 		
-		if (my_strspn(source,search) == strspn(source, search))
+		if (my_strspn(source, search) == strspn(source, search))
 			printf("test 1 in my_strspn PASSED\n");
 		else
 			printf("test 1 in my_strspn FAILED\n");
@@ -21,7 +21,7 @@ void test_my_strspn(void)
 		char source[] = "0123456789";
 		char search[] = "210";
 		
-		if (my_strspn(source,search) == strspn(source, search))
+		if (my_strspn(source, search) == strspn(source, search))
 			printf("test 2 in my_strspn PASSED\n");
 		else
 			printf("test 2 in my_strspn FAILED\n");
@@ -31,7 +31,7 @@ void test_my_strspn(void)
 		char source[] = "0123456789";
 		char search[] = "35";
 		
-		if (my_strspn(source,search) == strspn(source, search))
+		if (my_strspn(source, search) == strspn(source, search))
 			printf("test 3 in my_strspn PASSED\n");
 		else
 			printf("test 3 in my_strspn FAILED\n");
@@ -41,7 +41,7 @@ void test_my_strspn(void)
 		char source[] = "0123456789";
 		char search[] = "0123456789";
 		
-		if (my_strspn(source,search) == strspn(source, search))
+		if (my_strspn(source, search) == strspn(source, search))
 			printf("test 4 in my_strspn PASSED\n");
 		else
 			printf("test 4 in my_strspn FAILED\n");
@@ -51,7 +51,7 @@ void test_my_strspn(void)
 		char source[] = "0123456789";
 		char search[] = "";
 		
-		if (my_strspn(source,search) == strspn(source, search))
+		if (my_strspn(source, search) == strspn(source, search))
 			printf("test 5 in my_strspn PASSED\n");
 		else
 			printf("test 5 in my_strspn FAILED\n");

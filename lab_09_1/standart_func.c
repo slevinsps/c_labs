@@ -20,7 +20,7 @@ int strcat1(char **s1, char c, int n_new, size_t *n)
     if (n_new > *n)
     {
         *n = n_new;
-        tmp = realloc(*s1,*n+1);
+        tmp = realloc(*s1, *n + 1);
 		if (!tmp)
 			return MEMORY_ERROR;
 		*s1 = tmp;

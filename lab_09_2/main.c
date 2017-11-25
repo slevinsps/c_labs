@@ -4,8 +4,7 @@
 #include "standart_func.h"
 #include "find_replace.h"
 #include "defines.h"
-
-        
+   
 int main(int argc, char **argv) // основной main
 {
     FILE *f1;
@@ -48,7 +47,7 @@ int main(int argc, char **argv) // основной main
                     }
                     else
                     { 
-                        fprintf(f2,"%s",s1);
+                        fprintf(f2, "%s", s1);
                         free(s1);
                     }
                 }

@@ -13,7 +13,6 @@ void test_str_replace(void)
         char source[20] = "aaaa";
         char search[20] = "aa";
         char replace[20] = "bbb";
-        
         char expected[20] = "bbbbbb";
         char *actual;
         actual = str_replace(source, search, replace);
