@@ -72,7 +72,7 @@ void read_text(FILE *f, char ***words, int *n)
 	int ind;
 	char *string = malloc(SIZE_BUF);
 	int size_arr = 0;
-	while(fgets(string, 400, f))
+	while (fgets(string, 400, f))
     {
         ind = *n;
         *n += count_words(string);
@@ -88,7 +88,7 @@ void read_text(FILE *f, char ***words, int *n)
 
 int comp1(const void *a, const void *b)
 {
-  return strcmp((char *)a, (char *)b);
+    return strcmp((char *)a, (char *)b);
 } 
 
 void print_list(FILE *f, node_t *head)
