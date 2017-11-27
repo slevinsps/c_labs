@@ -17,8 +17,8 @@
 // в файл f2
 int main(int argc, char **argv)
 {
-	FILE *f1;
-	FILE *f2;
+    FILE * f1;
+    FILE * f2;
 	
 	int err = OK;
 	int n = 0;
