@@ -114,7 +114,7 @@ char* str_replace(const char *source, const char *search, const char *replace)
 size_t my_getdelim(char **lineptr, size_t *n, int delimiter, FILE *stream)
 {
     
-    if ((lineptr == NULL) || (n == NULL) || (!stream))
+    if ((lineptr == NULL) || (n == NULL) || (!stream) || (*lineptr == NULL))
         return ERROR;
     
     if (*lineptr == NULL || *n == 0)
