@@ -29,8 +29,7 @@ void test_str_replace(void)
                 }
             }
         }
-        if (actual != NULL)
-            free(actual);
+        free(actual);
     }
     {
         // 2 одно вхождениe

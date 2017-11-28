@@ -29,13 +29,10 @@ char *my_strdup(const char *str1)
 	char *res = malloc((len + 1) * sizeof(char));
 	if (res)
 	{
-		for (int i = 0;i < len; i++)
+		for (int i = 0;i <= len; i++)
 		{
 			res[i] = str1[i];
 		}
-		res[len] = 0;
 	}
-	else
-		return NULL;
 	return res;
 }
