@@ -111,7 +111,7 @@ char* str_replace(const char *source, const char *search, const char *replace)
 // n - количество считанных бит
 // delimiter - разделитель строк
 // stream - файл с текстом
-ssize_t my_getdelim(char **lineptr, size_t *n, int delimiter, FILE *stream)
+size_t my_getdelim(char **lineptr, size_t *n, int delimiter, FILE *stream)
 {
     
     if ((lineptr == NULL) || (n == NULL) || (!stream))
@@ -170,7 +170,7 @@ ssize_t my_getdelim(char **lineptr, size_t *n, int delimiter, FILE *stream)
     return n_new;
 }
 
-ssize_t my_getline(char **lineptr, size_t *n, FILE *stream)
+size_t my_getline(char **lineptr, size_t *n, FILE *stream)
 {
     if ((lineptr == NULL) || (n == NULL) || (!stream))
         return ERROR;
