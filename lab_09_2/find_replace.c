@@ -133,10 +133,11 @@ size_t my_getdelim(char **lineptr, size_t *n, int delimiter, FILE *stream)
         
     while ((buf = fgetc(stream)) != EOF && buf != delimiter)
     { 
-        if (n_new > *n)
+        if (n_new >= *n)
         {
-            *n *= MULTIPLY;
-            tmp = realloc(*lineptr, *n);
+			*n = 2 * n_new;
+            //*n *= MULTIPLY;
+            tmp = (char *) realloc(*lineptr, *n * sizeof(char));
             if (!tmp)
                 return ERROR;
             //free(*lineptr);
@@ -145,7 +146,7 @@ size_t my_getdelim(char **lineptr, size_t *n, int delimiter, FILE *stream)
         (*lineptr)[n_new] = buf;
         n_new++;         
     }
-	if (n_new > *n)
+	if (n_new >= *n)
 	{
 		*n = n_new;
         tmp = realloc(*lineptr, *n);
@@ -156,8 +157,8 @@ size_t my_getdelim(char **lineptr, size_t *n, int delimiter, FILE *stream)
     (*lineptr)[n_new] = 0;
     if (buf == delimiter)
     {
-        (*lineptr)[n_new] = delimiter;
-        n_new++;
+        //(*lineptr)[n_new] = delimiter;
+        //n_new++;
         (*lineptr)[n_new] = 0;
     }
     if (buf == EOF)

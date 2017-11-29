@@ -13,7 +13,7 @@ int main(int argc, char **argv) // основной main
     size_t n = 0;        
     char *s = NULL;
     int err = OK;
-    
+  
     if (argc != 7 || strcmp(argv[3], "-s") != 0 || strcmp(argv[5], "-r") != 0)
     {
         printf("./app.exe input.txt output.txt -s <SEARCH> -r <REPLACE>\n");
@@ -39,7 +39,7 @@ int main(int argc, char **argv) // основной main
             {
                 while (my_getdelim(&s, &n, '\n', f1) != ERROR)
                 {
-                    char *s1;
+				    char *s1;
                     s1 = str_replace(s, argv[4], argv[6]);
                     if (!s1)
                     {
