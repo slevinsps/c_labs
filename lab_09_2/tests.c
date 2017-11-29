@@ -554,7 +554,6 @@ void test_find_underline(void)
 }
 
 
-
 int main(void)
 {
     test_str_replace();    
