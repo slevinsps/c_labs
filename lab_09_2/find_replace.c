@@ -109,7 +109,7 @@ char* str_replace1(const char *source, const char *search, const char *replace)
 
 
 
-char* str_replace(const char *source, const char *search, const char *replace)
+char* str_replace2(const char *source, const char *search, const char *replace)
 {
     if ((source == NULL) || (search == NULL) || (replace == NULL))
         return NULL;
@@ -196,7 +196,7 @@ void process(char *res, const char *replace, const char *source, const char *sea
     res[*k] = 0;
 }
 
-char *str_replace2(const char *source, const char *search, const char *replace)
+char *str_replace(const char *source, const char *search, const char *replace)
 {
     char *res;
     int n, m, l;
