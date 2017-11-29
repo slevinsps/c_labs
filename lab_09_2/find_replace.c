@@ -67,7 +67,7 @@ char *my_strdup(const char *str1)
 // source - исходная строка
 // search - подстрока, которую нужно заменить в source
 // replace - подстрока, на которую нужно заменить search
-char* str_replace(const char *source, const char *search, const char *replace)
+char* str_replace1(const char *source, const char *search, const char *replace)
 {
     if ((source == NULL) || (search == NULL) || (replace == NULL))
         return NULL;
@@ -105,6 +105,59 @@ char* str_replace(const char *source, const char *search, const char *replace)
     }
     return new_source;
 }
+
+
+void process(char *res, const char *replace, const char *source, const char *search, int *i, int *k, int m, int l)
+/*Основная функция поиска и замены подстроки в строке*/
+{
+    int j = 0;
+
+    while ((j < m) && source[*i + j] == search[j])
+        j++;
+    if (j == m)
+    {
+        strcat(res, replace);
+        *k += l; // Прибавляем к счетчику новой строки длину строки replace
+        *i += m; // Прибавляем к счетчику исходной длину строки search
+    }
+    else
+    {
+        res[*k] = source[*i];
+        (*k)++;
+        (*i)++;
+    }
+
+    res[*k] = 0;
+}
+
+char *str_replace(const char *source, const char *search, const char *replace)
+{
+    char *res;
+    int n, m, l;
+    int i, k;
+
+	if (source == NULL || search == NULL || replace == NULL)
+        return NULL;
+        
+    n = strlen1(source); // Длина строки source
+    m = strlen1(search); // Длина строки search
+    l = strlen1(replace); // Длина строки replace
+
+    res = calloc(n * l + 1, sizeof(char));
+    if (!res)
+        return NULL;
+   
+    i = 0;
+    k = 0;
+    while (i < n)
+    {
+        process(res, replace, source, search, &i, &k, m, l);
+    }
+
+    return res;
+}
+
+
 
 // выделение строки в тексте
 // lineptr - полученная строка
