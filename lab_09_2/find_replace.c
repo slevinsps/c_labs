@@ -82,8 +82,16 @@ char* str_replace(const char *source, const char *search, const char *replace)
     int pos2 = 0;
     
     char *new_source, *tmp;
-    new_source = my_strdup(source);
-    if (!*new_source)
+    //new_source = my_strdup(source);
+    
+	new_source = malloc(len_res + 1);
+
+    for (int i = 0; i <= len_res; i++)
+    {
+        new_source[i] = source[i];        
+    }
+	
+	if (!*new_source)
         return NULL;
     int pos_begin = 0;
     while (find_underline(new_source, search, &pos1, &pos2, pos_begin))
