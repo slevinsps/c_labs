@@ -135,18 +135,18 @@ char *str_replace(const char *source, const char *search, const char *replace)
         len_res = len1 - len2 + len3;
         s = malloc(len_res + 1);
         
-        for (int i = 0; i < pos1; i++ )
+        for (int i = 0; i < pos1; i++)
         {
             s[i] = new_source[i];
         }
         
-        for (int i = pos1; i < pos1 + len3; i++ )
+        for (int i = pos1; i < pos1 + len3; i++)
         {
             s[i] = replace[i - pos1];
         }
         
         j = pos2;
-        for (int i = pos1 + len3; i < len_res; i++ )
+        for (int i = pos1 + len3; i < len_res; i++)
         {
             s[i] = (new_source)[j];
             j++;
@@ -170,8 +170,7 @@ char *str_replace(const char *source, const char *search, const char *replace)
 // delimiter - разделитель строк
 // stream - файл с текстом
 size_t my_getdelim(char **lineptr, size_t *n, int delimiter, FILE *stream)
-{
-    
+{    
     if ((lineptr == NULL) || (n == NULL) || (!stream))
         return ERROR;
     
@@ -190,7 +189,7 @@ size_t my_getdelim(char **lineptr, size_t *n, int delimiter, FILE *stream)
     char *tmp;
         
     while ((buf = fgetc(stream)) != EOF && buf != delimiter)
-    { 
+    {
         if (n_new >= *n)
         {
             *n = 2 * n_new;
