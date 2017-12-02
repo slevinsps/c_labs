@@ -81,7 +81,7 @@ char* str_replace(const char *source, const char *search, const char *replace)
     int pos1 = 0;
     int pos2 = 0;
     
-    char *new_source, *tmp;
+    char *new_source;
     new_source = my_strdup(source);
     if (!*new_source)
         return NULL;
@@ -290,6 +290,7 @@ size_t my_getline(char **lineptr, size_t *n, FILE *stream)
 	{
 		n_new = ERROR;
 	}
+	free(buf_string);
     /* if (buf == '\n')
     {
         (*lineptr)[n_new] = '\n';
