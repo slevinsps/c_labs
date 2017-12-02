@@ -109,7 +109,7 @@ char* str_replace1(const char *source, const char *search, const char *replace)
 
 
 
-char* str_replace2(const char *source, const char *search, const char *replace)
+char* str_replace(const char *source, const char *search, const char *replace)
 {
     if ((source == NULL) || (search == NULL) || (replace == NULL))
         return NULL;
@@ -128,11 +128,10 @@ char* str_replace2(const char *source, const char *search, const char *replace)
     char *new_source = malloc(len_res+1);
     
     
-    for (int i = 0; i < len_res; i++)
+    for (int i = 0; i <= len_res; i++)
     {
         new_source[i] = source[i];        
     }
-    new_source[len_res] = 0;
     
     while (find_underline(new_source, search, &pos1, &pos2))
     {
@@ -196,7 +195,7 @@ void process(char *res, const char *replace, const char *source, const char *sea
     res[*k] = 0;
 }
 
-char *str_replace(const char *source, const char *search, const char *replace)
+char *str_replace1(const char *source, const char *search, const char *replace)
 {
     char *res;
     int n, m, l;
