@@ -98,7 +98,7 @@ char* str_replace(const char *source, const char *search, const char *replace)
         }
         new_source = tmp;
         
-        memmove(new_source + pos1 + len3, new_source + pos2, len_res - (pos1 + len3));
+        memmove(new_source + pos1 + len3, new_source + pos2, len1 - pos2);
         memmove(new_source + pos1, replace, len3);
         
         new_source[len_res] = 0;
