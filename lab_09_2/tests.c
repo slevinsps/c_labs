@@ -553,7 +553,6 @@ void test_find_underline(void)
             printf("Test 4 in find_underline FAILED\n");
         }
     }
-    
 }
 
 
