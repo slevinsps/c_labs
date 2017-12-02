@@ -67,7 +67,7 @@ char *my_strdup(const char *str1)
 // source - исходная строка
 // search - подстрока, которую нужно заменить в source
 // replace - подстрока, на которую нужно заменить search
-char* str_replace2(const char *source, const char *search, const char *replace)
+/* char* str_replace2(const char *source, const char *search, const char *replace)
 {
     if ((source == NULL) || (search == NULL) || (replace == NULL))
         return NULL;
@@ -104,7 +104,7 @@ char* str_replace2(const char *source, const char *search, const char *replace)
         new_source[len_res] = 0;
     }
     return new_source;
-}
+} */
 
 
 
