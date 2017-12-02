@@ -13,13 +13,13 @@
 // search - подстрока, кторую нужно найти в source
 // pos1 - начало вхождения подстроки
 // pos2 - конец вхождения подстроки
-int find_underline(const char *source, const char *search, int *pos1, int *pos2)
+int find_underline(const char *source, const char *search, int *pos1, int *pos2, int pos_begin)
 {
     int len1 = strlen1(source);
     int len2 = strlen1(search);     
     int count = 0;
-    int i = 0;
-    int j = 0;
+    int i = pos_begin;
+    int j = pos_begin;
     
     while (i < len1 - len2 + 1 && !count)
     {
@@ -85,8 +85,8 @@ char* str_replace2(const char *source, const char *search, const char *replace)
     new_source = my_strdup(source);
     if (!*new_source)
         return NULL;
-    
-    while (find_underline(new_source, search, &pos1, &pos2))
+    int pos_begin = 0;
+    while (find_underline(new_source, search, &pos1, &pos2, pos_begin))
     {
         len1 = strlen1(new_source);
         len_res = len1 - len2 + len3;
@@ -128,13 +128,12 @@ char* str_replace(const char *source, const char *search, const char *replace)
     char *new_source = malloc(len_res+1);
     
     
-    for (int i = 0; i < len_res; i++)
+    for (int i = 0; i <= len_res; i++)
     {
         new_source[i] = source[i];        
     }
-    new_source[len_res] = 0;
-    
-    while (find_underline(new_source, search, &pos1, &pos2))
+    int pos_begin = 0;
+    while (find_underline(new_source, search, &pos1, &pos2, pos_begin))
     {
         len1 = strlen1(new_source);
         len_res = len1 - len2 + len3;
@@ -165,6 +164,7 @@ char* str_replace(const char *source, const char *search, const char *replace)
         }
         free(s);
         new_source[len_res] = 0;
+		pos_begin = pos1 + len3;
     } 
     return new_source;
 }
@@ -197,7 +197,7 @@ void process(char *res, const char *replace, const char *source, const char *sea
     res[*k] = 0;
 }
 
-char *str_replace1(const char *source, const char *search, const char *replace)
+char *str_replace12(const char *source, const char *search, const char *replace)
 {
     char *res;
     int n, m, l;
