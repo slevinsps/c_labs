@@ -483,8 +483,9 @@ void test_find_underline(void)
         int pos2 = 0;
         int actual_pos1 = 0;
         int actual_pos2 = 0;
-        
-        if (!find_underline(source, search, &pos1, &pos2) && pos1 == actual_pos1 && pos2 == actual_pos2)
+		int pos_begin = 0;
+		
+        if (!find_underline(source, search, &pos1, &pos2, pos_begin) && pos1 == actual_pos1 && pos2 == actual_pos2)
         {
             printf("Test 1 in find_underline PASSED\n");
         }
@@ -502,8 +503,8 @@ void test_find_underline(void)
         int pos2 = 0;
         int actual_pos1 = 0;
         int actual_pos2 = 5;
-        
-        if (find_underline(source, search, &pos1, &pos2) && pos1 == actual_pos1 && pos2 == actual_pos2)
+        int pos_begin = 0;
+        if (find_underline(source, search, &pos1, &pos2, pos_begin) && pos1 == actual_pos1 && pos2 == actual_pos2)
         {
             printf("Test 2 in find_underline PASSED\n");
         }
@@ -521,8 +522,9 @@ void test_find_underline(void)
         int pos2 = 0;
         int actual_pos1 = 17;
         int actual_pos2 = 21;
-        
-        if (find_underline(source, search, &pos1, &pos2) && pos1 == actual_pos1 && pos2 == actual_pos2)
+        int pos_begin = 0;
+		
+        if (find_underline(source, search, &pos1, &pos2, pos_begin) && pos1 == actual_pos1 && pos2 == actual_pos2)
         {
             printf("Test 3 in find_underline PASSED\n");
         }
@@ -540,8 +542,9 @@ void test_find_underline(void)
         int pos2 = 0;
         int actual_pos1 = 6;
         int actual_pos2 = 8;
-        
-        if (find_underline(source, search, &pos1, &pos2) && pos1 == actual_pos1 && pos2 == actual_pos2)
+        int pos_begin = 0;
+		
+        if (find_underline(source, search, &pos1, &pos2, pos_begin) && pos1 == actual_pos1 && pos2 == actual_pos2)
         {
             printf("Test 4 in find_underline PASSED\n");
         }
