@@ -98,8 +98,8 @@ char* str_replace(const char *source, const char *search, const char *replace)
         }
         new_source = tmp;
         
-        memcpy(new_source + pos1 + len3, new_source + pos2, len1 - pos2);
-        memcpy(new_source + pos1, replace, len3);
+        memmove(new_source + pos1 + len3, new_source + pos2, len1 - pos2);
+        memmove(new_source + pos1, replace, len3);
         
 
 		
@@ -277,21 +277,24 @@ size_t my_getline(char **lineptr, size_t *n, FILE *stream)
             n_new++;     
         }
         if (buf_string[len - 1] == '\n')
+		{
             break;
+		}
+		if (buf_string[len - 1] == EOF)
+		{
+			if (n_new == 0)
+			{
+				n_new = ERROR;
+			}
+			break;
+		}
     }
     (*lineptr)[n_new] = 0;
-    /* if (buf == delimiter)
+    /* if (buf == '\n')
     {
-        (*lineptr)[n_new] = delimiter;
+        (*lineptr)[n_new] = '\n';
         n_new++;
         (*lineptr)[n_new] = 0;
-    } */
-   /*  if (buf == EOF)
-    {
-        if (n_new == 0)
-        {
-            n_new = ERROR;
-        }
-    } */
+    }  */
     return n_new;
 }
