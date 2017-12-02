@@ -90,51 +90,16 @@ char* str_replace(const char *source, const char *search, const char *replace)
     {
         len1 = strlen1(new_source);
         len_res = len1 - len2 + len3;
-        /* tmp = realloc(new_source, len_res + 1);
-        if (!tmp)
-        {
-            free(new_source);
-            return NULL;
-        }
-        new_source = tmp; */
-        
-        //memmove(new_source + pos1 + len3, new_source + pos2, len1 - pos2);
-        //memmove(new_source + pos1, replace, len3);
-        
-		
-		
-		
+	
 		char *s = malloc(len_res + 1);
         memmove(s, new_source, pos1);
-        /* for (int i = 0; i < pos1; i++)
-        {
-            s[i] = new_source[i];
-        } */
-        
-        /* for (int i = pos1; i < pos1 + len3; i++)
-        {
-            s[i] = replace[i - pos1];
-        } */
-        
 		memmove(s + pos1, replace, len3);
-		
-        /*int j = pos2;
-        for (int i = pos1 + len3; i < len_res; i++)
-        {
-            s[i] = (new_source)[j];
-            j++;
-        }    
-        s[len_res] = 0;*/
 		memmove(s + pos1 + len3, new_source + pos2, len1 - pos2+1);
 		
 		new_source = realloc(new_source, len_res + 1);
-        for (int i = 0; i <= len_res; i++)
-        {
-            new_source[i] = s[i];
-        }
+		memmove(new_source, s, len_res+1);
+
         free(s);
-		
-        //new_source[len_res] = 0;
 		pos_begin = pos1 + len3;
     }
     return new_source;
