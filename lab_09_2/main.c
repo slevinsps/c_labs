@@ -29,8 +29,8 @@ int main(int argc, char **argv) // основной main
         }
         else
         {
-			fseek(а, 0, SEEK_END);
-			int pos = ftell(а);
+			fseek(f, 0, SEEK_END);
+			int pos = ftell(f);
 			if (pos > 0)
 			{
 				f2 = fopen(argv[2], "w");
