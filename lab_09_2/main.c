@@ -33,6 +33,7 @@ int main(int argc, char **argv) // основной main
 			int pos = ftell(f1);
 			if (pos > 0)
 			{
+				fseek(f1, 0, SEEK_SET);
 				f2 = fopen(argv[2], "w");
 				if (f2 == NULL)
 				{
@@ -63,7 +64,10 @@ int main(int argc, char **argv) // основной main
 				}
 			}
 			else
+			{
+				printf("File is empty\n");
 				err = NO_FILE;
+			}
             fclose(f1);  
         }
     }
