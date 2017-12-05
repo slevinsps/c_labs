@@ -250,8 +250,7 @@ size_t my_getline(char **lineptr, size_t *n, FILE *stream)
         }
     }
     char *buf_string = calloc(120, sizeof(char));
-    //char buf;
-    
+
     size_t n_new = 0;
     char *tmp;
     int len = 0;
@@ -276,14 +275,6 @@ size_t my_getline(char **lineptr, size_t *n, FILE *stream)
 		{
             break;
 		}
-		/* if (buf_string[len - 1] == EOF)
-		{
-			if (n_new == 0)
-			{
-				n_new = ERROR;
-			}
-			break;
-		} */
     }
     (*lineptr)[n_new] = 0;
 	if (n_new == 0)
@@ -291,11 +282,6 @@ size_t my_getline(char **lineptr, size_t *n, FILE *stream)
 		n_new = ERROR;
 	}
 	free(buf_string);
-    /* if (buf == '\n')
-    {
-        (*lineptr)[n_new] = '\n';
-        n_new++;
-        (*lineptr)[n_new] = 0;
-    }  */
+
     return n_new;
 }
