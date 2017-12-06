@@ -183,32 +183,32 @@ size_t my_getdelim(char **lineptr, size_t *n, int delimiter, FILE *stream)
         }
     }
 	
-	fseek(stream, 0, SEEK_END);
-	int pos = ftell(stream);
-	if (pos == 0)
-		return ERROR;
-	fseek(stream, 0, SEEK_SET);
-		
     int buf;
     
     size_t n_new = 0;
     char *tmp;
-        
-    while ((buf = fgetc(stream)) != EOF && buf != delimiter)
-    {
-        if (n_new >= *n)
-        {
-            //*n = 2 * n_new;
-            *n *= MULTIPLY;
-            tmp = (char *) realloc(*lineptr, *n * sizeof(char));
-            if (!tmp)
-                return ERROR;
-            //free(*lineptr);
-            *lineptr = tmp;
-        }
-        (*lineptr)[n_new] = buf;
-        n_new++;         
-    }
+    
+	if ((buf = fgetc(stream)) != EOF && buf != delimiter)
+	{
+		do
+		{
+			if (n_new >= *n)
+			{
+				//*n = 2 * n_new;
+				*n *= MULTIPLY;
+				tmp = (char *) realloc(*lineptr, *n * sizeof(char));
+				if (!tmp)
+					return ERROR;
+				//free(*lineptr);
+				*lineptr = tmp;
+			}
+			(*lineptr)[n_new] = buf;
+			n_new++;         
+		} while ((buf = fgetc(stream)) != EOF && buf != delimiter)
+	}
+	else
+		return ERROR;
+	
     if (n_new >= *n)
     {
         *n = 2 * n_new;
@@ -217,6 +217,7 @@ size_t my_getdelim(char **lineptr, size_t *n, int delimiter, FILE *stream)
             return ERROR;
         *lineptr = tmp;
     }
+
     (*lineptr)[n_new] = 0;
     if (buf == delimiter)
     {
