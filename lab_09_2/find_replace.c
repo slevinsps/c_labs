@@ -176,11 +176,10 @@ size_t my_getdelim(char **lineptr, size_t *n, int delimiter, FILE *stream)
     if (*lineptr == NULL || *n == 0)
     {
         *n = LEN_STR_BEGIN;
-        *lineptr = (char *) realloc(*lineptr, *n * sizeof(char));
-        if (*lineptr == NULL)
-        {
-            return ERROR;
-        }
+        char *tmp =  = realloc(*lineptr, *n * sizeof(char));
+		if (!tmp)
+			return ERROR;
+		*lineptr = tmp;
     }
 	
     int buf;
@@ -251,11 +250,11 @@ size_t my_getline(char **lineptr, size_t *n, FILE *stream)
     if (*lineptr == NULL || *n == 0)
     {
         *n = LEN_STR_BEGIN2;
-        *lineptr = (char *) realloc(*lineptr, *n * sizeof(char));
-        if (*lineptr == NULL)
-        {
-            return ERROR;
-        }
+		
+        char *tmp = realloc(*lineptr, *n * sizeof(char));
+		if (!tmp)
+			return ERROR;
+		*lineptr = tmp;
     }
 	
 	
