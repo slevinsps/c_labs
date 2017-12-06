@@ -263,7 +263,7 @@ size_t my_getline(char **lineptr, size_t *n, FILE *stream)
     char *tmp;
     int len = 0;
     
-	if ((fgets(buf_string, 120, stream)) != NULL)
+	if ((fgets(buf_string, 120, stream)) == NULL)
 		return ERROR;
     
     do
