@@ -257,7 +257,7 @@ size_t my_getline(char **lineptr, size_t *n, FILE *stream)
             return ERROR;
         }
     }
-    char *buf_string = malloc(120*sizeof(char));
+    char *buf_string = calloc(120, sizeof(char));
 
     size_t n_new = 0;
     char *tmp;
