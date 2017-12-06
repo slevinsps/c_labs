@@ -176,7 +176,7 @@ size_t my_getdelim(char **lineptr, size_t *n, int delimiter, FILE *stream)
     if (*lineptr == NULL || *n == 0)
     {
         *n = LEN_STR_BEGIN;
-        char *tmp =  = realloc(*lineptr, *n * sizeof(char));
+        char *tmp = realloc(*lineptr, *n * sizeof(char));
 		if (!tmp)
 			return ERROR;
 		*lineptr = tmp;
