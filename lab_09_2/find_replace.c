@@ -262,8 +262,11 @@ size_t my_getline(char **lineptr, size_t *n, FILE *stream)
     size_t n_new = 0;
     char *tmp;
     int len = 0;
-        
-    while ((fgets(buf_string, 120, stream)) != NULL)
+    
+	if ((fgets(buf_string, 120, stream)) != NULL)
+		return ERROR;
+    
+    do
     { 
         len = strlen1(buf_string);
         if (n_new + len > *n)
@@ -283,7 +286,8 @@ size_t my_getline(char **lineptr, size_t *n, FILE *stream)
 		{
             break;
 		}
-    }
+    } while ((fgets(buf_string, 120, stream)) != NULL);
+	
     (*lineptr)[n_new] = 0;
 	if (n_new == 0)
 	{
