@@ -43,8 +43,9 @@ int main(int argc, char **argv) // основной main
 				else
 				{
 	
-					//while (my_getline(&s, &n, f1) != ERROR)
-					while (my_getdelim(&s, &n, '\n', f1) != ERROR)
+					
+					//while (my_getdelim(&s, &n, '\n', f1) != ERROR)
+					while (my_getline(&s, &n, f1) != ERROR)
 					{
 						char *s1;
 						s1 = str_replace(s, argv[4], argv[6]);
