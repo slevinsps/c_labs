@@ -67,7 +67,7 @@ char *my_strdup(const char *str1)
 // source - исходная строка
 // search - подстрока, которую нужно заменить в source
 // replace - подстрока, на которую нужно заменить search
-char* str_replace(const char *source, const char *search, const char *replace)
+char *str_replace(const char *source, const char *search, const char *replace)
 {
     if ((source == NULL) || (search == NULL) || (replace == NULL))
         return NULL;
@@ -94,10 +94,10 @@ char* str_replace(const char *source, const char *search, const char *replace)
 		char *s = malloc(len_res + 1);
         memmove(s, new_source, pos1);
 		memmove(s + pos1, replace, len3);
-		memmove(s + pos1 + len3, new_source + pos2, len1 - pos2+1);
+		memmove(s + pos1 + len3, new_source + pos2, len1 - pos2 + 1);
 		
 		new_source = realloc(new_source, len_res + 1);
-		memmove(new_source, s, len_res+1);
+		memmove(new_source, s, len_res + 1);
 
         free(s);
 		pos_begin = pos1 + len3;
