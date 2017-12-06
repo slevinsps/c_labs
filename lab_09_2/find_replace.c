@@ -188,7 +188,9 @@ size_t my_getdelim(char **lineptr, size_t *n, int delimiter, FILE *stream)
     size_t n_new = 0;
     char *tmp;
     
-	if ((buf = fgetc(stream)) != EOF && buf != delimiter)
+	if ((buf = fgetc(stream)) == EOF)
+		return ERROR;
+	if (buf != delimiter)
 	{
 		do
 		{
@@ -206,8 +208,6 @@ size_t my_getdelim(char **lineptr, size_t *n, int delimiter, FILE *stream)
 			n_new++;         
 		} while ((buf = fgetc(stream)) != EOF && buf != delimiter);
 	}
-	else
-		return ERROR;
 	
     if (n_new >= *n)
     {
