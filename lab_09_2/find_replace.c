@@ -182,6 +182,13 @@ size_t my_getdelim(char **lineptr, size_t *n, int delimiter, FILE *stream)
             return ERROR;
         }
     }
+	
+	fseek(stream, 0, SEEK_END);
+	int pos = ftell(stream);
+	if (pos == 0)
+		return ERROR;
+	fseek(stream, 0, SEEK_SET);
+		
     int buf;
     
     size_t n_new = 0;
