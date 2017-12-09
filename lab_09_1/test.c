@@ -71,7 +71,6 @@ void test_my_strdup(void)
 			printf("test 1 in my_strdup FAILED\n");
 		free(s1);
 		free(s2);
-		
 	}
 	{
 		// 2 test один символ
