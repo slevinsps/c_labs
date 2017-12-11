@@ -33,17 +33,17 @@ void insert(node_t **head, node_t *elem, node_t *before)
 
 	while (tmp)
 	{
-		if (tmp == elem)
+		if (tmp == before)
 		{
 			if (prev)
 			{
-				prev->next = before;
-				before->next = elem;
+				prev->next = elem;
+				elem->next = before;
 			}
 			else
 			{
-				before->next = elem;
-				*head = before;
+				elem->next = before;
+				*head = elem;
 			}
 		}
 		prev = tmp;
