@@ -4,6 +4,17 @@
 
 #define N 50
 
+void free_list(node_t *head)
+{
+    node_t *head_copy;
+    while (head)
+    {
+        head_copy = head;
+        head = head->next;
+        free(head_copy);    
+    }
+}
+
 void load_list_int(node_t *head, int *arr, int n)
 {
     head->data = (int*)&arr[0];
@@ -73,6 +84,8 @@ void test_pop_front(void)
             printf("test 1 in pop_front PASSED\n");
         else
             printf("test 1 in pop_front FAILED\n");
+        free_list(head);
+        
     }
     {
         // 2 в списке один элемент
@@ -88,6 +101,7 @@ void test_pop_front(void)
             printf("test 2 in pop_front PASSED\n");
         else
             printf("test 2 in pop_front FAILED\n");
+        free_list(head);
     }
     {
         // 3 head == NULL
@@ -171,12 +185,13 @@ void test_insert(void)
         {
             elem = elem->next;
         }
-        insert(&head, elem, before);
+        insert(&head, before, elem);
 
         if (compare_list_arr_int(head, arr_exp))
             printf("test 1 in insert PASSED\n");
         else
             printf("test 1 in insert FAILED\n");
+        free_list(head);        
     }
     {
         // 2 вставка в начало
@@ -194,12 +209,13 @@ void test_insert(void)
         
         load_list_int(head, arr, n);
         elem = head;
-        insert(&head, elem, before);
+        insert(&head, before, elem);
         
         if (compare_list_arr_int(head, arr_exp))
             printf("test 2 in insert PASSED\n");
         else
             printf("test 2 in insert FAILED\n");
+        free_list(head);
     }
     {
         // 3 вставка перед последним
@@ -221,12 +237,13 @@ void test_insert(void)
         {
             elem = elem->next;
         }
-        insert(&head, elem, before);
+        insert(&head, before, elem);
         
         if (compare_list_arr_int(head, arr_exp))
             printf("test 3 in insert PASSED\n");
         else
             printf("test 3 in insert FAILED\n");
+        free_list(head);
     }
 }
 
@@ -250,6 +267,7 @@ void test_reverse(void)
             printf("test 1 in reverse PASSED\n");
         else
             printf("test 1 in reverse FAILED\n");
+        free_list(head_reverse);        
     }
     {
         // 2 в списке один элемент
@@ -269,6 +287,7 @@ void test_reverse(void)
             printf("test 2 in reverse PASSED\n");
         else
             printf("test 2 in reverse FAILED\n");
+        free_list(head_reverse);    
     }
     {
         // 3 в списке одинаковые элементы
@@ -288,6 +307,7 @@ void test_reverse(void)
             printf("test 3 in reverse PASSED\n");
         else
             printf("test 3 in reverse FAILED\n");
+        free_list(head_reverse);    
     }
     {
         // 4 в списке одинаковые элементы
@@ -331,6 +351,8 @@ void test_front_back_split(void)
             printf("test 1 in front_back_split PASSED\n");
         else
             printf("test 1 in front_back_split FAILED\n");
+        free_list(head);
+        free_list(back);
     }
     {
         // 2 в списке четное количество элементов
@@ -351,6 +373,8 @@ void test_front_back_split(void)
             printf("test 2 in front_back_split PASSED\n");
         else
             printf("test 2 in front_back_split FAILED\n");
+        free_list(head);
+        free_list(back);
     }
     {
         // 3 в списке 1 элемент
@@ -369,6 +393,8 @@ void test_front_back_split(void)
             printf("test 3 in front_back_split PASSED\n");
         else
             printf("test 3 in front_back_split FAILED\n");
+        free_list(head);
+        free_list(back);
     }
     {
         // 4 в списке 2 элемента
@@ -389,6 +415,8 @@ void test_front_back_split(void)
             printf("test 4 in front_back_split PASSED\n");
         else
             printf("test 4 in front_back_split FAILED\n");
+        free_list(head);
+        free_list(back);
     }
 }
 
@@ -440,6 +468,7 @@ void test_sorted_merge(void)
             printf("test 1 in sorted_merge PASSED\n");
         else
             printf("test 1 in sorted_merge FAILED\n");
+        free_list(res);
     }
     {
         // 2 в списках по одному элементу несколько элементов
@@ -462,6 +491,7 @@ void test_sorted_merge(void)
             printf("test 2 in sorted_merge PASSED\n");
         else
             printf("test 2 in sorted_merge FAILED\n");
+        free_list(res);
     }
     {
         // 3 в списках разное количество элементов
@@ -485,6 +515,7 @@ void test_sorted_merge(void)
             printf("test 3 in sorted_merge PASSED\n");
         else
             printf("test 3 in sorted_merge FAILED\n");
+        free_list(res);
     }
     {
         // 4 элементы типа double
@@ -507,6 +538,7 @@ void test_sorted_merge(void)
             printf("test 4 in sorted_merge PASSED\n");
         else
             printf("test 4 in sorted_merge FAILED\n");
+        free_list(res);
     }
     {
         // 4 элементы типа char
@@ -527,6 +559,7 @@ void test_sorted_merge(void)
             printf("test 4 in sorted_merge PASSED\n");
         else
             printf("test 4 in sorted_merge FAILED\n");
+        free_list(res);
     }
 }
 
@@ -549,6 +582,7 @@ void test_sort(void)
             printf("test 1 in sort PASSED\n");
         else
             printf("test 1 in sort FAILED\n");
+        free_list(res);
     }
     {
         // 2 один элемент
@@ -567,6 +601,7 @@ void test_sort(void)
             printf("test 2 in sort PASSED\n");
         else
             printf("test 2 in sort FAILED\n");
+        free_list(res);
     }
     {
         // 3 тип double
@@ -585,6 +620,7 @@ void test_sort(void)
             printf("test 3 in sort PASSED\n");
         else
             printf("test 3 in sort FAILED\n");
+        free_list(res);
     }
     {
         // 4 тип char
@@ -603,11 +639,12 @@ void test_sort(void)
             printf("test 4 in sort PASSED\n");
         else
             printf("test 4 in sort FAILED\n");
+        free_list(res);
     }
 }
 
 int main(void)
-{
+{        
     test_pop_front();
     test_insert();
     test_reverse();
