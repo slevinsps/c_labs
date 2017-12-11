@@ -85,7 +85,6 @@ void test_pop_front(void)
         else
             printf("test 1 in pop_front FAILED\n");
         free_list(head);
-        
     }
     {
         // 2 в списке один элемент
