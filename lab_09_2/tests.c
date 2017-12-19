@@ -392,7 +392,7 @@ void test_my_getdelim(void)
         free(lineptr);
         fclose(stream);
     }
-	/* {
+	{
         // 9 Файл пуст
         char *lineptr = NULL;
         size_t n;
@@ -405,7 +405,7 @@ void test_my_getdelim(void)
         if (count_numbers == ERROR)
             printf("Test 9 in my_getdelim PASSED\n");
 		fclose(stream);
-    } */	
+    }	
 }
 
 void test_my_getline(void)
