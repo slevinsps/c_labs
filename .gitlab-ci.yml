@@ -3,4 +3,4 @@ test:
   tags: 
     - testing-docker 
   script: 
-    - testing
+    - testing 
