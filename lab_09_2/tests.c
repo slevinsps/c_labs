@@ -526,7 +526,7 @@ void test_my_getline(void)
         free(lineptr);
         fclose(stream); 
     } 
-	{
+	/* {
         // 4 Файл пуст
         char *lineptr = NULL;
         size_t n;
@@ -550,7 +550,7 @@ void test_my_getline(void)
 		count_numbers = my_getline(&lineptr, &n, stream);
         if (count_numbers == ERROR)
             printf("Test 5 in my_getline PASSED\n");
-    }
+    } */
 	/* {
         // 6 Изначально задан размер строки
         size_t n = 100;
