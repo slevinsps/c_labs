@@ -536,6 +536,7 @@ void test_my_getline(void)
 		count_numbers = my_getline(&lineptr, &n, stream);
         if (count_numbers == ERROR)
             printf("Test 4 in my_getline PASSED\n");
+		fclose(stream);
     }
 	{
         // 5 Файл не задан
