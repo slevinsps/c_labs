@@ -404,6 +404,7 @@ void test_my_getdelim(void)
 		count_numbers = my_getdelim(&lineptr, &n, delimiter, stream);
         if (count_numbers == ERROR)
             printf("Test 9 in my_getdelim PASSED\n");
+		fclose(stream);
     }	
 }
 
