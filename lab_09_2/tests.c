@@ -361,7 +361,7 @@ void test_my_getdelim(void)
         if (count_numbers == ERROR)
             printf("Test 7 in my_getdelim PASSED\n");
     }
-	{
+	/* {
         // 8 задан начальный размер строки 
 		size_t n = 10;
         char *lineptr = malloc(n);
@@ -405,7 +405,7 @@ void test_my_getdelim(void)
         if (count_numbers == ERROR)
             printf("Test 9 in my_getdelim PASSED\n");
 		fclose(stream);
-    }	
+    } */	
 }
 
 void test_my_getline(void)
