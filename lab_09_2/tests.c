@@ -347,7 +347,51 @@ void test_my_getdelim(void)
             printf("Test 6 in my_getdelim PASSED\n");
         free(lineptr);
         fclose(stream);
-    } 
+    }
+	{
+        // 7 Файл не задан
+        char *lineptr = NULL;
+        size_t n;
+        int delimiter = '!';
+        FILE *stream = NULL;
+  
+        int count_numbers = 0;
+        //int l = 0;       
+		count_numbers = my_getdelim(&lineptr, &n, delimiter, stream);
+        if (count_numbers == ERROR)
+            printf("Test 7 in my_getdelim PASSED\n");
+    }
+	{
+        // 8 задан начальный размер строки 
+		size_t n = 10;
+        char *lineptr = malloc(n);
+       
+        int delimiter = '.';
+        FILE *stream = fopen("source_5.txt", "r");
+        char *expected[5] = {"Hello!my names! is ! Ivan\nand I! like books!" };
+        int k = 0;
+        int check_right = 1;
+        int count_numbers = 0;
+        while (count_numbers > 0)
+        {
+            count_numbers = my_getdelim(&lineptr, &n, delimiter, stream);
+            if (lineptr)
+            {
+                if (strcmp(expected[k], lineptr) != 0 || count_numbers != strlen(expected[k]))
+                {
+                    printf("Test 8 in my_getdelim FAILED\n");
+                    printf("lineptr = #%s#  %d \n", lineptr,count_numbers);
+                    check_right = 0;
+                    break;
+                }
+                k++;
+            }
+        }  
+        if (check_right)
+            printf("Test 8 in my_getdelim PASSED\n");
+        free(lineptr);
+        fclose(stream);
+    }	
 }
 
 void test_my_getline(void)
