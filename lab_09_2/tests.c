@@ -405,6 +405,7 @@ void test_my_getdelim(void)
         if (count_numbers == ERROR)
             printf("Test 9 in my_getdelim PASSED\n");
 		fclose(stream);
+		free(lineptr);
     }	
 }
 
@@ -526,7 +527,7 @@ void test_my_getline(void)
         free(lineptr);
         fclose(stream); 
     } 
-	/* {
+	{
         // 4 Файл пуст
         char *lineptr = NULL;
         size_t n;
@@ -538,6 +539,7 @@ void test_my_getline(void)
         if (count_numbers == ERROR)
             printf("Test 4 in my_getline PASSED\n");
 		fclose(stream);
+		free(lineptr);
     }
 	{
         // 5 Файл не задан
@@ -550,8 +552,8 @@ void test_my_getline(void)
 		count_numbers = my_getline(&lineptr, &n, stream);
         if (count_numbers == ERROR)
             printf("Test 5 in my_getline PASSED\n");
-    } */
-	/* {
+    }
+	{
         // 6 Изначально задан размер строки
         size_t n = 100;
         char *lineptr = malloc(n);
@@ -597,7 +599,7 @@ void test_my_getline(void)
             printf("Test 6 in my_getline PASSED\n");
         free(lineptr);
         fclose(stream);
-    } */
+    }
 }
 
 
