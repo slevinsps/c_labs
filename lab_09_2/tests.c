@@ -446,7 +446,7 @@ void test_my_getline(void)
         free(lineptr);
         fclose(stream);
     }
-   {
+    {
         // 2 разделитель \n
         char *lineptr = NULL;
         size_t n = 0;
@@ -525,6 +525,77 @@ void test_my_getline(void)
         free(lineptr);
         fclose(stream); 
     } 
+	{
+        // 4 Файл пуст
+        char *lineptr = NULL;
+        size_t n;
+        FILE *stream =  fopen("source_6.txt", "r");;
+  
+        int count_numbers = 0;
+        //int l = 0;       
+		count_numbers = my_getline(&lineptr, &n, stream);
+        if (count_numbers == ERROR)
+            printf("Test 4 in my_getline PASSED\n");
+    }
+	{
+        // 5 Файл не задан
+        char *lineptr = NULL;
+        size_t n;
+        FILE *stream = NULL;
+  
+        int count_numbers = 0;
+        //int l = 0;       
+		count_numbers = my_getline(&lineptr, &n, stream);
+        if (count_numbers == ERROR)
+            printf("Test 5 in my_getline PASSED\n");
+    }
+	{
+        // 6 Изначально задан размер строки
+        size_t n = 100;
+        char *lineptr = malloc(n);
+        FILE *stream = fopen("source_2.txt", "r");
+        char *expected[17] = { "Amy \n",
+                            "normally hated Monday \n",
+                            "mornings. but this year was different. \n",
+                            "Kamal was in her art class \n",
+                            "and she liked Kamal. She was waiting \n",
+                            "outside the classroom when her friend \n",
+                            "Tara arrived.\n",
+                            " Hi Amy! Your mum sent me a text. \n",
+                            "You forgot your inhaler. \n",
+                            "Amy don t you turn your phone on? \n",
+                            " Amy didn t like technology. \n",
+                            "She never sent text messages and \n",
+                            "she hated Facebook too.\n",
+                            " Did Kamal ask you to the disco?  \n",
+                            "Tara was Amy s best friend, \n",
+                            "and she wanted to know everything \n",
+                            "that was happening in Amy s life."};
+        int k = 0;
+        int check_right = 1;
+        int count_numbers;
+        while (!feof(stream))
+        {
+            count_numbers = my_getline(&lineptr, &n, stream);
+            //count_numbers = getdelim(&lineptr, &n, delimiter, stream);
+            if (lineptr)
+            {
+                if (strcmp(expected[k], lineptr) != 0 || count_numbers != strlen(expected[k]))
+                {
+                    printf("Test 6 in my_getline FAILED\n");
+                    printf("#%s# \n", lineptr);
+                    printf("#%s# \n", expected[k]);                    
+                    check_right = 0;
+                    break;
+                }
+                k++;
+            }
+        }  
+        if (check_right)
+            printf("Test 6 in my_getline PASSED\n");
+        free(lineptr);
+        fclose(stream);
+    }
 }
 
 
