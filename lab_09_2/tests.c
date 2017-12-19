@@ -391,6 +391,19 @@ void test_my_getdelim(void)
             printf("Test 8 in my_getdelim PASSED\n");
         free(lineptr);
         fclose(stream);
+    }
+	{
+        // 9 Файл пуст
+        char *lineptr = NULL;
+        size_t n;
+        int delimiter = '!';
+        FILE *stream =  fopen("source_6.txt", "r");;
+  
+        int count_numbers = 0;
+        //int l = 0;       
+		count_numbers = my_getdelim(&lineptr, &n, delimiter, stream);
+        if (count_numbers == ERROR)
+            printf("Test 9 in my_getdelim PASSED\n");
     }	
 }
 
