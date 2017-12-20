@@ -265,6 +265,7 @@ size_t my_getline(char **lineptr, size_t *n, FILE *stream)
 	if ((fgets(buf_string, LEN_STR_BEGIN, stream)) == NULL)
 	{
 		free(buf_string);
+		free(*lineptr);
 		return ERROR;
     }
 	
