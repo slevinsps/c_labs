@@ -539,7 +539,7 @@ void test_my_getline(void)
         if (count_numbers == ERROR)
             printf("Test 4 in my_getline PASSED\n");
 		fclose(stream);
-		//free(lineptr);
+		free(lineptr);
     }
 	{
         // 5 Файл не задан
