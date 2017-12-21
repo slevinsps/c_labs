@@ -43,7 +43,7 @@ void to_upp(char *s)
 }
 
 
-int my_snprintf(char *string, size_t n, const char *format, ...)
+int my_sprintf(char *string, size_t n, const char *format, ...)
 {
 	if (n == 0 || !string)
 	{
