@@ -1,9 +1,9 @@
 CC := gcc
 CFLAGS := -std=c99 -Wall -Werror -ggdb
 
-app.exe : main.o my_snprintf.o
+app.exe : main.o my_sprintf.o
 	$(CC) $(CFLAGS) $^ -o $@
-test.exe : test.o my_snprintf.o
+test.exe : test.o my_sprintf.o
 	$(CC) $(CFLAGS) $^ -o $@
 
 %.o : %.c *.h
