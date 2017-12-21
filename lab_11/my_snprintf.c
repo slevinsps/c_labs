@@ -102,7 +102,7 @@ int my_snprintf(char *string, size_t n, const char *format, ...)
 				res_string[i++] = '%';
 			}
 			else
-				break;
+				return -1;
 		}
 	}
 	//printf("%s", res_string);
