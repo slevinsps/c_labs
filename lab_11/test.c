@@ -22,6 +22,25 @@ int compare_strins(char *s1, char *s2)
 
 void test_snprintf(void)
 {
+	// test 0 - тестируем %d 
+	{
+		int n = 3;
+		char *string = malloc(n);
+		char *string2 = "I am 120 years old";
+		
+		char *format = "%s";
+
+		my_snprintf(string, 3, format, "ssssssssss", NULL);
+		if (compare_strins(string, string2))
+		{
+			printf("test 0 PASSED\n");
+		}
+		else
+		{
+			printf("test 0 FAILED\n");
+			printf("%s\n%s\n", string, string2);
+		}
+	}
 	// test 1 - тестируем %d 
 	{
 		int n = 20;

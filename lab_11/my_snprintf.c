@@ -45,6 +45,7 @@ void to_upp(char *s)
 
 int my_snprintf(char *string, size_t n, const char *format, ...)
 {
+	n--;
 	if (n == 0 || !string)
 	{
 		return 0;
