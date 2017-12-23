@@ -45,7 +45,6 @@ void to_upp(char *s)
 
 int my_snprintf(char *string, size_t n, const char *format, ...)
 {
-	n--;
 	if (n == 0 || !string)
 	{
 		return 0;
@@ -119,6 +118,6 @@ int my_snprintf(char *string, size_t n, const char *format, ...)
 		memmove(string, res_string, len_res);
 		string[len_res] = 0;
 	}
-		
+	string[n - 1] = 0;
 	return len_res;
 }
