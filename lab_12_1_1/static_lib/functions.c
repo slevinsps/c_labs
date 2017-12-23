@@ -14,7 +14,7 @@ int count_numbers(FILE *f)
     }
     return k;
 }    
-        
+    
 int key(const int *pb, const int *pe, int **new_begin, int **new_end)
 {
     const int *k;  
@@ -52,7 +52,7 @@ int key(const int *pb, const int *pe, int **new_begin, int **new_end)
         }
         else
         {
-            *new_begin = malloc((max - min) * sizeof(int));
+            
             if (*new_begin != NULL)
             {    
                 *new_end = *new_begin;
