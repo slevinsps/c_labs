@@ -7,22 +7,7 @@
 #include "io.h"
 #include "binary_sort.h"
 #include "defines.h"
-//#define ARR_DLL __declspec(dllimport)
-//#define ARR_DECL __cdecl   
 
-/* typedef  int(*comparator)(const void*, const void*); 
-
-ARR_DLL void ARR_DECL swap(void *a, void *b, size_t size);
-ARR_DLL void* ARR_DECL binary_search(void *first, void *right, size_t size, comparator compare);
-ARR_DLL void  ARR_DECL mysort(void *first, size_t number, size_t size, comparator compare);	
-
-ARR_DLL int ARR_DECL count_numbers(FILE *f);
-ARR_DLL int ARR_DECL key(const int *pb, const int *pe, int **new_begin, int **new_end);
-ARR_DLL int ARR_DECL rewrite_array(int *min, int *max, int **new_begin, int **new_end);	
-	
-ARR_DLL int ARR_DECL read_array(FILE *f, int *pb, int **pe, int k);
-ARR_DLL void ARR_DECL print_array(const int *pb, const int *pe, FILE *f);
-	 */
 int compare_int(const void *p, const void *q)
 {
     const int *a = p;    

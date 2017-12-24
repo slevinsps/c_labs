@@ -372,6 +372,7 @@ void key_tests(void)
     k = 1;
     int a1[9] = { 8, 2, 0, 1, 5, 7, 2, -1, 3 };
     int b1[6] = { 2, 0, 1, 5, 7, 2 };
+	new_begin = malloc(6*sizeof(int));
     key(a1, a1 + 9, &new_begin, &new_end);
     for (int i = 0;i < new_end - new_begin;i++)
     {
@@ -389,6 +390,7 @@ void key_tests(void)
     k = 1;
     int a2[9] = { 8, 2, 0, 1, 5, 7, 2, 5, 3 };
     int b2[1] = { 2 };
+	new_begin = malloc(1*sizeof(int));
     key(a2, a2 + 9, &new_begin, &new_end);
     for (int i = 0;i < new_end - new_begin;i++)
     {
@@ -406,6 +408,7 @@ void key_tests(void)
     k = 1;
     int err;
     int a3[8] = { 1, -1, 8, 4, 5, 6, 7, 3 };
+	new_begin = malloc(1*sizeof(int));
     err = key(a3, a3 + 8, &new_begin, &new_end);
     if (err == ARRAY_EMPTY)
         printf("Test 3 in key function is passed\n");
@@ -414,10 +417,11 @@ void key_tests(void)
         printf("Test 3 in key function is failed\n");
         free(new_begin);
     } 
-    //2 Несколько минимальных и максимальных значений
+    //4 Несколько минимальных и максимальных значений
     k = 1;
     int a4[7] = { 1, 1, 1, 2, 8, 8, 8 };
     int b4[3] = { 1, 1, 2 };
+	new_begin = malloc(3*sizeof(int));
     key(a4, a4 + 7, &new_begin, &new_end);
     for (int i = 0;i < new_end - new_begin;i++)
     {
