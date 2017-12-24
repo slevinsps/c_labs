@@ -44,22 +44,3 @@ ARR_DLL int ARR_DECL move_elements(int *array1, int *array2, int n)
 	}
 	return counter;
 }	
-
-
-int main(void)
-{
-	/* int n = 18;
-	int *arr = malloc(n*sizeof(int));
-	fidonachi(arr, n);
-	for (int i = 0; i < n; i++)
-	{
-		printf("%d ",arr[i]);
-	} */
-	/* int arr1[6] = {5,1,1,1,1,1};
-	int arr2[6] = {0,0,0,0,0,0};
-	move_elements(arr1, arr2, 6);
-	for (int i = 0; i < 6; i++)
-	{
-		printf("%d ",arr2[i]);
-	} */
-}
