@@ -43,9 +43,60 @@ void to_upp(char *s)
 }
 
 
+int count_dec_numbers(int n)
+{
+	int i = 0;
+	while (n)
+	{
+		n /= 10;
+		i++;
+	}
+	return i;
+}
+
+int count_hex_numbers(int n)
+{
+	int i = 0;
+	while (n)
+	{
+		n /= 16;
+		i++;
+	}
+	return i;
+}
+
+void num_to_string(void *num, char *buf, int base)
+{
+	int i;
+	int num1;
+	if (base == 16)
+	{
+		num1 = *(long long int *)num;
+		i = count_hex_numbers(num1) - 1;
+	}
+	else
+	{
+		num1 = *(int *)num;
+		i = count_dec_numbers(num1) - 1;
+	}
+	buf[i + 1] = 0;
+	while (num1)
+	{
+		int digit = num1 % base;
+		
+		if (digit < 0xA)
+			buf[i] = (num1 % base) + '0';
+		else
+			buf[i] = (num1 % base) + 'A' - 0xA;
+		num1 /= base;
+		i--;
+	}
+}
+
+
 int my_snprintf(char *string, size_t n, const char *format, ...)
 {
-	if (n == 0 || !string)
+	if (n == 0 || !string || !format)
 	{
 		return 0;
 	}
@@ -71,14 +122,14 @@ int my_snprintf(char *string, size_t n, const char *format, ...)
 		}
 		else
 		{
-			
 			specif = read_specificators(format + counter, &counter);
 			
 			if (specif == 1)
 			{
 				
 				num_int = va_arg(vl, int);
-				itoa(num_int, buf, 10);
+				//itoa(num_int, buf, 10);
+				num_to_string(&num_int, buf, 10);
 				strcat(res_string, buf);
 				i = strlen(res_string);
 			}
@@ -92,7 +143,7 @@ int my_snprintf(char *string, size_t n, const char *format, ...)
 			{
 				num_hex = va_arg(vl, long long int);
 				//printf("%I64X", num_hex);
-				itoa(num_hex, buf, 16);
+				num_to_string(&num_hex, buf, 16);
 				to_upp(buf);
 				strcat(res_string, buf);
 				i = strlen(res_string);
@@ -102,22 +153,27 @@ int my_snprintf(char *string, size_t n, const char *format, ...)
 				res_string[i++] = '%';
 			}
 			else
+			{
+				free(res_string);	
+				free(buf);
 				return -1;
+			}
 		}
 	}
 	//printf("%s", res_string);
 	int len_res = strlen(res_string);
-	if (len_res >= n)
+	if (len_res >= n-1)
 	{
-		memmove(string, res_string, n);
-		string[n] = 0;
-		len_res = n;
+		memmove(string, res_string, n-1);
+		string[n-1] = 0;
+		len_res = n-1;
 	}
 	else
 	{
 		memmove(string, res_string, len_res);
 		string[len_res] = 0;
 	}
-	string[n - 1] = 0;
+	free(res_string);	
+	free(buf);	
 	return len_res;
 }

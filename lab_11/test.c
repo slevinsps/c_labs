@@ -22,25 +22,6 @@ int compare_strins(char *s1, char *s2)
 
 void test_snprintf(void)
 {
-	// test 0 - тестируем %d 
-	{
-		int n = 3;
-		char *string = malloc(n);
-		char *string2 = "I am 120 years old";
-		
-		char *format = "%s";
-
-		my_snprintf(string, 3, format, "ssssssssss", NULL);
-		if (compare_strins(string, string2))
-		{
-			printf("test 0 PASSED\n");
-		}
-		else
-		{
-			printf("test 0 FAILED\n");
-			printf("%s\n%s\n", string, string2);
-		}
-	}
 	// test 1 - тестируем %d 
 	{
 		int n = 20;
@@ -59,6 +40,7 @@ void test_snprintf(void)
 			printf("test 1 FAILED\n");
 			printf("%s\n%s\n", string, string2);
 		}
+		free(string);
 	}
 	// test 2 - тестируем %s 
 	{
@@ -78,6 +60,7 @@ void test_snprintf(void)
 			printf("test 2 FAILED\n");
 			printf("%s\n%s\n", string, string2);
 		}
+		free(string);
 	}
 	// test 3 - тестируем %llX 
 	{
@@ -97,10 +80,11 @@ void test_snprintf(void)
 			printf("test 3 FAILED\n");
 			printf("%s\n%s\n", string, string2);
 		}
-	}
+		free(string);
+	} 
 	// test 4 - тестируем %llX %d %s
 	{
-		int n = 30;
+		int n = 32;
 		char *string = malloc(n);
 		char *string2 = "My FFF name is 35 AAA Ivan 365";
 		
@@ -116,12 +100,13 @@ void test_snprintf(void)
 			printf("test 4 FAILED\n");
 			printf("%s\n%s\n", string, string2);
 		}
+		free(string);
 	}
 	// test 5 - тестируем %llX %d %s при n меньших длины строки
 	{
 		int n = 5;
 		char *string = malloc(n);
-		char *string2 = "My FF";
+		char *string2 = "My F";
 		
 		char *format = "My %llX %s is %d %llX Ivan %d";
 
@@ -135,12 +120,13 @@ void test_snprintf(void)
 			printf("test 5 FAILED\n");
 			printf("%s\n%s\n", string, string2);
 		}
+		free(string);
 	}
 	// test 6 - тестируем %llX %d %s при n меньших длины строки
 	{
 		int n = 1;
 		char *string = malloc(n);
-		char *string2 = "M";
+		char *string2 = "";
 		
 		char *format = "My %llX %s is %d %llX Ivan %d";
 
@@ -154,6 +140,7 @@ void test_snprintf(void)
 			printf("test 6 FAILED\n");
 			printf("%s\n%s\n", string, string2);
 		}
+		free(string);
 	}
 	// test 7 - ошибочный коэфициент
 	{
@@ -174,6 +161,7 @@ void test_snprintf(void)
 			printf("test 7 FAILED\n");
 			printf("%s#\n%s\n", string, string2);
 		}
+		free(string);
 	}
 	// test 8 - один символ
 	{
@@ -192,8 +180,8 @@ void test_snprintf(void)
 			printf("test 8 FAILED\n");
 			printf("%s#\n%s\n", string, string2);
 		}
+		free(string);
 	}
-
 }
 
 int main(void)

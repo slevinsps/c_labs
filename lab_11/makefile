@@ -1,5 +1,5 @@
 CC := gcc
-CFLAGS := -std=c99 -Wall -Werror -ggdb
+CFLAGS := -std=c99 -Wall  -ggdb
 
 app.exe : main.o my_snprintf.o
 	$(CC) $(CFLAGS) $^ -o $@
