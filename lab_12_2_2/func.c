@@ -1,10 +1,11 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include "func.h"
 
 
-int fidonachi(int *array, int n)
+ARR_DLL int ARR_DECL fibonachi(int *array, int n)
 {
-	if (!array || n < 0)
+	if (!array || n <= 0)
 		return -1;
 	for (int i = 0; i < n; i++)
 	{
@@ -18,7 +19,7 @@ int fidonachi(int *array, int n)
 	return 0;
 }
 
-int move_elements(int *array1, int *array2, int n)
+ARR_DLL int ARR_DECL move_elements(int *array1, int *array2, int n)
 {
 	if (!array1 || !array2 || n < 1)
 		return -1;
