@@ -97,8 +97,7 @@ void num_to_string(void *num, char *buf, int base)
             buf[i] = (num1 % base) + 'A' - 0xA;
         num1 /= base;
         i--;
-    }
-	
+    }	
 }
 
 
@@ -120,7 +119,7 @@ int my_snprintf(char *string, size_t n, const char *format, ...)
     int counter = 0;
     int i = 0;
     int specif;
-    char *buf = calloc(20,sizeof(char));
+    char *buf = calloc(20, sizeof(char));
     while (counter < len_format)
     {
         if (format[counter] != '%')
@@ -169,11 +168,11 @@ int my_snprintf(char *string, size_t n, const char *format, ...)
     }
     //printf("%s", res_string);
     int len_res = strlen(res_string);
-    if (len_res >= n-1)
+    if (len_res >= n - 1)
     {
-        memmove(string, res_string, n-1);
-        string[n-1] = 0;
-        len_res = n-1;
+        memmove(string, res_string, n - 1);
+        string[n - 1] = 0;
+        len_res = n - 1;
     }
     else
     {
