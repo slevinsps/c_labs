@@ -27,7 +27,7 @@ void test_num_to_string(void)
 		int n = 10;
 		char *s = "10";
 		//long long int n = 0xF3FFA;
-		char *buf = calloc(20,sizeof(char));
+		char *buf = calloc(20, sizeof(char));
 		num_to_string(&n, buf, 10);
 		if (compare_strins(buf, s))
 			printf("test 1 num_to_string in PASSED\n");
@@ -40,7 +40,7 @@ void test_num_to_string(void)
 		int n = 1;
 		char *s = "1";
 		//long long int n = 0xF3FFA;
-		char *buf = calloc(20,sizeof(char));
+		char *buf = calloc(20, sizeof(char));
 		num_to_string(&n, buf, 10);
 		if (compare_strins(buf, s))
 			printf("test 2 num_to_string in PASSED\n");
@@ -53,7 +53,7 @@ void test_num_to_string(void)
 		int n = -125214;
 		char *s = "-125214";
 		//long long int n = 0xF3FFA;
-		char *buf = calloc(20,sizeof(char));
+		char *buf = calloc(20, sizeof(char));
 		num_to_string(&n, buf, 10);
 		if (compare_strins(buf, s))
 			printf("test 3 num_to_string in PASSED\n");
@@ -69,7 +69,7 @@ void test_num_to_string(void)
 		long long int n = 0xFFF;
 		char *s = "FFF";
 		//long long int n = 0xF3FFA;
-		char *buf = calloc(20,sizeof(char));
+		char *buf = calloc(20, sizeof(char));
 		num_to_string(&n, buf, 16);
 		if (compare_strins(buf, s))
 			printf("test 4 num_to_string in PASSED\n");
@@ -84,7 +84,7 @@ void test_num_to_string(void)
 	{
 		long long int n = 0xF3FF1;
 		char *s = "F3FF1";
-		char *buf = calloc(20,sizeof(char));
+		char *buf = calloc(20, sizeof(char));
 		num_to_string(&n, buf, 16);
 		if (compare_strins(buf, s))
 			printf("test 5 num_to_string in PASSED\n");
@@ -99,7 +99,7 @@ void test_num_to_string(void)
 	{
 		long long int n = -0xA;
 		char *s = "-A";
-		char *buf = calloc(20,sizeof(char));
+		char *buf = calloc(20, sizeof(char));
 		num_to_string(&n, buf, 16);
 		if (compare_strins(buf, s))
 			printf("test 6 num_to_string in PASSED\n");
