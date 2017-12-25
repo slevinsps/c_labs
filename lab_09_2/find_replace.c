@@ -257,7 +257,8 @@ size_t my_getline(char **lineptr, size_t *n, FILE *stream)
 	
 	
     char *buf_string = calloc(LEN_STR_BEGIN, sizeof(char));
-
+	if (!buf_string)
+		return ERROR;
     size_t n_new = 0;
     char *tmp;
     int len = 0;
@@ -290,6 +291,14 @@ size_t my_getline(char **lineptr, size_t *n, FILE *stream)
 		}
     } while ((fgets(buf_string, LEN_STR_BEGIN, stream)) != NULL);
 	
+	if (n_new >= *n)
+    {
+		*n = n_new + 1;
+		tmp = realloc(*lineptr, *n);
+        if (!tmp)
+            return ERROR;
+		*lineptr = tmp;
+	}
     (*lineptr)[n_new] = 0;
 	if (n_new == 0)
 	{
