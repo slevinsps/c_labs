@@ -274,7 +274,7 @@ size_t my_getline(char **lineptr, size_t *n, FILE *stream)
         len = strlen1(buf_string);
         if (n_new + len > *n)
         {
-            *n = n_new + len + 1;
+            *n = n_new + len;
             tmp = realloc(*lineptr, *n);
             if (!tmp)
                 return ERROR;
@@ -294,7 +294,7 @@ size_t my_getline(char **lineptr, size_t *n, FILE *stream)
 	if (n_new >= *n)
     {
 		*n = n_new + 1;
-		tmp = realloc(*lineptr, *n);
+		tmp = realloc(*lineptr, *n * 2);
         if (!tmp)
             return ERROR;
 		*lineptr = tmp;
