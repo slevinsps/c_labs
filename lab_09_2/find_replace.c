@@ -17,31 +17,31 @@ int find_underline(const char *source, const char *search, int *pos1, int *pos2,
 {
     int len1 = strlen1(source);
     int len2 = strlen1(search);     
-    int count = 0;
+
     int i = pos_begin;
     int j = pos_begin;
-    
-    while (i < len1 - len2 + 1 && !count)
+    *pos1 = -1;
+    while (i < len1 - len2 + 1 && *pos1 == -1)
     {
-        count = 1;
+        *pos1 = i;
         j = i;
-        while (j < i + len2 && count)
+        while (j < i + len2 && *pos1 != -1)
         {
             if (source[j] != search[j - i])
             {
-                count = 0;
+                *pos1 = -1;
             }
             j++;
         }
         i++;
     }
-    i--;
-    if (count)
+    if (*pos1 != -1)
     {
-        *pos1 = i;
-        *pos2 = i + len2;
+        *pos2 = *pos1 + len2;
         return 1;
     }
+	*pos1 = 0;
+	*pos2 = 0;
     return 0;
 }
 
