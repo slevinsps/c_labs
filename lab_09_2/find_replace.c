@@ -291,10 +291,10 @@ size_t my_getline(char **lineptr, size_t *n, FILE *stream)
 		}
     } while ((fgets(buf_string, LEN_STR_BEGIN, stream)) != NULL);
 	
-	if (n_new >= *n)
+	if (n_new + 1 >= *n)
     {
 		*n = n_new + 1;
-		tmp = realloc(*lineptr, *n * 2);
+		tmp = realloc(*lineptr, *n);
         if (!tmp)
             return ERROR;
 		*lineptr = tmp;
