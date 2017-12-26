@@ -3,7 +3,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <ctype.h>
-#include "my_sprintf.h"
+#include "my_snprintf.h"
 
 
 int compare_strins(char *s1, char *s2)
@@ -123,7 +123,7 @@ void test_snprintf(void)
         
         char *format = "I am %d years old";
 
-        my_sprintf(string, n, format, 120, NULL);
+        my_snprintf(string, n, format, 120, NULL);
         if (compare_strins(string, string2))
         {
             printf("test 1 PASSED\n");
@@ -143,7 +143,7 @@ void test_snprintf(void)
         
         char *format = "My %s is %s\n";
 
-        my_sprintf(string, n, format, "name", "Ivan", NULL);
+        my_snprintf(string, n, format, "name", "Ivan", NULL);
         if (compare_strins(string, string2))
         {
             printf("test 2 PASSED\n");
@@ -163,7 +163,7 @@ void test_snprintf(void)
         
         char *format = "  Its %llX here %llX...";
 
-        my_sprintf(string, n, format, 0xFFF, 0xAFF, NULL);
+        my_snprintf(string, n, format, 0xFFF, 0xAFF, NULL);
         if (compare_strins(string, string2))
         {
             printf("test 3 PASSED\n");
@@ -183,7 +183,7 @@ void test_snprintf(void)
         
         char *format = "My %llX %s is %d %llX Ivan %d";
 
-        my_sprintf(string, n, format, 0xFFF, "name", 35, 0xAAA, 365, NULL);
+        my_snprintf(string, n, format, 0xFFF, "name", 35, 0xAAA, 365, NULL);
         if (compare_strins(string, string2))
         {
             printf("test 4 PASSED\n");
@@ -203,7 +203,7 @@ void test_snprintf(void)
         
         char *format = "My %llX %s is %d %llX Ivan %d";
 
-        my_sprintf(string, n, format, 0xFFF, "name", 35, 0xAAA, 365, NULL);
+        my_snprintf(string, n, format, 0xFFF, "name", 35, 0xAAA, 365, NULL);
         if (compare_strins(string, string2))
         {
             printf("test 5 PASSED\n");
@@ -223,7 +223,7 @@ void test_snprintf(void)
         
         char *format = "My %llX %s is %d %llX Ivan %d";
 
-        my_sprintf(string, n, format, 0xFFF, "name", 35, 0xAAA, 365, NULL);
+        my_snprintf(string, n, format, 0xFFF, "name", 35, 0xAAA, 365, NULL);
         if (compare_strins(string, string2))
         {
             printf("test 6 PASSED\n");
@@ -244,7 +244,7 @@ void test_snprintf(void)
         char *format = "My %llX %ws is %td %llX Ivan %d";
 
         
-        int k = my_sprintf(string, n, format, 0xFFF, "name", 35, 0xAAA, 365, NULL);
+        int k = my_snprintf(string, n, format, 0xFFF, "name", 35, 0xAAA, 365, NULL);
         if (k == -1)
         {
             printf("test 7 PASSED\n");
@@ -263,7 +263,7 @@ void test_snprintf(void)
         char *string2 = "35M365";
         
         char *format = "%dM%d";
-        my_sprintf(string, n, format, 35, 365, NULL);
+        my_snprintf(string, n, format, 35, 365, NULL);
         if (compare_strins(string, string2))
         {
             printf("test 8 PASSED\n");

@@ -95,7 +95,7 @@ void num_to_string(void *num, char *buf, int base)
 }
 
 
-int my_sprintf(char *string, size_t n, const char *format, ...)
+int my_snprintf(char *string, size_t n, const char *format, ...)
 {
     if (n == 0 || !string || !format)
     {
