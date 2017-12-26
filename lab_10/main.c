@@ -9,6 +9,7 @@
 # define NOT_ALL_ARGUMENTS -1
 # define NO_FILE -2
 # define OK 0
+# define MEMORY_ERROR -3
 
 
 /* Условие задачи */
@@ -48,18 +49,28 @@ int main(int argc, char **argv)
             {
 				read_text(f1, &words, &n);
 				node_t *head = malloc(sizeof(node_t));
-				node_t *res_sort;
-				node_t *copy;
-				load_list_int(head, words, n);
-				res_sort = sort(head, comp1);
-				printf("Done!\n");			
-				print_list(f2, res_sort);
-				while (res_sort)
+				if (head)
 				{
-					copy = res_sort;
-					res_sort = res_sort->next;
-					free(copy);
+					node_t *res_sort;
+					node_t *copy;
+					err = load_list_int(head, words, n);
+					if (err == 0)
+					{					
+						res_sort = sort(head, comp1);
+						printf("Done!\n");			
+						print_list(f2, res_sort);
+						while (res_sort)
+						{
+							copy = res_sort;
+							res_sort = res_sort->next;
+							free(copy);
+						}
+					}
+					else
+						err = MEMORY_ERROR;
 				}
+				else
+					err = MEMORY_ERROR;
 				free(words);
 				fclose(f2);
 			}

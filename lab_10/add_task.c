@@ -8,17 +8,15 @@
 
 const char *strchr1(const char *str, char symbol)
 {
-    const char *c = NULL;
     int len = strlen(str);
     for (int i = 0; i < len; i++)
     {
         if (str[i] == symbol)
         {
-            c = &(str[i]);
-            break;
+            return str + i;
         }
     }
-    return c;
+    return NULL;
 }
 
 int count_words(const char *str)
@@ -51,7 +49,7 @@ void split_words(char *str, char **words, int ind)
     }
 }
 
-void load_list_int(node_t *head, char **words, int n)
+int load_list_int(node_t *head, char **words, int n)
 {
     head->data = words[0];
     head->next = NULL;
@@ -59,20 +57,25 @@ void load_list_int(node_t *head, char **words, int n)
     for (int i = 1; i < n; i++)
     {
         tmp = malloc(sizeof(node_t));
+		if (!tmp)
+			return -1;
         tmp->next = NULL;
         tmp->data = words[i];
         
         head->next = tmp;
         head = head->next;
     }    
+	return 0;
 }
 
-void read_text(FILE *f, char ***words, int *n)
+int read_text(FILE *f, char ***words, int *n)
 {
 	int ind;
 	char *string = malloc(SIZE_BUF);
+	if (!string)
+		return -1;
 	int size_arr = 0;
-	while (fgets(string, 400, f))
+	while (fgets(string, SIZE_BUF, f))
     {
         ind = *n;
         *n += count_words(string);
@@ -84,6 +87,7 @@ void read_text(FILE *f, char ***words, int *n)
 		split_words(string, *words, ind);
         string = malloc(SIZE_BUF);
     }
+	return 0;
 }
 
 int comp1(const void *a, const void *b)
