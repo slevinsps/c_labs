@@ -4,6 +4,11 @@
 #include <string.h>
 #include <ctype.h>
 
+#define  SPEC_d 1 
+#define  SPEC_s 2 
+#define  SPEC_llX 3 
+#define  SPEC_per 4 
+#define  ERROR -1 
 
 int read_specificators(const char *format, int *counter)
 {
@@ -12,25 +17,25 @@ int read_specificators(const char *format, int *counter)
     if (len >= 2 && format[0] == '%' && format[1] == 'd')
     {
         (*counter) += 2;
-        return 1;
+        return SPEC_d;
     }
     else if (len >= 2 && format[0] == '%' && format[1] == 's')
     {
         (*counter) += 2;
-        return 2;
+        return SPEC_s;
     }
     else if (len >= 4 && format[0] == '%' && format[1] == 'l' && format[2] == 'l' && format[3] == 'X')
     {    
         (*counter) += 4;
-        return 3;
+        return SPEC_llX;
     }
     else if (len >= 2 && format[0] == '%' && format[1] == '%')
     {
         (*counter) += 2;
-        return 4;
+        return SPEC_per;
     }
     else
-        return -1;
+        return ERROR;
 }
 
 void to_upp(char *s)
@@ -43,23 +48,12 @@ void to_upp(char *s)
 }
 
 
-int count_dec_numbers(int n)
+int count_numbers(int n, int base)
 {
     int i = 0;
     while (n)
     {
-        n /= 10;
-        i++;
-    }
-    return i;
-}
-
-int count_hex_numbers(int n)
-{
-    int i = 0;
-    while (n)
-    {
-        n /= 16;
+        n /= base;
         i++;
     }
     return i;
@@ -72,12 +66,12 @@ void num_to_string(void *num, char *buf, int base)
     if (base == 16)
     {
         num1 = *(long long int *)num;
-        i = count_hex_numbers(num1) - 1;
+        i = count_numbers(num1, 16) - 1;
     }
     else
     {
         num1 = *(int *)num;
-        i = count_dec_numbers(num1) - 1;
+        i = count_numbers(num1, 10) - 1;
     }
 	
 	if (num1 < 0)
@@ -112,62 +106,66 @@ int my_sprintf(char *string, size_t n, const char *format, ...)
     int num_int;
     char *num_char;
     long long int num_hex;
-    
+    string[0] = 0;
     int len_format = strlen(format);
     
-    char *res_string = calloc(2 * len_format, sizeof(char));
+    //char *res_string = calloc(2 * len_format, sizeof(char));
     int counter = 0;
     int i = 0;
     int specif;
     char *buf = calloc(20, sizeof(char));
     while (counter < len_format)
     {
+		if (i >= n - 1)
+			break;
         if (format[counter] != '%')
         {
-            res_string[i++] = format[counter];
+            string[i++] = format[counter];
+			string[i] = 0;
             counter++;
         }
         else
         {
             specif = read_specificators(format + counter, &counter);
             
-            if (specif == 1)
+            if (specif == SPEC_d)
             {            
                 num_int = va_arg(vl, int);
                 //itoa(num_int, buf, 10);
                 num_to_string(&num_int, buf, 10);
-                strcat(res_string, buf);
-                i = strlen(res_string);
+                strcat(string, buf);
+                i = strlen(string);
             }
-            else if (specif == 2)
+            else if (specif == SPEC_s)
             {
                 num_char = va_arg(vl, char*);
-                strcat(res_string, num_char);
-                i = strlen(res_string);
+                strcat(string, num_char);
+                i = strlen(string);
             }
-            else if (specif == 3)
+            else if (specif == SPEC_llX)
             {
                 num_hex = va_arg(vl, long long int);
                 //printf("%I64X", num_hex);
                 num_to_string(&num_hex, buf, 16);
                 to_upp(buf);
-                strcat(res_string, buf);
-                i = strlen(res_string);
+                strcat(string, buf);
+                i = strlen(string);
             }
-            else if (specif == 4)
+            else if (specif == SPEC_per)
             {
-                res_string[i++] = '%';
+                string[i++] = '%';
+				string[i] = 0;
             }
             else
             {
-                free(res_string);    
+                //free(res_string);    
                 free(buf);
-                return -1;
+                return ERROR;
             }
         }
     }
     //printf("%s", res_string);
-    int len_res = strlen(res_string);
+    /* int len_res = strlen(res_string);
     if (len_res >= n - 1)
     {
         memmove(string, res_string, n - 1);
@@ -179,7 +177,8 @@ int my_sprintf(char *string, size_t n, const char *format, ...)
         memmove(string, res_string, len_res);
         string[len_res] = 0;
     }
-    free(res_string);    
+    free(res_string); */   
+	string[n - 1] = 0;	
     free(buf);    
-    return len_res;
+    return strlen(string);
 }
