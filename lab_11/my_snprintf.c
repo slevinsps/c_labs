@@ -133,13 +133,13 @@ int my_snprintf(char *string, size_t n, const char *format, ...)
                 num_int = va_arg(vl, int);
                 //itoa(num_int, buf, 10);
                 num_to_string(&num_int, buf, 10);
-                strcat(string, buf);
+				strncat(string, buf,n - i - 1);
                 i = strlen(string);
             }
             else if (specif == SPEC_s)
             {
                 num_char = va_arg(vl, char*);
-                strcat(string, num_char);
+				strncat(string, num_char,n - i - 1);
                 i = strlen(string);
             }
             else if (specif == SPEC_llX)
@@ -148,8 +148,9 @@ int my_snprintf(char *string, size_t n, const char *format, ...)
                 //printf("%I64X", num_hex);
                 num_to_string(&num_hex, buf, 16);
                 to_upp(buf);
-                strcat(string, buf);
-                i = strlen(string);
+                //strcat(string, buf);
+                strncat(string, buf,n - i - 1);
+				i = strlen(string);
             }
             else if (specif == SPEC_per)
             {
@@ -163,21 +164,7 @@ int my_snprintf(char *string, size_t n, const char *format, ...)
                 return ERROR;
             }
         }
-    }
-    //printf("%s", res_string);
-    /* int len_res = strlen(res_string);
-    if (len_res >= n - 1)
-    {
-        memmove(string, res_string, n - 1);
-        string[n - 1] = 0;
-        len_res = n - 1;
-    }
-    else
-    {
-        memmove(string, res_string, len_res);
-        string[len_res] = 0;
-    }
-    free(res_string); */   
+    } 
 	string[n - 1] = 0;	
     free(buf);    
     return strlen(string);
