@@ -9,6 +9,7 @@
 #define  SPEC_llX 3 
 #define  SPEC_per 4 
 #define  ERROR -1 
+#define  MAX_LEN_BUFFER 20 
 
 int read_specificators(const char *format, int *counter)
 {
@@ -113,7 +114,9 @@ int my_snprintf(char *string, size_t n, const char *format, ...)
     int counter = 0;
     int i = 0;
     int specif;
-    char *buf = calloc(20, sizeof(char));
+    //char *buf = calloc(20, sizeof(char));
+    char buf[MAX_LEN_BUFFER];
+	
     while (counter < len_format)
     {
 		if (i >= n - 1)
@@ -160,12 +163,12 @@ int my_snprintf(char *string, size_t n, const char *format, ...)
             else
             {
                 //free(res_string);    
-                free(buf);
+                //free(buf);
                 return ERROR;
             }
         }
     } 
 	string[n - 1] = 0;	
-    free(buf);    
+    //free(buf);    
     return strlen(string);
 }
