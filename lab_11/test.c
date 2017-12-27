@@ -4,6 +4,7 @@
 #include <string.h>
 #include <ctype.h>
 #include "my_snprintf.h"
+#include "limits.h"
 
 
 int compare_strins(char *s1, char *s2)
@@ -20,110 +21,19 @@ int compare_strins(char *s1, char *s2)
     return 1;
 }
 
-void test_num_to_string(void)
-{
-	// test 1 - тестируем десятичное число 
-	{
-		int n = 10;
-		char *s = "10";
-		//long long int n = 0xF3FFA;
-		char *buf = calloc(20, sizeof(char));
-		num_to_string(&n, 2, buf, 10);
-		if (compare_strins(buf, s))
-			printf("test 1 num_to_string in PASSED\n");
-        else
-			printf("test 1 num_to_string in FAILED\n\n");
-		free(buf);
-	}
-	// test 2 - тестируем десятичное число 
-	{
-		int n = 1;
-		char *s = "1";
-		//long long int n = 0xF3FFA;
-		char *buf = calloc(20, sizeof(char));
-		num_to_string(&n, 1, buf, 10);
-		if (compare_strins(buf, s))
-			printf("test 2 num_to_string in PASSED\n");
-        else
-			printf("test 2 num_to_string in FAILED\n\n");
-		free(buf);
-	}
-	// test 3 - тестируем отрицательное десятичное число 
-	{
-		int n = -125214;
-		char *s = "-125214";
-		//long long int n = 0xF3FFA;
-		char *buf = calloc(20, sizeof(char));
-		num_to_string(&n, 6, buf, 10);
-		if (compare_strins(buf, s))
-			printf("test 3 num_to_string in PASSED\n");
-        else
-		{
-			printf("test 3 num_to_string in FAILED\n\n");
-			printf("%s\n", buf);
-		}
-		free(buf);
-	}
-	// test 3 - тестируем шестнадцатиричное число 
-	{
-		long long int n = 0xFFF;
-		char *s = "FFF";
-		//long long int n = 0xF3FFA;
-		char *buf = calloc(20, sizeof(char));
-		num_to_string(&n, count_numbers(n, 16), buf, 16);
-		if (compare_strins(buf, s))
-			printf("test 4 num_to_string in PASSED\n");
-        else
-		{
-			printf("test 4 num_to_string in FAILED\n\n");
-			printf("%s#\n", buf);
-		}
-		free(buf);
-	}
-	// test 5 - тестируем шестнадцатиричное число 
-	{
-		long long int n = 0xF3FF1;
-		char *s = "F3FF1";
-		char *buf = calloc(20, sizeof(char));
-		num_to_string(&n, 5, buf, 16);
-		if (compare_strins(buf, s))
-			printf("test 5 num_to_string in PASSED\n");
-        else
-		{
-			printf("test 5 num_to_string in FAILED\n\n");
-			printf("%s\n", buf);
-		}
-		free(buf);
-	}
-	// test 6 - тестируем шестнадцатиричное число 
-	{
-		long long int n = -0xA;
-		char *s = "-A";
-		char *buf = calloc(20, sizeof(char));
-		num_to_string(&n, count_numbers(n, 16), buf, 16);
-		if (compare_strins(buf, s))
-			printf("test 6 num_to_string in PASSED\n");
-        else
-		{
-			printf("test 6 num_to_string in FAILED\n\n");
-			printf("%s\n", buf);
-		}
-		free(buf);
-	}
-}
-
-
 void test_snprintf(void)
 {
-    // test 1 - тестируем %d 
+    // test 1 - INT_MIN
     {
         int n = 20;
         char *string = malloc(n);
-        char *string2 = "I am 120 years old";
+        char *string2 = malloc(n);
+        //char *string2 = "I am 120 years old";
         
-        char *format = "I am %d years old";
+        char *format = "%d";
 
-        my_snprintf(string, n, format, 120, NULL);
+        my_snprintf(string, n, format, INT_MIN);
+        snprintf(string2, n, format, INT_MIN);
         if (compare_strins(string, string2))
         {
             printf("test 1 PASSED\n");
@@ -134,16 +44,19 @@ void test_snprintf(void)
             printf("%s\n%s\n", string, string2);
         }
         free(string);
+        free(string2);
     }
-    // test 2 - тестируем %s 
+    // test 2 - INT_MAX
     {
         int n = 20;
         char *string = malloc(n);
-        char *string2 = "My name is Ivan\n";
+        char *string2 = malloc(n);
+        //char *string2 = "I am 120 years old";
         
-        char *format = "My %s is %s\n";
+        char *format = "%d";
 
-        my_snprintf(string, n, format, "name", "Ivan", NULL);
+        my_snprintf(string, n, format, INT_MAX);
+        snprintf(string2, n, format, INT_MAX);
         if (compare_strins(string, string2))
         {
             printf("test 2 PASSED\n");
@@ -154,16 +67,18 @@ void test_snprintf(void)
             printf("%s\n%s\n", string, string2);
         }
         free(string);
+		free(string2);
     }
-    // test 3 - тестируем %llX 
+    // test 3 - LLONG_MAX 
     {
         int n = 30;
         char *string = malloc(n);
-        char *string2 = "  Its FFF here AFF...";
+        char *string2 = malloc(n);
         
-        char *format = "  Its %llX here %llX...";
+        char *format = "%llX";
 
-        my_snprintf(string, n, format, 0xFFF, 0xAFF, NULL);
+        my_snprintf(string, n, format, LLONG_MAX);
+        snprintf(string2, n, format, LLONG_MAX);
         if (compare_strins(string, string2))
         {
             printf("test 3 PASSED\n");
@@ -174,16 +89,18 @@ void test_snprintf(void)
             printf("%s\n%s\n", string, string2);
         }
         free(string);
+		free(string2);
     } 
-    // test 4 - тестируем %llX %d %s
+    // test 4 - LLONG_MIN
     {
-        int n = 32;
+        int n = 30;
         char *string = malloc(n);
-        char *string2 = "My FFF name is 35 AAA Ivan 365";
+        char *string2 = malloc(n);
         
-        char *format = "My %llX %s is %d %llX Ivan %d";
+        char *format = "%llX";
 
-        my_snprintf(string, n, format, 0xFFF, "name", 35, 0xAAA, 365, NULL);
+        my_snprintf(string, n, format, LLONG_MIN);
+        snprintf(string2, n, format, LLONG_MIN);
         if (compare_strins(string, string2))
         {
             printf("test 4 PASSED\n");
@@ -194,36 +111,40 @@ void test_snprintf(void)
             printf("%s\n%s\n", string, string2);
         }
         free(string);
-    }
-    // test 5 - тестируем %llX %d %s при n меньших длины строки
+		free(string2);
+    } 
+    // test 5 - ULLONG_MAX
     {
-        int n = 5;
+        int n = 30;
         char *string = malloc(n);
-        char *string2 = "My F";
+        char *string2 = malloc(n);
         
-        char *format = "My %llX %s is %d %llX Ivan %d";
+        char *format = "%llX";
 
-        my_snprintf(string, n, format, 0xFFF, "name", 35, 0xAAA, 365, NULL);
+        my_snprintf(string, n, format, ULLONG_MAX);
+        snprintf(string2, n, format, ULLONG_MAX);
         if (compare_strins(string, string2))
         {
             printf("test 5 PASSED\n");
         }
-        else        
+        else
         {
             printf("test 5 FAILED\n");
             printf("%s\n%s\n", string, string2);
         }
         free(string);
+		free(string2);
     }
-    // test 6 - тестируем %llX %d %s при n меньших длины строки
+    // test 6 - 0
     {
-        int n = 1;
+        int n = 30;
         char *string = malloc(n);
-        char *string2 = "";
+        char *string2 = malloc(n);
         
-        char *format = "My %llX %s is %d %llX Ivan %d";
+        char *format = "%llX";
 
-        my_snprintf(string, n, format, 0xFFF, "name", 35, 0xAAA, 365, NULL);
+        my_snprintf(string, n, format, 0);
+        snprintf(string2, n, format, 0);
         if (compare_strins(string, string2))
         {
             printf("test 6 PASSED\n");
@@ -234,51 +155,12 @@ void test_snprintf(void)
             printf("%s\n%s\n", string, string2);
         }
         free(string);
-    }
-    // test 7 - ошибочный коэфициент
-    {
-        int n = 300;
-        char *string = malloc(n);
-        char *string2 = "M";
-        
-        char *format = "My %llX %ws is %td %llX Ivan %d";
-
-        
-        int k = my_snprintf(string, n, format, 0xFFF, "name", 35, 0xAAA, 365, NULL);
-        if (k == -1)
-        {
-            printf("test 7 PASSED\n");
-        }
-        else
-        {
-            printf("test 7 FAILED\n");
-            printf("%s#\n%s\n", string, string2);
-        }
-        free(string);
-    }
-    // test 8 - один символ
-    {
-        int n = 300;
-        char *string = malloc(n);
-        char *string2 = "35M365";
-        
-        char *format = "%dM%d";
-        my_snprintf(string, n, format, 35, 365, NULL);
-        if (compare_strins(string, string2))
-        {
-            printf("test 8 PASSED\n");
-        }
-        else
-        {
-            printf("test 8 FAILED\n");
-            printf("%s#\n%s\n", string, string2);
-        }
-        free(string);
+		free(string2);
     }
 }
 
 int main(void)
 {
-	test_num_to_string();
+	//test_num_to_string();
     test_snprintf();
 }

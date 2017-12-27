@@ -9,7 +9,7 @@
 #define  SPEC_llX 3 
 #define  SPEC_per 4 
 #define  ERROR -1 
-#define  MAX_LEN_BUFFER 20 
+#define  MAX_LEN_BUFFER 40 
 #define  BASE_10 10 
 #define  BASE_16 16 
 
@@ -51,54 +51,57 @@ void to_upp(char *s)
 }
 
 
-int count_numbers(int n, int base)
+int count_numbers(unsigned long long int n, int base)
 {
     int i = 0;
+	if (n == 0)
+		return 1;
     while (n)
     {
+		//printf("!! %d \n", n);
         n /= base;
+		
         i++;
-    }
+    } 
     return i;
 }
 
-void num_to_string(void *num, int kol, char *buf, int base)
+void num_to_string(unsigned long long int num, int kol, char *buf, int base)
 {
+    //printf("## %d\n", kol );
     int i;
-    int num1;
-    if (base == BASE_16)
+    i = kol - 1;
+	
+	
+    if (base == BASE_10 && num < 0)        
     {
-        num1 = *(long long int *)num;
+		//printf("!!!! %llX\n", num);
+        i++;
+        buf[0] = '-';
+        num *= -1;
     }
-    else
-    {
-        num1 = *(int *)num;
-    }
-	i = kol - 1;
-	if (num1 < 0)
-	{
-		i++;
-		buf[0] = '-';
-		num1 *= -1;
-	}
     buf[i + 1] = 0;
-    while (num1)
+	if (num == 0)
+		buf[i] = '0';
+    while (num)
     {
-        int digit = num1 % base;
-        
+        int digit = num % base;
+		if (digit < 0 && base == BASE_16)
+			digit *= -1;
+        //printf("%llx && &^%llx\n", num , digit);
         if (digit < 0xA)
-            buf[i] = (num1 % base) + '0';
+            buf[i] = digit + '0';
         else
-            buf[i] = (num1 % base) + 'A' - 0xA;
-        num1 /= base;
+            buf[i] = digit + 'A' - 0xA;
+        num /= base;
         i--;
-    }	
+    }    
 }
 
 
 int my_snprintf(char *string, size_t n, const char *format, ...)
 {
-	int kol;
+    int kol;
     if (n == 0 || !string || !format)
     {
         return 0;
@@ -117,15 +120,15 @@ int my_snprintf(char *string, size_t n, const char *format, ...)
     int specif;
     //char *buf = calloc(20, sizeof(char));
     char buf[MAX_LEN_BUFFER];
-	
+    
     while (counter < len_format)
     {
-		if (i >= n - 1)
-			break;
+        if (i >= n - 1)
+            break;
         if (format[counter] != '%')
         {
             string[i++] = format[counter];
-			string[i] = 0;
+            string[i] = 0;
             counter++;
         }
         else
@@ -136,31 +139,32 @@ int my_snprintf(char *string, size_t n, const char *format, ...)
             {            
                 num_int = va_arg(vl, int);
                 //itoa(num_int, buf, 10);
-				kol = count_numbers(num_int, BASE_10);
-                num_to_string(&num_int, kol, buf, BASE_10);
-				strncat(string, buf, n - i - 1);
+                kol = count_numbers(num_int, BASE_10);
+                num_to_string(num_int, kol, buf, BASE_10);
+                strncat(string, buf, n - i - 1);
                 i = strlen(string);
             }
             else if (specif == SPEC_s)
             {
                 num_char = va_arg(vl, char*);
-				strncat(string, num_char, n - i - 1);
+                strncat(string, num_char, n - i - 1);
                 i = strlen(string);
             }
             else if (specif == SPEC_llX)
             {
                 num_hex = va_arg(vl, long long int);
-				kol = count_numbers(num_hex, BASE_16);
-                num_to_string(&num_hex, kol, buf, BASE_16);
+                kol = count_numbers(num_hex, BASE_16);
+                printf("## %llX   %d\n", num_hex, kol );
+                num_to_string(num_hex, kol, buf, BASE_16);
                 to_upp(buf);
                 //strcat(string, buf);
                 strncat(string, buf, n - i - 1);
-				i = strlen(string);
+                i = strlen(string);
             }
             else if (specif == SPEC_per)
             {
                 string[i++] = '%';
-				string[i] = 0;
+                string[i] = 0;
             }
             else
             {
@@ -170,7 +174,7 @@ int my_snprintf(char *string, size_t n, const char *format, ...)
             }
         }
     } 
-	string[n - 1] = 0;	
+    string[n - 1] = 0;    
     //free(buf);    
     return strlen(string);
 }
