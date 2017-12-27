@@ -10,6 +10,8 @@
 #define  SPEC_per 4 
 #define  ERROR -1 
 #define  MAX_LEN_BUFFER 20 
+#define  BASE_10 10 
+#define  BASE_16 16 
 
 int read_specificators(const char *format, int *counter)
 {
@@ -60,21 +62,19 @@ int count_numbers(int n, int base)
     return i;
 }
 
-void num_to_string(void *num, char *buf, int base)
+void num_to_string(void *num, int kol, char *buf, int base)
 {
     int i;
     int num1;
-    if (base == 16)
+    if (base == BASE_16)
     {
         num1 = *(long long int *)num;
-        i = count_numbers(num1, 16) - 1;
     }
     else
     {
         num1 = *(int *)num;
-        i = count_numbers(num1, 10) - 1;
     }
-	
+	i = kol - 1;
 	if (num1 < 0)
 	{
 		i++;
@@ -98,6 +98,7 @@ void num_to_string(void *num, char *buf, int base)
 
 int my_snprintf(char *string, size_t n, const char *format, ...)
 {
+	int kol;
     if (n == 0 || !string || !format)
     {
         return 0;
@@ -135,7 +136,8 @@ int my_snprintf(char *string, size_t n, const char *format, ...)
             {            
                 num_int = va_arg(vl, int);
                 //itoa(num_int, buf, 10);
-                num_to_string(&num_int, buf, 10);
+				kol = count_numbers(num_int, BASE_10);
+                num_to_string(&num_int, kol, buf, BASE_10);
 				strncat(string, buf, n - i - 1);
                 i = strlen(string);
             }
@@ -148,8 +150,8 @@ int my_snprintf(char *string, size_t n, const char *format, ...)
             else if (specif == SPEC_llX)
             {
                 num_hex = va_arg(vl, long long int);
-                //printf("%I64X", num_hex);
-                num_to_string(&num_hex, buf, 16);
+				kol = count_numbers(num_hex, BASE_16);
+                num_to_string(&num_hex, kol, buf, BASE_16);
                 to_upp(buf);
                 //strcat(string, buf);
                 strncat(string, buf, n - i - 1);
